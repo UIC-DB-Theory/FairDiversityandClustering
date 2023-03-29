@@ -4,6 +4,8 @@ from collections import defaultdict
 import gurobipy as gp
 from gurobipy import GRB
 
+from tqdm import tqdm
+
 import typing as t
 
 def readCSV(filename : t.AnyStr, fieldNames: t.Sequence, wantedFields: t.Set) -> t.List[t.Dict[t.AnyStr, t.Any]]:
@@ -93,25 +95,18 @@ if __name__ == '__main__':
 
     # updates the model to reflect new vars
     # probably not needed but can't hurt?
-    # m.update()
+    m.update()
 
     # we need a distance function (1-d) for now
     def dist(a, b):
-        return abs((a["age"]) - (b["age"]))
+        _, ea = a
+        _, eb = b
+        return abs((ea["age"]) - (eb["age"]))
 
     # build up the LinExpr for our constraint
-    # as a side note, MaxMin kind of sucks to implement
 
-    # every pair of points we pick is greater than the minimum distance
-    mind = m.addVar(name="Min Dist")
-    for i in range(len(varData)):
-        for j in range(i):
-            vi, ei = varData[i]
-            vj, ej = varData[j]
-            m.addConstr(vi * vj * dist(ei, ej) >= mind)
-
-    # then we maximize the minimum distance
-    m.setObjective(mind, GRB.MAXIMIZE)
+    # objective function is moot
+    # m.setObjective(gp.LinExpr(1), GRB.MAXIMIZE)
 
     # we need at least ki of each color
     exprs = defaultdict()
@@ -124,8 +119,23 @@ if __name__ == '__main__':
     for key in kis.keys():
         m.addConstr(exprs[key] >= kis[key])
 
+    m.update()
 
     # we need at most one point in the ball
-    # for v, e in varData:
-        # others = naiveBall(dist, gamma / 2.0, e, data)
-        # print(others)
+    # This is slow
+
+    # exprs = []
+
+
+    for row in tqdm(varData):
+        v, e = row
+        others = naiveBall(dist, gamma / 2.0, row, varData)
+
+        # add constraint that all the variables need to add up
+        other_vars = [v for (v, _) in others]
+
+        in_rad = gp.LinExpr([1.0] * len(other_vars), other_vars)
+        
+        m.addConstr(in_rad <= 1)
+
+    m.optimize()
