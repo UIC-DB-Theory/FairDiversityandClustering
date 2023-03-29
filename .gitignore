@@ -130,3 +130,5 @@ dmypy.json
 
 # gurobi log
 gurobi.log
+
+.idea/
