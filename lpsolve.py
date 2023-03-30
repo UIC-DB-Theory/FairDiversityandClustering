@@ -77,8 +77,8 @@ if __name__ == '__main__':
     # variables for running LP
     k = 20
     color_field = 'sex'
-    kis = {"Male": 10, "Female": 10}
-    gamma = 10
+    kis = {"Male": 0, "Female": 1}
+    gamma = 1
 
     data = readCSV("./datasets/ads/adult.data", allFields, wantedFields)
 
