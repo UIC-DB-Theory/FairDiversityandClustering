@@ -8,6 +8,7 @@ from tqdm import tqdm
 
 import typing as t
 
+
 def readCSV(filename : t.AnyStr, fieldNames: t.Sequence, wantedFields: t.Set) -> t.List[t.Dict[t.AnyStr, t.Any]]:
     """readCSV.
 
@@ -29,7 +30,7 @@ def readCSV(filename : t.AnyStr, fieldNames: t.Sequence, wantedFields: t.Set) ->
     out = []
     for row in reader:
         # only return the keys we care about from the csv
-        out.append({k: v for k, v in row.items() if k in wantedFields})
+        out.append({k.strip(): v.strip() for k, v in row.items() if k in wantedFields})
 
     return out
 
@@ -75,10 +76,9 @@ if __name__ == '__main__':
     wantedFields = {"age", "sex"}
 
     # variables for running LP
-    k = 20
     color_field = 'sex'
-    kis = {"Male": 0, "Female": 1}
-    gamma = 1
+    kis = {"Male": 10, "Female": 10}
+    gamma = 10
 
     data = readCSV("./datasets/ads/adult.data", allFields, wantedFields)
 
@@ -89,7 +89,7 @@ if __name__ == '__main__':
     m = gp.Model("feasability")
 
     # for every row, we need a variable
-    varData = [(m.addVar(name=f"elem #{c}"), elem) for c, elem in enumerate(data)]
+    varData = [(m.addVar(name=f"elem #{c}", lb=0.0, ub=1.0), elem) for c, elem in enumerate(data)]
 
     # varData = varData[0:250]
 
@@ -106,7 +106,7 @@ if __name__ == '__main__':
     # build up the LinExpr for our constraint
 
     # objective function is moot
-    # m.setObjective(gp.LinExpr(1), GRB.MAXIMIZE)
+    # m.setObjective(gp.LinExpr(0), GRB.MAXIMIZE)
 
     # we need at least ki of each color
     exprs = defaultdict()
@@ -114,8 +114,10 @@ if __name__ == '__main__':
     for v, e in varData:
         for field, ki in kis.items():
             e_color = e[color_field]
-            exprs[e_color].addTerms(1.0, v)    
-    
+            exprs[e_color].addTerms(1.0, v)
+
+    print(exprs.keys())
+
     for key in kis.keys():
         m.addConstr(exprs[key] >= kis[key])
 
@@ -138,4 +140,14 @@ if __name__ == '__main__':
         
         m.addConstr(in_rad <= 1)
 
+    m.update()
+
     m.optimize()
+
+    if m.status == GRB.INFEASIBLE:
+        # let's find out what's wrong
+        iis = m.computeIIS()
+        m.write('fail.ilp')
+
+        m.feasRelaxS(1, False, False, True)
+        m.optimize()
