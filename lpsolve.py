@@ -49,28 +49,39 @@ def read_CSV(filename: t.AnyStr, field_names: t.Sequence, color_field: t.AnyStr,
     return colors, features
 
 
-def naiveBall(dF, r, point, points: t.List[t.Any]) -> t.List[t.Any]:
+def naiveBall(dF, points : npt.NDArray[np.float64], r : np.float64, point) -> npt.NDArray[int]:
     """naiveBall.
 
-    Returns a list of all points centered at point p with radius r.
+    Returns the indices of points inside the ball
 
     :param dF: the distance function point -> point -> num
-    :param r: the radius of the sphere to bound
-    :param point: the circle's center
     :param points: a list of all points in the dataset
     :type points: t.List[t.Any]
+    :param r: the radius of the sphere to bound
+    :param point: the circle's center
     :rtype: t.List[t.Any]
     """
-    inside = []
+    from scipy.spatial.distance import cdist
 
-    for p in points:
-        if dF(point, p) <= r:
-            inside.append(p)
+    dists = cdist(points, np.reshape(point, (1,1)))
+    dists = dists.flatten()
 
-    return inside
+    indices = (dists <= r).nonzero()[0]  # this is a tuple (reasons!)
+
+    return indices
 
 
 if __name__ == '__main__':
+    # variables for running LP bin-search
+    color_field = 'sex'
+    feature_fields = {'age'}
+    kis = {"Male": 10, "Female": 10}
+
+    # binary search params
+    epsilon = np.float64("0.0001")
+    multiple = 100000
+
+    # import data from file
     allFields = [
         "age",
         "workclass",
@@ -88,50 +99,35 @@ if __name__ == '__main__':
         "native-country",
         "yearly-income",
     ]
-
-    # variables for running LP bin-search
-    color_field = 'sex'
-    feature_fields = {'age'}
-    kis = {"Male": 10, "Female": 10}
-
-    epsilon = np.float64("0.0001")
-
-    # import data as needed
     colors, features = read_CSV("./datasets/ads/adult.data", allFields, color_field, feature_fields)
     assert(len(colors) == len(features))
     N = len(features)
 
-
-    m = gp.Model("feasability")
+    # no objective model
+    m = gp.Model(f"feasability (gamma = ")
 
     # for every row, we need a variable
+    # this returns a gp "tuple list"
     variables = m.addVars(N, name="x")
 
-
-    # build up the LinExpr for our constraint
-
-    # objective function is moot
-    # m.setObjective(gp.LinExpr(0), GRB.MAXIMIZE)
-
-    # we need at least ki of each color
+    # we can build up the color constraints once and repeatedly add them
+    # this builds up the lhs of the constraints in exprs
     exprs = defaultdict()
-    exprs.default_factory = lambda: gp.LinExpr()
-    for v, e in varData:
-        for field, ki in kis.items():
-            e_color = e[color_field]
-            exprs[e_color].addTerms(1.0, v)
+    exprs.default_factory = lambda: gp.LinExpr()  # this shouldn't be necessary but it is!
+    for i, color in tqdm(enumerate(colors), desc="Building color constraints", unit=" elements"):
+        exprs[color.item()].addTerms(1.0, variables[i])
 
-    print(exprs.keys())
-
+    # we need at least ki of each color so build the final constraints here
     for key in kis.keys():
         m.addConstr(exprs[key] >= kis[key])
 
     m.update()
 
+    # get our gamma value
+    gamma = epsilon * multiple
+
     # we need at most one point in the ball
     # This is slow
-
-    # exprs = []
 
     # we need a distance function (1-d) for now
     def dist(a, b):
@@ -139,9 +135,13 @@ if __name__ == '__main__':
         _, eb = b
         return abs((ea["age"]) - (eb["age"]))
 
-    for row in tqdm(varData):
-        v, e = row
-        others = naiveBall(dist, gamma / 2.0, row, varData)
+    # build a constraint for every point
+    for v, p in tqdm(zip(variables, features)):
+
+        indices = naiveBall(dist, features, gamma / 2.0, p)
+
+        print(indices)
+        exit(0)
 
         # add constraint that all the variables need to add up
         other_vars = [v for (v, _) in others]
