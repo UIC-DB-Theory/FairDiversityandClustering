@@ -1,0 +1,11 @@
+dataset,group,c,k,EPS,algorithm,num,div,time
+dataset,group,c,k,EPS,algorithm,num,div,time
+dataset,group,c,k,EPS,algorithm,num,div,time
+Census_small,Sex,2,10,0.001,scalable_fmmd_ILP,0,31.0,1.3700769289862365
+Census_small,Sex,2,10,0.001,scalable_fmmd_ILP,1,29.0,0.09051930496934801
+Census_small,Sex,2,10,0.001,scalable_fmmd_ILP,2,31.0,0.07975307700689882
+Census_small,Sex,2,10,0.001,scalable_fmmd_ILP,3,31.0,0.08009227097500116
+Census_small,Sex,2,10,0.001,scalable_fmmd_ILP,4,30.0,0.08505641698138788
+Census_small,Sex,2,10,0.001,scalable_fmmd_ILP,5,30.0,0.08275715500349179
+Census_small,Sex,2,10,0.001,scalable_fmmd_ILP,6,30.0,0.0879819379770197
+Census_small,Sex,2,10,0.001,scalable_fmmd_ILP,7,30.0,0.08481798099819571
