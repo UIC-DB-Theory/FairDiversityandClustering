@@ -39,7 +39,7 @@ def read_CSV(filename: t.AnyStr, field_names: t.Sequence, color_field: t.AnyStr,
     features = []
 
     for row in reader:
-        colors.append([row[color_field].strip()])  # both are nested to ensure we get matrices instead of vectors
+        colors.append(row[color_field].strip())
         features.append([float(row[field]) for field in feature_fields])
 
     # we want these as np arrays
@@ -49,8 +49,8 @@ def read_CSV(filename: t.AnyStr, field_names: t.Sequence, color_field: t.AnyStr,
     return colors, features
 
 
-def naiveBall(dF, points : npt.NDArray[np.float64], r : np.float64, point) -> npt.NDArray[int]:
-    """naiveBall.
+def naive_ball(dF, points : npt.NDArray[np.float64], r : np.float64, point) -> npt.NDArray[int]:
+    """naive_ball.
 
     Returns the indices of points inside the ball
 
@@ -63,12 +63,10 @@ def naiveBall(dF, points : npt.NDArray[np.float64], r : np.float64, point) -> np
     """
     from scipy.spatial.distance import cdist
 
+    # comes out as a Nx1 matrix
     dists = cdist(points, np.reshape(point, (1,1)))
-    dists = dists.flatten()
 
-    indices = (dists <= r).nonzero()[0]  # this is a tuple (reasons!)
-
-    return indices
+    return (dists.flatten() <= r).nonzero()[0]  # this is a tuple (reasons!)
 
 
 if __name__ == '__main__':
@@ -79,7 +77,7 @@ if __name__ == '__main__':
 
     # binary search params
     epsilon = np.float64("0.0001")
-    multiple = 100000
+    multiple = 10000
 
     # import data from file
     allFields = [
@@ -107,15 +105,15 @@ if __name__ == '__main__':
     m = gp.Model(f"feasability (gamma = ")
 
     # for every row, we need a variable
-    # this returns a gp "tuple list"
-    variables = m.addVars(N, name="x")
+    # the M gives us back a numpy array
+    variables = m.addMVar(N, name="x")
 
     # we can build up the color constraints once and repeatedly add them
     # this builds up the lhs of the constraints in exprs
     exprs = defaultdict()
     exprs.default_factory = lambda: gp.LinExpr()  # this shouldn't be necessary but it is!
-    for i, color in tqdm(enumerate(colors), desc="Building color constraints", unit=" elements"):
-        exprs[color.item()].addTerms(1.0, variables[i])
+    for i, color in tqdm(enumerate(colors), desc="Building color constraints", unit=" elems", total=N):
+        exprs[color.item()].addTerms(1.0, variables[i].item())
 
     # we need at least ki of each color so build the final constraints here
     for key in kis.keys():
@@ -136,22 +134,21 @@ if __name__ == '__main__':
         return abs((ea["age"]) - (eb["age"]))
 
     # build a constraint for every point
-    for v, p in tqdm(zip(variables, features)):
+    for v, p in tqdm(zip(variables, features), desc="Building ball constraints", unit=" elems", total=N):
 
-        indices = naiveBall(dist, features, gamma / 2.0, p)
-
-        print(indices)
-        exit(0)
+        indices = naive_ball(dist, features, gamma / 2.0, p)
 
         # add constraint that all the variables need to add up
-        other_vars = [v for (v, _) in others]
+        other_vars = variables[indices]
+        count = other_vars.shape[0]
 
-        in_rad = gp.LinExpr([1.0] * len(other_vars), other_vars)
+        # a bit of workarounds to get from MVar to var here
+        in_rad = gp.LinExpr([1.0] * count, other_vars.tolist())
+        in_rad.add(v.item(), 1.0)
 
         m.addConstr(in_rad <= 1)
 
-    m.update()
-
+    print('Optimizing!')
     m.optimize()
 
     if m.status == GRB.INFEASIBLE:
