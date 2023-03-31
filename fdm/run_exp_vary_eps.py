@@ -100,7 +100,7 @@ for eps in values_eps:
 # read the celebA dataset grouped by sex (c=2)
 elements.clear()
 elements = []
-csr_sparse = sp.load_npz('../data/celebA_small_csr_sparse.npz')
+csr_sparse = sp.load_npz('./data/celebA_small_csr_sparse.npz')
 for i in range(1000):
     if int(csr_sparse[i, 1]) == -1:
         elem = utils.ElemSparse(int(csr_sparse[i, 0]), 0, csr_sparse[i, 4:])
@@ -131,7 +131,7 @@ for eps in values_eps:
 # read the celebA dataset grouped by age (c=2)
 elements.clear()
 elements = []
-csr_sparse = sp.load_npz('../data/celebA_small_csr_sparse.npz')
+csr_sparse = sp.load_npz('./data/celebA_small_csr_sparse.npz')
 for i in range(1000):
     if int(csr_sparse[i, 2]) == -1:
         elem = utils.ElemSparse(int(csr_sparse[i, 0]), 0, csr_sparse[i, 4:])
@@ -161,7 +161,7 @@ for eps in values_eps:
 # read the celebA dataset grouped by sex+age (c=4)
 elements.clear()
 elements = []
-csr_sparse = sp.load_npz('../data/celebA_small_csr_sparse.npz')
+csr_sparse = sp.load_npz('./data/celebA_small_csr_sparse.npz')
 for i in range(1000):
     if int(csr_sparse[i, 3]) == -1:
         elem = utils.ElemSparse(int(csr_sparse[i, 0]), 0, csr_sparse[i, 4:])
