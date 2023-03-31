@@ -4,15 +4,15 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-gurobipy = "*"
-pynvim = "*"
-gurobipy-stubs = "*"
 networkx = "*"
 numpy = "*"
 scipy = "*"
+sklearn = "*"
 scikit-learn = "*"
+gurobipy = "*"
+gurobipy-stubs = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.9"
+python_version = "3.10"
