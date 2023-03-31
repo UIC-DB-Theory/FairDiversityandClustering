@@ -11,8 +11,8 @@ networkx = "*"
 numpy = "*"
 scipy = "*"
 scikit-learn = "*"
+tqdm = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.9"
