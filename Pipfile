@@ -5,13 +5,13 @@ name = "pypi"
 
 [packages]
 gurobipy = "*"
-pynvim = "*"
 gurobipy-stubs = "*"
 networkx = "*"
 numpy = "*"
 scipy = "*"
 scikit-learn = "*"
 tqdm = "*"
+pynvim = "*"
 
 [dev-packages]
 

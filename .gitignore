@@ -132,3 +132,12 @@ dmypy.json
 gurobi.log
 
 .idea/
+
+# data and results for fdm
+fdm/results_vary_k_eps.csv
+fdm/results_vary_c_n_together.csv
+fdm/results_vary_k.csv
+fdm/data/
+
+# lock files
+Pipfile.lock
