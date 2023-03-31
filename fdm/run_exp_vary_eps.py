@@ -12,7 +12,7 @@ import scipy.sparse as sp
     eps = 0.001,0.005,0.01,0.05,0.1,0.5
 
 '''
-output = open("results_very_k_eps.csv", "a")
+output = open("results_vary_k_eps.csv", "a")
 writer = csv.writer(output)
 writer.writerow(["dataset", "group", "c", "k", "EPS", "algorithm", "num", "div", "time"])
 output.flush()
