@@ -2,39 +2,54 @@
 
 from collections import defaultdict
 import gurobipy as gp
+import numpy
 from gurobipy import GRB
 
+import numpy as np
+
 from tqdm import tqdm
-
 import typing as t
+import numpy.typing as npt
 
 
-def readCSV(filename : t.AnyStr, fieldNames: t.Sequence, wantedFields: t.Set) -> t.List[t.Dict[t.AnyStr, t.Any]]:
-    """readCSV.
+def read_CSV(filename: t.AnyStr, field_names: t.Sequence, color_field: t.AnyStr, feature_fields: t.Set[t.AnyStr]) -> (npt.NDArray[t.AnyStr], npt.NDArray[numpy.float64]):
+    """read_CSV.
 
     Reads in a CSV datafile as a list of dictionaries.
     The datafile should have no header row
 
+    Returns a tuple of the colors of elements and their features
+
     :param filename: the file to read in
     :type filename: t.AnyStr
-    :param fieldNames: the headers of the CSV file, in order
-    :type fieldNames: t.Sequence
-    :param wantedFields: a subset of fieldnames which will be returned (the rest are filtered)
-    :type wantedFields: t.Set
+    :param field_names: the headers of the CSV file, in order
+    :type field_names: t.Sequence
+    :param color_field: the field containing the object color
+    :type color_field: t.AnyStr
+    :param feature_fields: the fields which are numerical data values for the point
+    :type feature_fields: t.Set[t.AnyStr]
     """
     from csv import DictReader
 
     # read csv as a dict with given keys
-    reader = DictReader(open(filename), fieldnames=fieldNames)
+    reader = DictReader(open(filename), fieldnames=field_names)
 
-    out = []
+    # return the requested features and colors
+    colors = []
+    features = []
+
     for row in reader:
-        # only return the keys we care about from the csv
-        out.append({k.strip(): v.strip() for k, v in row.items() if k in wantedFields})
+        colors.append([row[color_field].strip()])  # both are nested to ensure we get matrices instead of vectors
+        features.append([float(row[field]) for field in feature_fields])
 
-    return out
+    # we want these as np arrays
+    colors = np.array(colors)
+    features = np.array(features, dtype=numpy.float64)
 
-def naiveBall(dF, r, point, points : t.List[t.Any]) -> t.List[t.Any]:
+    return colors, features
+
+
+def naiveBall(dF, r, point, points: t.List[t.Any]) -> t.List[t.Any]:
     """naiveBall.
 
     Returns a list of all points centered at point p with radius r.
@@ -57,51 +72,41 @@ def naiveBall(dF, r, point, points : t.List[t.Any]) -> t.List[t.Any]:
 
 if __name__ == '__main__':
     allFields = [
-            "age",
-            "workclass",
-            "fnlwgt", # what on earth is this one?
-            "education",
-            "education-num",
-            "marital-status",
-            "occupation",
-            "relationship",
-            "race",
-            "sex",
-            "captial-gain",
-            "capital-loss",
-            "hours-per-week",
-            "native-country",
-            "yearly-income",
-            ]
-    wantedFields = {"age", "sex"}
+        "age",
+        "workclass",
+        "fnlwgt",  # what on earth is this one?
+        "education",
+        "education-num",
+        "marital-status",
+        "occupation",
+        "relationship",
+        "race",
+        "sex",
+        "captial-gain",
+        "capital-loss",
+        "hours-per-week",
+        "native-country",
+        "yearly-income",
+    ]
 
-    # variables for running LP
+    # variables for running LP bin-search
     color_field = 'sex'
+    feature_fields = {'age'}
     kis = {"Male": 10, "Female": 10}
-    gamma = 10
 
-    data = readCSV("./datasets/ads/adult.data", allFields, wantedFields)
+    epsilon = np.float64("0.0001")
 
-    # read to int
-    for elem in data:
-        elem['age'] = int(elem['age'])
+    # import data as needed
+    colors, features = read_CSV("./datasets/ads/adult.data", allFields, color_field, feature_fields)
+    assert(len(colors) == len(features))
+    N = len(features)
+
 
     m = gp.Model("feasability")
 
     # for every row, we need a variable
-    varData = [(m.addVar(name=f"elem #{c}", lb=0.0, ub=1.0), elem) for c, elem in enumerate(data)]
+    variables = m.addVars(N, name="x")
 
-    # varData = varData[0:250]
-
-    # updates the model to reflect new vars
-    # probably not needed but can't hurt?
-    m.update()
-
-    # we need a distance function (1-d) for now
-    def dist(a, b):
-        _, ea = a
-        _, eb = b
-        return abs((ea["age"]) - (eb["age"]))
 
     # build up the LinExpr for our constraint
 
@@ -110,7 +115,7 @@ if __name__ == '__main__':
 
     # we need at least ki of each color
     exprs = defaultdict()
-    exprs.default_factory=lambda: gp.LinExpr()
+    exprs.default_factory = lambda: gp.LinExpr()
     for v, e in varData:
         for field, ki in kis.items():
             e_color = e[color_field]
@@ -128,6 +133,11 @@ if __name__ == '__main__':
 
     # exprs = []
 
+    # we need a distance function (1-d) for now
+    def dist(a, b):
+        _, ea = a
+        _, eb = b
+        return abs((ea["age"]) - (eb["age"]))
 
     for row in tqdm(varData):
         v, e = row
@@ -137,7 +147,7 @@ if __name__ == '__main__':
         other_vars = [v for (v, _) in others]
 
         in_rad = gp.LinExpr([1.0] * len(other_vars), other_vars)
-        
+
         m.addConstr(in_rad <= 1)
 
     m.update()
