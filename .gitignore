@@ -132,3 +132,9 @@ dmypy.json
 gurobi.log
 
 .idea/
+
+# data for fdm
+fdm/data/
+
+# lock files
+Pipfile.lock
