@@ -134,6 +134,7 @@ gurobi.log
 .idea/
 
 # data for fdm
+fdm/results_*
 fdm/data/
 
 # lock files
