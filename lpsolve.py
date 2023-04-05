@@ -1,9 +1,11 @@
 # lpsolve - simple lp solving based approach to the problem
-
+import math
 from collections import defaultdict
 import gurobipy as gp
 import numpy
 from gurobipy import GRB
+
+import sys
 
 import numpy as np
 
@@ -49,7 +51,7 @@ def read_CSV(filename: t.AnyStr, field_names: t.Sequence, color_field: t.AnyStr,
     return colors, features
 
 
-def naive_ball(dF, points : npt.NDArray[np.float64], r : np.float64, point) -> npt.NDArray[int]:
+def naive_ball(points : npt.NDArray[np.float64], r : np.float64, point) -> npt.NDArray[int]:
     """naive_ball.
 
     Returns the indices of points inside the ball
@@ -63,21 +65,91 @@ def naive_ball(dF, points : npt.NDArray[np.float64], r : np.float64, point) -> n
     """
     from scipy.spatial.distance import cdist
 
-    # comes out as a Nx1 matrix
-    dists = cdist(points, np.reshape(point, (1,1)))
 
-    return (dists.flatten() <= r).nonzero()[0]  # this is a tuple (reasons!)
+    # we need to reshape the point vector into a row vector
+    dim = point.shape[0] # this is a tuple (reasons!)
+    point = np.reshape(point, (1, dim))
+
+    # comes out as a Nx1 matrix
+    dists = cdist(points, point)
+
+    return (dists.flatten() <= r).nonzero()[0] # Also a tuple!
+
+
+def solve_lp(m : gp.Model, gamma : np.float64, variables : npt.NDArray[gp.MVar], colors : npt.NDArray[t.AnyStr], features : npt.NDArray[np.float64]) -> bool:
+    """
+    solve_lp
+
+    builds and solves the LP for the given gamma, returning true if the model is feasible
+
+    variables, colors, and features should all have the same length (features can be multi-dimensional?)
+
+    :param m: the initialized model (named, really; added for compatibility with moving pieces outside of this to reduce re-initalization)
+    :param gamma: current minimum distance between points
+    :param variables: np array of model variables
+    :param colors: np array of "colors" of each point
+    :param features: np array of data points per model
+    :return:
+    """
+    # maybe this makes it faster?
+    m.tune()
+
+    sys.stdout.flush()
+    print(f'testing feasability of gamma={gamma}', flush=True)
+    # we could probably build up the color constraints once and repeatedly add them
+    # this builds up the lhs of the constraints in exprs
+    exprs = defaultdict()
+    exprs.default_factory = lambda: gp.LinExpr()  # this shouldn't be necessary but it is!
+    for i, color in tqdm(enumerate(colors), desc="Building color constraints", unit=" elems", total=N):
+        exprs[color.item()].addTerms(1.0, variables[i].item())
+    exprs.default_factory = None
+
+    # we need at least ki of each color so build the final constraints here
+    for key in kis.keys():
+        m.addConstr(exprs[key] >= kis[key])
+
+    # we need at most one point in the ball
+    # This is slow
+
+    # build a constraint for every point
+    for v, p in tqdm(zip(variables, features), desc="Building ball constraints", unit=" elems", total=N):
+
+        indices = naive_ball(features, gamma / 2.0, p)
+
+        # add constraint that all the variables need to add up
+        other_vars = variables[indices]
+        count = other_vars.shape[0]
+
+        # a bit of workarounds to get from MVar to var here
+        in_rad = gp.LinExpr([1.0] * count, other_vars.tolist())
+        in_rad.add(v.item(), 1.0)
+
+        m.addConstr(in_rad <= 1)
+
+    m.optimize()
+    print(flush=True)
+
+    # if we're feasible, return true otherwise return false
+    # model is passed back automatically
+    # TODO: ensure else case is ONLY if model is feasible (error otherwise)
+    if m.status == GRB.INFEASIBLE:
+        return False
+    else:
+        return True
 
 
 if __name__ == '__main__':
     # variables for running LP bin-search
     color_field = 'sex'
-    feature_fields = {'age'}
+    feature_fields = {'age', 'capital-gain', 'capital-loss'}
+    # feature_fields = {'age'}
     kis = {"Male": 10, "Female": 10}
 
     # binary search params
     epsilon = np.float64("0.0001")
-    multiple = 10000
+
+    # other things for gurobi
+    method = 1 # model method of solving
 
     # import data from file
     allFields = [
@@ -91,7 +163,7 @@ if __name__ == '__main__':
         "relationship",
         "race",
         "sex",
-        "captial-gain",
+        "capital-gain",
         "capital-loss",
         "hours-per-week",
         "native-country",
@@ -101,60 +173,67 @@ if __name__ == '__main__':
     assert(len(colors) == len(features))
     N = len(features)
 
-    # no objective model
-    m = gp.Model(f"feasability (gamma = ")
+    # "normalize" features
+    features = features / features.max(axis=0)
 
-    # for every row, we need a variable
-    # the M gives us back a numpy array
+    # first we need to find the high value
+    print('Solving for high bound')
+    high = 10  # I'm assuming it's a BIT larger than 0.0001
+    gamma = high * epsilon
+    m = gp.Model(f"feasability (gamma = {gamma})", env=gp.Env()) # workaround for OOM error?
+    m.Params.method = method
     variables = m.addMVar(N, name="x")
 
-    # we can build up the color constraints once and repeatedly add them
-    # this builds up the lhs of the constraints in exprs
-    exprs = defaultdict()
-    exprs.default_factory = lambda: gp.LinExpr()  # this shouldn't be necessary but it is!
-    for i, color in tqdm(enumerate(colors), desc="Building color constraints", unit=" elems", total=N):
-        exprs[color.item()].addTerms(1.0, variables[i].item())
 
-    # we need at least ki of each color so build the final constraints here
-    for key in kis.keys():
-        m.addConstr(exprs[key] >= kis[key])
+    feasible = solve_lp(m, gamma, variables, colors, features)
+    while feasible:
+        high *= 2
+        gamma = high * epsilon
 
-    m.update()
+        m = gp.Model(f"feasability (gamma = {gamma})")
+        m.Params.method = method
+        variables = m.addMVar(N, name="x")
 
-    # get our gamma value
-    gamma = epsilon * multiple
+        feasible = solve_lp(m, gamma, variables, colors, features)
 
-    # we need at most one point in the ball
-    # This is slow
 
-    # we need a distance function (1-d) for now
-    def dist(a, b):
-        _, ea = a
-        _, eb = b
-        return abs((ea["age"]) - (eb["age"]))
+    print(f'High bound is {high}; binary search')
 
-    # build a constraint for every point
-    for v, p in tqdm(zip(variables, features), desc="Building ball constraints", unit=" elems", total=N):
+    # binary search over multiples of epsilon
+    low = 1
+    assert(low < high)
 
-        indices = naive_ball(dist, features, gamma / 2.0, p)
+    while low < high:
+        # solve model once for current gamma
+        multiple = math.ceil((low + high) / 2.0)
+        print(f'Current multiple is {multiple}')
+        sys.stdout.flush()
 
-        # add constraint that all the variables need to add up
-        other_vars = variables[indices]
-        count = other_vars.shape[0]
+        gamma = multiple * epsilon
 
-        # a bit of workarounds to get from MVar to var here
-        in_rad = gp.LinExpr([1.0] * count, other_vars.tolist())
-        in_rad.add(v.item(), 1.0)
+        # the model has no objective
+        m = gp.Model(f"feasability (gamma = {gamma})")
 
-        m.addConstr(in_rad <= 1)
+        # for every row, we need a variable
+        # the M gives us back a numpy array
+        variables = m.addMVar(N, name="x")
 
-    print('Optimizing!')
-    m.optimize()
+        feasible = solve_lp(m, gamma, variables, colors, features)
 
+        # if it's feasible, we have to search for larger multiples
+        # if it's not, we want smaller multiples
+        if feasible:
+            # our high will be the first failure
+            low = multiple
+        else:
+            high = multiple - 1
+
+        print(low, high)
+
+    print(variables)
+    print()
     if m.status == GRB.INFEASIBLE:
-        # let's find out what's wrong
-        iis = m.computeIIS()
-        m.write('fail.ilp')
-
-        m.feasRelaxS(1, False, False, True)
-        m.optimize()
+        print('feasible!')
+    else:
+        print('unfeasible!')
+    print(multiple)
