@@ -10,7 +10,7 @@ import scipy.sparse as sp
 '''
     experiment-vary-k-small:
     n = 1000
-    k = 5,10,15,...,45,50
+    k = 5,10,15, .,45,50
     eps = 0.05
 '''
 output = open("results_vary_k.csv", "a")
@@ -563,7 +563,7 @@ for k in values_k:
 # read the celebA dataset grouped by sex (c=2)
 elements.clear()
 elements = []
-csr_sparse = sp.load_npz('../data/celebA_small_csr_sparse.npz')
+csr_sparse = sp.load_npz('./data/celebA_small_csr_sparse.npz')
 for i in range(1000):
     if int(csr_sparse[i, 1]) == -1:
         elem = utils.ElemSparse(int(csr_sparse[i, 0]), 0, csr_sparse[i, 4:])
@@ -662,7 +662,7 @@ for k in values_k:
 # read the celebA dataset grouped by age (c=2)
 elements.clear()
 elements = []
-csr_sparse = sp.load_npz('../data/celebA_small_csr_sparse.npz')
+csr_sparse = sp.load_npz('./data/celebA_small_csr_sparse.npz')
 for i in range(1000):
     if int(csr_sparse[i, 2]) == -1:
         elem = utils.ElemSparse(int(csr_sparse[i, 0]), 0, csr_sparse[i, 4:])
@@ -762,7 +762,7 @@ for k in values_k:
 # read the celebA dataset grouped by sex+age (c=4)
 elements.clear()
 elements = []
-csr_sparse = sp.load_npz('../data/celebA_small_csr_sparse.npz')
+csr_sparse = sp.load_npz('./data/celebA_small_csr_sparse.npz')
 for i in range(1000):
     if int(csr_sparse[i, 3]) == -1:
         elem = utils.ElemSparse(int(csr_sparse[i, 0]), 0, csr_sparse[i, 4:])
