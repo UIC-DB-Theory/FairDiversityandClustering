@@ -92,7 +92,7 @@ def solve_lp(m : gp.Model, gamma : np.float64, variables : npt.NDArray[gp.MVar],
     :return:
     """
     # maybe this makes it faster?
-    m.tune()
+    # m.tune()
 
     sys.stdout.flush()
     print(f'testing feasability of gamma={gamma}', flush=True)
@@ -126,16 +126,23 @@ def solve_lp(m : gp.Model, gamma : np.float64, variables : npt.NDArray[gp.MVar],
 
         m.addConstr(in_rad <= 1)
 
+    m.update()
+
     m.optimize()
-    print(flush=True)
 
     # if we're feasible, return true otherwise return false
     # model is passed back automatically
     # TODO: ensure else case is ONLY if model is feasible (error otherwise)
-    if m.status == GRB.INFEASIBLE:
+    if m.status == GRB.INFEASIBLE or m.status == GRB.INF_OR_UNBD:
+        print(f'Model for {gamma} is infeasible')
         return False
-    else:
+    elif m.status == GRB.OPTIMAL:
+        print(f'Model for {gamma} is feasible')
         return True
+    else:
+        print(f'\n\n\n***ERROR: Model returned status code {m.status}***')
+        print(f'Exiting')
+        exit(-1)
 
 
 if __name__ == '__main__':
@@ -149,7 +156,7 @@ if __name__ == '__main__':
     epsilon = np.float64("0.0001")
 
     # other things for gurobi
-    method = 1 # model method of solving
+    method = 2 # model method of solving
 
     # import data from file
     allFields = [
@@ -178,21 +185,22 @@ if __name__ == '__main__':
 
     # first we need to find the high value
     print('Solving for high bound')
-    high = 10  # I'm assuming it's a BIT larger than 0.0001
+    high = 1500 # I'm assuming it's a BIT larger than 0.0001
     gamma = high * epsilon
-    m = gp.Model(f"feasability (gamma = {gamma})", env=gp.Env()) # workaround for OOM error?
+    m = gp.Model(f"feasability model") # workaround for OOM error?
     m.Params.method = method
-    variables = m.addMVar(N, name="x")
+    m.Params.SolutionLimit = 1
 
+    variables = m.addMVar(N, name="x")
 
     feasible = solve_lp(m, gamma, variables, colors, features)
     while feasible:
         high *= 2
         gamma = high * epsilon
 
-        m = gp.Model(f"feasability (gamma = {gamma})")
-        m.Params.method = method
-        variables = m.addMVar(N, name="x")
+        # reset model, removing constraints
+        m.reset()
+        m.remove(m.getConstrs())
 
         feasible = solve_lp(m, gamma, variables, colors, features)
 
@@ -211,8 +219,9 @@ if __name__ == '__main__':
 
         gamma = multiple * epsilon
 
-        # the model has no objective
-        m = gp.Model(f"feasability (gamma = {gamma})")
+        # reset model, removing constraints
+        m.reset()
+        m.remove(m.getConstrs())
 
         # for every row, we need a variable
         # the M gives us back a numpy array
@@ -233,7 +242,7 @@ if __name__ == '__main__':
     print(variables)
     print()
     if m.status == GRB.INFEASIBLE:
-        print('feasible!')
-    else:
         print('unfeasible!')
+    else:
+        print('feasible!')
     print(multiple)
