@@ -178,6 +178,12 @@ if __name__ == '__main__':
     ]
     colors, features = read_CSV("./datasets/ads/adult.data", allFields, color_field, feature_fields)
     assert(len(colors) == len(features))
+
+    # truncate for testing
+    limit = 10000
+    colors = colors[0:limit]
+    features = features[0:limit]
+
     N = len(features)
 
     # "normalize" features
@@ -211,9 +217,9 @@ if __name__ == '__main__':
     low = 1
     assert(low < high)
 
+    multiple = math.floor((low + high) / 2.0)
     while low < high:
         # solve model once for current gamma
-        multiple = math.ceil((low + high) / 2.0)
         print(f'Current multiple is {multiple}')
         sys.stdout.flush()
 
@@ -223,26 +229,31 @@ if __name__ == '__main__':
         m.reset()
         m.remove(m.getConstrs())
 
-        # for every row, we need a variable
-        # the M gives us back a numpy array
-        variables = m.addMVar(N, name="x")
-
         feasible = solve_lp(m, gamma, variables, colors, features)
 
         # if it's feasible, we have to search for larger multiples
         # if it's not, we want smaller multiples
         if feasible:
             # our high will be the first failure
-            low = multiple
+            low = multiple + 1
         else:
             high = multiple - 1
 
         print(low, high)
+        multiple = math.floor((low + high) / 2.0)
 
-    print(variables)
+    gamma = multiple * epsilon
+
+    print(f'Final test for multiple {multiple} (gamma = {gamma}')
+
+    feasible = solve_lp(m, gamma, variables, colors, features)
+
     print()
-    if m.status == GRB.INFEASIBLE:
-        print('unfeasible!')
+    if m.status == GRB.INFEASIBLE or m.status == GRB.INF_OR_UNBD:
+        print(f'Model for {gamma} is infeasible')
+    elif m.status == GRB.OPTIMAL:
+        print(f'Model for {gamma} is feasible')
     else:
-        print('feasible!')
-    print(multiple)
+        print(f'\n\n\n***ERROR: Model returned status code {m.status}***')
+        print(f'Exiting')
+        exit(-1)
