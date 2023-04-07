@@ -2,7 +2,6 @@
 import math
 from collections import defaultdict
 import gurobipy as gp
-import numpy
 from gurobipy import GRB
 
 import sys
