@@ -112,7 +112,7 @@ def solve_lp(m : gp.Model, gamma : np.float64, variables : npt.NDArray[gp.MVar],
     # This is slow
 
     # build a constraint for every point
-    for v, p in tqdm(zip(variables, features), desc="Building ball constraints", unit=" elems", total=N):
+    for p in tqdm(features, desc="Building ball constraints", unit=" elems", total=N):
 
         indices = naive_ball(features, gamma / 2.0, p)
 
@@ -122,7 +122,6 @@ def solve_lp(m : gp.Model, gamma : np.float64, variables : npt.NDArray[gp.MVar],
 
         # a bit of workarounds to get from MVar to var here
         in_rad = gp.LinExpr([1.0] * count, other_vars.tolist())
-        in_rad.add(v.item(), 1.0)
 
         m.addConstr(in_rad <= 1)
 
@@ -217,7 +216,7 @@ if __name__ == '__main__':
     low = 1
     assert(low < high)
 
-    multiple = math.floor((low + high) / 2.0)
+    multiple = math.ceil((low + high) / 2.0)
     while low < high:
         # solve model once for current gamma
         print(f'Current multiple is {multiple}')
@@ -235,12 +234,12 @@ if __name__ == '__main__':
         # if it's not, we want smaller multiples
         if feasible:
             # our high will be the first failure
-            low = multiple + 1
+            low = multiple
         else:
             high = multiple - 1
 
         print(low, high)
-        multiple = math.floor((low + high) / 2.0)
+        multiple = math.ceil((low + high) / 2.0)
 
     gamma = multiple * epsilon
 
