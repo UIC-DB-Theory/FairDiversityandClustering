@@ -1,70 +1,147 @@
 import matplotlib.pyplot as plt
-import os
-import sys
 import csv
+import os
+
+
+def labels(filetype):
+	if filetype == "vary_k":
+		return "k", "time"
+	elif filetype == "vary_k_eps":
+		return "k", "diversity"
 
 
 def color(alg_name):
-	if alg_name == "fmmd_ILP":
-		# Red
-		return 'r-'
-	elif alg_name == "FairFlow":
+	'''
+	Returns the color used for plotting the graph of the given algorithm
+	
+	alg_name - name of the algorithm
+	'''
+	if alg_name == "fmmd_ilp": # FMMD-E
+		# Blue
+		return 'tab:blue'
+	elif alg_name == "fairflow": 
 		# Yellow
 		return 'y-'
-	elif alg_name == "scalable_fmmd_ILP":
-		# Green
-		return 'g-'
-	elif alg_name == "FairSwap":
+	elif alg_name == "scalable_fmmd_ilp": #FMMD-S
+		# Red
+		return 'tab:red'
+	elif alg_name == "fairswap":
 		# Black
-		return 'k-'
-	elif alg_name == "Alg1":
-		# Pink
-		return 'm-'
-	elif alg_name == "Alg2":
-		# Blue
-		return 'b-'
-	elif alg_name == "FairGreedyFlow":
+		return 'k'
+	elif alg_name == "sfdm1": #agl1
+		# Purple
+		return 'tab:purple'
+	elif alg_name == "sfdm2": #alg2
+		# Green
+		return 'tab:green'
+	elif alg_name == "fairgreedyflow":
 		# Cyan
-		return 'c-'
+		return 'tab:cyan'
+	elif alg_name == "scalable_fmmd_modified_greedy":
+		# Brown
+		return 'tab:brown'
 
 
-# main
-def main():
-	# Load the data into a dictionary 
+def plot_graph(graphname,filetype, data_per_alg, outputdir):
 
-	data_per_alg = {}
-	filepath = "./results/results_vary_k copy.csv"
+	'''
+	plots a graph for a single dataset and group variation.
+
+	graphname - the name of the graph/also the name of the file the graph is saved to.
+	x_label - label for x axis
+	y_label - label for y axis
+	data_per_alg - teh data of k vs runtime for each algorithm for the particular dataset and group.
+	outputdir - the directory where the geaph is saved
+	'''
+
+	plt.clf()
+	for a in data_per_alg:
+		plt.plot(data_per_alg[a]["x"], data_per_alg[a]["y"], color(a), label=a)
+	
+	plt.yscale("log")
+	plt.legend(title = graphname, bbox_to_anchor=(1.05, 1.0), loc='upper left')
+	x_label, y_label = labels(filetype)
+	plt.xlabel(x_label)
+	plt.ylabel(y_label)
+	plt.savefig(outputdir + "/" + graphname, dpi=300, bbox_inches='tight')
+
+def load_data(filepath, filetype):
+	'''
+	loads the data for plotting the graph into a dictionary and returns it.
+
+	The dictionary would look something like:
+	{
+		...,
+
+		"census_small_sex" : {
+								"fairflow" : {"x":[//k value], "y":[//runtimes]},
+								"fmmd_ilp" : {"x":[//k value], "y":[//runtimes]}
+							},
+
+		"adult_small_race" : {
+								"fairflow" : {"x":[//k value], "y":[//runtimes]},
+								"fmmd_ilp" : {"x":[//k value], "y":[//runtimes]}
+							},
+		...
+	}
+	'''
+	data = {}
 	with open(filepath) as csv_file:
 		csv_reader = csv.reader(csv_file, delimiter=',')
 		lc = 0
 		for row in csv_reader:
-			if lc == 0:
-				lc += 1
-			else:
-				if row[4] not in data_per_alg:
-					data_per_alg[row[4]] = {"k":[int(row[3])], "time":[float(row[10])]}
+			print("reading line: ", lc)
+			# Ignore first row
+			if lc != 0:
+
+				try:
+					if filetype == "vary_k":
+						dataset = row[0].lower()
+						group = row[1].lower()
+						alg = row[4].lower()
+						if alg == "alg1":
+							alg = "sfdm1"
+						elif alg == "alg2":
+							alg = "sfdm2"
+						x_val = int(row[3])
+						y_val = float(row[10])
+					elif filetype == "vary_k_eps":
+						dataset = row[0].lower()
+						group = row[1].lower()
+						alg = row[4].lower()
+						x_val = int(row[3])
+						y_val = float(row[10])
+				except:
+					print("csv has missing columns")
+				key = dataset + "_" + group
+				# Look at the dataset and the group
+				if key not in data:
+					data[key] = {alg: {"x":[x_val], "y": [y_val]}}
 				else:
-					data_per_alg[row[4]]["k"].append(int(row[3]))
-					data_per_alg[row[4]]["time"].append(float(row[10]))
+					# Look at the algorithm run on the dataset and group
+					if alg not in data[key]:
+						data[key][alg] = {"x": [x_val], "y": [y_val]}
+					else:
+						data[key][alg]["x"].append(x_val)
+						data[key][alg]["y"].append(y_val)
+			lc += 1
+	return data
 
-	for a in data_per_alg:
-		print("Alg = ", a)
-		print("\tX=", data_per_alg[a]["k"])
-		print("\tY=", data_per_alg[a]["time"])
-		plt.plot(data_per_alg[a]["k"], data_per_alg[a]["time"], color(a), label=a)
-	
-	plt.yscale("log")
-	plt.legend(title = "Census Small (Sex)")
-	plt.xlabel("k")
-	plt.ylabel("time")
-	#fig, ax = plt.subplots()
-	#ax.set_ylim(bottom=0)
-	plt.savefig('censmallsex.png', dpi=300, bbox_inches='tight')
-
+def plotgraphsfromfile(filepath, filetype, outputdir):
+	data = load_data(filepath, filetype)
+	for graphname in data:
+		print("Plotting - ", graphname)
+		data_per_alg = data[graphname]
+		plot_graph(graphname, filetype, data_per_alg, outputdir)
 
 
 
-
+# main
+def main():
+	outputdir = "./graphs"
+	if not os.path.exists(outputdir):
+		os.makedirs(outputdir)
+	plotgraphsfromfile("./results/results_vary_k.csv","vary_k","./graphs")
 
 
 
