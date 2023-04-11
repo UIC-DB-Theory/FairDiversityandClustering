@@ -6,7 +6,7 @@ import os
 def labels(filetype):
 	if filetype == "vary_k":
 		return "k", "time"
-	elif filetype == "vary_k_eps":
+	elif filetype == "vary_k_div":
 		return "k", "diversity"
 
 
@@ -105,7 +105,7 @@ def load_data(filepath, filetype):
 							alg = "sfdm2"
 						x_val = int(row[3])
 						y_val = float(row[10])
-					elif filetype == "vary_k_eps":
+					elif filetype == "vary_k_div":
 						dataset = row[0].lower()
 						group = row[1].lower()
 						alg = row[4].lower()
@@ -142,6 +142,7 @@ def main():
 	if not os.path.exists(outputdir):
 		os.makedirs(outputdir)
 	plotgraphsfromfile("./results/results_vary_k.csv","vary_k","./graphs")
+	plotgraphsfromfile("./results/results_vary_k.csv","vary_k_div","./graphs")
 
 
 
