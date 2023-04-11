@@ -24,12 +24,12 @@ def print_o(s):
 
 
 
-def run_celebA_dataset(writer, output):
+def run_celebA_dataset(writer, output, datadir):
 
 	print_o("\tgrouped by sex (c=2)")
 	# read the celebA dataset grouped by sex (c=2)
 	elements = []
-	csr_sparse = sp.load_npz('./data/celebA_csr_sparse.npz')
+	csr_sparse = sp.load_npz(f'{datadir}/celebA_csr_sparse.npz')
 	for i in range(202599):
 		if int(csr_sparse[i, 1]) == -1:
 			elem = utils.ElemSparse(int(csr_sparse[i, 0]), 0, csr_sparse[i, 4:])
@@ -122,7 +122,7 @@ def run_celebA_dataset(writer, output):
 	# read the celebA dataset grouped by age (c=2)
 	elements.clear()
 	elements = []
-	csr_sparse = sp.load_npz('./data/celebA_csr_sparse.npz')
+	csr_sparse = sp.load_npz(f'{datadir}/celebA_csr_sparse.npz')
 	for i in range(202599):
 		if int(csr_sparse[i, 2]) == -1:
 			elem = utils.ElemSparse(int(csr_sparse[i, 0]), 0, csr_sparse[i, 4:])
@@ -210,7 +210,7 @@ def run_celebA_dataset(writer, output):
 	# read the celebA dataset grouped by sex+age (c=4)
 	elements.clear()
 	elements = []
-	csr_sparse = sp.load_npz('./data/celebA_csr_sparse.npz')
+	csr_sparse = sp.load_npz(f'{datadir}/celebA_csr_sparse.npz')
 	for i in range(202599):
 		if int(csr_sparse[i, 3]) == -1:
 			elem = utils.ElemSparse(int(csr_sparse[i, 0]), 0, csr_sparse[i, 4:])
@@ -281,13 +281,13 @@ def run_celebA_dataset(writer, output):
 			np.average(alg2[3]), np.average(alg2[2]) + np.average(alg2[3])])
 		output.flush()
 
-def run_adult_dataset(writer, output):
+def run_adult_dataset(writer, output, datadir):
 	# adult
 
 	print_o("\tgrouped by sex (c=2)")
 	# read the Adult dataset grouped by sex (c=2)
 	elements = []
-	with open("./data/adult.csv", "r") as fileobj:
+	with open(f'{datadir}/adult.csv', "r") as fileobj:
 		csvreader = csv.reader(fileobj, delimiter=',')
 		for row in csvreader:
 			features = []
@@ -364,7 +364,7 @@ def run_adult_dataset(writer, output):
 	print_o("\tgrouped by race (c=5)")
 	# read the Adult dataset grouped by race (c=5)
 	elements.clear()
-	with open("./data/adult.csv", "r") as fileobj:
+	with open(f'{datadir}/adult.csv', "r") as fileobj:
 		csvreader = csv.reader(fileobj, delimiter=',')
 		for row in csvreader:
 			features = []
@@ -434,7 +434,7 @@ def run_adult_dataset(writer, output):
 	print_o("\tgrouped by sex+race (c=10)")
 	# read the Adult dataset grouped by sex+race (c=10)
 	elements.clear()
-	with open("./data/adult.csv", "r") as fileobj:
+	with open(f'{datadir}/adult.csv', "r") as fileobj:
 		csvreader = csv.reader(fileobj, delimiter=',')
 		for row in csvreader:
 			features = []
@@ -508,12 +508,12 @@ def run_adult_dataset(writer, output):
 			np.average(alg2[3]), np.average(alg2[2]) + np.average(alg2[3])])
 		output.flush()
 
-def run_twitter_dataset(writer, output):
+def run_twitter_dataset(writer, output, datadir):
 
 	print_o("\tgrouped by gender (c=3)")
 	# read the twitter dataset grouped by gender (c=3)
 	elements = []
-	with open("./data/twitter.csv", "r") as fileobj:
+	with open(f'{datadir}/twitter.csv', "r") as fileobj:
 		csvreader = csv.reader(fileobj, delimiter=',')
 		for row in csvreader:
 			features = []
@@ -581,13 +581,13 @@ def run_twitter_dataset(writer, output):
 		output.flush()
 
 
-def run_census_dataset(writer, output):
+def run_census_dataset(writer, output, datadir):
 	# all
 
 	print_o("\tgrouped by sex (c=2)")
 	# read the Census dataset grouped by sex (c=2)
 	elements = []
-	with open("./data/census.csv", "r") as fileobj:
+	with open(f'{datadir}/census.csv', "r") as fileobj:
 		csvreader = csv.reader(fileobj, delimiter=',')
 		for row in csvreader:
 			features = []
@@ -657,7 +657,7 @@ def run_census_dataset(writer, output):
 	# read the Census dataset grouped by age (c=7)
 	elements.clear()
 	elements = []
-	with open("./data/census.csv", "r") as fileobj:
+	with open(f'{datadir}/census.csv', "r") as fileobj:
 		csvreader = csv.reader(fileobj, delimiter=',')
 		for row in csvreader:
 			features = []
@@ -721,7 +721,7 @@ def run_census_dataset(writer, output):
 	print_o("\tgrouped by both (c=14)")
 	# read the Census dataset grouped by both (c=14)
 	elements.clear()
-	with open("./data/census.csv", "r") as fileobj:
+	with open(f'{datadir}/census.csv', "r") as fileobj:
 		csvreader = csv.reader(fileobj, delimiter=',')
 		for row in csvreader:
 			features = []
@@ -813,6 +813,7 @@ def main():
 	print("***Varying K for full datasets***")
 	
 	outfile = "results_vary_k.csv"
+	datadir = sys.argv[1]
 	output = open("results_vary_k.csv", "a")
 	writer = csv.writer(output)
 	writer.writerow(["dataset", "group", "m", "k", "algorithm", "param_eps", "div", "num_elem", "time1", "time2", "time3"])
@@ -836,11 +837,11 @@ def main():
 
 
 	print_o("Running census dataset")
-	run_census_dataset(writer, output)
+	run_census_dataset(writer, output, datadir)
 
 
 	print_o("Running twitter dataset")
-	run_twitter_dataset(writer, output)
+	run_twitter_dataset(writer, output, datadir)
 
 	enablePrint()
 	
