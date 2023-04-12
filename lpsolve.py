@@ -95,7 +95,7 @@ if __name__ == '__main__':
     kis = {"Male": 10, "Female": 10}
 
     # binary search params
-    epsilon = np.float64("0.0001")
+    epsilon = np.float64("0.001")
 
     # other things for gurobi
     method = 2  # model method of solving
@@ -121,10 +121,9 @@ if __name__ == '__main__':
     colors, features = utils.read_CSV("./datasets/ads/adult.data", allFields, color_field, feature_fields)
     assert (len(colors) == len(features))
 
-    # truncate for testing
-    limit = 1000
-    colors = colors[0:limit]
-    features = features[0:limit]
+    # build corset
+    utils.make_coreset(colors, features, kis, epsilon, 0.1)
+    exit(0)
 
     N = len(features)
 

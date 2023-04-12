@@ -41,7 +41,7 @@ def read_CSV(filename: t.AnyStr, field_names: t.Sequence, color_field: t.AnyStr,
 
     return colors, features
 
-def make_coreset(possible_colors: t.Set[t.AnyStr], colors: npt.NDArray[t.AnyStr], features: npt.NDArray[np.float64], kis, epsilon, error) -> (npt.NDArray[t.AnyStr], npt.NDArray[np.float64]):
+def make_coreset(colors: npt.NDArray[t.AnyStr], features: npt.NDArray[np.float64], kis, epsilon, error) -> (npt.NDArray[t.AnyStr], npt.NDArray[np.float64]):
     """
     returns the corest of the dataset; a subset that has similar properties for our purposes
 
@@ -51,7 +51,24 @@ def make_coreset(possible_colors: t.Set[t.AnyStr], colors: npt.NDArray[t.AnyStr]
     :param kis: the map of colors to required amounts
     :param epsilon: the division of space used in the algorithm
     :param error: the epsilon error for the coreset computation
-    :return:
+    :return: a pair of new colors and features
     """
+    import coreset_kcenter as kc
 
+    out_colors = []
+    out_features = []
 
+    # our "K" value for number of clusters
+    dim = features.shape[1]
+    K = sum(kis.values()) / (error ** dim)
+
+    # trying to hardcode
+    K = 100
+
+    # run k-center on all possible colors
+    all_colors, inverse = np.unique(colors, return_inverse=True)
+    for color in range(len(all_colors)):
+        color_features = features[inverse == color]
+
+        centerer = kc.Coreset_kCenter(color_features, K, error)
+        print(centerer.compute_kCenter_Coreset())

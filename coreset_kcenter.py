@@ -111,7 +111,7 @@ class Coreset_kCenter:
 
         # Snap points to grid - in d dimensions
 
-    def snap_point_to_grid(self, point):
+    def snap_point_to_grid(self, index, point):
         grid_loc = []
 
         # Iterate over each dimensions and snap to nearest grid coordinates
@@ -123,12 +123,12 @@ class Coreset_kCenter:
 
         # Add to grid points dict - if location exists add point to location
         if grid_loc in self.gridpoints.keys():
-            self.gridpoints[grid_loc].append(point)
+            self.gridpoints[grid_loc].append(index)
 
 
         else:  # if location doesn't exist create array and add point
             self.gridpoints[grid_loc] = []
-            self.gridpoints[grid_loc].append(point)
+            self.gridpoints[grid_loc].append(index)
 
         return
 
@@ -145,8 +145,8 @@ class Coreset_kCenter:
         # print("d-dimensional grid side_length = ", self.side_length)
 
         # Snap all points to d-dimensional grid
-        for p in self.x_array:
-            self.snap_point_to_grid(p)
+        for index, p in enumerate(self.x_array):
+            self.snap_point_to_grid(index, p)
 
         return
 
