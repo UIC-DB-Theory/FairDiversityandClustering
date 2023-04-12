@@ -62,13 +62,22 @@ def make_coreset(colors: npt.NDArray[t.AnyStr], features: npt.NDArray[np.float64
     dim = features.shape[1]
     K = sum(kis.values()) / (error ** dim)
 
-    # trying to hardcode
+    # trying to hardcode for now since this was way too large
     K = 100
 
     # run k-center on all possible colors
     all_colors, inverse = np.unique(colors, return_inverse=True)
     for color in range(len(all_colors)):
         color_features = features[inverse == color]
+        # TODO: just replicate a color repeatedly instead of doing this
+        color_colors = colors[inverse == color]
 
         centerer = kc.Coreset_kCenter(color_features, K, error)
-        print(centerer.compute_kCenter_Coreset())
+        indices = centerer.compute_kCenter_Coreset()
+        out_colors.append(color_colors[indices]) #TODO: see above
+        out_features.append(color_features[indices])
+
+    out_colors = np.concatenate(out_colors)
+    out_features = np.concatenate(out_features)
+
+    return out_colors, out_features
