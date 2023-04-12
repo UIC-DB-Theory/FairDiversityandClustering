@@ -40,3 +40,18 @@ def read_CSV(filename: t.AnyStr, field_names: t.Sequence, color_field: t.AnyStr,
     features = np.array(features, dtype=np.float64)
 
     return colors, features
+
+def make_coreset(possible_colors: t.Set[t.AnyStr], colors: npt.NDArray[t.AnyStr], features: npt.NDArray[np.float64], kis, epsilon, error) -> (npt.NDArray[t.AnyStr], npt.NDArray[np.float64]):
+    """
+    returns the corest of the dataset; a subset that has similar properties for our purposes
+
+    :param possible_colors: all possible color values in colors
+    :param colors: the colors of the data
+    :param features: corresponding features
+    :param kis: the map of colors to required amounts
+    :param epsilon: the division of space used in the algorithm
+    :param error: the epsilon error for the coreset computation
+    :return:
+    """
+
+
