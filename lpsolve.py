@@ -34,6 +34,10 @@ def solve_lp(dataStruct, m: gp.Model, gamma: np.float64, variables: npt.NDArray[
     # maybe this makes it faster?
     # m.tune()
 
+    # reset model, removing constraints if they exist
+    m.reset()
+    m.remove(m.getConstrs())
+
     sys.stdout.flush()
     print(f'testing feasability of gamma={gamma}', flush=True)
     # we could probably build up the color constraints once and repeatedly add them
@@ -118,7 +122,7 @@ if __name__ == '__main__':
     assert (len(colors) == len(features))
 
     # truncate for testing
-    limit = 10000
+    limit = 1000
     colors = colors[0:limit]
     features = features[0:limit]
 
@@ -145,10 +149,6 @@ if __name__ == '__main__':
         high *= 2
         gamma = high * epsilon
 
-        # reset model, removing constraints
-        m.reset()
-        m.remove(m.getConstrs())
-
         feasible = solve_lp(data_struct, m, np.float_(gamma), variables, colors, features)
 
     print(f'High bound is {high}; binary search')
@@ -164,10 +164,6 @@ if __name__ == '__main__':
         sys.stdout.flush()
 
         gamma = multiple * epsilon
-
-        # reset model, removing constraints
-        m.reset()
-        m.remove(m.getConstrs())
 
         feasible = solve_lp(data_struct, m, np.float_(gamma), variables, colors, features)
 
@@ -186,7 +182,9 @@ if __name__ == '__main__':
 
     print(f'Final test for multiple {multiple} (gamma = {gamma}')
 
-    feasible = solve_lp(data_struct, m, np.float_(gamma), variables, colors, features)
+    while not solve_lp(data_struct, m, np.float_(gamma), variables, colors, features):
+        multiple -= 1
+        gamma = multiple * epsilon
 
     print()
     if m.status == GRB.INFEASIBLE or m.status == GRB.INF_OR_UNBD:
