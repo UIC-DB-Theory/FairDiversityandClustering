@@ -2,7 +2,6 @@
 import math
 from collections import defaultdict
 import gurobipy as gp
-import numpy
 from gurobipy import GRB
 
 import sys
@@ -13,70 +12,11 @@ from tqdm import tqdm
 import typing as t
 import numpy.typing as npt
 
+import BallTree as algo
+import utils
 
-def read_CSV(filename: t.AnyStr, field_names: t.Sequence, color_field: t.AnyStr, feature_fields: t.Set[t.AnyStr]) -> (npt.NDArray[t.AnyStr], npt.NDArray[numpy.float64]):
-    """read_CSV.
-
-    Reads in a CSV datafile as a list of dictionaries.
-    The datafile should have no header row
-
-    Returns a tuple of the colors of elements and their features
-
-    :param filename: the file to read in
-    :type filename: t.AnyStr
-    :param field_names: the headers of the CSV file, in order
-    :type field_names: t.Sequence
-    :param color_field: the field containing the object color
-    :type color_field: t.AnyStr
-    :param feature_fields: the fields which are numerical data values for the point
-    :type feature_fields: t.Set[t.AnyStr]
-    """
-    from csv import DictReader
-
-    # read csv as a dict with given keys
-    reader = DictReader(open(filename), fieldnames=field_names)
-
-    # return the requested features and colors
-    colors = []
-    features = []
-
-    for row in reader:
-        colors.append(row[color_field].strip())
-        features.append([float(row[field]) for field in feature_fields])
-
-    # we want these as np arrays
-    colors = np.array(colors)
-    features = np.array(features, dtype=numpy.float64)
-
-    return colors, features
-
-
-def naive_ball(points : npt.NDArray[np.float64], r : np.float64, point) -> npt.NDArray[int]:
-    """naive_ball.
-
-    Returns the indices of points inside the ball
-
-    :param dF: the distance function point -> point -> num
-    :param points: a list of all points in the dataset
-    :type points: t.List[t.Any]
-    :param r: the radius of the sphere to bound
-    :param point: the circle's center
-    :rtype: t.List[t.Any]
-    """
-    from scipy.spatial.distance import cdist
-
-
-    # we need to reshape the point vector into a row vector
-    dim = point.shape[0] # this is a tuple (reasons!)
-    point = np.reshape(point, (1, dim))
-
-    # comes out as a Nx1 matrix
-    dists = cdist(points, point)
-
-    return (dists.flatten() <= r).nonzero()[0] # Also a tuple!
-
-
-def solve_lp(m : gp.Model, gamma : np.float64, variables : npt.NDArray[gp.MVar], colors : npt.NDArray[t.AnyStr], features : npt.NDArray[np.float64]) -> bool:
+def solve_lp(dataStruct, m: gp.Model, gamma: np.float64, variables: npt.NDArray[gp.MVar], colors: npt.NDArray[t.AnyStr],
+             features: npt.NDArray[np.float64]) -> bool:
     """
     solve_lp
 
@@ -112,9 +52,8 @@ def solve_lp(m : gp.Model, gamma : np.float64, variables : npt.NDArray[gp.MVar],
     # This is slow
 
     # build a constraint for every point
-    for p in tqdm(features, desc="Building ball constraints", unit=" elems", total=N):
-
-        indices = naive_ball(features, gamma / 2.0, p)
+    for v, p in tqdm(zip(variables, features), desc="Building ball constraints", unit=" elems", total=N):
+        indices = algo.get_ind(dataStruct, np.float_(gamma / 2.0), p)
 
         # add constraint that all the variables need to add up
         other_vars = variables[indices]
@@ -155,7 +94,7 @@ if __name__ == '__main__':
     epsilon = np.float64("0.0001")
 
     # other things for gurobi
-    method = 2 # model method of solving
+    method = 2  # model method of solving
 
     # import data from file
     allFields = [
@@ -175,8 +114,8 @@ if __name__ == '__main__':
         "native-country",
         "yearly-income",
     ]
-    colors, features = read_CSV("./datasets/ads/adult.data", allFields, color_field, feature_fields)
-    assert(len(colors) == len(features))
+    colors, features = utils.read_CSV("./datasets/ads/adult.data", allFields, color_field, feature_fields)
+    assert (len(colors) == len(features))
 
     # truncate for testing
     limit = 10000
@@ -188,17 +127,20 @@ if __name__ == '__main__':
     # "normalize" features
     features = features / features.max(axis=0)
 
+    # create data structure
+    data_struct = algo.create(features)
+
     # first we need to find the high value
     print('Solving for high bound')
-    high = 1500 # I'm assuming it's a BIT larger than 0.0001
+    high = 1500  # I'm assuming it's a BIT larger than 0.0001
     gamma = high * epsilon
-    m = gp.Model(f"feasability model") # workaround for OOM error?
+    m = gp.Model(f"feasibility model")  # workaround for OOM error?
     m.Params.method = method
     m.Params.SolutionLimit = 1
 
     variables = m.addMVar(N, name="x")
 
-    feasible = solve_lp(m, gamma, variables, colors, features)
+    feasible = solve_lp(data_struct, m, np.float_(gamma), variables, colors, features)
     while feasible:
         high *= 2
         gamma = high * epsilon
@@ -207,14 +149,13 @@ if __name__ == '__main__':
         m.reset()
         m.remove(m.getConstrs())
 
-        feasible = solve_lp(m, gamma, variables, colors, features)
-
+        feasible = solve_lp(data_struct, m, np.float_(gamma), variables, colors, features)
 
     print(f'High bound is {high}; binary search')
 
     # binary search over multiples of epsilon
     low = 1
-    assert(low < high)
+    assert (low < high)
 
     multiple = math.ceil((low + high) / 2.0)
     while low < high:
@@ -228,7 +169,7 @@ if __name__ == '__main__':
         m.reset()
         m.remove(m.getConstrs())
 
-        feasible = solve_lp(m, gamma, variables, colors, features)
+        feasible = solve_lp(data_struct, m, np.float_(gamma), variables, colors, features)
 
         # if it's feasible, we have to search for larger multiples
         # if it's not, we want smaller multiples
@@ -245,7 +186,7 @@ if __name__ == '__main__':
 
     print(f'Final test for multiple {multiple} (gamma = {gamma}')
 
-    feasible = solve_lp(m, gamma, variables, colors, features)
+    feasible = solve_lp(data_struct, m, np.float_(gamma), variables, colors, features)
 
     print()
     if m.status == GRB.INFEASIBLE or m.status == GRB.INF_OR_UNBD:
