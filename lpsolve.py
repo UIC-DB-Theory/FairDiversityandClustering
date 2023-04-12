@@ -1,153 +1,197 @@
 # lpsolve - simple lp solving based approach to the problem
-
+import math
 from collections import defaultdict
 import gurobipy as gp
 from gurobipy import GRB
 
+import sys
+
+import numpy as np
+
 from tqdm import tqdm
-
 import typing as t
+import numpy.typing as npt
 
+import BallTree as algo
+import utils
 
-def readCSV(filename : t.AnyStr, fieldNames: t.Sequence, wantedFields: t.Set) -> t.List[t.Dict[t.AnyStr, t.Any]]:
-    """readCSV.
-
-    Reads in a CSV datafile as a list of dictionaries.
-    The datafile should have no header row
-
-    :param filename: the file to read in
-    :type filename: t.AnyStr
-    :param fieldNames: the headers of the CSV file, in order
-    :type fieldNames: t.Sequence
-    :param wantedFields: a subset of fieldnames which will be returned (the rest are filtered)
-    :type wantedFields: t.Set
+def solve_lp(dataStruct, m: gp.Model, gamma: np.float64, variables: npt.NDArray[gp.MVar], colors: npt.NDArray[t.AnyStr],
+             features: npt.NDArray[np.float64]) -> bool:
     """
-    from csv import DictReader
+    solve_lp
 
-    # read csv as a dict with given keys
-    reader = DictReader(open(filename), fieldnames=fieldNames)
+    builds and solves the LP for the given gamma, returning true if the model is feasible
 
-    out = []
-    for row in reader:
-        # only return the keys we care about from the csv
-        out.append({k.strip(): v.strip() for k, v in row.items() if k in wantedFields})
+    variables, colors, and features should all have the same length (features can be multi-dimensional?)
 
-    return out
-
-def naiveBall(dF, r, point, points : t.List[t.Any]) -> t.List[t.Any]:
-    """naiveBall.
-
-    Returns a list of all points centered at point p with radius r.
-
-    :param dF: the distance function point -> point -> num
-    :param r: the radius of the sphere to bound
-    :param point: the circle's center
-    :param points: a list of all points in the dataset
-    :type points: t.List[t.Any]
-    :rtype: t.List[t.Any]
+    :param m: the initialized model (named, really; added for compatibility with moving pieces outside of this to reduce re-initalization)
+    :param gamma: current minimum distance between points
+    :param variables: np array of model variables
+    :param colors: np array of "colors" of each point
+    :param features: np array of data points per model
+    :return:
     """
-    inside = []
+    # maybe this makes it faster?
+    # m.tune()
 
-    for p in points:
-        if dF(point, p) <= r:
-            inside.append(p)
+    # reset model, removing constraints if they exist
+    m.reset()
+    m.remove(m.getConstrs())
 
-    return inside
-
-
-if __name__ == '__main__':
-    allFields = [
-            "age",
-            "workclass",
-            "fnlwgt", # what on earth is this one?
-            "education",
-            "education-num",
-            "marital-status",
-            "occupation",
-            "relationship",
-            "race",
-            "sex",
-            "captial-gain",
-            "capital-loss",
-            "hours-per-week",
-            "native-country",
-            "yearly-income",
-            ]
-    wantedFields = {"age", "sex"}
-
-    # variables for running LP
-    color_field = 'sex'
-    kis = {"Male": 10, "Female": 10}
-    gamma = 10
-
-    data = readCSV("./datasets/ads/adult.data", allFields, wantedFields)
-
-    # read to int
-    for elem in data:
-        elem['age'] = int(elem['age'])
-
-    m = gp.Model("feasability")
-
-    # for every row, we need a variable
-    varData = [(m.addVar(name=f"elem #{c}", lb=0.0, ub=1.0), elem) for c, elem in enumerate(data)]
-
-    # varData = varData[0:250]
-
-    # updates the model to reflect new vars
-    # probably not needed but can't hurt?
-    m.update()
-
-    # we need a distance function (1-d) for now
-    def dist(a, b):
-        _, ea = a
-        _, eb = b
-        return abs((ea["age"]) - (eb["age"]))
-
-    # build up the LinExpr for our constraint
-
-    # objective function is moot
-    # m.setObjective(gp.LinExpr(0), GRB.MAXIMIZE)
-
-    # we need at least ki of each color
+    sys.stdout.flush()
+    print(f'testing feasability of gamma={gamma}', flush=True)
+    # we could probably build up the color constraints once and repeatedly add them
+    # this builds up the lhs of the constraints in exprs
     exprs = defaultdict()
-    exprs.default_factory=lambda: gp.LinExpr()
-    for v, e in varData:
-        for field, ki in kis.items():
-            e_color = e[color_field]
-            exprs[e_color].addTerms(1.0, v)
+    exprs.default_factory = lambda: gp.LinExpr()  # this shouldn't be necessary but it is!
+    for i, color in tqdm(enumerate(colors), desc="Building color constraints", unit=" elems", total=N):
+        exprs[color.item()].addTerms(1.0, variables[i].item())
+    exprs.default_factory = None
 
-    print(exprs.keys())
-
+    # we need at least ki of each color so build the final constraints here
     for key in kis.keys():
         m.addConstr(exprs[key] >= kis[key])
-
-    m.update()
 
     # we need at most one point in the ball
     # This is slow
 
-    # exprs = []
-
-
-    for row in tqdm(varData):
-        v, e = row
-        others = naiveBall(dist, gamma / 2.0, row, varData)
+    # build a constraint for every point
+    for v, p in tqdm(zip(variables, features), desc="Building ball constraints", unit=" elems", total=N):
+        indices = algo.get_ind(dataStruct, np.float_(gamma / 2.0), p)
 
         # add constraint that all the variables need to add up
-        other_vars = [v for (v, _) in others]
+        other_vars = variables[indices]
+        count = other_vars.shape[0]
 
-        in_rad = gp.LinExpr([1.0] * len(other_vars), other_vars)
-        
+        # a bit of workarounds to get from MVar to var here
+        in_rad = gp.LinExpr([1.0] * count, other_vars.tolist())
+
         m.addConstr(in_rad <= 1)
 
     m.update()
 
     m.optimize()
 
-    if m.status == GRB.INFEASIBLE:
-        # let's find out what's wrong
-        iis = m.computeIIS()
-        m.write('fail.ilp')
+    # if we're feasible, return true otherwise return false
+    # model is passed back automatically
+    # TODO: ensure else case is ONLY if model is feasible (error otherwise)
+    if m.status == GRB.INFEASIBLE or m.status == GRB.INF_OR_UNBD:
+        print(f'Model for {gamma} is infeasible')
+        return False
+    elif m.status == GRB.OPTIMAL:
+        print(f'Model for {gamma} is feasible')
+        return True
+    else:
+        print(f'\n\n\n***ERROR: Model returned status code {m.status}***')
+        print(f'Exiting')
+        exit(-1)
 
-        m.feasRelaxS(1, False, False, True)
-        m.optimize()
+
+if __name__ == '__main__':
+    # variables for running LP bin-search
+    color_field = 'sex'
+    feature_fields = {'age', 'capital-gain', 'capital-loss'}
+    # feature_fields = {'age'}
+    kis = {"Male": 10, "Female": 10}
+
+    # binary search params
+    epsilon = np.float64("0.0001")
+
+    # other things for gurobi
+    method = 2  # model method of solving
+
+    # import data from file
+    allFields = [
+        "age",
+        "workclass",
+        "fnlwgt",  # what on earth is this one?
+        "education",
+        "education-num",
+        "marital-status",
+        "occupation",
+        "relationship",
+        "race",
+        "sex",
+        "capital-gain",
+        "capital-loss",
+        "hours-per-week",
+        "native-country",
+        "yearly-income",
+    ]
+    colors, features = utils.read_CSV("./datasets/ads/adult.data", allFields, color_field, feature_fields)
+    assert (len(colors) == len(features))
+
+    # truncate for testing
+    limit = 1000
+    colors = colors[0:limit]
+    features = features[0:limit]
+
+    N = len(features)
+
+    # "normalize" features
+    features = features / features.max(axis=0)
+
+    # create data structure
+    data_struct = algo.create(features)
+
+    # first we need to find the high value
+    print('Solving for high bound')
+    high = 1500  # I'm assuming it's a BIT larger than 0.0001
+    gamma = high * epsilon
+    m = gp.Model(f"feasibility model")  # workaround for OOM error?
+    m.Params.method = method
+    m.Params.SolutionLimit = 1
+
+    variables = m.addMVar(N, name="x")
+
+    feasible = solve_lp(data_struct, m, np.float_(gamma), variables, colors, features)
+    while feasible:
+        high *= 2
+        gamma = high * epsilon
+
+        feasible = solve_lp(data_struct, m, np.float_(gamma), variables, colors, features)
+
+    print(f'High bound is {high}; binary search')
+
+    # binary search over multiples of epsilon
+    low = 1
+    assert (low < high)
+
+    multiple = math.ceil((low + high) / 2.0)
+    while low < high:
+        # solve model once for current gamma
+        print(f'Current multiple is {multiple}')
+        sys.stdout.flush()
+
+        gamma = multiple * epsilon
+
+        feasible = solve_lp(data_struct, m, np.float_(gamma), variables, colors, features)
+
+        # if it's feasible, we have to search for larger multiples
+        # if it's not, we want smaller multiples
+        if feasible:
+            # our high will be the first failure
+            low = multiple
+        else:
+            high = multiple - 1
+
+        print(low, high)
+        multiple = math.ceil((low + high) / 2.0)
+
+    gamma = multiple * epsilon
+
+    print(f'Final test for multiple {multiple} (gamma = {gamma}')
+
+    while not solve_lp(data_struct, m, np.float_(gamma), variables, colors, features):
+        multiple -= 1
+        gamma = multiple * epsilon
+
+    print()
+    if m.status == GRB.INFEASIBLE or m.status == GRB.INF_OR_UNBD:
+        print(f'Model for {gamma} is infeasible')
+    elif m.status == GRB.OPTIMAL:
+        print(f'Model for {gamma} is feasible')
+    else:
+        print(f'\n\n\n***ERROR: Model returned status code {m.status}***')
+        print(f'Exiting')
+        exit(-1)
