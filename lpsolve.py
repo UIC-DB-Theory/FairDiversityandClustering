@@ -14,6 +14,7 @@ import numpy.typing as npt
 
 import BallTree as algo
 import utils
+import coreset as CORESET
 
 def solve_lp(dataStruct, m: gp.Model, gamma: np.float64, variables: npt.NDArray[gp.MVar], colors: npt.NDArray[t.AnyStr],
              features: npt.NDArray[np.float64]) -> bool:
@@ -93,7 +94,7 @@ if __name__ == '__main__':
     feature_fields = {'age', 'capital-gain', 'capital-loss'}
     # feature_fields = {'age'}
     kis = {"Male": 10, "Female": 10}
-
+    k = 20
     # binary search params
     epsilon = np.float64("0.001")
 
@@ -120,9 +121,15 @@ if __name__ == '__main__':
     ]
     colors, features = utils.read_CSV("./datasets/ads/adult.data", allFields, color_field, feature_fields)
     assert (len(colors) == len(features))
-
+    # doubling dimenstion
+    # TODO: how is this value calucated? this is required to calculate the coreset
+    l = 7
+    e_coreset = 0.1
     # build corset
-    utils.make_coreset(colors, features, kis, epsilon, 0.1)
+    kc = CORESET.Coreset_FMM(features, colors, k, e_coreset, l)
+    coreset, colors = kc.compute()
+    print(f'Original size = {len(features)}')
+    print(f'Coreset size = {len(coreset)}')
     exit(0)
 
     N = len(features)

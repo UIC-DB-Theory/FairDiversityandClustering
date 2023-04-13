@@ -53,7 +53,7 @@ def make_coreset(colors: npt.NDArray[t.AnyStr], features: npt.NDArray[np.float64
     :param error: the epsilon error for the coreset computation
     :return: a pair of new colors and features
     """
-    import coreset_kcenter as kc
+    import coreset as kc
 
     out_colors = []
     out_features = []
