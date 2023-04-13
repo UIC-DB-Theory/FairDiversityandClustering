@@ -121,14 +121,19 @@ if __name__ == '__main__':
     ]
     colors, features = utils.read_CSV("./datasets/ads/adult.data", allFields, color_field, feature_fields)
     assert (len(colors) == len(features))
+
+
+
     # doubling dimenstion
     # TODO: how is this value calucated? this is required to calculate the coreset
-    l = 7
-    e_coreset = 0.1
+    l = 3
+    e_coreset = 1
+
+    print(f'Original size = {len(features)}')
     # build corset
     kc = CORESET.Coreset_FMM(features, colors, k, e_coreset, l)
     coreset, colors = kc.compute()
-    print(f'Original size = {len(features)}')
+    
     print(f'Coreset size = {len(coreset)}')
     exit(0)
 

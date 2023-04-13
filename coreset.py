@@ -48,7 +48,7 @@ class Coreset_FMM:
         self.d = c
         
         # The result set size while running gmm for each color
-        self.gmm_result_size = np.ceil(pow((4/(e/(1+e))), l) * k).astype(int)
+        self.gmm_result_size = np.ceil(pow(((4*(e+1))/(e)), l) * k).astype(int)
 
     # Compute Greedy k-center/GMM with polynomial 2-approximation
     def GMM(self, input_set):
@@ -61,7 +61,6 @@ class Coreset_FMM:
         point_distances = [hf.dist(input_set[i], s_1) for i in range(len(input_set))]
 
         # Result set for GMM
-        print(self.gmm_result_size)
         result = np.zeros((self.gmm_result_size, self.d), np.float64)
         result[0] = s_1
 
@@ -90,6 +89,7 @@ class Coreset_FMM:
     # Compute the coreset for FMM
     def compute(self):
         
+        print("No. of points selected by GMM per color:", self.gmm_result_size)
 
         # TODO: Not sure if we can do this using numpy
         # First we segregate the feautures by their colors
@@ -101,17 +101,24 @@ class Coreset_FMM:
                 m+=1
             else:
                 features_per_color[self.colors[i]].append(self.features[i])
+        
+        print("No. of points per color:")
+        for color in features_per_color:
+            print(f'\t{color}: {len(features_per_color[color])}')
 
         # Calcualte the coreset
         coreset = np.empty((0, self.d), np.float64)
         colors = []
         for color in features_per_color:
+
+            print("Calculating coreset for color:", color)
+
             # Concatenate the result sets of GMM run on each colored set.
             coreset = np.append(coreset, self.GMM(features_per_color[color]), axis=0)
             colors = colors + ([color]*self.gmm_result_size)
 
         # A trivial test
-        (r, _) = coreset.shape()
-        assert(r, m*self.gmm_result_size)
+        (r, _) = coreset.shape
+        assert(r == m*self.gmm_result_size)
 
         return coreset, colors
