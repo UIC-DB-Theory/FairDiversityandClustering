@@ -1,6 +1,3 @@
-## k-Center Coreset Implementation
-## Karan Vombatkere, Dec 2021
-
 import numpy as np
 import numpy.typing as npt
 import helper_functions as hf
@@ -12,7 +9,8 @@ class Coreset_FMM:
     Class to compute Fair Max Min Coreset.
     
     It computes the (1+e)-coreset for FAIR-MAX-MIN in metric spaces of low doubling dimension (l).
-    The paper cited below guarantees that in the resulting coreset there would be enough points
+    
+    The paper [2] cited below guarantees that in the resulting coreset there would be enough points
     from each color group to satisfy fairness while these points are atleast l*/(1+e) apart.
     TODO: (l* is the optimal diversity score? -- double check this)
 
@@ -26,19 +24,23 @@ class Coreset_FMM:
         
     ----------
     References
-    1. Agarwal, Pankaj K., Sariel Har-Peled, and Kasturi R. Varadarajan. "Geometric approximation via coresets."
+    [1] Agarwal, Pankaj K., Sariel Har-Peled, and Kasturi R. Varadarajan. "Geometric approximation via coresets."
     Combinatorial and computational geometry 52.1-30 (2005): 3.
+
+    [2] Addanki, R., McGregor, A., Meliou, A., & Moumoulidou, Z. (2022). Improved approximation and scalability 
+    for fair max-min diversification. arXiv preprint arXiv:2201.06678.
+
+    [3] https://github.com/kvombatkere/CoreSets-Algorithms
     """
 
     # Initialize with parameters
     def __init__(self, features, colors, k , e, l):
 
         if isinstance(features, np.ndarray):
-            self.x_array = features
+            self.features = features
         else:
-            self.x_array = np.array(features)
+            self.features = np.array(features)
 
-        self.features = features
         self.colors = colors
         self.k = k
         self.e = e
@@ -50,8 +52,12 @@ class Coreset_FMM:
         # The result set size while running gmm for each color
         self.gmm_result_size = np.ceil(pow(((4*(e+1))/(e)), l) * k).astype(int)
 
+
     # Compute Greedy k-center/GMM with polynomial 2-approximation
     def GMM(self, input_set):
+
+        if len(input_set) < self.gmm_result_size:
+            return np.array(input_set)
 
         # Randomly select a point.
         randomPointIndex = np.random.randint(0, len(input_set) + 1)
@@ -116,9 +122,5 @@ class Coreset_FMM:
             # Concatenate the result sets of GMM run on each colored set.
             coreset = np.append(coreset, self.GMM(features_per_color[color]), axis=0)
             colors = colors + ([color]*self.gmm_result_size)
-
-        # A trivial test
-        (r, _) = coreset.shape
-        assert(r == m*self.gmm_result_size)
 
         return coreset, colors
