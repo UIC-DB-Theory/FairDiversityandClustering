@@ -138,10 +138,11 @@ def plotgraphsfromfile(filepath, filetype, outputdir):
 
 # main
 def main():
-	outputdir = "./graphs"
+	outputdir = "./graphs/full/adult/"
 	if not os.path.exists(outputdir):
 		os.makedirs(outputdir)
-	plotgraphsfromfile("./results/results_vary_k.csv","vary_k","./graphs")
+	# plotgraphsfromfile("./results/results_vary_k.csv","vary_k","./graphs")
+	plotgraphsfromfile("./results/results_vary_k_adult_full.csv","vary_k","./graphs")
 
 
 
