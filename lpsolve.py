@@ -122,32 +122,32 @@ if __name__ == '__main__':
     colors, features = utils.read_CSV("./datasets/ads/adult.data", allFields, color_field, feature_fields)
     assert (len(colors) == len(features))
 
-
+    # "normalize" features
+    # Should happen before coreset construction
+    features = features / features.max(axis=0)
 
     # doubling dimenstion
     # TODO: how is this value calucated? this is required to calculate the coreset
     l = 3
-    e_coreset = 1
+    e_coreset = 3
 
     print(f'Original size = {len(features)}')
     # build corset
     kc = CORESET.Coreset_FMM(features, colors, k, e_coreset, l)
-    coreset, colors = kc.compute()
-    
-    print(f'Coreset size = {len(coreset)}')
-    exit(0)
+    features, colors = kc.compute()
+
+    assert (len(colors) == len(features))
+    print(f'Coreset size = {len(features)}')
+    print(features)
 
     N = len(features)
-
-    # "normalize" features
-    features = features / features.max(axis=0)
 
     # create data structure
     data_struct = algo.create(features)
 
     # first we need to find the high value
     print('Solving for high bound')
-    high = 1500  # I'm assuming it's a BIT larger than 0.0001
+    high = 100  # I'm assuming it's a BIT larger than 0.0001
     gamma = high * epsilon
     m = gp.Model(f"feasibility model")  # workaround for OOM error?
     m.Params.method = method

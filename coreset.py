@@ -2,6 +2,7 @@ import numpy as np
 import numpy.typing as npt
 import helper_functions as hf
 import time, random
+from tqdm import trange, tqdm
 
 # TODO: add types later :)
 class Coreset_FMM:
@@ -55,6 +56,7 @@ class Coreset_FMM:
 
     # Compute Greedy k-center/GMM with polynomial 2-approximation
     def GMM(self, input_set):
+        from scipy.spatial.distance import cdist
 
         if len(input_set) < self.gmm_result_size:
             return np.array(input_set)
@@ -64,23 +66,31 @@ class Coreset_FMM:
         s_1 = input_set[randomPointIndex]
 
         # Initialize all distances initially to s_1.
-        point_distances = [hf.dist(input_set[i], s_1) for i in range(len(input_set))]
+        # we need to reshape the point vector into a row vector
+        dim = s_1.shape[0]  # this is a tuple (reasons!)
+        point = np.reshape(s_1, (1, dim)) # point is the current "max_dist" point we're working with
+
+        # comes out as a Nx1 matrix
+        point_distances = cdist(input_set, point)
 
         # Result set for GMM
         result = np.zeros((self.gmm_result_size, self.d), np.float64)
-        result[0] = s_1
+        result[0] = point
 
-        for i in range(1, self.gmm_result_size):
+        for i in trange(1, self.gmm_result_size):
 
             # Get the farthest point from current point
-            max_point_index = point_distances.index(max(point_distances))
-            maximum_dist_point = input_set[max_point_index]
+            # max_point_index = point_distances.index(max(point_distances))
+            # maximum_dist_point = input_set[max_point_index]
+            maximum_dist_point = input_set[point_distances.argmax()]
 
             result[i] = maximum_dist_point
 
             # Update point distances with respect to the maximum_dis_point.
-            point_distances = [min(hf.dist(input_set[i], maximum_dist_point), point_distances[i]) for i in
-                               range(len(input_set))]
+            # we keep the minimum distance any point is to our selected point
+            point = np.reshape(maximum_dist_point, (1, dim))
+            new_point_distances = cdist(input_set, point)
+            point_distances = np.minimum(point_distances, new_point_distances)
 
         # TODO: What is this and is this relevant to us?
         # Get the cost, R
@@ -120,7 +130,11 @@ class Coreset_FMM:
             print("Calculating coreset for color:", color)
 
             # Concatenate the result sets of GMM run on each colored set.
-            coreset = np.append(coreset, self.GMM(features_per_color[color]), axis=0)
-            colors = colors + ([color]*self.gmm_result_size)
+            # Had to change this to account for failing color lengths
+            gmm_res = self.GMM(features_per_color[color])
+            coreset = np.append(coreset, gmm_res, axis=0)
+            colors = colors + ([color]*len(gmm_res))
+
+        colors = np.array(colors)
 
         return coreset, colors
