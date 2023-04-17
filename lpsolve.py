@@ -14,7 +14,6 @@ import numpy.typing as npt
 
 import BallTree as algo
 import utils
-import coreset as CORESET
 
 def solve_lp(dataStruct, m: gp.Model, gamma: np.float64, variables: npt.NDArray[gp.MVar], colors: npt.NDArray[t.AnyStr],
              features: npt.NDArray[np.float64]) -> bool:
@@ -87,6 +86,21 @@ def solve_lp(dataStruct, m: gp.Model, gamma: np.float64, variables: npt.NDArray[
         print(f'Exiting')
         exit(-1)
 
+def construct_coreset(features, colors):
+    """
+    construct_coreset
+
+    constructs the coreset for FMMD.
+
+    :param features: np array of data points per model
+    :param colors: np array of "colors" of each point
+    """
+    import coreset as CORESET
+    l = len(feature_fields) # doubling dimension = d 
+    e_coreset = 3 
+    coreset_constructor = CORESET.Coreset_FMM(features, colors, k, e_coreset, l)
+    features, colors = coreset_constructor.compute()
+    return features, colors
 
 if __name__ == '__main__':
     # variables for running LP bin-search
@@ -126,19 +140,10 @@ if __name__ == '__main__':
     # Should happen before coreset construction
     features = features / features.max(axis=0)
 
-    # doubling dimenstion
-    # TODO: how is this value calucated? this is required to calculate the coreset
-    l = 3
-    e_coreset = 3
 
-    print(f'Original size = {len(features)}')
-    # build corset
-    kc = CORESET.Coreset_FMM(features, colors, k, e_coreset, l)
-    features, colors = kc.compute()
-
-    assert (len(colors) == len(features))
+    print(f'Size of data = {len(features)}')
+    features, colors = construct_coreset(features, colors)
     print(f'Coreset size = {len(features)}')
-    print(features)
 
     N = len(features)
 

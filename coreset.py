@@ -1,19 +1,13 @@
 import numpy as np
 import numpy.typing as npt
-import helper_functions as hf
-import time, random
-from tqdm import trange, tqdm
+import typing as t
+from tqdm import trange
 
-# TODO: add types later :)
 class Coreset_FMM:
     """
     Class to compute Fair Max Min Coreset.
-    
+
     It computes the (1+e)-coreset for FAIR-MAX-MIN in metric spaces of low doubling dimension (l).
-    
-    The paper [2] cited below guarantees that in the resulting coreset there would be enough points
-    from each color group to satisfy fairness while these points are atleast l*/(1+e) apart.
-    TODO: (l* is the optimal diversity score? -- double check this)
 
     Parameters
     ----------
@@ -21,7 +15,7 @@ class Coreset_FMM:
         colors : list of colors corresponding to the points.
         k : cardinality of the result set for FMMD.
         e : epsilon value for coreset.
-        l: the doubling dimension.
+        l : the doubling dimension.
         
     ----------
     References
@@ -35,18 +29,21 @@ class Coreset_FMM:
     """
 
     # Initialize with parameters
-    def __init__(self, features, colors, k , e, l):
+    def __init__(self, features: npt.NDArray[np.float64], colors: npt.NDArray[t.AnyStr], k, e, l):
 
         if isinstance(features, np.ndarray):
             self.features = features
         else:
             self.features = np.array(features)
+        
+        if isinstance(colors, np.ndarray):
+            self.colors = colors
+        else:
+            self.colors = np.array(colors)
 
-        self.colors = colors
         self.k = k
         self.e = e
 
-        # TODO: double check this
         (_, c) = features.shape
         self.d = c
         
@@ -55,7 +52,7 @@ class Coreset_FMM:
 
 
     # Compute Greedy k-center/GMM with polynomial 2-approximation
-    def GMM(self, input_set):
+    def GMM(self, input_set: npt.NDArray[np.float64]):
         from scipy.spatial.distance import cdist
 
         if len(input_set) < self.gmm_result_size:
@@ -92,49 +89,33 @@ class Coreset_FMM:
             new_point_distances = cdist(input_set, point)
             point_distances = np.minimum(point_distances, new_point_distances)
 
-        # TODO: What is this and is this relevant to us?
-        # Get the cost, R
-        # self.R_val = max(point_distances)
-        # print("Cost (max) of k-center clustering={:.3f}".format(self.R_val))
-
         return result
-
-        
-
 
     # Compute the coreset for FMM
     def compute(self):
         
         print("No. of points selected by GMM per color:", self.gmm_result_size)
+    
+        out_colors = []
+        out_features = []
 
-        # TODO: Not sure if we can do this using numpy
-        # First we segregate the feautures by their colors
-        features_per_color = {}
-        m = 0
-        for i in range(0, len(self.features)):
-            if self.colors[i] not in features_per_color:
-                features_per_color[self.colors[i]] = [self.features[i]]
-                m+=1
-            else:
-                features_per_color[self.colors[i]].append(self.features[i])
-        
-        print("No. of points per color:")
-        for color in features_per_color:
-            print(f'\t{color}: {len(features_per_color[color])}')
+        # run k-center on all possible colors
+        all_colors, inverse = np.unique(self.colors, return_inverse=True)
+        for color in range(len(all_colors)):
 
-        # Calcualte the coreset
-        coreset = np.empty((0, self.d), np.float64)
-        colors = []
-        for color in features_per_color:
+            # The fetures for current color
+            color_features = self.features[inverse == color]
 
-            print("Calculating coreset for color:", color)
+            # Calculate the GMM for colored set
+            color_coreset = self.GMM(color_features)
 
-            # Concatenate the result sets of GMM run on each colored set.
-            # Had to change this to account for failing color lengths
-            gmm_res = self.GMM(features_per_color[color])
-            coreset = np.append(coreset, gmm_res, axis=0)
-            colors = colors + ([color]*len(gmm_res))
+            # The coressponding color list
+            color_colors = np.array([all_colors[self.colors]]*len(color_coreset))
 
-        colors = np.array(colors)
+            out_colors.append(color_colors)
+            out_features.append(color_coreset)
 
-        return coreset, colors
+        out_colors = np.concatenate(out_colors)
+        out_features = np.concatenate(out_features)
+
+        return out_features, out_colors
