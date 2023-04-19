@@ -86,6 +86,21 @@ def solve_lp(dataStruct, m: gp.Model, gamma: np.float64, variables: npt.NDArray[
         print(f'Exiting')
         exit(-1)
 
+def construct_coreset(features, colors):
+    """
+    construct_coreset
+
+    constructs the coreset for FMMD.
+
+    :param features: np array of data points per model
+    :param colors: np array of "colors" of each point
+    """
+    import coreset as CORESET
+    l = len(feature_fields) # doubling dimension = d 
+    e_coreset = 3 
+    coreset_constructor = CORESET.Coreset_FMM(features, colors, k, e_coreset, l)
+    features, colors = coreset_constructor.compute()
+    return features, colors
 
 if __name__ == '__main__':
     # variables for running LP bin-search
@@ -93,9 +108,9 @@ if __name__ == '__main__':
     feature_fields = {'age', 'capital-gain', 'capital-loss'}
     # feature_fields = {'age'}
     kis = {"Male": 10, "Female": 10}
-
+    k = 20
     # binary search params
-    epsilon = np.float64("0.0001")
+    epsilon = np.float64("0.001")
 
     # other things for gurobi
     method = 2  # model method of solving
@@ -121,22 +136,23 @@ if __name__ == '__main__':
     colors, features = utils.read_CSV("./datasets/ads/adult.data", allFields, color_field, feature_fields)
     assert (len(colors) == len(features))
 
-    # truncate for testing
-    limit = 1000
-    colors = colors[0:limit]
-    features = features[0:limit]
+    # "normalize" features
+    # Should happen before coreset construction
+    features = features / features.max(axis=0)
+
+
+    print(f'Size of data = {len(features)}')
+    features, colors = construct_coreset(features, colors)
+    print(f'Coreset size = {len(features)}')
 
     N = len(features)
-
-    # "normalize" features
-    features = features / features.max(axis=0)
 
     # create data structure
     data_struct = algo.create(features)
 
     # first we need to find the high value
     print('Solving for high bound')
-    high = 1500  # I'm assuming it's a BIT larger than 0.0001
+    high = 100  # I'm assuming it's a BIT larger than 0.0001
     gamma = high * epsilon
     m = gp.Model(f"feasibility model")  # workaround for OOM error?
     m.Params.method = method
