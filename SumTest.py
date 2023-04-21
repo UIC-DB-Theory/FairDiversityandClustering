@@ -1,23 +1,8 @@
-import typing
 
-from sklearn.neighbors import KDTree
 from sklearn.neighbors import BallTree
-import math
-from collections import defaultdict
-import gurobipy as gp
-from gurobipy import GRB
 
-import sys
-
+import time
 import numpy as np
-
-from tqdm import tqdm
-import typing as t
-import numpy.typing as npt
-import BallTree as btree
-import KDTree as kdtree
-import NaiveBall as nball
-import KDTree2 as kdtree2
 import utils
 
 def preamble():
@@ -61,22 +46,28 @@ def preamble():
 
     return colors, weights, features
 
+def balltreeCount(tree, point):
+    dim = point.shape[0]  # this is a tuple (reasons!)
+    point_reshaped = np.reshape(point, (1, dim))
+    res = tree.query_radius(point_reshaped, np.float_(.15 / 2), count_only=True)
+    return res,
+
+
+def balltreeSum(tree, point):
+    dim = point.shape[0]  # this is a tuple (reasons!)
+    point_reshaped = np.reshape(point, (1, dim))
+    idxs = tree.query_radius(point_reshaped, np.float_(.15 / 2)).flatten()[0]
+    return np.sum(idxs)
+
+
 if __name__ == '__main__':
     colors, weights, features = preamble()
     N = len(features)
+    tree = BallTree(features, metric='minkowski', sample_weight=weights)
 
-    tree = kdtree.create(features)
-    for p in features:
-        kdind = kdtree.get_ind(tree, np.float_(.15 / 2), p)
+    countTest = np.array([balltreeCount(tree, point) for point in features])
+    sumTest = np.array([balltreeSum(tree,point)for point in features])
 
-    tree = kdtree2.create(features)
-    for p in features:
-        kdind = kdtree2.get_ind(tree, np.float_(.15 / 2), p)
+    print(f"count: {countTest}")
+    print(f"sum: {sumTest}")
 
-    tree = btree.create(features)
-    for p in features:
-        kdind = btree.get_ind(tree, np.float_(.15 / 2), p)
-
-    tree = nball.create(features)
-    for p in features:
-        kdind = nball.get_ind(tree, np.float_(.15 / 2), p)
