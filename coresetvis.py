@@ -79,24 +79,24 @@ assert (len(colors) == len(features))
 
 
 print(f'Size of data = {len(features)}')
-import coreset as CORESET
-#l = len(feature_fields) # doubling dimension = d 
-e_coreset = 20
-coreset_constructor = CORESET.Coreset_FMM(features, colors, k, e_coreset, len(feature_fields))
-features, colors = coreset_constructor.compute()
-print(f'Coreset size = {len(features)}')
 
+for eps in range(1, 20):
+    import coreset as CORESET
+    #l = len(feature_fields) # doubling dimension = d 
+    e_coreset = eps
+    coreset_constructor = CORESET.Coreset_FMM(features, colors, k, e_coreset, len(feature_fields))
+    features_c, colors_c = coreset_constructor.compute()
+    print(f'Coreset size eps({e_coreset}) = {len(features)}')
 
-
-f = open("pixels_coreset.csv", "w")
-data_coreset = []
-for i in range(0, len(features)):
-   color = colors[i]
-   x = int(features[i][0])
-   y = int(features[i][1])
-   data_coreset.append([color, x, y])
-   f.write(line([color, x, y]))
+    f = open(f'pixels_coreset_{eps}.csv', "w")
+    data_coreset = []
+    for i in range(1, len(features_c)):
+        color = colors[i]
+        x = int(features_c[i][0])
+        y = int(features_c[i][1])
+        data_coreset.append([color, x, y])
+        f.write(line([color, x, y]))
+    make_image(data_coreset, f'coreset_{eps}.png')
 
 # plot the images
 make_image(data, "data.png")
-make_image(data_coreset, "coreset.png")
