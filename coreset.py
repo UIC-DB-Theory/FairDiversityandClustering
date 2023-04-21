@@ -59,8 +59,7 @@ class Coreset_FMM:
             return np.array(input_set)
 
         # Randomly select a point.
-        randomPointIndex = np.random.randint(0, len(input_set))
-        s_1 = input_set[randomPointIndex]
+        s_1 = np.random.default_rng().choice(input_set)
 
         # Initialize all distances initially to s_1.
         # we need to reshape the point vector into a row vector
