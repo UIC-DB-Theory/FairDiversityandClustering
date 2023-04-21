@@ -86,7 +86,7 @@ def solve_lp(dataStruct, m: gp.Model, gamma: np.float64, variables: npt.NDArray[
         print(f'Exiting')
         exit(-1)
 
-def construct_coreset(features, colors):
+def construct_coreset(features, colors, l):
     """
     construct_coreset
 
@@ -96,7 +96,7 @@ def construct_coreset(features, colors):
     :param colors: np array of "colors" of each point
     """
     import coreset as CORESET
-    l = len(feature_fields) # doubling dimension = d 
+    #l = len(feature_fields) # doubling dimension = d 
     e_coreset = 20
     coreset_constructor = CORESET.Coreset_FMM(features, colors, k, e_coreset, l)
     features, colors = coreset_constructor.compute()
@@ -142,7 +142,7 @@ if __name__ == '__main__':
 
 
     print(f'Size of data = {len(features)}')
-    features, colors = construct_coreset(features, colors)
+    features, colors = construct_coreset(features, colors, len(feature_fields))
     print(f'Coreset size = {len(features)}')
 
     N = len(features)
