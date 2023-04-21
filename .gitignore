@@ -138,3 +138,6 @@ fdm/data/
 
 # lock files
 Pipfile.lock
+
+# lpsolve.py logs
+logs/
