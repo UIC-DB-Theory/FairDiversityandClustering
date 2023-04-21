@@ -205,9 +205,15 @@ if __name__ == '__main__':
     print()
     if m.status == GRB.INFEASIBLE or m.status == GRB.INF_OR_UNBD:
         print(f'Model for {gamma} is infeasible')
+        exit(-1)
     elif m.status == GRB.OPTIMAL:
         print(f'Model for {gamma} is feasible')
     else:
         print(f'\n\n\n***ERROR: Model returned status code {m.status}***')
         print(f'Exiting')
         exit(-1)
+
+    # get results of the LP
+    vars = m.getVars()
+    X = m.getAttr("X", vars)
+    print(X)

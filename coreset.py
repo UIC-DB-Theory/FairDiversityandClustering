@@ -110,7 +110,7 @@ class Coreset_FMM:
             color_coreset = self.GMM(color_features)
 
             # The coressponding color list
-            color_colors = np.array([all_colors[self.colors]]*len(color_coreset))
+            color_colors = np.array([all_colors[color]]*len(color_coreset))
 
             out_colors.append(color_colors)
             out_features.append(color_coreset)
