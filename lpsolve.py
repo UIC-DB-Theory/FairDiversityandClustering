@@ -3,12 +3,8 @@ import math
 from collections import defaultdict
 import gurobipy as gp
 from gurobipy import GRB
-import logging
-from pathlib import Path
 
 import sys
-import os
-import datetime as dt
 import numpy as np
 
 from tqdm import tqdm
@@ -105,21 +101,6 @@ def construct_coreset(e_coreset, features, colors):
     return features, colors
 
 if __name__ == '__main__':
-    
-    loggingDirPath = Path("./logs")
-    if not os.path.exists(loggingDirPath):
-        os.makedirs(loggingDirPath)
-
-    # Generate timestamp
-    timestamp = dt.datetime.now().strftime("%m-%d-%Y-%H-%M-S")
-    logFileName = f'run_{timestamp}.log'
-    logFilePath = loggingDirPath / logFileName
-
-    # Logging setup
-    logging.basicConfig(filename=logFilePath, encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s')
-
-
-
     # variables for running LP bin-search
     color_field = 'sex'
     feature_fields = {'age', 'capital-gain', 'capital-loss', 'hours-per-week', 'fnlwgt', 'education-num'}
@@ -161,9 +142,9 @@ if __name__ == '__main__':
     features = features / features.max(axis=0)
 
 
-    logging.info(f'Size of data = {len(features)}')
-    features, colors = construct_coreset(e_coreset, features, colors)
-    logging.info(f'Coreset size = {len(features)}')
+    print(f'Size of data = {len(features)}')
+    features, colors = construct_coreset(features, colors)
+    print(f'Coreset size = {len(features)}')
 
     N = len(features)
 
@@ -171,14 +152,14 @@ if __name__ == '__main__':
     data_struct = algo.create(features)
 
     # first we need to find the high value
-    logging.info('Solving for high bound')
+    print('Solving for high bound')
     high = 100  # I'm assuming it's a BIT larger than 0.0001
     gamma = high * epsilon
     m = gp.Model(f"feasibility model")  # workaround for OOM error?
     m.Params.method = method
     m.Params.SolutionLimit = 1
 
-    variables = m.addMVar(N, name="x", vtype=GRB.BINARY)
+    variables = m.addMVar(N, name="x", vtype=GRB.CONTINUOUS)
 
     feasible = solve_lp(data_struct, m, np.float_(gamma), variables, colors, features)
     while feasible:
@@ -187,7 +168,7 @@ if __name__ == '__main__':
 
         feasible = solve_lp(data_struct, m, np.float_(gamma), variables, colors, features)
 
-    logging.info(f'High bound is {high}; binary search')
+    print(f'High bound is {high}; binary search')
 
     # binary search over multiples of epsilon
     low = 1
@@ -196,7 +177,7 @@ if __name__ == '__main__':
     multiple = math.ceil((low + high) / 2.0)
     while low < high:
         # solve model once for current gamma
-        logging.info(f'Current multiple is {multiple}')
+        print(f'Current multiple is {multiple}')
         sys.stdout.flush()
 
         gamma = multiple * epsilon
@@ -216,7 +197,7 @@ if __name__ == '__main__':
 
     gamma = multiple * epsilon
 
-    logging.info(f'Final test for multiple {multiple} (gamma = {gamma}')
+    print(f'Final test for multiple {multiple} (gamma = {gamma}')
 
     while not solve_lp(data_struct, m, np.float_(gamma), variables, colors, features):
         multiple -= 1
@@ -225,14 +206,11 @@ if __name__ == '__main__':
     print()
     if m.status == GRB.INFEASIBLE or m.status == GRB.INF_OR_UNBD:
         print(f'Model for {gamma} is infeasible')
-        logging.info(f'Model for {gamma} is infeasible')
         exit(-1)
     elif m.status == GRB.OPTIMAL or m.status == GRB.SOLUTION_LIMIT:
         print(f'Model for {gamma} is feasible')
-        logging.info(f'Model for {gamma} is feasible')
     else:
         print(f'\n\n\n***ERROR: Model returned status code {m.status}***')
-        logging.info(f'\n\n\n***ERROR: Model returned status code {m.status}***')
         print(f'Exiting')
         exit(-1)
 
