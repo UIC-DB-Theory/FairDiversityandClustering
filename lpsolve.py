@@ -97,7 +97,7 @@ def construct_coreset(features, colors):
     """
     import coreset as CORESET
     l = len(feature_fields) # doubling dimension = d 
-    e_coreset = 3 
+    e_coreset = 20
     coreset_constructor = CORESET.Coreset_FMM(features, colors, k, e_coreset, l)
     features, colors = coreset_constructor.compute()
     return features, colors
@@ -113,7 +113,7 @@ if __name__ == '__main__':
     epsilon = np.float64("0.001")
 
     # other things for gurobi
-    method = 2  # model method of solving
+    method = 0  # model method of solving
 
     # import data from file
     allFields = [
@@ -158,7 +158,7 @@ if __name__ == '__main__':
     m.Params.method = method
     m.Params.SolutionLimit = 1
 
-    variables = m.addMVar(N, name="x")
+    variables = m.addMVar(N, name="x", vtype=GRB.CONTINUOUS)
 
     feasible = solve_lp(data_struct, m, np.float_(gamma), variables, colors, features)
     while feasible:
@@ -215,5 +215,32 @@ if __name__ == '__main__':
 
     # get results of the LP
     vars = m.getVars()
-    X = m.getAttr("X", vars)
-    print(X)
+    X = np.array(m.getAttr("X", vars))
+    names = np.array(m.getAttr("VarName", vars))
+    assert(len(X) == N)
+
+    # we only want to pick from points we care about
+    # (and we need to go backwards later)
+    nonzero_indexes = np.nonzero(X != 0)[0] # always a tuple
+    nonzeros = X[nonzero_indexes]
+
+    # get a random permutation
+    rands = np.random.random_sample(size=len(nonzeros))
+    # of the original array!
+    argsort = np.argsort(rands ** (1.0 / nonzeros))
+    i_permutation = nonzero_indexes[argsort]
+
+    S = np.array()
+    b = {k: 0 for k in kis.keys()}
+
+    for index in i_permutation:
+        q = X[index]
+        color = colors[index]
+
+        # if we have the color full, skip
+        if b[color] == kis[color]:
+            continue
+
+        b[color] += 1
+
+        # TODO: get NN of p
