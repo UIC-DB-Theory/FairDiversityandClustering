@@ -36,7 +36,7 @@ def preamble():
         "native-country",
         "yearly-income",
     ]
-    colors, features = utils.read_CSV("./datasets/ads/adult.data", allFields, color_field, feature_fields)
+    colors, features = utils.read_CSV("../datasets/ads/adult.data", allFields, color_field, feature_fields)
     assert (len(colors) == len(features))
 
     # "normalize" features

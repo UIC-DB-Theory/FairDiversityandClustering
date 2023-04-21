@@ -36,7 +36,7 @@ def preamble():
         "native-country",
         "yearly-income",
     ]
-    colors, features = utils.read_CSV("./datasets/ads/adult.data", allFields, color_field, feature_fields)
+    colors, features = utils.read_CSV("../datasets/ads/adult.data", allFields, color_field, feature_fields)
     assert (len(colors) == len(features))
 
     # "normalize" features
@@ -50,8 +50,8 @@ def preamble():
 if __name__ == '__main__':
     colors, weights, features = preamble()
     N = len(features)
-    tree = BallTree(features, metric='minkowski', sample_weight=weights)
-    tree2 = BallTree(features, metric='minkowski', sample_weight=weights)
+    tree = BallTree(features, metric='minkowski')#, sample_weight=weights)
+    tree2 = BallTree(features, metric='minkowski')#, sample_weight=weights)
     countTimes = list()
     sumTimes = list()
     # print(tree.get_tree_stats())
