@@ -111,7 +111,7 @@ if __name__ == '__main__':
     epsilon = np.float64("0.001")
 
     # coreset params
-    e_coreset = 1
+    e_coreset = 2
 
     # other things for gurobi
     method = 0  # model method of solving
@@ -143,7 +143,7 @@ if __name__ == '__main__':
 
 
     print(f'Size of data = {len(features)}')
-    features, colors = construct_coreset(features, colors)
+    features, colors = construct_coreset(e_coreset, features, colors)
     print(f'Coreset size = {len(features)}')
 
     N = len(features)
@@ -220,10 +220,14 @@ if __name__ == '__main__':
     names = np.array(m.getAttr("VarName", vars))
     assert(len(X) == N)
 
-    print('Nonzero variables:')
+    count=0
+    print(f'Nonzero variables:')
     for x, n in zip(X, names):
         if x != 0:
             print(f"{n} = {x}")
+            count+=1
+    print(f'Total number: {count}')
+    print()
 
     # we only want to pick from points we care about
     # (and we need to go backwards later)
@@ -240,15 +244,19 @@ if __name__ == '__main__':
         print('Empty result')
         exit(0)
 
-    S = np.array([i_permutation[0]]) # we always include the first point
+    # declare variables
+    # we always keep the first point
+    # so we add it in first to ensure the tree is non-empty
+    S = np.array([i_permutation[0]])
     b = {k: 0 for k in kis.keys()}
+    b[colors[i_permutation[0]]] += 1
 
     for index in i_permutation:
         q = features[index]
         color = colors[index]
 
         # if the color of this point is already full, skip it
-        if b[color] == kis[color]:
+        if b[color] >= kis[color]:
             continue
 
         # get distance to nearest point
@@ -267,3 +275,7 @@ if __name__ == '__main__':
     res = list(zip(features[S], colors[S]))
     for r in res:
         print(r[0], r[1])
+
+    print('Solution Stats:')
+    for color in kis.keys():
+        print(f'{color}: {sum(colors[S] == color)}')
