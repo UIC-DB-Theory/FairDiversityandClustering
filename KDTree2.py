@@ -25,10 +25,10 @@ def get_ind_range(structure, r: np.float64, point) -> npt.NDArray[int]:
 
     return structure.query_ball_point(point_reshaped, r).flatten()[0]
 
-def get_ind(structure, k, point) -> npt.NDArray[int]:
+def get_ind(structure, k : int, point) -> npt.NDArray[int]:
     dim = point.shape[0]  # this is a tuple (reasons!)
     point_reshaped = np.reshape(point, (1, dim))
 
 
 
-    return structure.query(point_reshaped, k).flatten()[0]
+    return structure.query(point_reshaped, k)

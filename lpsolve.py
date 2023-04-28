@@ -15,7 +15,7 @@ from tqdm import tqdm
 import typing as t
 import numpy.typing as npt
 
-import BallTree as algo
+import KDTree2 as algo
 import utils
 
 def solve_lp(dataStruct, m: gp.Model, gamma: np.float64, variables: npt.NDArray[gp.MVar], colors: npt.NDArray[t.AnyStr],
@@ -60,7 +60,7 @@ def solve_lp(dataStruct, m: gp.Model, gamma: np.float64, variables: npt.NDArray[
 
     # build a constraint for every point
     for v, p in tqdm(zip(variables, features), desc="Building ball constraints", unit=" elems", total=N):
-        indices = algo.get_ind(dataStruct, np.float_(gamma / 2.0), p)
+        indices = algo.get_ind_range(dataStruct, np.float_(gamma / 2.0), p)
 
         # add constraint that all the variables need to add up
         other_vars = variables[indices]
@@ -81,7 +81,7 @@ def solve_lp(dataStruct, m: gp.Model, gamma: np.float64, variables: npt.NDArray[
     if m.status == GRB.INFEASIBLE or m.status == GRB.INF_OR_UNBD:
         print(f'Model for {gamma} is infeasible')
         return False
-    elif m.status == GRB.OPTIMAL:
+    elif m.status == GRB.OPTIMAL or m.status == GRB.SOLUTION_LIMIT:
         print(f'Model for {gamma} is feasible')
         return True
     else:
@@ -89,7 +89,7 @@ def solve_lp(dataStruct, m: gp.Model, gamma: np.float64, variables: npt.NDArray[
         print(f'Exiting')
         exit(-1)
 
-def construct_coreset(features, colors):
+def construct_coreset(e_coreset, features, colors):
     """
     construct_coreset
 
@@ -99,8 +99,7 @@ def construct_coreset(features, colors):
     :param colors: np array of "colors" of each point
     """
     import coreset as CORESET
-    l = len(feature_fields) # doubling dimension = d 
-    e_coreset = 20
+    l = len(feature_fields) # doubling dimension = d
     coreset_constructor = CORESET.Coreset_FMM(features, colors, k, e_coreset, l)
     features, colors = coreset_constructor.compute()
     return features, colors
@@ -123,12 +122,15 @@ if __name__ == '__main__':
 
     # variables for running LP bin-search
     color_field = 'sex'
-    feature_fields = {'age', 'capital-gain', 'capital-loss'}
+    feature_fields = {'age', 'capital-gain', 'capital-loss', 'hours-per-week', 'fnlwgt', 'education-num'}
     # feature_fields = {'age'}
-    kis = {"Male": 10, "Female": 10}
+    kis = {"Male": 30, "Female": 30}
     k = 20
     # binary search params
     epsilon = np.float64("0.001")
+
+    # coreset params
+    e_coreset = 1
 
     # other things for gurobi
     method = 0  # model method of solving
@@ -160,7 +162,7 @@ if __name__ == '__main__':
 
 
     logging.info(f'Size of data = {len(features)}')
-    features, colors = construct_coreset(features, colors)
+    features, colors = construct_coreset(e_coreset, features, colors)
     logging.info(f'Coreset size = {len(features)}')
 
     N = len(features)
@@ -176,7 +178,7 @@ if __name__ == '__main__':
     m.Params.method = method
     m.Params.SolutionLimit = 1
 
-    variables = m.addMVar(N, name="x", vtype=GRB.CONTINUOUS)
+    variables = m.addMVar(N, name="x", vtype=GRB.BINARY)
 
     feasible = solve_lp(data_struct, m, np.float_(gamma), variables, colors, features)
     while feasible:
@@ -225,7 +227,7 @@ if __name__ == '__main__':
         print(f'Model for {gamma} is infeasible')
         logging.info(f'Model for {gamma} is infeasible')
         exit(-1)
-    elif m.status == GRB.OPTIMAL:
+    elif m.status == GRB.OPTIMAL or m.status == GRB.SOLUTION_LIMIT:
         print(f'Model for {gamma} is feasible')
         logging.info(f'Model for {gamma} is feasible')
     else:
@@ -240,6 +242,11 @@ if __name__ == '__main__':
     names = np.array(m.getAttr("VarName", vars))
     assert(len(X) == N)
 
+    print('Nonzero variables:')
+    for x, n in zip(X, names):
+        if x != 0:
+            print(f"{n} = {x}")
+
     # we only want to pick from points we care about
     # (and we need to go backwards later)
     nonzero_indexes = np.nonzero(X != 0)[0] # always a tuple
@@ -251,17 +258,34 @@ if __name__ == '__main__':
     argsort = np.argsort(rands ** (1.0 / nonzeros))
     i_permutation = nonzero_indexes[argsort]
 
-    S = np.array([])
+    if len(i_permutation) == 0:
+        print('Empty result')
+        exit(0)
+
+    S = np.array([i_permutation[0]]) # we always include the first point
     b = {k: 0 for k in kis.keys()}
 
     for index in i_permutation:
-        q = X[index]
+        q = features[index]
         color = colors[index]
 
-        # if we have the color full, skip
+        # if the color of this point is already full, skip it
         if b[color] == kis[color]:
             continue
 
-        b[color] += 1
+        # get distance to nearest point
+        # (for now, we build the tree every time)
+        dists, _ = algo.get_ind(algo.create(features[S]), 1, q)
+        dist = dists[0]
+        if dist > gamma / 2.0:
+            b[color] += 1
+            S = np.append(S, [index])
+        else:
+            # do nothing
+            pass
 
-        # TODO: get NN of p
+    print('Final Solution:')
+    print(S)
+    res = list(zip(features[S], colors[S]))
+    for r in res:
+        print(r[0], r[1])

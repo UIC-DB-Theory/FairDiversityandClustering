@@ -48,7 +48,7 @@ class Coreset_FMM:
         self.d = c
         
         # The result set size while running gmm for each color
-        self.gmm_result_size = np.ceil(pow(((4*(e+1))/(e)), l) * k).astype(int)
+        self.gmm_result_size = np.ceil(pow(((1*(e+1))/(e)), l) * k).astype(int)
 
 
     # Compute Greedy k-center/GMM with polynomial 2-approximation
