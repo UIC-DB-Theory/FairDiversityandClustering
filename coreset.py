@@ -14,7 +14,8 @@ class Coreset_FMM:
         features : ndarry of points.
         colors : list of colors corresponding to the points.
         k : cardinality of the result set for FMMD.
-        e : epsilon value for coreset.
+        m : number of unique colors
+        coreset_size : required size of the coreset
         l : the doubling dimension.
         
     ----------
@@ -29,8 +30,9 @@ class Coreset_FMM:
     """
 
     # Initialize with parameters
-    def __init__(self, features: npt.NDArray[np.float64], colors: npt.NDArray[t.AnyStr], k, e, l):
+    def __init__(self, features: npt.NDArray[np.float64], colors: npt.NDArray[t.AnyStr], k, m, d, coreset_size):
 
+        # Convert features and colors to numpy arrays
         if isinstance(features, np.ndarray):
             self.features = features
         else:
@@ -41,14 +43,24 @@ class Coreset_FMM:
         else:
             self.colors = np.array(colors)
 
+        # Minimum size of the result set (FMMD)
         self.k = k
-        self.e = e
 
-        (_, c) = features.shape
-        self.d = c
+        # Number of unique colors
+        self.m  = m
+
+        # Required coreset size
+        self.coreset_size = coreset_size
+
+        # Dimensions - number of features per point
+        self.d = d
         
         # The result set size while running gmm for each color
-        self.gmm_result_size = np.ceil(pow(((4*(e+1))/(e)), l) * k).astype(int)
+        # GMM selects equal number of points per color
+        self.gmm_result_size = int(coreset_size/m)
+
+        # error value for calculated coreset
+        self.e = pow(((k*m)/coreset_size),(1/d)) * 8
 
 
     # Compute Greedy k-center/GMM with polynomial 2-approximation
@@ -93,7 +105,9 @@ class Coreset_FMM:
     # Compute the coreset for FMM
     def compute(self):
         
-        print("No. of points selected by GMM per color:", self.gmm_result_size)
+        print("[CORESET] Computing coreset of size: ", self.coreset_size)
+        print("[CORESET] No. of points selected by GMM per color:", self.gmm_result_size)
+        print("[CORESET] Error value (e): ", self.e)
     
         out_colors = []
         out_features = []

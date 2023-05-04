@@ -95,17 +95,11 @@ def construct_coreset(features, colors):
     :param features: np array of data points per model
     :param colors: np array of "colors" of each point
     """
-    import coreset as CORESET
-    l = len(feature_fields) # doubling dimension = d 
-    e_coreset = 20
-    coreset_constructor = CORESET.Coreset_FMM(features, colors, k, e_coreset, l)
-    features, colors = coreset_constructor.compute()
-    return features, colors
 
 if __name__ == '__main__':
     # variables for running LP bin-search
     color_field = 'sex'
-    feature_fields = {'age', 'capital-gain', 'capital-loss'}
+    feature_fields = ['age', 'capital-gain', 'capital-loss']
     # feature_fields = {'age'}
     kis = {"Male": 10, "Female": 10}
     k = 20
@@ -139,11 +133,16 @@ if __name__ == '__main__':
     # "normalize" features
     # Should happen before coreset construction
     features = features / features.max(axis=0)
-
-
-    print(f'Size of data = {len(features)}')
-    features, colors = construct_coreset(features, colors)
-    print(f'Coreset size = {len(features)}')
+    
+    print("[LPSOLVE] Number of points (original): ", len(features))
+    import coreset as CORESET
+    d = len(feature_fields)
+    m = len(kis.keys())
+    # Set the size of the coreset
+    coreset_size = 5000
+    coreset_constructor = CORESET.Coreset_FMM(features, colors, k, m, d, coreset_size)
+    features, colors = coreset_constructor.compute()
+    print("[LPSOLVE] Number of points (coreset): ", len(features))
 
     N = len(features)
 
@@ -230,7 +229,7 @@ if __name__ == '__main__':
     argsort = np.argsort(rands ** (1.0 / nonzeros))
     i_permutation = nonzero_indexes[argsort]
 
-    S = np.array()
+    S = np.array([])
     b = {k: 0 for k in kis.keys()}
 
     for index in i_permutation:
