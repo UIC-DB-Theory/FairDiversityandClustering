@@ -61,6 +61,11 @@ class Coreset_FMM:
 
         # error value for calculated coreset
         self.e = pow(((k*m)/coreset_size),(1/d)) * 8
+    
+    def update_coreset_size(self, coreset_size):
+        self.coreset_size = coreset_size
+        self.e = pow(((self.k*self.m)/coreset_size),(1/self.d)) * 8
+        self.gmm_result_size = int(coreset_size/self.m)
 
 
     # Compute Greedy k-center/GMM with polynomial 2-approximation
@@ -104,10 +109,6 @@ class Coreset_FMM:
 
     # Compute the coreset for FMM
     def compute(self):
-        
-        print("[CORESET] Computing coreset of size: ", self.coreset_size)
-        print("[CORESET] No. of points selected by GMM per color:", self.gmm_result_size)
-        print("[CORESET] Error value (e): ", self.e)
     
         out_colors = []
         out_features = []
