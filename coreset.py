@@ -15,8 +15,8 @@ class Coreset_FMM:
         colors : list of colors corresponding to the points.
         k : cardinality of the result set for FMMD.
         m : number of unique colors
+        d : data of the dimension
         coreset_size : required size of the coreset
-        l : the doubling dimension.
         
     ----------
     References
