@@ -31,7 +31,7 @@ def solve_lp(dataStruct, m: gp.Model, gamma: np.float64, variables: npt.NDArray[
     :return:
     """
     # maybe this makes it faster?
-    # m.tune()
+    m.tune()
 
     # reset model, removing constraints if they exist
     m.reset()
@@ -114,7 +114,7 @@ if __name__ == '__main__':
     e_coreset = 2
 
     # other things for gurobi
-    method = 0  # model method of solving
+    method = 2  # model method of solving
 
     # import data from file
     allFields = [
@@ -153,7 +153,7 @@ if __name__ == '__main__':
 
     # first we need to find the high value
     print('Solving for high bound')
-    high = 100  # I'm assuming it's a BIT larger than 0.0001
+    high = 1  # I'm assuming it's a BIT larger than 0.0001
     gamma = high * epsilon
     m = gp.Model(f"feasibility model")  # workaround for OOM error?
     m.Params.method = method
@@ -247,31 +247,40 @@ if __name__ == '__main__':
     # declare variables
     # we always keep the first point
     # so we add it in first to ensure the tree is non-empty
-    S = np.array([i_permutation[0]])
+    S = np.array([], dtype=int)
+    # all our points to build a tree of points
+    viewed_points = np.empty((1, features.shape[1]))
+    # counts for colors we have found already
     b = {k: 0 for k in kis.keys()}
-    b[colors[i_permutation[0]]] += 1
 
     for index in i_permutation:
         q = features[index]
         color = colors[index]
 
         # if the color of this point is already full, skip it
-        if b[color] >= kis[color]:
-            continue
+        #if b[color] >= kis[color]:
+            # always add the point
+        #    viewed_points = np.append(viewed_points, [q], axis=0)
+        #    continue
 
         # get distance to nearest point
         # (for now, we build the tree every time)
-        dists, _ = algo.get_ind(algo.create(features[S]), 1, q)
+        dists, _ = algo.get_ind(algo.create(viewed_points), 1, q)
         dist = dists[0]
-        if dist > gamma / 2.0:
+
+        viewed_points = np.append(viewed_points, [q], axis=0)
+
+        if dist > gamma / 2.0 and b[color] < kis[color]:
             b[color] += 1
             S = np.append(S, [index])
         else:
             # do nothing
             pass
 
-    print('Final Solution:')
+    print(f'Final Solution (len = {len(S)}):')
     print(S)
+
+    print('Points:')
     res = list(zip(features[S], colors[S]))
     for r in res:
         print(r[0], r[1])
@@ -279,3 +288,16 @@ if __name__ == '__main__':
     print('Solution Stats:')
     for color in kis.keys():
         print(f'{color}: {sum(colors[S] == color)}')
+
+    print()
+    tree = algo.create(features[S])
+    for i in S:
+        p = features[i]
+        dists, indecies = algo.get_ind(tree, 2, p)
+
+        if dists[0][1] < gamma / 2.0:
+            print('ERROR: invalid distance between points')
+            print(dists)
+            print(features[i])
+            print(features[S][indecies[0]][1])
+            print()
