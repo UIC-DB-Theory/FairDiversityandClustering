@@ -90,7 +90,7 @@ class Coreset_FMM:
         result = np.zeros((self.gmm_result_size, self.d), np.float64)
         result[0] = point
 
-        for i in trange(1, self.gmm_result_size):
+        for i in range(1, self.gmm_result_size):
 
             # Get the farthest point from current point
             # max_point_index = point_distances.index(max(point_distances))
