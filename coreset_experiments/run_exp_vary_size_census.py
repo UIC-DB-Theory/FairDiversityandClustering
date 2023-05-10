@@ -4,8 +4,10 @@ import sys
 import os
 import argparse
 import time
+import csv
 import matplotlib.pyplot as plt
 from tqdm import trange
+from typing import Any, Callable, List
 
 # Adding parent directory to path
 sys.path.append(os.path.join(os.path.dirname(__file__), '../'))
@@ -13,12 +15,6 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '../'))
 import coreset as CORESET
 import utils
 
-def parseArgs():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-f", "--file", help="data file")
-    parser.add_argument("-d", "--dimension", help="data dimension")
-    args = parser.parse_args()
-    return args
 
 def plot_graph(graphname, x_label, x_values, y_label, y_values, outputdir):
 
@@ -37,84 +33,85 @@ def blockPrint():
 def enablePrint():
     sys.stdout = sys.__stdout__
 
-def main(args):
-    print("****CORESET EXPERIMENTS****")
-    print("file: ", args.file)
-    
-    if args.file and not os.path.isfile(args.file):
-        print('File not found.')
-        print('for help run: python3 run_exp_vary_size.py -h')
-        exit(-1)
-    
-    # import data from file
-    allFields = [
-        "age",
-        "workclass",
-        "fnlwgt",  # what on earth is this one?
-        "education",
-        "education-num",
-        "marital-status",
-        "occupation",
-        "relationship",
-        "race",
-        "sex",
-        "capital-gain",
-        "capital-loss",
-        "hours-per-week",
-        "native-country",
-        "yearly-income",
-    ]
-    # variables for running LP bin-search
-    color_field = 'sex'
-    feature_fields = ['age', 'capital-gain', 'capital-loss']
-    kis = {"Male": 10, "Female": 10}
-    k = 20
-    colors, features = utils.read_CSV("../datasets/ads/adult.data", allFields, color_field, feature_fields)
-    assert (len(colors) == len(features))
 
-    # "normalize" features
-    # Should happen before coreset construction
-    features = features / features.max(axis=0)
+def getNumColors(colors):
+    color_set = set(colors)
+    return len(color_set)
+
+def getDimension(features):
+    return len(features[0])
+
+def main():
+    print("****CORESET EXPERIMENTS: CENSUS FULL****")
+
+    print("\tgrouped by sex (c=2)")
+    # read the Census dataset grouped by sex (c=2)
+    features = []
+    colors = []
+    with open(f'./datasets/census.csv', "r") as fileobj:
+        csvreader = csv.reader(fileobj, delimiter=',')
+        for row in csvreader:
+            attributes = []
+            for i in range(4, len(row)):
+                attributes.append(float(row[i]))
+            colors.append(int(row[1]))
+            features.append(attributes)
     
-    d = len(feature_fields)
-    m = len(kis.keys())
+    assert(len(colors) == len(features))
+
+    d =  getDimension(features)
+    m =  getNumColors(colors)
+    k = 60
+
+    print("d = ", d)
+    print("m = ", m)
+    print("k = ", k)
+
     t = []
     ratios = []
     errors = []
     coreset_constructor = CORESET.Coreset_FMM(features, colors, k, m, d, k)
 
+    resultfile = open("census_coreset.csv", "a")
     # Vary the coreset size
     # Intially start with coreset size equal to number of colors
     # Increment by number of colors per iteration
-    for coreset_size in trange(k, int(len(features)), m):
+    for coreset_size in range(1000, int(len(features)), 10000):
+
+        print("coreset_size = ", coreset_size)
 
         # Update the size of the coreset
         coreset_constructor.update_coreset_size(coreset_size)
 
         # Take multiple readings for time
         exec_time = 0.0
-        for i in range(0, 10):
+        num_readings = 1
+        for i in range(0, num_readings):
             start_time = time.time()
             coreset_constructor.compute()
             end_time = time.time()
             exec_time += (end_time - start_time)
         
         # Take the average
-        exec_time = exec_time/10
+        exec_time = exec_time/num_readings
 
         # Record the measures
         t.append(exec_time)
         ratios.append(coreset_size/len(features))
         errors.append(coreset_constructor.e)
+        resultfile.write(f'{coreset_size},{exec_time}, {coreset_constructor.e}\n')
+        resultfile.flush()
     
     outdir = './graphs'
     if not os.path.isdir(outdir):
         os.makedirs(outdir)
-    graphname = f't_vs_coresetsize_k{k}_d{m}_m{d}'
+    graphname = f'census_t_vs_coresetsize_k{k}_d{d}_m{m}'
     plot_graph(graphname, "coreset_size/N", ratios, "time (s)", t, outdir)
 
-    graphname = f'e_vs_coresetsize_k{k}_d{m}_m{d}'
+    graphname = f'census_e_vs_coresetsize_k{k}_d{d}_m{m}'
     plot_graph(graphname, "coreset_size/N", ratios, "e", errors, outdir)
+
+
     
 if __name__ == "__main__":
-    main(parseArgs())
+    main()
