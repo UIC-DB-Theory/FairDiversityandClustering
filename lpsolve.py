@@ -113,7 +113,7 @@ if __name__ == '__main__':
     epsilon = np.float64("0.001")
 
     # coreset params
-    e_coreset = 0.75
+    e_coreset = 1.5
 
     # other things for gurobi
     method = 2  # model method of solving
@@ -244,6 +244,9 @@ if __name__ == '__main__':
 
     timer.split("Randomized Rounding")
 
+    # do we want all points included or just the ones in S?
+    all_points = True
+
     # we only want to pick from points we care about
     # (and we need to go backwards later)
     nonzero_indexes = np.nonzero(X != 0)[0] # always a tuple
@@ -280,7 +283,12 @@ if __name__ == '__main__':
 
         # get distance to nearest point
         # (for now, we build the tree every time)
-        dists, _ = algo.get_ind(algo.create(viewed_points), 1, q)
+        # either we base this off of every point seen or every point included
+        if all_points:
+            points = viewed_points
+        else:
+            points = features[S]
+        dists, _ = algo.get_ind(algo.create(points), 1, q)
         dist = dists[0]
 
         viewed_points = np.append(viewed_points, [q], axis=0)
