@@ -1,7 +1,10 @@
+import typing
 import typing as t
 
 import numpy as np
 import numpy.typing as npt
+
+import time
 
 
 def read_CSV(filename: t.AnyStr, field_names: t.Sequence, color_field: t.AnyStr, feature_fields: t.Set[t.AnyStr]) -> (
@@ -40,3 +43,22 @@ def read_CSV(filename: t.AnyStr, field_names: t.Sequence, color_field: t.AnyStr,
     features = np.array(features, dtype=np.float64)
 
     return colors, features
+
+class TimeKeeper:
+    def __init__(self, name: t.AnyStr):
+        self.names = [name]
+        self.times = [time.perf_counter()]
+
+    def split(self, name: t.AnyStr) -> ():
+        self.names.append(name)
+        self.times.append(time.perf_counter())
+
+    def get_splits(self) -> [t.AnyStr]:
+        return self.names
+
+    def _calc_deltas(self) -> [float]:
+        return [b - a for a, b in zip(self.times, self.times[1:])]
+
+    def stop(self) -> [(t.AnyStr, float)]:
+        self.times.append(time.perf_counter())
+        return zip(self.names, self._calc_deltas())

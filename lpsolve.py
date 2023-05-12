@@ -11,6 +11,8 @@ from tqdm import tqdm
 import typing as t
 import numpy.typing as npt
 
+import time
+
 import KDTree2 as algo
 import utils
 
@@ -105,13 +107,13 @@ if __name__ == '__main__':
     color_field = 'sex'
     feature_fields = {'age', 'capital-gain', 'capital-loss', 'hours-per-week', 'fnlwgt', 'education-num'}
     # feature_fields = {'age'}
-    kis = {"Male": 30, "Female": 30}
+    kis = {"Male": 60, "Female": 200}
     k = 20
     # binary search params
     epsilon = np.float64("0.001")
 
     # coreset params
-    e_coreset = 2
+    e_coreset = 0.75
 
     # other things for gurobi
     method = 2  # model method of solving
@@ -134,6 +136,10 @@ if __name__ == '__main__':
         "native-country",
         "yearly-income",
     ]
+
+    # start the timer
+    timer = utils.TimeKeeper("Parse Data")
+
     colors, features = utils.read_CSV("./datasets/ads/adult.data", allFields, color_field, feature_fields)
     assert (len(colors) == len(features))
 
@@ -141,6 +147,7 @@ if __name__ == '__main__':
     # Should happen before coreset construction
     features = features / features.max(axis=0)
 
+    timer.split("Coreset")
 
     print(f'Size of data = {len(features)}')
     features, colors = construct_coreset(e_coreset, features, colors)
@@ -148,8 +155,12 @@ if __name__ == '__main__':
 
     N = len(features)
 
+    timer.split("Tree Creation (All Features)")
+
     # create data structure
     data_struct = algo.create(features)
+
+    timer.split("High Bound Search")
 
     # first we need to find the high value
     print('Solving for high bound')
@@ -171,6 +182,7 @@ if __name__ == '__main__':
     print(f'High bound is {high}; binary search')
 
     # binary search over multiples of epsilon
+    timer.split("Binary Search")
     low = 1
     assert (low < high)
 
@@ -214,6 +226,7 @@ if __name__ == '__main__':
         print(f'Exiting')
         exit(-1)
 
+    timer.split("Get Results")
     # get results of the LP
     vars = m.getVars()
     X = np.array(m.getAttr("X", vars))
@@ -224,10 +237,12 @@ if __name__ == '__main__':
     print(f'Nonzero variables:')
     for x, n in zip(X, names):
         if x != 0:
-            print(f"{n} = {x}")
+            #print(f"{n} = {x}")
             count+=1
     print(f'Total number: {count}')
     print()
+
+    timer.split("Randomized Rounding")
 
     # we only want to pick from points we care about
     # (and we need to go backwards later)
@@ -301,3 +316,9 @@ if __name__ == '__main__':
             print(features[i])
             print(features[S][indecies[0]][1])
             print()
+
+    # time!
+    res = timer.stop()
+    print('Timings! (seconds)')
+    for name, delta in res:
+        print(f'{name + ":":>25} {delta}')
