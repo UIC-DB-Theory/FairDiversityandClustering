@@ -138,7 +138,7 @@ if __name__ == '__main__':
     ]
 
     # start the timer
-    timer = utils.TimeKeeper("Parse Data")
+    timer = utils.Stopwatch("Parse Data")
 
     colors, features = utils.read_CSV("./datasets/ads/adult.data", allFields, color_field, feature_fields)
     assert (len(colors) == len(features))
@@ -321,4 +321,4 @@ if __name__ == '__main__':
     res = timer.stop()
     print('Timings! (seconds)')
     for name, delta in res:
-        print(f'{name + ":":>25} {delta}')
+        print(f'{name + ":":>40} {delta}')
