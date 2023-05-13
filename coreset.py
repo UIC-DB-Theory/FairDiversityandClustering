@@ -14,8 +14,9 @@ class Coreset_FMM:
         features : ndarry of points.
         colors : list of colors corresponding to the points.
         k : cardinality of the result set for FMMD.
-        e : epsilon value for coreset.
-        l : the doubling dimension.
+        m : number of unique colors
+        d : data of the dimension
+        coreset_size : required size of the coreset
         
     ----------
     References
@@ -29,8 +30,9 @@ class Coreset_FMM:
     """
 
     # Initialize with parameters
-    def __init__(self, features: npt.NDArray[np.float64], colors: npt.NDArray[t.AnyStr], k, e, l):
+    def __init__(self, features: npt.NDArray[np.float64], colors: npt.NDArray[t.AnyStr], k, m, d, coreset_size):
 
+        # Convert features and colors to numpy arrays
         if isinstance(features, np.ndarray):
             self.features = features
         else:
@@ -41,14 +43,28 @@ class Coreset_FMM:
         else:
             self.colors = np.array(colors)
 
+        # Minimum size of the result set (FMMD)
         self.k = k
-        self.e = e
 
-        (_, c) = features.shape
-        self.d = c
-        
-        # The result set size while running gmm for each color
-        self.gmm_result_size = np.ceil(pow(((1*(e+1))/(e)), l) * k).astype(int)
+        # Number of unique colors
+        self.m  = m
+
+        # Required coreset size
+        self.coreset_size = coreset_size
+
+        # Dimensions - number of features per point
+        self.d = d
+       
+        # GMM selects equal number of points per color
+        self.gmm_result_size = int(coreset_size/m)
+
+        # error value for calculated coreset
+        self.e = pow(((k*m)/coreset_size),(1/d)) * 8
+    
+    def update_coreset_size(self, coreset_size):
+        self.coreset_size = coreset_size
+        self.e = pow(((self.k*self.m)/coreset_size),(1/self.d)) * 8
+        self.gmm_result_size = int(coreset_size/self.m)
 
 
     # Compute Greedy k-center/GMM with polynomial 2-approximation
@@ -59,8 +75,7 @@ class Coreset_FMM:
             return np.array(input_set)
 
         # Randomly select a point.
-        randomPointIndex = np.random.randint(0, len(input_set) + 1)
-        s_1 = input_set[randomPointIndex]
+        s_1 = np.random.default_rng().choice(input_set)
 
         # Initialize all distances initially to s_1.
         # we need to reshape the point vector into a row vector
@@ -74,7 +89,7 @@ class Coreset_FMM:
         result = np.zeros((self.gmm_result_size, self.d), np.float64)
         result[0] = point
 
-        for i in trange(1, self.gmm_result_size):
+        for i in range(1, self.gmm_result_size):
 
             # Get the farthest point from current point
             # max_point_index = point_distances.index(max(point_distances))
@@ -93,8 +108,6 @@ class Coreset_FMM:
 
     # Compute the coreset for FMM
     def compute(self):
-        
-        print("No. of points selected by GMM per color:", self.gmm_result_size)
     
         out_colors = []
         out_features = []

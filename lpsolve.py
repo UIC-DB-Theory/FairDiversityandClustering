@@ -14,6 +14,7 @@ import numpy.typing as npt
 import time
 
 import KDTree2 as algo
+import coreset as CORESET
 import utils
 
 def solve_lp(dataStruct, m: gp.Model, gamma: np.float64, variables: npt.NDArray[gp.MVar], colors: npt.NDArray[t.AnyStr],
@@ -87,20 +88,6 @@ def solve_lp(dataStruct, m: gp.Model, gamma: np.float64, variables: npt.NDArray[
         print(f'Exiting')
         exit(-1)
 
-def construct_coreset(e_coreset, features, colors):
-    """
-    construct_coreset
-
-    constructs the coreset for FMMD.
-
-    :param features: np array of data points per model
-    :param colors: np array of "colors" of each point
-    """
-    import coreset as CORESET
-    l = len(feature_fields) # doubling dimension = d
-    coreset_constructor = CORESET.Coreset_FMM(features, colors, k, e_coreset, l)
-    features, colors = coreset_constructor.compute()
-    return features, colors
 
 if __name__ == '__main__':
     # variables for running LP bin-search
@@ -113,7 +100,8 @@ if __name__ == '__main__':
     epsilon = np.float64("0.001")
 
     # coreset params
-    e_coreset = 1.5
+    # Set the size of the coreset
+    coreset_size = 5000
 
     # other things for gurobi
     method = 2  # model method of solving
@@ -149,9 +137,11 @@ if __name__ == '__main__':
 
     timer.split("Coreset")
 
-    print(f'Size of data = {len(features)}')
-    features, colors = construct_coreset(e_coreset, features, colors)
-    print(f'Coreset size = {len(features)}')
+    print("[LPSOLVE] Number of points (original): ", len(features))
+    d = len(feature_fields)
+    m = len(kis.keys())
+    features, colors = CORESET.Coreset_FMM(features, colors, k, m, d, coreset_size).compute()
+    print("[LPSOLVE] Number of points (coreset): ", len(features))
 
     N = len(features)
 
