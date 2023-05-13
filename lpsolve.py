@@ -110,30 +110,30 @@ if __name__ == '__main__':
     ]
 
     # fields we care about for parsing
-    color_field = {'race', 'sex'}
+    color_field = ['race', 'sex']
     feature_fields = {'age', 'capital-gain', 'capital-loss', 'hours-per-week', 'fnlwgt', 'education-num'}
 
     # variables for running LP bin-search
     # keys are appended using underscores
     kis = {
         'White_Male': 15,
-        'White_Female': 25,
-        'Asian-Pac-Islander_Male': 15,
-        'Asian-Pac-Islander_Female': 25,
+        'White_Female': 35,
+        'Asian-Pac-Islander_Male': 55,
+        'Asian-Pac-Islander_Female': 35,
         'Amer-Indian-Eskimo_Male': 15,
-        'Amer-Indian-Eskimo_Female': 25,
+        'Amer-Indian-Eskimo_Female': 35,
         'Other_Male': 15,
-        'Other_Female': 25,
+        'Other_Female': 35,
         'Black_Male': 15,
-        'Black_Female': 25,
+        'Black_Female': 35,
     }
-    k = 20
+    k = sum(kis.values())
     # binary search params
     epsilon = np.float64("0.001")
 
     # coreset params
     # Set the size of the coreset
-    coreset_size = 1000
+    coreset_size = 20000
 
     # other things for gurobi
     method = 2  # model method of solving

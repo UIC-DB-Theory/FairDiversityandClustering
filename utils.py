@@ -7,7 +7,7 @@ import numpy.typing as npt
 import time
 
 
-def read_CSV(filename: t.AnyStr, field_names: t.Sequence, color_fields: t.Set[t.AnyStr], color_sep: t.AnyStr, feature_fields: t.Set[t.AnyStr]) -> (
+def read_CSV(filename: t.AnyStr, field_names: t.Sequence, color_fields: t.List[t.AnyStr], color_sep: t.AnyStr, feature_fields: t.Set[t.AnyStr]) -> (
         npt.NDArray[t.AnyStr], npt.NDArray[np.float64]):
     """read_CSV.
 
