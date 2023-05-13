@@ -7,7 +7,7 @@ import numpy.typing as npt
 import time
 
 
-def read_CSV(filename: t.AnyStr, field_names: t.Sequence, color_field: t.AnyStr, feature_fields: t.Set[t.AnyStr]) -> (
+def read_CSV(filename: t.AnyStr, field_names: t.Sequence, color_fields: t.Set[t.AnyStr], color_sep: t.AnyStr, feature_fields: t.Set[t.AnyStr]) -> (
         npt.NDArray[t.AnyStr], npt.NDArray[np.float64]):
     """read_CSV.
 
@@ -20,8 +20,10 @@ def read_CSV(filename: t.AnyStr, field_names: t.Sequence, color_field: t.AnyStr,
     :type filename: t.AnyStr
     :param field_names: the headers of the CSV file, in order
     :type field_names: t.Sequence
-    :param color_field: the field containing the object color
-    :type color_field: t.AnyStr
+    :param color_fields: the fields containing the object color; the end "color" will be a tuple of all the colors
+    :type color_fields: t.Set[t.AnyStr]
+    :param color_sep: Separator for joining together multiple color fields
+    :type color_sep: t.AnyStr
     :param feature_fields: the fields which are numerical data values for the point
     :type feature_fields: t.Set[t.AnyStr]
     """
@@ -35,7 +37,9 @@ def read_CSV(filename: t.AnyStr, field_names: t.Sequence, color_field: t.AnyStr,
     features = []
 
     for row in reader:
-        colors.append(row[color_field].strip())
+        # this will become a row per color
+        color_list = [row[color_field].strip() for color_field in color_fields]
+        colors.append(color_sep.join(color_list))
         features.append([float(row[field]) for field in feature_fields])
 
     # we want these as np arrays

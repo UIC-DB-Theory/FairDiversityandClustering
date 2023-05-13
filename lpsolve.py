@@ -90,23 +90,7 @@ def solve_lp(dataStruct, m: gp.Model, gamma: np.float64, variables: npt.NDArray[
 
 
 if __name__ == '__main__':
-    # variables for running LP bin-search
-    color_field = 'sex'
-    feature_fields = {'age', 'capital-gain', 'capital-loss', 'hours-per-week', 'fnlwgt', 'education-num'}
-    # feature_fields = {'age'}
-    kis = {"Male": 60, "Female": 200}
-    k = 20
-    # binary search params
-    epsilon = np.float64("0.001")
-
-    # coreset params
-    # Set the size of the coreset
-    coreset_size = 5000
-
-    # other things for gurobi
-    method = 2  # model method of solving
-
-    # import data from file
+    # File fields
     allFields = [
         "age",
         "workclass",
@@ -125,10 +109,39 @@ if __name__ == '__main__':
         "yearly-income",
     ]
 
+    # fields we care about for parsing
+    color_field = {'race', 'sex'}
+    feature_fields = {'age', 'capital-gain', 'capital-loss', 'hours-per-week', 'fnlwgt', 'education-num'}
+
+    # variables for running LP bin-search
+    # keys are appended using underscores
+    kis = {
+        'White_Male': 15,
+        'White_Female': 25,
+        'Asian-Pac-Islander_Male': 15,
+        'Asian-Pac-Islander_Female': 25,
+        'Amer-Indian-Eskimo_Male': 15,
+        'Amer-Indian-Eskimo_Female': 25,
+        'Other_Male': 15,
+        'Other_Female': 25,
+        'Black_Male': 15,
+        'Black_Female': 25,
+    }
+    k = 20
+    # binary search params
+    epsilon = np.float64("0.001")
+
+    # coreset params
+    # Set the size of the coreset
+    coreset_size = 1000
+
+    # other things for gurobi
+    method = 2  # model method of solving
+
     # start the timer
     timer = utils.Stopwatch("Parse Data")
 
-    colors, features = utils.read_CSV("./datasets/ads/adult.data", allFields, color_field, feature_fields)
+    colors, features = utils.read_CSV("./datasets/ads/adult.data", allFields, color_field, '_', feature_fields)
     assert (len(colors) == len(features))
 
     # "normalize" features
