@@ -1,7 +1,10 @@
+import typing
 import typing as t
 
 import numpy as np
 import numpy.typing as npt
+
+import time
 
 
 def read_CSV(filename: t.AnyStr, field_names: t.Sequence, color_field: t.AnyStr, feature_fields: t.Set[t.AnyStr]) -> (
@@ -40,3 +43,40 @@ def read_CSV(filename: t.AnyStr, field_names: t.Sequence, color_field: t.AnyStr,
     features = np.array(features, dtype=np.float64)
 
     return colors, features
+
+class Stopwatch:
+    def __init__(self, name: t.AnyStr):
+        """
+        Creates a new stopwatch that has started timing
+
+        :param name: the name of the first split
+        """
+        self.names = [name]
+        self.times = [time.perf_counter()]
+
+    def split(self, name: t.AnyStr) -> ():
+        """
+        Stop the previous split and start another one with the given name
+        :param name: the name of the new split
+        :return: None
+        """
+        self.names.append(name)
+        self.times.append(time.perf_counter())
+
+    def get_splits(self) -> [t.AnyStr]:
+        """
+        Provides all existing splits, including the currently running split
+        :return: a list of strings, one per split
+        """
+        return self.names
+
+    def _calc_deltas(self) -> [float]:
+        return [b - a for a, b in zip(self.times, self.times[1:])]
+
+    def stop(self) -> [(t.AnyStr, float)]:
+        """
+        Stops the clock
+        :return: a list of (split-name, delta-time) pairs for every segment created via "split" and creation
+        """
+        self.times.append(time.perf_counter())
+        return zip(self.names, self._calc_deltas())

@@ -54,8 +54,7 @@ class Coreset_FMM:
 
         # Dimensions - number of features per point
         self.d = d
-        
-        # The result set size while running gmm for each color
+       
         # GMM selects equal number of points per color
         self.gmm_result_size = int(coreset_size/m)
 

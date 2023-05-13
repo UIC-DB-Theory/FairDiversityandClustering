@@ -5,14 +5,16 @@ import gurobipy as gp
 from gurobipy import GRB
 
 import sys
-
 import numpy as np
 
 from tqdm import tqdm
 import typing as t
 import numpy.typing as npt
 
-import BallTree as algo
+import time
+
+import KDTree2 as algo
+import coreset as CORESET
 import utils
 
 def solve_lp(dataStruct, m: gp.Model, gamma: np.float64, variables: npt.NDArray[gp.MVar], colors: npt.NDArray[t.AnyStr],
@@ -32,7 +34,7 @@ def solve_lp(dataStruct, m: gp.Model, gamma: np.float64, variables: npt.NDArray[
     :return:
     """
     # maybe this makes it faster?
-    # m.tune()
+    m.tune()
 
     # reset model, removing constraints if they exist
     m.reset()
@@ -57,7 +59,7 @@ def solve_lp(dataStruct, m: gp.Model, gamma: np.float64, variables: npt.NDArray[
 
     # build a constraint for every point
     for v, p in tqdm(zip(variables, features), desc="Building ball constraints", unit=" elems", total=N):
-        indices = algo.get_ind(dataStruct, np.float_(gamma / 2.0), p)
+        indices = algo.get_ind_range(dataStruct, np.float_(gamma / 2.0), p)
 
         # add constraint that all the variables need to add up
         other_vars = variables[indices]
@@ -78,7 +80,7 @@ def solve_lp(dataStruct, m: gp.Model, gamma: np.float64, variables: npt.NDArray[
     if m.status == GRB.INFEASIBLE or m.status == GRB.INF_OR_UNBD:
         print(f'Model for {gamma} is infeasible')
         return False
-    elif m.status == GRB.OPTIMAL:
+    elif m.status == GRB.OPTIMAL or m.status == GRB.SOLUTION_LIMIT:
         print(f'Model for {gamma} is feasible')
         return True
     else:
@@ -86,28 +88,23 @@ def solve_lp(dataStruct, m: gp.Model, gamma: np.float64, variables: npt.NDArray[
         print(f'Exiting')
         exit(-1)
 
-def construct_coreset(features, colors):
-    """
-    construct_coreset
-
-    constructs the coreset for FMMD.
-
-    :param features: np array of data points per model
-    :param colors: np array of "colors" of each point
-    """
 
 if __name__ == '__main__':
     # variables for running LP bin-search
     color_field = 'sex'
-    feature_fields = ['age', 'capital-gain', 'capital-loss']
+    feature_fields = {'age', 'capital-gain', 'capital-loss', 'hours-per-week', 'fnlwgt', 'education-num'}
     # feature_fields = {'age'}
-    kis = {"Male": 10, "Female": 10}
+    kis = {"Male": 60, "Female": 200}
     k = 20
     # binary search params
     epsilon = np.float64("0.001")
 
+    # coreset params
+    # Set the size of the coreset
+    coreset_size = 5000
+
     # other things for gurobi
-    method = 0  # model method of solving
+    method = 2  # model method of solving
 
     # import data from file
     allFields = [
@@ -127,31 +124,37 @@ if __name__ == '__main__':
         "native-country",
         "yearly-income",
     ]
+
+    # start the timer
+    timer = utils.Stopwatch("Parse Data")
+
     colors, features = utils.read_CSV("./datasets/ads/adult.data", allFields, color_field, feature_fields)
     assert (len(colors) == len(features))
 
     # "normalize" features
     # Should happen before coreset construction
     features = features / features.max(axis=0)
-    
+
+    timer.split("Coreset")
+
     print("[LPSOLVE] Number of points (original): ", len(features))
-    import coreset as CORESET
     d = len(feature_fields)
     m = len(kis.keys())
-    # Set the size of the coreset
-    coreset_size = 5000
-    coreset_constructor = CORESET.Coreset_FMM(features, colors, k, m, d, coreset_size)
-    features, colors = coreset_constructor.compute()
+    features, colors = CORESET.Coreset_FMM(features, colors, k, m, d, coreset_size).compute()
     print("[LPSOLVE] Number of points (coreset): ", len(features))
 
     N = len(features)
 
+    timer.split("Tree Creation (All Features)")
+
     # create data structure
     data_struct = algo.create(features)
 
+    timer.split("High Bound Search")
+
     # first we need to find the high value
     print('Solving for high bound')
-    high = 100  # I'm assuming it's a BIT larger than 0.0001
+    high = 1  # I'm assuming it's a BIT larger than 0.0001
     gamma = high * epsilon
     m = gp.Model(f"feasibility model")  # workaround for OOM error?
     m.Params.method = method
@@ -169,6 +172,7 @@ if __name__ == '__main__':
     print(f'High bound is {high}; binary search')
 
     # binary search over multiples of epsilon
+    timer.split("Binary Search")
     low = 1
     assert (low < high)
 
@@ -205,18 +209,33 @@ if __name__ == '__main__':
     if m.status == GRB.INFEASIBLE or m.status == GRB.INF_OR_UNBD:
         print(f'Model for {gamma} is infeasible')
         exit(-1)
-    elif m.status == GRB.OPTIMAL:
+    elif m.status == GRB.OPTIMAL or m.status == GRB.SOLUTION_LIMIT:
         print(f'Model for {gamma} is feasible')
     else:
         print(f'\n\n\n***ERROR: Model returned status code {m.status}***')
         print(f'Exiting')
         exit(-1)
 
+    timer.split("Get Results")
     # get results of the LP
     vars = m.getVars()
     X = np.array(m.getAttr("X", vars))
     names = np.array(m.getAttr("VarName", vars))
     assert(len(X) == N)
+
+    count=0
+    print(f'Nonzero variables:')
+    for x, n in zip(X, names):
+        if x != 0:
+            #print(f"{n} = {x}")
+            count+=1
+    print(f'Total number: {count}')
+    print()
+
+    timer.split("Randomized Rounding")
+
+    # do we want all points included or just the ones in S?
+    all_points = True
 
     # we only want to pick from points we care about
     # (and we need to go backwards later)
@@ -229,17 +248,75 @@ if __name__ == '__main__':
     argsort = np.argsort(rands ** (1.0 / nonzeros))
     i_permutation = nonzero_indexes[argsort]
 
-    S = np.array([])
+    if len(i_permutation) == 0:
+        print('Empty result')
+        exit(0)
+
+    # declare variables
+    # we always keep the first point
+    # so we add it in first to ensure the tree is non-empty
+    S = np.array([], dtype=int)
+    # all our points to build a tree of points
+    viewed_points = np.empty((1, features.shape[1]))
+    # counts for colors we have found already
     b = {k: 0 for k in kis.keys()}
 
     for index in i_permutation:
-        q = X[index]
+        q = features[index]
         color = colors[index]
 
-        # if we have the color full, skip
-        if b[color] == kis[color]:
-            continue
+        # if the color of this point is already full, skip it
+        #if b[color] >= kis[color]:
+            # always add the point
+        #    viewed_points = np.append(viewed_points, [q], axis=0)
+        #    continue
 
-        b[color] += 1
+        # get distance to nearest point
+        # (for now, we build the tree every time)
+        # either we base this off of every point seen or every point included
+        if all_points:
+            points = viewed_points
+        else:
+            points = features[S]
+        dists, _ = algo.get_ind(algo.create(points), 1, q)
+        dist = dists[0]
 
-        # TODO: get NN of p
+        viewed_points = np.append(viewed_points, [q], axis=0)
+
+        if dist > gamma / 2.0 and b[color] < kis[color]:
+            b[color] += 1
+            S = np.append(S, [index])
+        else:
+            # do nothing
+            pass
+
+    print(f'Final Solution (len = {len(S)}):')
+    print(S)
+
+    print('Points:')
+    res = list(zip(features[S], colors[S]))
+    for r in res:
+        print(r[0], r[1])
+
+    print('Solution Stats:')
+    for color in kis.keys():
+        print(f'{color}: {sum(colors[S] == color)}')
+
+    print()
+    tree = algo.create(features[S])
+    for i in S:
+        p = features[i]
+        dists, indecies = algo.get_ind(tree, 2, p)
+
+        if dists[0][1] < gamma / 2.0:
+            print('ERROR: invalid distance between points')
+            print(dists)
+            print(features[i])
+            print(features[S][indecies[0]][1])
+            print()
+
+    # time!
+    res = timer.stop()
+    print('Timings! (seconds)')
+    for name, delta in res:
+        print(f'{name + ":":>40} {delta}')
