@@ -4,7 +4,7 @@ from collections import defaultdict
 import sys
 import numpy as np
 
-from tqdm import tqdm
+from tqdm import tqdm, trange
 import typing as t
 import numpy.typing as npt
 
@@ -13,18 +13,56 @@ import coreset as CORESET
 import utils
 from rounding import rand_round
 
-def mult_weight_upd(gamma, features, colors, kis, epsilon):
+def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
     """
     uses the multiplicative weight update method to
     generate an integer solution for the LP
     :param gamma: the minimum distance to optimize for
+    :param N: the number of elements in the dataset
+    :param k: total number of points selected
     :param features: dataset's features
     :param colors: matching colors
     :param kis: the color->count mapping
     :param epsilon: allowed error value
     :return: a nx1 vector X of the solution or None if infeasible
     """
+    # TODO: update epsilon if needed
+    h = np.full((N, 1), 1.0 / N) # weights
+    X = np.zeros((N, 1))         # Output
 
+    T = (8 * k) / (math.pow(epsilon, 2)) * math.log(N, math.e) # iterations
+    # for now, we can recreate the structure in advance
+    struct = algo.create(features)
+
+    # NOTE: should this be <= or was it 1 indexed?
+    print(T)
+    for t in trange(math.ceil(T), desc='MWU Loop'):
+
+        S = np.empty_like(features)  # points we select this round
+        W = 0                        # current weight sum
+
+        # weights to every point
+        w_sums = algo.get_weight_ranges(struct, h, gamma / 2.0)
+
+        # compute minimums per color
+        for color in kis.keys():
+            # need this to reverse things
+            color_sums_ind = (color == colors).nonzero()[0] # tuple for reasons
+
+            # get minimum points as indices
+            color_sums = w_sums[color_sums_ind]
+            mins = np.argpartition(color_sums, kis[color])[:kis[color]]
+            min_indecies = color_sums_ind[mins]
+
+            # add to X's
+            X[min_indecies] += 1
+            # add points to set we've seen
+            S = np.append(S, features[min_indecies], axis=0)
+            # add additional weight
+            W += np.sum(h[min_indecies])
+
+        if W > 1:
+            return None
 
 
 if __name__ == '__main__':
@@ -93,3 +131,16 @@ if __name__ == '__main__':
 
     N = len(features)
 
+    timer.split("One MWU round")
+
+    # first we need to find the high value
+    print('Solving for high bound')
+    high = 1
+    gamma = high * epsilon
+
+    mult_weight_upd(gamma, N, k, features, colors, kis, 0.5)
+
+    res = timer.stop()
+    print('Timings! (seconds)')
+    for name, delta in res:
+        print(f'{name + ":":>40} {delta}')

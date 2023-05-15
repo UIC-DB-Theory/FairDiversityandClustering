@@ -32,3 +32,8 @@ def get_ind(structure, k : int, point) -> npt.NDArray[int]:
 
 
     return structure.query(point_reshaped, k)
+
+def get_weight_ranges(structure, weights, gamma):
+    ind = structure.query_ball_tree(structure, gamma)
+    weights = [np.sum(weights[i]) for i in ind]
+    return np.array(weights)
