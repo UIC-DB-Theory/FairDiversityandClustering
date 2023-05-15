@@ -65,7 +65,7 @@ def solve_lp(dataStruct, m: gp.Model, gamma: np.float64, variables: npt.NDArray[
         other_vars = variables[indices]
         count = other_vars.shape[0]
 
-        # a bit of workarounds to get from MVar to var here
+        # a bit of workaaounds to get from MVar to var here
         in_rad = gp.LinExpr([1.0] * count, other_vars.tolist())
 
         m.addConstr(in_rad <= 1)
@@ -88,6 +88,64 @@ def solve_lp(dataStruct, m: gp.Model, gamma: np.float64, variables: npt.NDArray[
         print(f'Exiting')
         exit(-1)
 
+
+def rand_round(X, features, colors, kis, theory_accurate=True):
+    """
+    Randomly rounds a real solution to an integer one
+    :param X: the variables of the program
+    :param features: feature set
+    :param colors: colors of features
+    :param kis: color-count mapping
+    :return: the indecies of points in the integer solution
+    """
+    # we only want to pick from points we care about
+    # (and we need to go backwards later)
+    nonzero_indexes = np.nonzero(X != 0)[0] # always a tuple
+    nonzeros = X[nonzero_indexes]
+
+    # get a random permutation
+    rands = np.random.random_sample(size=len(nonzeros))
+    # of the original array!
+    argsort = np.argsort(rands ** (1.0 / nonzeros))
+    i_permutation = nonzero_indexes[argsort]
+
+    if len(i_permutation) == 0:
+        print('Empty result')
+        exit(0)
+
+    # declare variables
+    # we always keep the first point
+    # so we add it in first to ensure the tree is non-empty
+    S = np.array([], dtype=int)
+    # all our points to build a tree of points
+    viewed_points = np.empty((1, features.shape[1]))
+    # counts for colors we have found already
+    b = {k: 0 for k in kis.keys()}
+
+    for index in i_permutation:
+        q = features[index]
+        color = colors[index]
+
+        # get distance to nearest point
+        # (for now, we build the tree every time)
+        # either we base this off of every point seen or every point included
+        if theory_accurate:
+            points = viewed_points
+        else:
+            points = features[S]
+        dists, _ = algo.get_ind(algo.create(points), 1, q)
+        dist = dists[0]
+
+        viewed_points = np.append(viewed_points, [q], axis=0)
+
+        if dist > gamma / 2.0 and b[color] < kis[color]:
+            b[color] += 1
+            S = np.append(S, [index])
+        else:
+            # do nothing
+            pass
+
+    return S
 
 if __name__ == '__main__':
     # File fields
@@ -133,7 +191,7 @@ if __name__ == '__main__':
 
     # coreset params
     # Set the size of the coreset
-    coreset_size = 20000
+    coreset_size = 10000
 
     # other things for gurobi
     method = 2  # model method of solving
@@ -248,60 +306,7 @@ if __name__ == '__main__':
     timer.split("Randomized Rounding")
 
     # do we want all points included or just the ones in S?
-    all_points = True
-
-    # we only want to pick from points we care about
-    # (and we need to go backwards later)
-    nonzero_indexes = np.nonzero(X != 0)[0] # always a tuple
-    nonzeros = X[nonzero_indexes]
-
-    # get a random permutation
-    rands = np.random.random_sample(size=len(nonzeros))
-    # of the original array!
-    argsort = np.argsort(rands ** (1.0 / nonzeros))
-    i_permutation = nonzero_indexes[argsort]
-
-    if len(i_permutation) == 0:
-        print('Empty result')
-        exit(0)
-
-    # declare variables
-    # we always keep the first point
-    # so we add it in first to ensure the tree is non-empty
-    S = np.array([], dtype=int)
-    # all our points to build a tree of points
-    viewed_points = np.empty((1, features.shape[1]))
-    # counts for colors we have found already
-    b = {k: 0 for k in kis.keys()}
-
-    for index in i_permutation:
-        q = features[index]
-        color = colors[index]
-
-        # if the color of this point is already full, skip it
-        #if b[color] >= kis[color]:
-            # always add the point
-        #    viewed_points = np.append(viewed_points, [q], axis=0)
-        #    continue
-
-        # get distance to nearest point
-        # (for now, we build the tree every time)
-        # either we base this off of every point seen or every point included
-        if all_points:
-            points = viewed_points
-        else:
-            points = features[S]
-        dists, _ = algo.get_ind(algo.create(points), 1, q)
-        dist = dists[0]
-
-        viewed_points = np.append(viewed_points, [q], axis=0)
-
-        if dist > gamma / 2.0 and b[color] < kis[color]:
-            b[color] += 1
-            S = np.append(S, [index])
-        else:
-            # do nothing
-            pass
+    S = rand_round(X, features, colors, kis)
 
     print(f'Final Solution (len = {len(S)}):')
     print(S)
