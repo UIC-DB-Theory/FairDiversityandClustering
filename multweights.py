@@ -26,6 +26,8 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
     :param epsilon: allowed error value
     :return: a nx1 vector X of the solution or None if infeasible
     """
+    assert(k > 0)
+
     # TODO: update epsilon if needed
     h = np.full((N, 1), 1.0 / N) # weights
     X = np.zeros((N, 1))         # Output
@@ -63,6 +65,23 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
 
         if W > 1:
             return None
+
+        # get counts of points in each ball in M
+        M = np.zeros_like(h)
+        Z = algo.create(S)
+
+        Cs = 0
+        for i in range(N):
+            #TODO: replace this with proper counting rather than reporting
+            c = len(algo.get_ind_range(Z, gamma / 2.0, features[i]))
+            Cs += c
+            M[i] = (1.0 / k) * ((-1 * c) + 1)
+
+        # update H
+        oldH = np.copy(h)
+        h = h * (1 - (epsilon / 4.0))
+        h /= np.sum(h)
+
 
 
 if __name__ == '__main__':
@@ -135,7 +154,7 @@ if __name__ == '__main__':
 
     # first we need to find the high value
     print('Solving for high bound')
-    high = 1
+    high = 100
     gamma = high * epsilon
 
     mult_weight_upd(gamma, N, k, features, colors, kis, 0.5)
