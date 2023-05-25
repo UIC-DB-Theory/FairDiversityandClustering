@@ -28,12 +28,13 @@ def get_ind_range(structure, r: np.float64, point) -> npt.NDArray[int]:
 def get_ind(structure, k : int, point) -> npt.NDArray[int]:
     dim = point.shape[0]  # this is a tuple (reasons!)
     point_reshaped = np.reshape(point, (1, dim))
-
-
-
     return structure.query(point_reshaped, k)
 
 def get_weight_ranges(structure, weights, gamma):
     ind = structure.query_ball_tree(structure, gamma)
     weights = [np.sum(weights[i]) for i in ind]
     return np.array(weights)
+
+def get_count_in_range(structure : KDTree, point : npt.NDArray, r : float):
+    ind = get_ind_range(structure, r, point)
+    return len(ind)

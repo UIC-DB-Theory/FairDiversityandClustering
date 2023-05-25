@@ -37,7 +37,6 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
     struct = algo.create(features)
 
     # NOTE: should this be <= or was it 1 indexed?
-    print(T)
     for t in trange(math.ceil(T), desc='MWU Loop'):
 
         S = np.empty_like(features)  # points we select this round
@@ -53,14 +52,14 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
 
             # get minimum points as indices
             color_sums = w_sums[color_sums_ind]
-            mins = np.argpartition(color_sums, kis[color])[:kis[color]]
-            min_indecies = color_sums_ind[mins]
+            arg_mins = np.argpartition(color_sums, kis[color])[:kis[color]]
+            min_indecies = color_sums_ind[arg_mins]
 
-            # add to X's
+            # add 1 to X[i]'s that are the minimum indices
             X[min_indecies] += 1
-            # add points to set we've seen
+            # add points we've seen to S
             S = np.append(S, features[min_indecies], axis=0)
-            # add additional weight
+            # add additional weight to W
             W += np.sum(h[min_indecies])
 
         if W > 1:
@@ -72,16 +71,27 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
 
         Cs = 0
         for i in range(N):
-            #TODO: replace this with proper counting rather than reporting
-            c = len(algo.get_ind_range(Z, gamma / 2.0, features[i]))
+            c = algo.get_count_in_range(struct, features[i], gamma / 2.0)
             Cs += c
             M[i] = (1.0 / k) * ((-1 * c) + 1)
 
         # update H
         oldH = np.copy(h)
-        h = h * (1 - (epsilon / 4.0))
+        h = h * (1 - ((epsilon / 4.0) * M))
         h /= np.sum(h)
 
+
+        # If things aren't changing, stop early
+        if np.allclose(h, oldH, atol=1e-08):
+            print(f'Exiting early on iteration {t+1}')
+            break
+        else:
+            # TODO: check with L1, L2, or average distance
+            tqdm.write(f'\th distance: {np.linalg.norm(h - oldH)}', end='')
+
+
+    X = X / (t + 1)
+    return X
 
 
 if __name__ == '__main__':
@@ -128,7 +138,7 @@ if __name__ == '__main__':
 
     # coreset params
     # Set the size of the coreset
-    coreset_size = 10000
+    coreset_size = 30000
 
     # start the timer
     timer = utils.Stopwatch("Parse Data")
@@ -145,7 +155,7 @@ if __name__ == '__main__':
     print("Number of points (original): ", len(features))
     d = len(feature_fields)
     m = len(kis.keys())
-    features, colors = CORESET.Coreset_FMM(features, colors, k, m, d, coreset_size).compute()
+    #features, colors = CORESET.Coreset_FMM(features, colors, k, m, d, coreset_size).compute()
     print("Number of points (coreset): ", len(features))
 
     N = len(features)
@@ -154,10 +164,10 @@ if __name__ == '__main__':
 
     # first we need to find the high value
     print('Solving for high bound')
-    high = 100
+    high = 1
     gamma = high * epsilon
 
-    mult_weight_upd(gamma, N, k, features, colors, kis, 0.5)
+    X = mult_weight_upd(gamma, N, k, features, colors, kis, 0.25)
 
     res = timer.stop()
     print('Timings! (seconds)')
