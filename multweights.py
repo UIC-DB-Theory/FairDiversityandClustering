@@ -8,7 +8,8 @@ from tqdm import tqdm, trange
 import typing as t
 import numpy.typing as npt
 
-import KDTree2 as algo
+import KDTree2
+import BallTree
 import coreset as CORESET
 import utils
 from rounding import rand_round
@@ -34,16 +35,16 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
 
     T = (8 * k) / (math.pow(epsilon, 2)) * math.log(N, math.e) # iterations
     # for now, we can recreate the structure in advance
-    struct = algo.create(features)
+    struct = KDTree2.create(features)
 
     # NOTE: should this be <= or was it 1 indexed?
     for t in trange(math.ceil(T), desc='MWU Loop'):
 
-        S = np.empty_like(features)  # points we select this round
-        W = 0                        # current weight sum
+        S = np.empty((0, features.shape[1]))  # points we select this round
+        W = 0                                 # current weight sum
 
         # weights to every point
-        w_sums = algo.get_weight_ranges(struct, h, gamma / 2.0)
+        w_sums = KDTree2.get_weight_ranges(struct, h, gamma / 2.0)
 
         # compute minimums per color
         for color in kis.keys():
@@ -67,17 +68,16 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
 
         # get counts of points in each ball in M
         M = np.zeros_like(h)
-        Z = algo.create(S)
+        Z = BallTree.create(S)
 
-        Cs = 0
-        for i in range(N):
-            c = algo.get_count_in_range(struct, features[i], gamma / 2.0)
-            Cs += c
+        Cs = BallTree.get_counts_in_range(Z, features, gamma / 2.0)
+        for i, c in enumerate(Cs):
             M[i] = (1.0 / k) * ((-1 * c) + 1)
 
         # update H
         oldH = np.copy(h)
-        h = h * (1 - ((epsilon / 4.0) * M))
+        # TODO: check sign of value
+        h = h * (1 + ((epsilon / 4.0) * M))
         h /= np.sum(h)
 
 
@@ -86,9 +86,7 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
             print(f'Exiting early on iteration {t+1}')
             break
         else:
-            # TODO: check with L1, L2, or average distance
             tqdm.write(f'\th distance: {np.linalg.norm(h - oldH)}', end='')
-
 
     X = X / (t + 1)
     return X
