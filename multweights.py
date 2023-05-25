@@ -155,7 +155,7 @@ if __name__ == '__main__':
     print("Number of points (original): ", len(features))
     d = len(feature_fields)
     m = len(kis.keys())
-    #features, colors = CORESET.Coreset_FMM(features, colors, k, m, d, coreset_size).compute()
+    features, colors = CORESET.Coreset_FMM(features, colors, k, m, d, coreset_size).compute()
     print("Number of points (coreset): ", len(features))
 
     N = len(features)
