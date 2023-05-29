@@ -4,105 +4,59 @@ import random
 import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
+from gen_pixel_dataset import make_image
 
-# Adding parent directory to path
 sys.path.append(os.path.join(os.path.dirname(__file__), '../'))
 
+import coreset_mod as CORESET
 import utils
 
-def line(l):
+def make_image_data (features, colors):
+    data = []
+    for i in range(len(features)):
+        row = [ colors[i], features[i][0], features[i][1]]
+        data.append(row)
+    return data
+
+def main():
+    print('Coreset Construction')
     
-    tline = str(l[0])
-    for i in range(1, len(l)):
-     tline = tline + ", " + str(l[i])
-    
-    return tline + "\n"
+    if len(sys.argv) != 2:
+        print('Usage: python3 vis.py [<datafile>] [<width>] [<height>]')
 
-def make_image(data, out):
-    
-    #print("Plotting: ", out)
-    img = Image.new('RGB', (width, height), color='white')
+    datafile = sys.argv[1]
+    width = int(sys.argv[2])
+    height = int(sys.argv[3])
 
-    for p in data:
-        color = p[0]
-        x = p[1]
-        y = p[2]
-        pixel_color = (0,0,0)
-        if color == "r":
-            pixel_color = (255,0,0)
-        elif color == "g":
-            pixel_color = (0,255,0)
-        elif color == "b":
-            pixel_color = (0,0,255)
-        #print(f'\tplotting: ({x}, {y}) with {color}')
-        img.putpixel((int(x), int(y)), pixel_color)
-    
-    img.save(out)
+    allFields = [
+        "color",
+        "x",
+        "y"
+    ]
 
-width = 50
-height = 50
-f = open("pixels.csv", "w")
+    # fields we care about for parsing
+    color_fields = ['color']
+    feature_fields = ['x', 'y']
 
-labels = ["color", "x", "y"]
-#f.write(line(labels))
+    kis = {
+        'r': 3,
+        'g': 3,
+        'b': 3,
+    }
+    k = sum(kis.values())
 
-colors = ["r", "g", "b"]
+    colors, features = utils.read_CSV(datafile, allFields, color_fields, '_', feature_fields)
 
-data = []
+    coreset_size = 25
 
-for x in range (width):
-    for y in range (height):
-        color =random.choice(colors)
-        data.append([color, x, y])
-        f.write(line([color, x, y]))
+    print("Number of points (original): ", len(features))
+    d = len(feature_fields)
+    m = len(kis.keys())
+    features, colors = CORESET.Coreset_FMM(features, colors, k, m, d, coreset_size).compute()
+    print("Number of points (coreset): ", len(features))
 
-f.close()
+    make_image('coreset', width, height, make_image_data(features, colors))
 
 
-# variables for running LP bin-search
-color_field = 'color'
-feature_fields = ['x', 'y']
-# feature_fields = {'age'}
-kis = {"r": 10, "g": 10, "b": 10}
-k = 30
-# binary search params
-epsilon = np.float64("0.001")
-
-# other things for gurobi
-method = 0  # model method of solving
-
-# import data from file
-allFields = [
-    "color",
-    "x",
-    "y"
-]
-colors, features = utils.read_CSV("./pixels.csv", allFields, [color_field],'_',feature_fields)
-assert (len(colors) == len(features))
-
-# "normalize" features
-# Should happen before coreset construction
-# features = features / features.max(axis=0)
-
-
-#print(f'Size of data = {len(features)}')
-#print("Original\n", features)
-#print("Original\n", colors)
-
-import coreset as CORESET
-#l = len(feature_fields) # doubling dimension = d 
-coreset_constructor = CORESET.Coreset_FMM(features, colors, k, e_coreset, len(feature_fields))
-features_c, colors_c = coreset_constructor.compute()
-
-f = open(f'pixels_coreset_{eps}.csv', "w")
-data_coreset = []
-for i in range(0, len(features_c)):
-    color = colors_c[i]
-    x = int(features_c[i][0])
-    y = int(features_c[i][1])
-    data_coreset.append([color, x, y])
-    f.write(line([color, x, y]))
-make_image(data_coreset, f'coreset_{eps}.png')
-
-# plot the images
-make_image(data, "data.png")
+if __name__ == "__main__":
+    main()
