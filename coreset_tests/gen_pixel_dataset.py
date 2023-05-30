@@ -56,6 +56,7 @@ def main():
     
     if len(sys.argv) != 4:
         print('Usage: python3 gen_pixel_dataset.py [<dataname>] [<width>] [<height>]')
+        exit(-1)
     
     dataname = sys.argv[1]
     width = int(sys.argv[2])

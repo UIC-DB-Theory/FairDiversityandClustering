@@ -21,8 +21,9 @@ def make_image_data (features, colors):
 def main():
     print('Coreset Construction')
     
-    if len(sys.argv) != 2:
+    if len(sys.argv) != 4:
         print('Usage: python3 vis.py [<datafile>] [<width>] [<height>]')
+        exit(-1)
 
     datafile = sys.argv[1]
     width = int(sys.argv[2])

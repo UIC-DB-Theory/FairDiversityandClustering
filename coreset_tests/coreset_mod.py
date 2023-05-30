@@ -1,6 +1,7 @@
 import numpy as np
 import numpy.typing as npt
 import typing as t
+from gen_pixel_dataset import make_image
 
 class Coreset_FMM:
     """
@@ -67,7 +68,7 @@ class Coreset_FMM:
 
 
     # Compute Greedy k-center/GMM with polynomial 2-approximation
-    def GMM(self, input_set: npt.NDArray[np.float64]):
+    def GMM(self, input_set: npt.NDArray[np.float64], color):
         from scipy.spatial.distance import cdist
 
         if len(input_set) < self.gmm_result_size:
@@ -75,6 +76,8 @@ class Coreset_FMM:
 
         # Randomly select a point.
         s_1 = np.random.default_rng().choice(input_set)
+        data = [[color, s_1[0], s_1[1]]]
+        make_image(f'coreset_gmm_{color}_0', 10, 10, data)
 
         # Initialize all distances initially to s_1.
         # we need to reshape the point vector into a row vector
@@ -96,6 +99,8 @@ class Coreset_FMM:
             maximum_dist_point = input_set[point_distances.argmax()]
 
             result[i] = maximum_dist_point
+            data.append([color, maximum_dist_point[0], maximum_dist_point[1]])
+            make_image(f'coreset_gmm_{color}_{i}', 10, 10, data)
 
             # Update point distances with respect to the maximum_dis_point.
             # we keep the minimum distance any point is to our selected point
@@ -121,7 +126,7 @@ class Coreset_FMM:
             print(f'Coreset for color: {all_colors[color]}, number of points: {len(color_features)}')
 
             # Calculate the GMM for colored set
-            color_coreset = self.GMM(color_features)
+            color_coreset = self.GMM(color_features, all_colors[color])
 
             # The coressponding color list
             color_colors = np.array([all_colors[color]]*len(color_coreset))
