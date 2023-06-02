@@ -105,7 +105,51 @@ class Coreset_FMM:
             point_distances = np.minimum(point_distances, new_point_distances)
 
         return result
+    
+    # returns the upper bound for gamma as 2*div(U)
+    def compute_gamma_upper_bound(self):
 
+        gamma_high = float('inf')
+
+        from scipy.spatial.distance import cdist
+
+        # Randomly select a point.
+        s_1 = np.random.default_rng().choice(self.features)
+
+        # Initialize all distances initially to s_1.
+        # we need to reshape the point vector into a row vector
+        dim = s_1.shape[0]  # this is a tuple (reasons!)
+        point = np.reshape(s_1, (1, dim)) # point is the current "max_dist" point we're working with
+
+        # comes out as a Nx1 matrix
+        point_distances = cdist(self.features, point)
+
+        # Result set for GMM
+        result = np.zeros((self.k, self.d), np.float64)
+        result[0] = point
+
+        for i in range(1, self.k):
+
+            # Get the farthest point from current point
+            # max_point_index = point_distances.index(max(point_distances))
+            # maximum_dist_point = input_set[max_point_index]
+            maximum_dist_point = self.features[point_distances.argmax()]
+            
+            distance = point_distances[point_distances.argmax()][0]
+
+            if distance < gamma_high:
+                gamma_high = distance
+
+            result[i] = maximum_dist_point
+
+            # Update point distances with respect to the maximum_dis_point.
+            # we keep the minimum distance any point is to our selected point
+            point = np.reshape(maximum_dist_point, (1, dim))
+            new_point_distances = cdist(self.features, point)
+            point_distances = np.minimum(point_distances, new_point_distances)
+        
+        return 2*gamma_high
+    
     # Compute the coreset for FMM
     def compute(self):
     
