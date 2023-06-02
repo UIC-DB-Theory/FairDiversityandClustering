@@ -43,21 +43,20 @@ def main():
 
     d =  getDimension(features)
     m =  getNumColors(colors)
-    k = 60
+    
+    resultfile = open("census_gamma_high_vary_k.csv", "w")
+    resultfile.write(f'k,gamma_high,time\n')
+    for k in range (100, 10000, 100):
+        coreset_constructor = CORESET.Coreset_FMM(features, colors, k, m, d, 1000)
+        start_time = time.time()
+        gamma_high = coreset_constructor.compute_gamma_upper_bound()
+        end_time = time.time()
 
-    print("d = ", d)
-    print("m = ", m)
-    print("k = ", k)
-    print("Data Size = ", len(features))
+        t = (end_time - start_time)
 
-    coreset_constructor = CORESET.Coreset_FMM(features, colors, k, m, d, 1000)
-    features_coreset, colors_coreset = coreset_constructor.compute()
-
-    print("Coreset Size = ", len(features_coreset))
-
-    gamma_high = coreset_constructor.compute_gamma_upper_bound()
-
-    print("Gamma Upper Bound = ", gamma_high)
+        resultfile.write(f'{k},{gamma_high},{t}\n')
+        resultfile.flush()
+        
 
 if __name__ == "__main__":
     main()
