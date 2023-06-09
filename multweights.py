@@ -14,6 +14,9 @@ import coreset as CORESET
 import utils
 from rounding import rand_round
 
+# TODO: early stop on X vector in slack
+    # try pre-processing ball query distances
+
 def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
     """
     uses the multiplicative weight update method to
@@ -29,11 +32,15 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
     """
     assert(k > 0)
 
-    # TODO: update epsilon if needed
+    scaled_eps = epsilon / (1 + (epsilon / 4.0))
+
+    # for calculating error
+    mu = k - 1
+
     h = np.full((N, 1), 1.0 / N) # weights
     X = np.zeros((N, 1))         # Output
 
-    T = (8 * k) / (math.pow(epsilon, 2)) * math.log(N, math.e) # iterations
+    T = ((8 * mu) / (math.pow(scaled_eps, 2))) * math.log(N, math.e) # iterations
     # for now, we can recreate the structure in advance
     struct = KDTree2.create(features)
 
@@ -73,12 +80,12 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
 
         Cs = BallTree.get_counts_in_range(Z, features, gamma / 2.0)
         for i, c in enumerate(Cs):
-            M[i] = (1.0 / k) * ((-1 * c) + 1)
+            M[i] = (1.0 / mu) * ((-1 * c) + 1)
 
         # update H
         oldH = np.copy(h)
         # TODO: check sign of value
-        h = h * (1 - ((epsilon / 4.0) * M))
+        h = h * (1 - ((scaled_eps / 4.0) * M))
         h /= np.sum(h)
 
         # print X for testing
@@ -89,7 +96,8 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
 
         with open(file, "a") as f:
             with np.printoptions(linewidth=np.inf):
-                print((X / (t+1)).flatten(), file=f)
+                print((X / (t+1)).flatten(), file=f, end="\t")
+                print(f'\th distance: {np.linalg.norm(h - oldH)}', file=f)
 
         # If things aren't changing, stop early
         # TODO: figure out a better way to stop early
@@ -156,10 +164,16 @@ if __name__ == '__main__':
 
     timer.split("One MWU round")
 
-    # TODO: remove hardcoding
+    # TODO: adult, 2 colors (sex) and all colors, K ~ 100 in total, gamma ~ 3 ([2-4]), epsilon try things
     gamma = 5
 
-    X = mult_weight_upd(gamma, N, k, features, colors, kis, 0.01)
+    X = mult_weight_upd(gamma, N, k, features, colors, kis, 0.2)
+    """
+    to check X is correct
+        sum [0-3] <=  1 + e
+        sum [5-8] <=  1 + e
+        sum [8-11] <= 1 + e
+    """
 
     res = timer.stop()
     print('Timings! (seconds)')
