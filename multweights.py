@@ -32,12 +32,12 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
     """
     assert(k > 0)
 
-    scaled_eps = epsilon / (1 + (epsilon / 4.0))
+    scaled_eps = epsilon / (1.0 + (epsilon / 4.0))
 
     # for calculating error
     mu = k - 1
 
-    h = np.full((N, 1), 1.0 / N) # weights
+    h = np.full((N, 1), 1.0 / N, dtype=np.longdouble) # weights
     X = np.zeros((N, 1))         # Output
 
     T = ((8 * mu) / (math.pow(scaled_eps, 2))) * math.log(N, math.e) # iterations
@@ -69,7 +69,7 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
             # add points we've seen to S
             S = np.append(S, features[min_indecies], axis=0)
             # add additional weight to W
-            W += np.sum(h[min_indecies])
+            W += np.sum(w_sums[min_indecies])
 
         if W >= 1:
             return None
@@ -85,7 +85,7 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
         # update H
         oldH = np.copy(h)
         # TODO: check sign of value
-        h = h * (1 - ((scaled_eps / 4.0) * M))
+        h = h * (np.ones_like(M) - ((scaled_eps / 4.0) * M))
         h /= np.sum(h)
 
         # print X for testing
@@ -96,14 +96,24 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
 
         with open(file, "a") as f:
             with np.printoptions(linewidth=np.inf):
+                #print(f'{np.sum(X[0:4] / (t + 1))}', file=f)
+                #print(f'{W}', file=f, end="\n")
                 print((X / (t+1)).flatten(), file=f, end="\t")
                 print(f'\th distance: {np.linalg.norm(h - oldH)}', file=f)
 
         # If things aren't changing, stop early
         # TODO: figure out a better way to stop early
-        if np.allclose(h, oldH, atol=1e-08):
-            print(f'Exiting early on iteration {t+1}')
-            break
+
+        #if np.allclose(h, oldH, atol=1e-08):
+        #    print(f'Exiting early on iteration {t+1}')
+        #    break
+
+        # check directly if X is a feasible solution
+        if t % 50 == 0:
+            X_weights = KDTree2.get_weight_ranges(struct, X / (1 + t), gamma / 2.0)
+            if not np.any(X_weights > 1 + epsilon):
+                break
+
 
         #tqdm.write(f'\th distance: {np.linalg.norm(h - oldH)}', end='')
 
@@ -122,13 +132,13 @@ if __name__ == '__main__':
 
     # fields we care about for parsing
     color_field = ['color']
-    feature_fields = {'x', 'y'}
+    feature_fields = ['x', 'y']
 
     # variables for running LP bin-search
     # keys are appended using underscores
     kis = {
         'blue': 2,
-        'red': 2,
+        'red': 1,
     }
     k = sum(kis.values())
     # binary search params
@@ -167,7 +177,7 @@ if __name__ == '__main__':
     # TODO: adult, 2 colors (sex) and all colors, K ~ 100 in total, gamma ~ 3 ([2-4]), epsilon try things
     gamma = 5
 
-    X = mult_weight_upd(gamma, N, k, features, colors, kis, 0.2)
+    X = mult_weight_upd(gamma, N, k, features, colors, kis, .1)
     """
     to check X is correct
         sum [0-3] <=  1 + e
@@ -184,3 +194,6 @@ if __name__ == '__main__':
         print('Infeasible!')
     else:
         print(X)
+
+        for i in range(N):
+            print(f'{features[i]}\t{X[i]}')
