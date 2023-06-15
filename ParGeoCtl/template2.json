@@ -1,0 +1,5 @@
+{
+	"type" : "run-query",
+	"radius" : 1,
+	"weights" : [1, 2]
+}

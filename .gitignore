@@ -140,3 +140,6 @@ coreset_tests/datasets/
 
 # lock files
 Pipfile.lock
+
+# vscode files
+.vscode
