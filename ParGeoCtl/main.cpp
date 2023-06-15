@@ -10,6 +10,7 @@ const int READ_JSON_STDIN = 200;
 int main(int argc, char *argv[]) {
     
     int mode;
+    json message;
     
     int opt;
     while((opt = getopt(argc, argv, ":j:f:")) != -1) 
@@ -24,11 +25,22 @@ int main(int argc, char *argv[]) {
             // Read the message from the command line
             case 'j':
                 mode = READ_JSON_STDIN;
-                json ex1 =  json::parse(optarg);
-                std::cout << "\ttype: " << ex1["type"].template get<std::string>() << std::endl;
+                message =  json::parse(optarg);
                 break; 
         } 
-    } 
+    }
+
+    // First message should be of type build-datastructure
+    // For now, just printing the message details
+    std::cout << "\ttype: " << message["type"].template get<std::string>() << std::endl;
+    std::cout << "\tdimension: " << message["dimension"].template get<int>() << std::endl;
+    // Read the points into a vector
+    std::vector<std::vector<double>> points = message["points"].template get<std::vector<std::vector<double>>>();
+
+    std::cout << "\tpoints: " << std::endl;
+    for (std::vector<double> p : points) {
+        std::cout << "\t\t" << p[0] << ", " << p[1] << ", " << p[2] << std::endl;
+    }
     
     // TODO: For any extra argument parsing use this
     // optind is for the extra arguments
