@@ -1,0 +1,2 @@
+{"type": "build-datastructure", "dimension": 3, "points": [[0.0, 0.0 ,0.0],[1.0, 2.0 ,3.0]]}
+{"type" : "run-query", "radius" : 1, "weights" : [1, 2]}

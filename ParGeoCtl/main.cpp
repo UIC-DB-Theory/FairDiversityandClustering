@@ -41,6 +41,24 @@ int main(int argc, char *argv[]) {
     for (std::vector<double> p : points) {
         std::cout << "\t\t" << p[0] << ", " << p[1] << ", " << p[2] << std::endl;
     }
+
+    while(true) {
+
+        std::cin >> message;
+        std::string message_type = message["type"].template get<std::string>();
+
+        if(message_type.compare("run-query") == 0) {
+            std::cout << "\tradius: " << message["radius"].template get<int>() << std::endl;
+
+            // Read the weights into a vector
+            std::vector<double> weights = message["weights"].template get<std::vector<double>>();
+
+            std::cout << "\tweights: " << std::endl;
+            for (double w : weights) {
+                std::cout << "\t\t" << w << std::endl;
+            }
+        }
+    }
     
     // TODO: For any extra argument parsing use this
     // optind is for the extra arguments
