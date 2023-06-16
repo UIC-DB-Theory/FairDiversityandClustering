@@ -18,7 +18,7 @@ import coreset as CORESET
 import utils
 from rounding import rand_round
 
-def solve_lp(dataStruct, m: gp.Model, gamma: np.float64, variables: npt.NDArray[gp.MVar], colors: npt.NDArray[t.AnyStr],
+def solve_lp(dataStruct, kis, m: gp.Model, gamma: np.float64, variables: npt.NDArray[gp.MVar], colors: npt.NDArray[t.AnyStr],
              features: npt.NDArray[np.float64]) -> bool:
     """
     solve_lp
@@ -40,6 +40,8 @@ def solve_lp(dataStruct, m: gp.Model, gamma: np.float64, variables: npt.NDArray[
     # reset model, removing constraints if they exist
     m.reset()
     m.remove(m.getConstrs())
+
+    N = len(features)
 
     sys.stdout.flush()
     print(f'testing feasability of gamma={gamma}', flush=True)
@@ -178,12 +180,12 @@ if __name__ == '__main__':
 
     variables = m.addMVar(N, name="x", vtype=GRB.CONTINUOUS)
 
-    feasible = solve_lp(data_struct, m, np.float_(gamma), variables, colors, features)
+    feasible = solve_lp(data_struct, kis, m, np.float_(gamma), variables, colors, features)
     while feasible:
         high *= 2
         gamma = high * epsilon
 
-        feasible = solve_lp(data_struct, m, np.float_(gamma), variables, colors, features)
+        feasible = solve_lp(data_struct, kis, m, np.float_(gamma), variables, colors, features)
 
     print(f'High bound is {high}; binary search')
 
@@ -200,7 +202,7 @@ if __name__ == '__main__':
 
         gamma = multiple * epsilon
 
-        feasible = solve_lp(data_struct, m, np.float_(gamma), variables, colors, features)
+        feasible = solve_lp(data_struct, kis, m, np.float_(gamma), variables, colors, features)
 
         # if it's feasible, we have to search for larger multiples
         # if it's not, we want smaller multiples
@@ -217,7 +219,7 @@ if __name__ == '__main__':
 
     print(f'Final test for multiple {multiple} (gamma = {gamma}')
 
-    while not solve_lp(data_struct, m, np.float_(gamma), variables, colors, features):
+    while not solve_lp(data_struct, kis, m, np.float_(gamma), variables, colors, features):
         multiple -= 1
         gamma = multiple * epsilon
 
