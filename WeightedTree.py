@@ -72,7 +72,7 @@ class WeightedTree:
         response_json = json.loads(response_str)
         # TODO: check response and handle if errors occured
 
-        return np.array(response_json["result"])
+        return (np.array(response_json["result"]),response_json["time"])
 
     def delete_tree(self):
         message = {
@@ -98,16 +98,19 @@ if __name__ == "__main__":
         print(i)
     
     # Run a query on the tree.
-    result = tree.run_query(1, np.array([1, 2]))
-    print(result)
+    result, time = tree.run_query(1, np.array([1, 2]))
+    print(f'Result: {result}')
+    print(f'Time(s): {time}')
 
     # More sample computation.
     for i in range(0,5):
         print(i)
     
     # Run a query.
-    result = tree.run_query(1, np.array([1, 2]))
-    print(result)
+    result, time = tree.run_query(1, np.array([1, 2]))
+    print(f'Result: {result}')
+    print(f'Time(s): {time}')
+
 
     # Delete the tree. Ensures the process exits correctly
     tree.delete_tree()
