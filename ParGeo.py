@@ -1,22 +1,24 @@
-import asyncio
+import subprocess
 import sys
 
-ParGeoCtl = './ParGeoCtl/pargeoctl'
+executable = 'cat'
 
-async def pargeo_proc():
+proc = subprocess.Popen(
+    ['cat'],
+    stdin=subprocess.PIPE,
+    stdout=subprocess.PIPE
+)
 
-    # Create the subprocess; redirect the standard output
-    # into a pipe.
-    proc = await asyncio.create_subprocess_exec(
-        ParGeoCtl,
-        stdout=asyncio.subprocess.PIPE,
-        stdin=asyncio.subprocess.PIPE)
+proc.stdin.write(bytes('abc def ghi\n', 'utf-8'))
+proc.stdin.write(bytes('123 456 789\n', 'utf-8'))
+proc.stdin.flush()
 
-    proc.stdin.write(bytes('{"type" : "run-query", "radius" : 1, "weights" : [1, 2]}',"utf-8"))
+a = proc.stdout.readline()
+print(a)
 
-    data = await proc.stdout.readline()
+a = proc.stdout.readline()
+print(a)
 
-    print(data)
 
-if __name__ == '__main__':
-    asyncio.run(pargeo_proc())
+
+

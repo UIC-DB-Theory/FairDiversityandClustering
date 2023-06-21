@@ -30,8 +30,10 @@ int main(int argc, char *argv[]) {
     std::string message_str;
     std::vector<double> empty_vector;
 
-    std::getline(std::cin, message_str);
-    std::cout<<"Received:"<<message_str<<std::endl;
+    while(true) {
+        std::getline(std::cin, message_str);
+        std::cout<<"Received:"<<message_str<<std::endl;
+    }
     
     // int opt;
     // while((opt = getopt(argc, argv, ":j:f:")) != -1) 
