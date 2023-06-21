@@ -2,28 +2,6 @@ import subprocess
 import numpy as np
 import json
 
-# proc = subprocess.Popen(
-#     ['./ParGeoCtl/pargeoctl'],
-#     stdin=subprocess.PIPE,
-#     stdout=subprocess.PIPE
-# )
-
-# proc.stdin.write(bytes('abc def ghi\n', 'utf-8'))
-# proc.stdin.flush()
-# a = proc.stdout.readline()
-# print(a)
-
-# proc.stdin.write(bytes('123 456 789\n', 'utf-8'))
-# proc.stdin.flush()
-# a = proc.stdout.readline()
-# print(a)
-
-# proc.stdin.write(bytes('123 456 789\n', 'utf-8'))
-# proc.stdin.flush()
-# a = proc.stdout.readline()
-# print(a)
-
-
 class WeightedTree:
 
     def __init__(self):
