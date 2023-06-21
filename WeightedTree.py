@@ -40,22 +40,40 @@ class WeightedTree:
         self.points = np.array([])
     
     def construct_tree(self, points):
-        message = {
+        message_json = {
             "type": "build-datastructure", 
             "dimension": 3, 
             "points": points.tolist()}
         
-        json_message= json.dumps(message)
+        message_str = json.dumps(message_json)
 
-        self.proc.stdin.write(bytes(json_message + "\n", 'utf-8'))
+        self.proc.stdin.write(bytes(message_str + "\n", 'utf-8'))
         self.proc.stdin.flush()
-        a = self.proc.stdout.readline()
-        print(a)
+        response_str = self.proc.stdout.readline().decode()
+        response_str = response_str[:-1] #strip the newline
+
+        response_json = json.loads(response_str)
+        # TODO: check response and handle if errors occured
 
 
     def run_query(self, radius, weights):
-        pass
-    
+        message_json = {
+            "type" : "run-query", 
+            "radius" : radius, 
+            "weights" : weights.tolist()}
+        
+        message_str = json.dumps(message_json)
+
+        self.proc.stdin.write(bytes(message_str + "\n", 'utf-8'))
+        self.proc.stdin.flush()
+        response_str = self.proc.stdout.readline().decode()
+        response_str = response_str[:-1] #strip the newline
+
+        response_json = json.loads(response_str)
+        # TODO: check response and handle if errors occured
+
+        return np.array(response_json["result"])
+
     def delete_tree(self):
         message = {
             "type": "exit"}
@@ -66,14 +84,33 @@ class WeightedTree:
         self.proc.stdin.flush()
             
 
-tree = WeightedTree()
-tree.construct_tree(np.array([[0.0, 0.0 ,0.0],[1.0, 2.0 ,3.0]]))
-for i in range(0,5):
-    print(i)
-tree.construct_tree(np.array([[0.0, 0.0 ,0.0],[1.0, 2.0 ,3.0]]))
-for i in range(0,5):
-    print(i)
-tree.delete_tree()
+# Example usage.
+if __name__ == "__main__":
+    
+    # Initialize the tree and the subprocess.
+    tree = WeightedTree()
+
+    # COnstruct the tree on the data.
+    tree.construct_tree(np.array([[0.0, 0.0 ,0.0],[1.0, 2.0 ,3.0]]))
+
+    # Sample computation.
+    for i in range(0,5):
+        print(i)
+    
+    # Run a query on the tree.
+    result = tree.run_query(1, np.array([1, 2]))
+    print(result)
+
+    # More sample computation.
+    for i in range(0,5):
+        print(i)
+    
+    # Run a query.
+    result = tree.run_query(1, np.array([1, 2]))
+    print(result)
+
+    # Delete the tree. Ensures the process exits correctly
+    tree.delete_tree()
 
 
 
