@@ -895,6 +895,7 @@ def scalable_fmmd_ILP2(V: ElemList, EPS: float, k: int, C: int, constr: List[Lis
     div_sol = 0.0
 
     # The Gonzalez's algorithm
+    print("\tRunning Gonzalez's algorithm...")
     cand = set()
     cand_dists = dict()
     cand_div = sys.float_info.max
@@ -919,6 +920,7 @@ def scalable_fmmd_ILP2(V: ElemList, EPS: float, k: int, C: int, constr: List[Lis
             array_dists[i] = min(array_dists[i], dist(V[i], V[max_idx]))
 
     # Divide candidates by colors
+    print("\tDividing candidates by colors...")
     cand_colors = list()
     for c in range(C):
         cand_colors.append(set())
@@ -928,7 +930,8 @@ def scalable_fmmd_ILP2(V: ElemList, EPS: float, k: int, C: int, constr: List[Lis
 
     # Compute the solution
     div = cand_div
-    print("Initial diversity")
+    print("\tComputing solution...")
+    print(f'\tInitial diversity = {div}')
     while len(sol) == 0:
         under_capped = False
         for c in range(C):
@@ -974,6 +977,7 @@ def scalable_fmmd_ILP2(V: ElemList, EPS: float, k: int, C: int, constr: List[Lis
                 break
         if under_capped:
             div = div * (1.0 - EPS)
+            print(f'\tNew diversity(when under_capped) = {div}')
             continue
 
         # Build a graph G w.r.t. cand_div

@@ -50,6 +50,7 @@ if __name__ == '__main__':
     k = sum(kis.values())
     # binary search params
     epsilon = np.float64("0.001")
+    EPS = 0.05
 
     dataset = "../datasets/ads/adult.data"
     colors, features = utils2.read_CSV(dataset, allFields, color_field, '_', feature_fields)
@@ -70,18 +71,6 @@ if __name__ == '__main__':
         j = j + 1
     print(f'********************************')
     
-
-    # read the Adult dataset grouped by sex+race (c=10)
-    elements = []
-    with open("./data/adult_small.csv", "r") as fileobj:
-        csvreader = csv.reader(fileobj, delimiter=',')
-        for row in csvreader:
-            features = []
-            for i in range(4, len(row)):
-                features.append(float(row[i]))
-            elem = utils.Elem(int(row[0]), int(row[3]), features)
-            elements.append(elem)
-
 
     # Adjust problem definition to work for scalable fmmd ILP
     # For the adult dataset, grouped by age and sex
@@ -126,7 +115,13 @@ if __name__ == '__main__':
         range_constr = [kis[color] - c_offset, kis[color] + c_offset]
         constr.append(range_constr)
     
+    print("***********Running fmmd_ILP on normalized dataset***********")
+    sol1, div_sol1, t1 = alg.scalable_fmmd_ILP2(V=elements_normalized, k=k, EPS=EPS, C=c,constr=constr ,dist=utils.euclidean_dist)
+    print("***********Running fmmd_ILP on non normalized dataset***********")
+    sol2, div_sol2, t2 = alg.scalable_fmmd_ILP2(V=elements, k=k, EPS=EPS, C=c,constr=constr ,dist=utils.euclidean_dist)
 
-
-    
-    # alg.scalable_fmmd_ILP(V=features, k=k, EPS=epsilon, C=c,constr=constr[k] ,dist=utils.euclidean_dist)
+    print("\n\n***********Results***********")
+    print(f'Solution diversity (normalized) = {div_sol1}')
+    print(f'Time taken (normalized) = {t1}')
+    print(f'Solution diversity = {div_sol2}')
+    print(f'Time taken = {t2}')

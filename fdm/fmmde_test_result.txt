@@ -1,0 +1,677 @@
+***********Parameters***********
+Dataset: ../datasets/ads/adult.data
+Result set size(k): 290
+EPS(e): 0.001
+Colors/Grouped By: ['race', 'sex']
+Num colors(c): 10
+		constraint		color
+	1	15		White_Male
+	2	35		White_Female
+	3	55		Asian-Pac-Islander_Male
+	4	35		Asian-Pac-Islander_Female
+	5	15		Amer-Indian-Eskimo_Male
+	6	35		Amer-Indian-Eskimo_Female
+	7	15		Other_Male
+	8	35		Other_Female
+	9	15		Black_Male
+	10	35		Black_Female
+********************************
+***********Running fmmd_ILP on normalized dataset***********
+	Running Gonzalez's algorithm...
+	Dividing candidates by colors...
+	Computing solution...
+	Initial diversity = 1.7827024057400778
+	New diversity(when under_capped) = 1.693567285453074
+	New diversity(when under_capped) = 1.60888892118042
+	New diversity(when under_capped) = 1.528444475121399
+	New diversity(when under_capped) = 1.452022251365329
+	New diversity(when under_capped) = 1.3794211387970625
+	New diversity(when under_capped) = 1.3104500818572093
+Set parameter Username
+Academic license - for non-commercial use only - expires 2024-03-23
+Set parameter TimeLimit to value 300
+Gurobi Optimizer version 10.0.1 build v10.0.1rc0 (linux64)
+
+CPU model: AMD Ryzen 9 5900HX with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 8 physical cores, 16 logical processors, using up to 16 threads
+
+Optimize a model with 3290 rows, 1171 columns and 10051 nonzeros
+Model fingerprint: 0x2fcf7354
+Variable types: 0 continuous, 1171 integer (1171 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 3e+02]
+Presolve removed 2893 rows and 857 columns
+Presolve time: 0.01s
+
+Explored 0 nodes (0 simplex iterations) in 0.01 seconds (0.01 work units)
+Thread count was 1 (of 16 available processors)
+
+Solution count 0
+No other solutions better than -1e+100
+
+Model is infeasible
+Best objective -, best bound -, gap -
+Set parameter TimeLimit to value 300
+Gurobi Optimizer version 10.0.1 build v10.0.1rc0 (linux64)
+
+CPU model: AMD Ryzen 9 5900HX with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 8 physical cores, 16 logical processors, using up to 16 threads
+
+Optimize a model with 3122 rows, 1226 columns and 9880 nonzeros
+Model fingerprint: 0x19a6d7d9
+Variable types: 0 continuous, 1226 integer (1226 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 3e+02]
+Presolve removed 2872 rows and 949 columns
+Presolve time: 0.01s
+Presolved: 250 rows, 277 columns, 1463 nonzeros
+Variable types: 0 continuous, 277 integer (271 binary)
+
+Root relaxation: infeasible, 112 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 infeasible    0               - infeasible      -     -    0s
+
+Explored 1 nodes (112 simplex iterations) in 0.01 seconds (0.02 work units)
+Thread count was 16 (of 16 available processors)
+
+Solution count 0
+No other solutions better than -1e+100
+
+Model is infeasible
+Best objective -, best bound -, gap -
+Set parameter TimeLimit to value 300
+Gurobi Optimizer version 10.0.1 build v10.0.1rc0 (linux64)
+
+CPU model: AMD Ryzen 9 5900HX with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 8 physical cores, 16 logical processors, using up to 16 threads
+
+Optimize a model with 3118 rows, 1287 columns and 10055 nonzeros
+Model fingerprint: 0x52624346
+Variable types: 0 continuous, 1287 integer (1287 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 3e+02]
+Presolve removed 2835 rows and 988 columns
+Presolve time: 0.01s
+Presolved: 283 rows, 299 columns, 1650 nonzeros
+Variable types: 0 continuous, 299 integer (292 binary)
+
+Root relaxation: infeasible, 184 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 infeasible    0               - infeasible      -     -    0s
+
+Explored 1 nodes (184 simplex iterations) in 0.01 seconds (0.01 work units)
+Thread count was 16 (of 16 available processors)
+
+Solution count 0
+No other solutions better than -1e+100
+
+Model is infeasible
+Best objective -, best bound -, gap -
+Set parameter TimeLimit to value 300
+Gurobi Optimizer version 10.0.1 build v10.0.1rc0 (linux64)
+
+CPU model: AMD Ryzen 9 5900HX with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 8 physical cores, 16 logical processors, using up to 16 threads
+
+Optimize a model with 3030 rows, 1349 columns and 10065 nonzeros
+Model fingerprint: 0x0e15ca35
+Variable types: 0 continuous, 1349 integer (1349 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 3e+02]
+Presolve removed 2749 rows and 1034 columns
+Presolve time: 0.01s
+Presolved: 281 rows, 315 columns, 1715 nonzeros
+Variable types: 0 continuous, 315 integer (308 binary)
+
+Root relaxation: objective 2.900000e+02, 168 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     290.0000000  290.00000  0.00%     -    0s
+
+Explored 1 nodes (168 simplex iterations) in 0.01 seconds (0.01 work units)
+Thread count was 16 (of 16 available processors)
+
+Solution count 1: 290 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.900000000000e+02, best bound 2.900000000000e+02, gap 0.0000%
+***********Running fmmd_ILP on non normalized dataset***********
+	Running Gonzalez's algorithm...
+	Dividing candidates by colors...
+	Computing solution...
+	Initial diversity = 6520.009662569527
+Set parameter TimeLimit to value 300
+Gurobi Optimizer version 10.0.1 build v10.0.1rc0 (linux64)
+
+CPU model: AMD Ryzen 9 5900HX with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 8 physical cores, 16 logical processors, using up to 16 threads
+
+Optimize a model with 2892 rows, 904 columns and 8454 nonzeros
+Model fingerprint: 0xcccf4fb7
+Variable types: 0 continuous, 904 integer (904 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 3e+02]
+Presolve removed 2559 rows and 358 columns
+Presolve time: 0.01s
+Presolved: 333 rows, 546 columns, 2208 nonzeros
+Variable types: 0 continuous, 546 integer (542 binary)
+
+Root relaxation: infeasible, 34 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 infeasible    0               - infeasible      -     -    0s
+
+Explored 1 nodes (34 simplex iterations) in 0.01 seconds (0.02 work units)
+Thread count was 16 (of 16 available processors)
+
+Solution count 0
+No other solutions better than -1e+100
+
+Model is infeasible
+Best objective -, best bound -, gap -
+Set parameter TimeLimit to value 300
+Gurobi Optimizer version 10.0.1 build v10.0.1rc0 (linux64)
+
+CPU model: AMD Ryzen 9 5900HX with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 8 physical cores, 16 logical processors, using up to 16 threads
+
+Optimize a model with 2921 rows, 935 columns and 8605 nonzeros
+Model fingerprint: 0xee0265de
+Variable types: 0 continuous, 935 integer (935 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 3e+02]
+Presolve removed 2738 rows and 616 columns
+Presolve time: 0.01s
+Presolved: 183 rows, 319 columns, 1330 nonzeros
+Variable types: 0 continuous, 319 integer (315 binary)
+
+Root relaxation: infeasible, 55 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 infeasible    0               - infeasible      -     -    0s
+
+Explored 1 nodes (55 simplex iterations) in 0.01 seconds (0.01 work units)
+Thread count was 16 (of 16 available processors)
+
+Solution count 0
+No other solutions better than -1e+100
+
+Model is infeasible
+Best objective -, best bound -, gap -
+Set parameter TimeLimit to value 300
+Gurobi Optimizer version 10.0.1 build v10.0.1rc0 (linux64)
+
+CPU model: AMD Ryzen 9 5900HX with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 8 physical cores, 16 logical processors, using up to 16 threads
+
+Optimize a model with 2944 rows, 964 columns and 8738 nonzeros
+Model fingerprint: 0xeec40668
+Variable types: 0 continuous, 964 integer (964 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 3e+02]
+Presolve removed 2756 rows and 637 columns
+Presolve time: 0.01s
+Presolved: 188 rows, 327 columns, 1353 nonzeros
+Variable types: 0 continuous, 327 integer (323 binary)
+
+Root relaxation: infeasible, 28 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 infeasible    0               - infeasible      -     -    0s
+
+Explored 1 nodes (28 simplex iterations) in 0.01 seconds (0.01 work units)
+Thread count was 16 (of 16 available processors)
+
+Solution count 0
+No other solutions better than -1e+100
+
+Model is infeasible
+Best objective -, best bound -, gap -
+Set parameter TimeLimit to value 300
+Gurobi Optimizer version 10.0.1 build v10.0.1rc0 (linux64)
+
+CPU model: AMD Ryzen 9 5900HX with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 8 physical cores, 16 logical processors, using up to 16 threads
+
+Optimize a model with 3050 rows, 1005 columns and 9073 nonzeros
+Model fingerprint: 0x49a2abcc
+Variable types: 0 continuous, 1005 integer (1005 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 3e+02]
+Presolve removed 2847 rows and 665 columns
+Presolve time: 0.01s
+Presolved: 203 rows, 340 columns, 1416 nonzeros
+Variable types: 0 continuous, 340 integer (336 binary)
+
+Root relaxation: infeasible, 24 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 infeasible    0               - infeasible      -     -    0s
+
+Explored 1 nodes (24 simplex iterations) in 0.01 seconds (0.01 work units)
+Thread count was 16 (of 16 available processors)
+
+Solution count 0
+No other solutions better than -1e+100
+
+Model is infeasible
+Best objective -, best bound -, gap -
+Set parameter TimeLimit to value 300
+Gurobi Optimizer version 10.0.1 build v10.0.1rc0 (linux64)
+
+CPU model: AMD Ryzen 9 5900HX with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 8 physical cores, 16 logical processors, using up to 16 threads
+
+Optimize a model with 3061 rows, 1031 columns and 9173 nonzeros
+Model fingerprint: 0x1fa10f1c
+Variable types: 0 continuous, 1031 integer (1031 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 3e+02]
+Presolve removed 2861 rows and 682 columns
+Presolve time: 0.01s
+Presolved: 200 rows, 349 columns, 1417 nonzeros
+Variable types: 0 continuous, 349 integer (345 binary)
+
+Root relaxation: infeasible, 50 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 infeasible    0               - infeasible      -     -    0s
+
+Explored 1 nodes (50 simplex iterations) in 0.01 seconds (0.01 work units)
+Thread count was 16 (of 16 available processors)
+
+Solution count 0
+No other solutions better than -1e+100
+
+Model is infeasible
+Best objective -, best bound -, gap -
+Set parameter TimeLimit to value 300
+Gurobi Optimizer version 10.0.1 build v10.0.1rc0 (linux64)
+
+CPU model: AMD Ryzen 9 5900HX with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 8 physical cores, 16 logical processors, using up to 16 threads
+
+Optimize a model with 3121 rows, 1066 columns and 9398 nonzeros
+Model fingerprint: 0xcc7d3ea1
+Variable types: 0 continuous, 1066 integer (1066 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 3e+02]
+Presolve removed 2925 rows and 703 columns
+Presolve time: 0.01s
+Presolved: 196 rows, 363 columns, 1428 nonzeros
+Variable types: 0 continuous, 363 integer (359 binary)
+
+Root relaxation: infeasible, 71 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 infeasible    0               - infeasible      -     -    0s
+
+Explored 1 nodes (71 simplex iterations) in 0.01 seconds (0.01 work units)
+Thread count was 16 (of 16 available processors)
+
+Solution count 0
+No other solutions better than -1e+100
+
+Model is infeasible
+Best objective -, best bound -, gap -
+Set parameter TimeLimit to value 300
+Gurobi Optimizer version 10.0.1 build v10.0.1rc0 (linux64)
+
+CPU model: AMD Ryzen 9 5900HX with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 8 physical cores, 16 logical processors, using up to 16 threads
+
+Optimize a model with 3194 rows, 1103 columns and 9655 nonzeros
+Model fingerprint: 0x869df193
+Variable types: 0 continuous, 1103 integer (1103 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 3e+02]
+Presolve removed 2980 rows and 735 columns
+Presolve time: 0.01s
+Presolved: 214 rows, 368 columns, 1458 nonzeros
+Variable types: 0 continuous, 368 integer (364 binary)
+
+Root relaxation: infeasible, 49 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 infeasible    0               - infeasible      -     -    0s
+
+Explored 1 nodes (49 simplex iterations) in 0.01 seconds (0.01 work units)
+Thread count was 16 (of 16 available processors)
+
+Solution count 0
+No other solutions better than -1e+100
+
+Model is infeasible
+Best objective -, best bound -, gap -
+Set parameter TimeLimit to value 300
+Gurobi Optimizer version 10.0.1 build v10.0.1rc0 (linux64)
+
+CPU model: AMD Ryzen 9 5900HX with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 8 physical cores, 16 logical processors, using up to 16 threads
+
+Optimize a model with 3327 rows, 1148 columns and 10056 nonzeros
+Model fingerprint: 0x679af070
+Variable types: 0 continuous, 1148 integer (1148 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 3e+02]
+Presolve removed 3095 rows and 761 columns
+Presolve time: 0.01s
+Presolved: 232 rows, 387 columns, 1562 nonzeros
+Variable types: 0 continuous, 387 integer (383 binary)
+
+Root relaxation: infeasible, 162 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 infeasible    0               - infeasible      -     -    0s
+
+Explored 1 nodes (162 simplex iterations) in 0.01 seconds (0.02 work units)
+Thread count was 16 (of 16 available processors)
+
+Solution count 0
+No other solutions better than -1e+100
+
+Model is infeasible
+Best objective -, best bound -, gap -
+Set parameter TimeLimit to value 300
+Gurobi Optimizer version 10.0.1 build v10.0.1rc0 (linux64)
+
+CPU model: AMD Ryzen 9 5900HX with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 8 physical cores, 16 logical processors, using up to 16 threads
+
+Optimize a model with 3464 rows, 1192 columns and 10462 nonzeros
+Model fingerprint: 0x479f7f71
+Variable types: 0 continuous, 1192 integer (1192 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 3e+02]
+Presolve removed 3212 rows and 769 columns
+Presolve time: 0.01s
+Presolved: 252 rows, 423 columns, 1757 nonzeros
+Variable types: 0 continuous, 423 integer (419 binary)
+
+Root relaxation: infeasible, 258 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 infeasible    0               - infeasible      -     -    0s
+
+Explored 1 nodes (258 simplex iterations) in 0.01 seconds (0.01 work units)
+Thread count was 16 (of 16 available processors)
+
+Solution count 0
+No other solutions better than -1e+100
+
+Model is infeasible
+Best objective -, best bound -, gap -
+Set parameter TimeLimit to value 300
+Gurobi Optimizer version 10.0.1 build v10.0.1rc0 (linux64)
+
+CPU model: AMD Ryzen 9 5900HX with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 8 physical cores, 16 logical processors, using up to 16 threads
+
+Optimize a model with 3543 rows, 1228 columns and 10728 nonzeros
+Model fingerprint: 0x775eb906
+Variable types: 0 continuous, 1228 integer (1228 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 3e+02]
+Presolve removed 3291 rows and 796 columns
+Presolve time: 0.01s
+Presolved: 252 rows, 432 columns, 1764 nonzeros
+Variable types: 0 continuous, 432 integer (427 binary)
+
+Root relaxation: infeasible, 278 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 infeasible    0               - infeasible      -     -    0s
+
+Explored 1 nodes (278 simplex iterations) in 0.01 seconds (0.02 work units)
+Thread count was 16 (of 16 available processors)
+
+Solution count 0
+No other solutions better than -1e+100
+
+Model is infeasible
+Best objective -, best bound -, gap -
+Set parameter TimeLimit to value 300
+Gurobi Optimizer version 10.0.1 build v10.0.1rc0 (linux64)
+
+CPU model: AMD Ryzen 9 5900HX with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 8 physical cores, 16 logical processors, using up to 16 threads
+
+Optimize a model with 3578 rows, 1266 columns and 10912 nonzeros
+Model fingerprint: 0x31a7b6d8
+Variable types: 0 continuous, 1266 integer (1266 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 3e+02]
+Presolve removed 3388 rows and 935 columns
+Presolve time: 0.01s
+Presolved: 190 rows, 331 columns, 1313 nonzeros
+Variable types: 0 continuous, 331 integer (327 binary)
+
+Root relaxation: infeasible, 112 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 infeasible    0               - infeasible      -     -    0s
+
+Explored 1 nodes (112 simplex iterations) in 0.01 seconds (0.01 work units)
+Thread count was 16 (of 16 available processors)
+
+Solution count 0
+No other solutions better than -1e+100
+
+Model is infeasible
+Best objective -, best bound -, gap -
+Set parameter TimeLimit to value 300
+Gurobi Optimizer version 10.0.1 build v10.0.1rc0 (linux64)
+
+CPU model: AMD Ryzen 9 5900HX with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 8 physical cores, 16 logical processors, using up to 16 threads
+
+Optimize a model with 3523 rows, 1296 columns and 10892 nonzeros
+Model fingerprint: 0x0b84adfc
+Variable types: 0 continuous, 1296 integer (1296 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 3e+02]
+Presolve removed 3327 rows and 957 columns
+Presolve time: 0.01s
+Presolved: 196 rows, 339 columns, 1349 nonzeros
+Variable types: 0 continuous, 339 integer (334 binary)
+
+Root relaxation: infeasible, 150 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 infeasible    0               - infeasible      -     -    0s
+
+Explored 1 nodes (150 simplex iterations) in 0.01 seconds (0.01 work units)
+Thread count was 16 (of 16 available processors)
+
+Solution count 0
+No other solutions better than -1e+100
+
+Model is infeasible
+Best objective -, best bound -, gap -
+Set parameter TimeLimit to value 300
+Gurobi Optimizer version 10.0.1 build v10.0.1rc0 (linux64)
+
+CPU model: AMD Ryzen 9 5900HX with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 8 physical cores, 16 logical processors, using up to 16 threads
+
+Optimize a model with 3499 rows, 1324 columns and 10928 nonzeros
+Model fingerprint: 0x7ba06b16
+Variable types: 0 continuous, 1324 integer (1324 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 3e+02]
+Presolve removed 3297 rows and 975 columns
+Presolve time: 0.01s
+Presolved: 202 rows, 349 columns, 1733 nonzeros
+Variable types: 0 continuous, 349 integer (343 binary)
+
+Root relaxation: infeasible, 234 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 infeasible    0               - infeasible      -     -    0s
+
+Explored 1 nodes (234 simplex iterations) in 0.01 seconds (0.02 work units)
+Thread count was 16 (of 16 available processors)
+
+Solution count 0
+No other solutions better than -1e+100
+
+Model is infeasible
+Best objective -, best bound -, gap -
+Set parameter TimeLimit to value 300
+Gurobi Optimizer version 10.0.1 build v10.0.1rc0 (linux64)
+
+CPU model: AMD Ryzen 9 5900HX with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 8 physical cores, 16 logical processors, using up to 16 threads
+
+Optimize a model with 3417 rows, 1350 columns and 10842 nonzeros
+Model fingerprint: 0xdaa3b4d1
+Variable types: 0 continuous, 1350 integer (1350 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 3e+02]
+Presolve removed 3216 rows and 994 columns
+Presolve time: 0.01s
+Presolved: 201 rows, 356 columns, 1739 nonzeros
+Variable types: 0 continuous, 356 integer (350 binary)
+
+Root relaxation: objective 2.880000e+02, 218 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     288.0000000  288.00000  0.00%     -    0s
+
+Explored 1 nodes (218 simplex iterations) in 0.01 seconds (0.01 work units)
+Thread count was 16 (of 16 available processors)
+
+Solution count 1: 288 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.880000000000e+02, best bound 2.880000000000e+02, gap 0.0000%
+Set parameter TimeLimit to value 300
+Gurobi Optimizer version 10.0.1 build v10.0.1rc0 (linux64)
+
+CPU model: AMD Ryzen 9 5900HX with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 8 physical cores, 16 logical processors, using up to 16 threads
+
+Optimize a model with 3339 rows, 1371 columns and 10749 nonzeros
+Model fingerprint: 0x84923a07
+Variable types: 0 continuous, 1371 integer (1371 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 3e+02]
+Presolve removed 3134 rows and 1010 columns
+Presolve time: 0.01s
+Presolved: 205 rows, 361 columns, 1764 nonzeros
+Variable types: 0 continuous, 361 integer (355 binary)
+
+Root relaxation: objective 2.900000e+02, 174 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     290.0000000  290.00000  0.00%     -    0s
+
+Explored 1 nodes (174 simplex iterations) in 0.01 seconds (0.01 work units)
+Thread count was 16 (of 16 available processors)
+
+Solution count 1: 290 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.900000000000e+02, best bound 2.900000000000e+02, gap 0.0000%
+
+
+***********Results***********
+Solution diversity (normalized) = 1.1255643993420432
+Time taken (normalized) = 420.34238669899787
+Solution diversity = 3193.045098334817
+Time taken = 624.9531974460042
