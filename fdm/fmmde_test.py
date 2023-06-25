@@ -98,31 +98,34 @@ if __name__ == '__main__':
     features_normalized = features_normalized.tolist()
 
     # Adjust the elements to work with fmmd ILP
-    color_number_map = {
-        'White_Male': 0,
-        'White_Female': 1,
-        'Asian-Pac-Islander_Male': 2,
-        'Asian-Pac-Islander_Female': 3,
-        'Amer-Indian-Eskimo_Male': 4,
-        'Amer-Indian-Eskimo_Female': 5,
-        'Other_Male': 6,
-        'Other_Female': 7,
-        'Black_Male': 8,
-        'Black_Female': 9,
-    }
+    color_number_map = [
+        'White_Male',
+        'White_Female',
+        'Asian-Pac-Islander_Male',
+        'Asian-Pac-Islander_Female',
+        'Amer-Indian-Eskimo_Male',
+        'Amer-Indian-Eskimo_Female',
+        'Other_Male',
+        'Other_Female',
+        'Black_Male',
+        'Black_Female'
+    ]
     elements_normalized = []
     elements = []
     for i in range(0, len(features_normalized)):
-        elem_normalized = utils.Elem(i, color_number_map[colors[i]], features_normalized[i])
-        elem = utils.Elem(i, color_number_map[colors[i]], features[i])
+        elem_normalized = utils.Elem(i, color_number_map.index(colors[i]), features_normalized[i])
+        elem = utils.Elem(i, color_number_map.index(colors[i]), features[i])
+        elements.append(elem)
+        elements_normalized.append(elem_normalized)
 
-
-    # +- c_offset for the values of kis
+    # Adjust the constraints per color to as a range
+    # +- offset for the values of kis
     c_offset = 5
-
-    # Each element is structured as: [index, color, [features]]
-
-    elements = []
+    constr = []
+    for color in color_number_map:
+        range_constr = [kis[color] - c_offset, kis[color] + c_offset]
+        constr.append(range_constr)
+    
 
 
     
