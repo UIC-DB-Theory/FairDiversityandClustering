@@ -1,20 +1,20 @@
 ***********Parameters***********
 Dataset: ../datasets/ads/adult.data
 Result set size(k): 290
-EPS(e): 0.001
+EPS(e): 0.05
 Colors/Grouped By: ['race', 'sex']
 Num colors(c): 10
-		constraint		color
-	1	15		White_Male
-	2	35		White_Female
-	3	55		Asian-Pac-Islander_Male
-	4	35		Asian-Pac-Islander_Female
-	5	15		Amer-Indian-Eskimo_Male
-	6	35		Amer-Indian-Eskimo_Female
-	7	15		Other_Male
-	8	35		Other_Female
-	9	15		Black_Male
-	10	35		Black_Female
+		constraint		available			color
+	1	15		19174			White_Male
+	2	35		8642			White_Female
+	3	55		693			Asian-Pac-Islander_Male
+	4	35		346			Asian-Pac-Islander_Female
+	5	15		192			Amer-Indian-Eskimo_Male
+	6	35		119			Amer-Indian-Eskimo_Female
+	7	15		162			Other_Male
+	8	35		109			Other_Female
+	9	15		1569			Black_Male
+	10	35		1555			Black_Female
 ********************************
 ***********Running fmmd_ILP on normalized dataset***********
 	Running Gonzalez's algorithm...
@@ -635,6 +635,7 @@ Solution count 1: 288
 
 Optimal solution found (tolerance 1.00e-04)
 Best objective 2.880000000000e+02, best bound 2.880000000000e+02, gap 0.0000%
+	New diversity(as solutiuon size 288 < 290) = 3179.645576026645
 Set parameter TimeLimit to value 300
 Gurobi Optimizer version 10.0.1 build v10.0.1rc0 (linux64)
 
@@ -672,6 +673,6 @@ Best objective 2.900000000000e+02, best bound 2.900000000000e+02, gap 0.0000%
 
 ***********Results***********
 Solution diversity (normalized) = 1.1255643993420432
-Time taken (normalized) = 420.34238669899787
+Time taken (normalized) = 427.8966213250096
 Solution diversity = 3193.045098334817
-Time taken = 624.9531974460042
+Time taken = 638.6571501970029

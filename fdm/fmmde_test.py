@@ -54,6 +54,12 @@ if __name__ == '__main__':
 
     dataset = "../datasets/ads/adult.data"
     colors, features = utils2.read_CSV(dataset, allFields, color_field, '_', feature_fields)
+    color_counts = {}
+    for i in colors:
+        if i not in color_counts:
+            color_counts[i] = 1
+        else:
+            color_counts[i] += 1
     assert (len(colors) == len(features))
 
     N = len(features)
@@ -61,13 +67,13 @@ if __name__ == '__main__':
     print(f'***********Parameters***********')
     print(f'Dataset: {dataset}')
     print(f'Result set size(k): {k}')
-    print(f'EPS(e): {epsilon}')
+    print(f'EPS(e): {EPS}')
     print(f'Colors/Grouped By: {color_field}')
     print(f'Num colors(c): {c}')
-    print(f'\t\tconstraint\t\tcolor')
+    print(f'\t\tconstraint\t\tavailable\t\t\tcolor')
     j = 1
     for i in kis:
-        print(f'\t{j}\t{kis[i]}\t\t{i}')
+        print(f'\t{j}\t{kis[i]}\t\t{color_counts[i]}\t\t\t{i}')
         j = j + 1
     print(f'********************************')
     

@@ -1035,6 +1035,7 @@ def scalable_fmmd_ILP2(V: ElemList, EPS: float, k: int, C: int, constr: List[Lis
                 break
             else:
                 div = div * (1.0 - EPS)
+                print(f'\tNew diversity(as solutiuon size {len(S)} < {k}) = {div}')
 
         except gp.GurobiError as error:
             print("Error code " + str(error))
