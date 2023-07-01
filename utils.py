@@ -6,6 +6,8 @@ import numpy.typing as npt
 
 import time
 
+import math
+
 
 def read_CSV(filename: t.AnyStr, field_names: t.Sequence, color_fields: t.List[t.AnyStr], color_sep: t.AnyStr, feature_fields: t.Set[t.AnyStr]) -> (
         npt.NDArray[t.AnyStr], npt.NDArray[np.float64]):
@@ -83,4 +85,47 @@ class Stopwatch:
         :return: a list of (split-name, delta-time) pairs for every segment created via "split" and creation
         """
         self.times.append(time.perf_counter())
-        return zip(self.names, self._calc_deltas())
+        return zip(self.names, self._calc_deltas()), self.times[-1] - self.times[0]
+
+
+def compute_maxmin_diversity(points : npt.NDArray[np.float64]) -> float:
+    """
+    Computes maxmin diversity of a set of points (the minimum distance between any two points)
+    under the Euclidean metric
+    :param points: the set of points to compute diversity for
+    :return: the minimum distance between points in points
+    """
+    from scipy.spatial import KDTree
+
+    # get nearest point to each element
+    tree = KDTree(points)
+    distances, _ = tree.query(points, k=2)
+    nonzero_distances = distances[:, 1]
+
+    return np.min(nonzero_distances)
+
+
+def buildKisMap(colors, k, a):
+    """
+    builds a map to select at least (1-a) * k total points, spaced out in all colors
+    The amount per color is calculated via the formula:
+        max(1, (1-a) * k n_c / n)
+
+    :param colors: an array of every color of the points in the dataset
+    :param k: total # to select
+    :param a: minimum percentage of k to allow
+    :return: a map of unique colors to counts
+    """
+    N = len(colors)
+
+    color_names, color_counts = np.unique(colors, return_counts=True)
+
+    # we build up a dictionary of kis based on the names and counts
+    # groups are built by the formula  max(1, (1-a) * k n_c / n)
+    def calcKi(a, k, c):
+        raw = max(1, ((1.0 - a) * k * c) / N)
+        return math.ceil(raw)
+
+    kis = {n: calcKi(a, k, c) for n, c in zip(color_names, color_counts)}
+
+    return kis

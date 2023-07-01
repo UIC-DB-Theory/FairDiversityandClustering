@@ -94,7 +94,7 @@ def solve_lp(dataStruct, kis, m: gp.Model, gamma: np.float64, variables: npt.NDA
 
 
 
-if __name__ == '__main__':
+def bin_lpsolve(k):
     # File fields
     allFields = [
         "age",
@@ -119,22 +119,11 @@ if __name__ == '__main__':
     feature_fields = {'age', 'capital-gain', 'capital-loss', 'hours-per-week', 'fnlwgt', 'education-num'}
 
     # variables for running LP bin-search
-    # keys are appended using underscores
-    kis = {
-        'White_Male': 15,
-        'White_Female': 35,
-        'Asian-Pac-Islander_Male': 55,
-        'Asian-Pac-Islander_Female': 35,
-        'Amer-Indian-Eskimo_Male': 15,
-        'Amer-Indian-Eskimo_Female': 35,
-        'Other_Male': 15,
-        'Other_Female': 35,
-        'Black_Male': 15,
-        'Black_Female': 35,
-    }
-    k = sum(kis.values())
+
     # binary search params
-    epsilon = np.float64("0.001")
+
+    # the minimum quantization of our search space
+    epsilon = np.float64("0.01")
 
     # coreset params
     # Set the size of the coreset
@@ -149,21 +138,40 @@ if __name__ == '__main__':
     colors, features = utils.read_CSV("./datasets/ads/adult.data", allFields, color_field, '_', feature_fields)
     assert (len(colors) == len(features))
 
-    # "normalize" features
-    # Should happen before coreset construction
-    features = features / features.max(axis=0)
+    # all colors made by combining values in color_fields
+    color_names = np.unique(colors)
 
     timer.split("Coreset")
 
+    # "normalize" features
+    # Should happen before coreset construction
+    means = features.mean(axis=0)
+    devs  = features.std(axis=0)
+    features = (features - means) / devs
+
+    timer.split("Normalization")
+
+
     print("[LPSOLVE] Number of points (original): ", len(features))
     d = len(feature_fields)
-    m = len(kis.keys())
+    m = len(color_names)
     features, colors = CORESET.Coreset_FMM(features, colors, k, m, d, coreset_size).compute()
     print("[LPSOLVE] Number of points (coreset): ", len(features))
 
     N = len(features)
 
-    timer.split("Tree Creation (All Features)")
+    timer.split("Building Kis")
+
+    kis = utils.buildKisMap(colors, k, 0.2)
+
+    # keys are appended using underscores
+    # TODO: group formulas => max(1, (1-a) * k n_c / n)
+    # NOTE: DO THIS AFTER CORESET
+    # a = 0.2
+    # n = number of input points in color c
+    # (k * n_c / n) <- is all we need!
+
+    timer.split("Tree Creation")
 
     # create data structure
     data_struct = algo.create(features)
@@ -172,7 +180,7 @@ if __name__ == '__main__':
 
     # first we need to find the high value
     print('Solving for high bound')
-    high = 1  # I'm assuming it's a BIT larger than 0.0001
+    high = 50  # I'm assuming it's a BIT larger than 0.01
     gamma = high * epsilon
     m = gp.Model(f"feasibility model")  # workaround for OOM error?
     m.Params.method = method
@@ -253,8 +261,9 @@ if __name__ == '__main__':
     timer.split("Randomized Rounding")
 
     # do we want all points included or just the ones in S?
-    S = rand_round(gamma, X, features, colors, kis)
+    S = rand_round(gamma / 2, X, features, colors, kis)
 
+    """
     print(f'Final Solution (len = {len(S)}):')
     print(S)
 
@@ -262,6 +271,7 @@ if __name__ == '__main__':
     res = list(zip(features[S], colors[S]))
     for r in res:
         print(r[0], r[1])
+    """
 
     print('Solution Stats:')
     for color in kis.keys():
@@ -271,17 +281,29 @@ if __name__ == '__main__':
     tree = algo.create(features[S])
     for i in S:
         p = features[i]
-        dists, indecies = algo.get_ind(tree, 2, p)
+        dists, indices = algo.get_ind(tree, 2, p)
 
         if dists[0][1] < gamma / 2.0:
             print('ERROR: invalid distance between points')
             print(dists)
             print(features[i])
-            print(features[S][indecies[0]][1])
+            print(features[S][indices[0]][1])
             print()
 
     # time!
-    res = timer.stop()
-    print('Timings! (seconds)')
+    res, total = timer.stop()
+    print(f'Timings! ({total} total seconds)')
     for name, delta in res:
         print(f'{name + ":":>40} {delta}')
+
+    # compute diversity value of solution
+    solution = features[S]
+
+    diversity = utils.compute_maxmin_diversity(solution)
+    print(f'Solved diversity is {diversity}')
+
+    return diversity, total
+
+if __name__ == '__main__':
+    # run some tests!
+    for i in range(10, 101):

@@ -14,6 +14,11 @@ import coreset as CORESET
 import utils
 from rounding import rand_round
 
+import gurobipy as gp
+from gurobipy import GRB
+
+from lpsolve import solve_lp
+
 # TODO: early stop on X vector in slack
     # try pre-processing ball query distances
 
@@ -88,6 +93,7 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
         h = h * (np.ones_like(M) - ((scaled_eps / 4.0) * M))
         h /= np.sum(h)
 
+        """
         # print X for testing
         file = f"test_{kis['red']}_{kis['blue']}_{gamma}_{epsilon}_output.txt"
         if t == 0:
@@ -100,6 +106,7 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
                 #print(f'{W}', file=f, end="\n")
                 print((X / (t+1)).flatten(), file=f, end="\t")
                 print(f'\th distance: {np.linalg.norm(h - oldH)}', file=f)
+        """
 
         # If things aren't changing, stop early
         # TODO: figure out a better way to stop early
@@ -112,6 +119,7 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
         if t % 50 == 0:
             X_weights = KDTree2.get_weight_ranges(struct, X / (1 + t), gamma / 2.0)
             if not np.any(X_weights > 1 + epsilon):
+                print(f'Breaking early due to feasible solution on iteration {t+1}!')
                 break
 
 
@@ -123,6 +131,8 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
 
 
 if __name__ == '__main__':
+    """
+    # Testing field
     # File fields
     allFields = [
         "x",
@@ -141,43 +151,116 @@ if __name__ == '__main__':
         'red': 1,
     }
     k = sum(kis.values())
+    """
+
+    # File fields
+    allFields = [
+        "age",
+        "workclass",
+        "fnlwgt",  # what on earth is this one?
+        "education",
+        "education-num",
+        "marital-status",
+        "occupation",
+        "relationship",
+        "race",
+        "sex",
+        "capital-gain",
+        "capital-loss",
+        "hours-per-week",
+        "native-country",
+        "yearly-income",
+    ]
+
+    # fields we care about for parsing
+    color_field = ['race', 'sex']
+    feature_fields = {'age', 'capital-gain', 'capital-loss', 'hours-per-week', 'fnlwgt', 'education-num'}
+
+    #TODO: group formulas => max(1, (1-a) * k n_c / n)
+    # a = 0.2
+    # n = number of input points in color c
+    # (k * n_c / n) <- is all we need!
+
+    # variables for running LP bin-search
+    # keys are appended using underscores
+    kis = {
+        'White_Male': 15,
+        'White_Female': 35,
+        'Asian-Pac-Islander_Male': 55,
+        'Asian-Pac-Islander_Female': 35,
+        'Amer-Indian-Eskimo_Male': 15,
+        'Amer-Indian-Eskimo_Female': 35,
+        'Other_Male': 15,
+        'Other_Female': 35,
+        'Black_Male': 15,
+        'Black_Female': 35,
+    }
+    k = sum(kis.values())
+    print(k)
+
     # binary search params
-    epsilon = np.float64("0.001")
+    #epsilon = np.float64("0.001")
 
     # coreset params
     # Set the size of the coreset
-    coreset_size = 30000
+    coreset_size = 10000
 
     # start the timer
     timer = utils.Stopwatch("Parse Data")
 
-    colors, features = utils.read_CSV("./datasets/mwutest/example.csv", allFields, color_field, '_', feature_fields)
+    colors, features = utils.read_CSV("./datasets/ads/adult.data", allFields, color_field, '_', feature_fields)
     assert (len(colors) == len(features))
 
-    """
     # "normalize" features
     # Should happen before coreset construction
-    # TODO: remove normalization
-    features = features / features.max(axis=0)
+    means = features.mean(axis=0)
+    devs  = features.std(axis=0)
+    features = (features - means) / devs
 
     timer.split("Coreset")
 
     print("Number of points (original): ", len(features))
     d = len(feature_fields)
     m = len(kis.keys())
+    upper_bound = CORESET.Coreset_FMM(features, colors, k, m, d, coreset_size).compute_gamma_upper_bound()
+    print(upper_bound)
     features, colors = CORESET.Coreset_FMM(features, colors, k, m, d, coreset_size).compute()
     print("Number of points (coreset): ", len(features))
-    
-    """
+
 
     N = len(features)
 
     timer.split("One MWU round")
 
     # TODO: adult, 2 colors (sex) and all colors, K ~ 100 in total, gamma ~ 3 ([2-4]), epsilon try things
-    gamma = 5
+    gamma = 1.31
 
-    X = mult_weight_upd(gamma, N, k, features, colors, kis, .1)
+    # epsilon (last parameter) should be around .1-.5
+    X = mult_weight_upd(gamma, N, k, features, colors, kis, .999)
+    res = None
+    if X is not None:
+        timer.split("Randomized Rounding")
+        print(X.shape)
+
+        # do we want all points included or just the ones in S?
+        S = rand_round(gamma / 2.0, X.flatten(), features, colors, kis)
+
+        res, total = timer.stop()
+
+        colors, chosen_colors = np.unique(colors[S], return_counts=True)
+
+        for color, count in zip(colors, chosen_colors):
+            print(f'Color: {color}    count: {count}')
+
+        # calculate diversity
+        solution = features[S]
+        diversity = utils.compute_maxmin_diversity(solution)
+        print(f'Solved diversity is {diversity}')
+
+    else:
+        res, total = timer.stop()
+        print('MWU: N/A')
+
     """
     to check X is correct
         sum [0-3] <=  1 + e
@@ -185,15 +268,32 @@ if __name__ == '__main__':
         sum [8-11] <= 1 + e
     """
 
-    res = timer.stop()
     print('Timings! (seconds)')
     for name, delta in res:
         print(f'{name + ":":>40} {delta}')
 
-    if X is None:
-        print('Infeasible!')
-    else:
-        print(X)
+    """
+        timer.split("LP Solve of same problem")
 
-        for i in range(N):
-            print(f'{features[i]}\t{X[i]}')
+        # LP solve approach as well
+        m = gp.Model(f"feasibility model")  # workaround for OOM error?
+        m.Params.method = 2
+        m.Params.SolutionLimit = 1
+
+        variables = m.addMVar(N, name="x", vtype=GRB.CONTINUOUS)
+        # create data structure
+        data_struct = KDTree2.create(features)
+
+        feasible = solve_lp(data_struct, kis, m, gamma, variables, colors, features)
+
+        if feasible:
+            vars = m.getVars()
+            X = np.array(m.getAttr("X", vars))
+            names = np.array(m.getAttr("VarName", vars))
+            print(f'LP: {X}')
+        else:
+            print("LP: N/A")
+    """
+
+
+

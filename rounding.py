@@ -1,14 +1,14 @@
 import numpy as np
 import KDTree2 as algo
 
-def rand_round(gamma, X, features, colors, kis, theory_accurate=True):
+def rand_round(min_dist, X, features, colors, kis, theory_accurate=True):
     """
     Randomly rounds a real solution to an integer one
     :param X: the variables of the program
     :param features: feature set
     :param colors: colors of features
     :param kis: color-count mapping
-    :return: the indecies of points in the integer solution
+    :return: the indices of points in the integer solution
     """
     # we only want to pick from points we care about
     # (and we need to go backwards later)
@@ -50,7 +50,7 @@ def rand_round(gamma, X, features, colors, kis, theory_accurate=True):
 
         viewed_points = np.append(viewed_points, [q], axis=0)
 
-        if dist > gamma / 2.0 and b[color] < kis[color]:
+        if dist > min_dist and b[color] < kis[color]:
             b[color] += 1
             S = np.append(S, [index])
         else:
