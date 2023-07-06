@@ -18,6 +18,7 @@ import coreset as CORESET
 import utils
 from rounding import rand_round
 
+
 def solve_lp(dataStruct, kis, m: gp.Model, gamma: np.float64, variables: npt.NDArray[gp.MVar], colors: npt.NDArray[t.AnyStr],
              features: npt.NDArray[np.float64]) -> bool:
     """
@@ -44,6 +45,14 @@ def solve_lp(dataStruct, kis, m: gp.Model, gamma: np.float64, variables: npt.NDA
 
     N = len(features)
 
+    """
+    THIS DOES NOT WORK
+    # if we are going to a big dataset, use memory reducing settings
+    if N >= 10000:
+        m.Params.PreSparsify = 2
+        m.Params.Method = 1
+        """
+
     sys.stdout.flush()
     print(f'testing feasability of gamma={gamma}', flush=True)
     sys.stdout.flush()
@@ -53,6 +62,8 @@ def solve_lp(dataStruct, kis, m: gp.Model, gamma: np.float64, variables: npt.NDA
     exprs.default_factory = lambda: gp.LinExpr()  # this shouldn't be necessary but it is!
     for i, color in tqdm(enumerate(colors), desc="Building color constraints", unit=" elems", total=N):
         exprs[color.item()].addTerms(1.0, variables[i].item())
+
+    # reset the default factory to make this into a normal dictionary (error if we use the wrong key)
     exprs.default_factory = None
 
     # we need at least ki of each color so build the final constraints here
@@ -76,12 +87,10 @@ def solve_lp(dataStruct, kis, m: gp.Model, gamma: np.float64, variables: npt.NDA
         m.addConstr(in_rad <= 1)
 
     m.update()
-
     m.optimize()
 
     # if we're feasible, return true otherwise return false
     # model is passed back automatically
-    # TODO: ensure else case is ONLY if model is feasible (error otherwise)
     sys.stdout.flush()
     if m.status == GRB.INFEASIBLE or m.status == GRB.INF_OR_UNBD:
         print(f'Model for {gamma} is infeasible')
@@ -287,8 +296,8 @@ def epsilon_falloff(features, colors, k, epsilon, a):
 
     d = len(feature_fields)
     m = len(color_names)
-    corset = CORESET.Coreset_FMM(features, colors, k, m, d, coreset_size)
-    features, colors = corset.compute()
+    coreset = CORESET.Coreset_FMM(features, colors, k, m, d, coreset_size)
+    features, colors = coreset.compute()
 
     N = len(features)
 
@@ -311,9 +320,9 @@ def epsilon_falloff(features, colors, k, epsilon, a):
     m.Params.LogToConsole = 0
 
 
-    gamma = corset.compute_gamma_upper_bound()
+    gamma = coreset.compute_gamma_upper_bound()
 
-    variables = m.addMVar(N, name="x", vtype=GRB.CONTINUOUS)
+    variables = m.addMVar(N, name="X", vtype=GRB.CONTINUOUS)
 
     # fall off until solving
     while not solve_lp(data_struct, kis, m, np.float_(gamma), variables, colors, features):
@@ -323,13 +332,15 @@ def epsilon_falloff(features, colors, k, epsilon, a):
     # get results of the LP
     vars = m.getVars()
     X = np.array(m.getAttr("X", vars))
-    names = np.array(m.getAttr("VarName", vars))
+    #names = np.array(m.getAttr("VarName", vars))
     assert(len(X) == N)
 
     # do we want all points included or just the ones in S?
-    S = rand_round(gamma / 2, X, features, colors, kis)
+    S = rand_round(gamma / 2.0, X, features, colors, kis)
 
-    res, total = timer.stop()
+    selected_count = len(S)
+
+    _, total_time = timer.stop()
 
     # compute diversity value of solution
     solution = features[S]
@@ -337,7 +348,7 @@ def epsilon_falloff(features, colors, k, epsilon, a):
     diversity = utils.compute_maxmin_diversity(solution)
     print(f'Solved diversity is {diversity}')
 
-    return diversity, total
+    return selected_count, diversity, total_time
 
 
 if __name__ == '__main__':
@@ -367,14 +378,9 @@ if __name__ == '__main__':
 
     # variables for running LP bin-search
 
-    # binary search params
-
     # coreset params
     # Set the size of the coreset
-    coreset_size = 10000
-
-    # other things for gurobi
-    method = 2  # model method of solving
+    coreset_size = 15000
 
     colors, features = utils.read_CSV("./datasets/ads/adult.data", allFields, color_field, '_', feature_fields)
     assert (len(colors) == len(features))
@@ -383,12 +389,12 @@ if __name__ == '__main__':
     results = []
 
     # first for the proper 100
-    for k in range(10, 101, 10):
+    for k in range(10, 201, 5):
         #div, time = bin_lpsolve(features, colors, k, 0.01, 0)
-        div, time = epsilon_falloff(features, colors, k, 0.05, 0)
-        results.append((k, div, time))
+        selected, div, time = epsilon_falloff(features, colors, k, 0.05, 0)
+        results.append((k, selected, div, time))
 
     print('\n\nFINAL RESULTS:')
-    print('k,\tdiversity,\ttime,')
-    for k, div, time in results:
-        print(f'{k},\t{div},\t{time},')
+    print('k,\tselected,\tdiversity,\ttime,')
+    for k, selected, div, time in results:
+        print(f'{k},\t{selected},{div},\t{time},')

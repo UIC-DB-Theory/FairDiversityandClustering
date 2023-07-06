@@ -25,6 +25,15 @@ def get_ind_range(structure, r: np.float64, point) -> npt.NDArray[int]:
 
     return np.array(structure.query_ball_point(point_reshaped, r).flatten()[0])
 
+def get_self_range(structure, r: np.float64) -> npt.NDArray[int]:
+    """
+    Queries the KDTree for all neighbors of itself within radius gamma
+    :param structure: the tree to search
+    :param r: radius for points to be close
+    :return: list of lists aligning points in structure to their neighbors
+    """
+    return structure.query_ball_tree(structure, r)
+
 def get_ind(structure, k : int, point) -> npt.NDArray[int]:
     dim = point.shape[0]  # this is a tuple (reasons!)
     point_reshaped = np.reshape(point, (1, dim))

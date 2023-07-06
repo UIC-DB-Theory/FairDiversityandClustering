@@ -19,8 +19,6 @@ from gurobipy import GRB
 
 from lpsolve import solve_lp
 
-# TODO: early stop on X vector in slack
-    # try pre-processing ball query distances
 
 def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
     """
@@ -130,6 +128,70 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
     return X
 
 
+def epsilon_falloff(features, colors, coreset_size, k, a, mwu_epsilon, falloff_epsilon):
+    """
+    starts at a high bound (given by the corset estimate) and repeatedly falls off by 1-epsilon
+    :param features: the data set
+    :param colors:   color labels for the data set
+    :param coreset_size: the number of points to use in the corset
+    :param k:        total K to pick from the graph
+    :param a:        fraction of K acceptable to lose
+    :param mwu_epsilon: epsilon for the MWU method (static error)
+    :param falloff_epsilon: epsilon for the falloff system (fraction to reduce by each cycle)
+    :return:
+    """
+
+    # get the colors
+    color_names = np.unique(colors)
+
+    timer = utils.Stopwatch("Normalization")
+
+    # "normalize" features
+    # Should happen before coreset construction
+    means = features.mean(axis=0)
+    devs = features.std(axis=0)
+    features = (features - means) / devs
+
+    timer.split("Coreset")
+
+    d = len(feature_fields)
+    m = len(color_names)
+    coreset = CORESET.Coreset_FMM(features, colors, k, m, d, coreset_size)
+    features, colors = coreset.compute()
+
+    N = len(features)
+
+    timer.split("Building Kis")
+
+    kis = utils.buildKisMap(colors, k, a)
+
+    timer.split("Falloff")
+
+    gamma = coreset.compute_gamma_upper_bound()
+
+    X = mult_weight_upd(gamma, N, k, features, colors, kis, mwu_epsilon)
+    while X is None:
+        gamma = gamma * (1 - falloff_epsilon)
+        X = mult_weight_upd(gamma, N, k, features, colors, kis, mwu_epsilon)
+
+    timer.split("Randomized Rounding")
+
+    # we need to flatten X since it expects an array rather than a 1D vector
+    S = rand_round(gamma / 2.0, X.flatten(), features, colors, kis)
+
+    _, total_time = timer.stop()
+
+    # build up stats to return
+    selected_count = len(S)
+    solution = features[S]
+
+    diversity = utils.compute_maxmin_diversity(solution)
+    print(f'Solved!')
+    print(f'Diversity: {diversity}')
+    print(f'Time (S):  {total_time}')
+
+    return selected_count, diversity, total_time
+
 if __name__ == '__main__':
     """
     # Testing field
@@ -176,124 +238,25 @@ if __name__ == '__main__':
     color_field = ['race', 'sex']
     feature_fields = {'age', 'capital-gain', 'capital-loss', 'hours-per-week', 'fnlwgt', 'education-num'}
 
-    #TODO: group formulas => max(1, (1-a) * k n_c / n)
-    # a = 0.2
-    # n = number of input points in color c
-    # (k * n_c / n) <- is all we need!
-
-    # variables for running LP bin-search
-    # keys are appended using underscores
-    kis = {
-        'White_Male': 15,
-        'White_Female': 35,
-        'Asian-Pac-Islander_Male': 55,
-        'Asian-Pac-Islander_Female': 35,
-        'Amer-Indian-Eskimo_Male': 15,
-        'Amer-Indian-Eskimo_Female': 35,
-        'Other_Male': 15,
-        'Other_Female': 35,
-        'Black_Male': 15,
-        'Black_Female': 35,
-    }
-    k = sum(kis.values())
-    print(k)
-
-    # binary search params
-    #epsilon = np.float64("0.001")
-
-    # coreset params
-    # Set the size of the coreset
-    coreset_size = 10000
-
-    # start the timer
-    timer = utils.Stopwatch("Parse Data")
-
     colors, features = utils.read_CSV("./datasets/ads/adult.data", allFields, color_field, '_', feature_fields)
     assert (len(colors) == len(features))
 
-    # "normalize" features
-    # Should happen before coreset construction
-    means = features.mean(axis=0)
-    devs  = features.std(axis=0)
-    features = (features - means) / devs
+    # testing!
+    results = []
 
-    timer.split("Coreset")
+    for k in range(10, 201, 5):
+        selected, div, time = epsilon_falloff(
+            features=features,
+            colors=colors,
+            coreset_size=2500,
+            k=k,
+            a=0,
+            mwu_epsilon=0.75,
+            falloff_epsilon=0.1,
+        )
+        results.append((k, selected, div, time))
 
-    print("Number of points (original): ", len(features))
-    d = len(feature_fields)
-    m = len(kis.keys())
-    upper_bound = CORESET.Coreset_FMM(features, colors, k, m, d, coreset_size).compute_gamma_upper_bound()
-    print(upper_bound)
-    features, colors = CORESET.Coreset_FMM(features, colors, k, m, d, coreset_size).compute()
-    print("Number of points (coreset): ", len(features))
-
-
-    N = len(features)
-
-    timer.split("One MWU round")
-
-    # TODO: adult, 2 colors (sex) and all colors, K ~ 100 in total, gamma ~ 3 ([2-4]), epsilon try things
-    gamma = 1.31
-
-    # epsilon (last parameter) should be around .1-.5
-    X = mult_weight_upd(gamma, N, k, features, colors, kis, .999)
-    res = None
-    if X is not None:
-        timer.split("Randomized Rounding")
-        print(X.shape)
-
-        # do we want all points included or just the ones in S?
-        S = rand_round(gamma / 2.0, X.flatten(), features, colors, kis)
-
-        res, total = timer.stop()
-
-        colors, chosen_colors = np.unique(colors[S], return_counts=True)
-
-        for color, count in zip(colors, chosen_colors):
-            print(f'Color: {color}    count: {count}')
-
-        # calculate diversity
-        solution = features[S]
-        diversity = utils.compute_maxmin_diversity(solution)
-        print(f'Solved diversity is {diversity}')
-
-    else:
-        res, total = timer.stop()
-        print('MWU: N/A')
-
-    """
-    to check X is correct
-        sum [0-3] <=  1 + e
-        sum [5-8] <=  1 + e
-        sum [8-11] <= 1 + e
-    """
-
-    print('Timings! (seconds)')
-    for name, delta in res:
-        print(f'{name + ":":>40} {delta}')
-
-    """
-        timer.split("LP Solve of same problem")
-
-        # LP solve approach as well
-        m = gp.Model(f"feasibility model")  # workaround for OOM error?
-        m.Params.method = 2
-        m.Params.SolutionLimit = 1
-
-        variables = m.addMVar(N, name="x", vtype=GRB.CONTINUOUS)
-        # create data structure
-        data_struct = KDTree2.create(features)
-
-        feasible = solve_lp(data_struct, kis, m, gamma, variables, colors, features)
-
-        if feasible:
-            vars = m.getVars()
-            X = np.array(m.getAttr("X", vars))
-            names = np.array(m.getAttr("VarName", vars))
-            print(f'LP: {X}')
-        else:
-            print("LP: N/A")
-    """
-
-
-
+    print('\n\nFINAL RESULTS:')
+    print('k,\tselected,\tdiversity,\ttime,')
+    for k, selected, div, time in results:
+        print(f'{k},\t{selected},{div},\t{time},')
