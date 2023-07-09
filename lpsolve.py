@@ -270,7 +270,7 @@ def bin_lpsolve(features, colors, k, epsilon, a):
     return diversity, total
 
 
-def epsilon_falloff(features, colors, k, epsilon, a):
+def epsilon_falloff(features, colors, coreset_size, k, a, epsilon):
     """
     starts at a high bound from the corest and repeatedly falls off by 1-epsilon
     :param features:
@@ -338,15 +338,16 @@ def epsilon_falloff(features, colors, k, epsilon, a):
     # do we want all points included or just the ones in S?
     S = rand_round(gamma / 2.0, X, features, colors, kis)
 
-    selected_count = len(S)
-
     _, total_time = timer.stop()
+
+    selected_count = len(S)
 
     # compute diversity value of solution
     solution = features[S]
-
     diversity = utils.compute_maxmin_diversity(solution)
-    print(f'Solved diversity is {diversity}')
+    print(f'{k} solved!')
+    print(f'Diversity: {diversity}')
+    print(f'Time (S):  {total_time}')
 
     return selected_count, diversity, total_time
 
@@ -380,7 +381,6 @@ if __name__ == '__main__':
 
     # coreset params
     # Set the size of the coreset
-    coreset_size = 15000
 
     colors, features = utils.read_CSV("./datasets/ads/adult.data", allFields, color_field, '_', feature_fields)
     assert (len(colors) == len(features))
@@ -391,7 +391,14 @@ if __name__ == '__main__':
     # first for the proper 100
     for k in range(10, 201, 5):
         #div, time = bin_lpsolve(features, colors, k, 0.01, 0)
-        selected, div, time = epsilon_falloff(features, colors, k, 0.05, 0)
+        selected, div, time = epsilon_falloff(
+            features=features,
+            colors=colors,
+            coreset_size=10000,
+            k=k,
+            a=0,
+            epsilon=.1,
+        )
         results.append((k, selected, div, time))
 
     print('\n\nFINAL RESULTS:')

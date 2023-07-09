@@ -186,7 +186,7 @@ def epsilon_falloff(features, colors, coreset_size, k, a, mwu_epsilon, falloff_e
     solution = features[S]
 
     diversity = utils.compute_maxmin_diversity(solution)
-    print(f'Solved!')
+    print(f'{k} solved!')
     print(f'Diversity: {diversity}')
     print(f'Time (S):  {total_time}')
 
@@ -248,7 +248,7 @@ if __name__ == '__main__':
         selected, div, time = epsilon_falloff(
             features=features,
             colors=colors,
-            coreset_size=2500,
+            coreset_size=10000,
             k=k,
             a=0,
             mwu_epsilon=0.75,
@@ -259,4 +259,4 @@ if __name__ == '__main__':
     print('\n\nFINAL RESULTS:')
     print('k,\tselected,\tdiversity,\ttime,')
     for k, selected, div, time in results:
-        print(f'{k},\t{selected},{div},\t{time},')
+        print(f'{k},\t{selected},\t{div},\t{time},')
