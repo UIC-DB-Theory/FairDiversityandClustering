@@ -28,11 +28,12 @@ class WeightedTree:
         response_str = response_str[:-1]  # strip the newline
         return json.loads(response_str)
 
-    def construct_tree(self, points):
+    def construct_tree(self, points:np.ndarray):
         message_json = {
             "type": "build-datastructure",
             "dimension": self.dim,
-            "points": points.tolist()}
+            "points": points.flatten().tolist()
+        }
 
         message_str = json.dumps(message_json)
         response = self.send_message(message_str)
@@ -43,7 +44,7 @@ class WeightedTree:
         message_json = {
             "type": "run-query",
             "radius": radius,
-            "weights": weights.tolist()}
+            "weights": weights.flatten().tolist()}
 
         message_str = json.dumps(message_json)
 
@@ -60,35 +61,3 @@ class WeightedTree:
 
         self.proc.stdin.write(bytes(json_message + "\n", 'utf-8'))
         self.proc.stdin.flush()
-
-
-# Example usage.
-if __name__ == "__main__":
-
-    # Initialize the tree and the subprocess.
-    tree = WeightedTree(3)
-
-    # Construct the tree on the data.
-    tree_construction_response = tree.construct_tree(np.array([0.0, 0.0, 0.0,
-                                  1.0, 2.0, 3.0,
-                                  1.0, 2.0, 3.0,
-                                  1.0, 2.0, 3.0,
-                                  1.0, 2.0, 3.0,
-                                  1.0, 2.0, 3.0,
-                                  1.0, 2.0, 3.0,
-                                  1.0, 2.0, 3.0]))
-
-    print(f"Constructed a tree: {tree_construction_response}")
-
-    # Run a query on the tree.
-
-    result1 = tree.run_query(1, np.array([1, 1, 1]))
-    print(f"Query 1 Result: {result1}")
-
-    # Run a query.
-
-    result2 = tree.run_query(.5, np.array([1, 5, 10]))
-    print(f"Query 2 Result: {result2}")
-
-    # Delete the tree. Ensures the process exits correctly
-    tree.delete_tree()
