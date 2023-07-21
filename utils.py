@@ -129,3 +129,28 @@ def buildKisMap(colors, k, a):
     kis = {n: calcKi(a, k, c) for n, c in zip(color_names, color_counts)}
 
     return kis
+
+def check_returned_kis(colors, kis, S):
+    """
+    Computes the differences between each color value and chosen colors
+    :param colors: the colors in the dataset
+    :param kis: requested count per color
+    :param S: computed solution (indicies into features and colors arrays)
+    :return: a map of color to delta between kis and S
+    """
+    sol_colors = colors[S]
+
+    color_vals, color_counts = np.unique(sol_colors, return_counts=True)
+
+    # if we didn't return a color, our delta is the inverse of the requested count
+    deltas = {c: -1 * count for c, count in kis.items()}
+
+    # otherwise, we can compute the difference
+    for color, computed in zip(color_vals, color_counts):
+        actual = kis[color]
+        delta = computed - actual
+        deltas[color] = delta
+
+    # we better have every color here
+    assert (len(deltas.keys()) == len(kis.keys()))
+    return deltas

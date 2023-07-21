@@ -53,14 +53,11 @@ def solve_lp(dataStruct, kis, m: gp.Model, gamma: np.float64, variables: npt.NDA
         m.Params.Method = 1
         """
 
-    sys.stdout.flush()
-    print(f'testing feasability of gamma={gamma}', flush=True)
-    sys.stdout.flush()
     # we could probably build up the color constraints once and repeatedly add them
     # this builds up the lhs of the constraints in exprs
     exprs = defaultdict()
     exprs.default_factory = lambda: gp.LinExpr()  # this shouldn't be necessary but it is!
-    for i, color in tqdm(enumerate(colors), desc="Building color constraints", unit=" elems", total=N):
+    for i, color in tqdm(enumerate(colors), desc="Building color constraints", unit=" elems", total=N, disable=True):
         exprs[color.item()].addTerms(1.0, variables[i].item())
 
     # reset the default factory to make this into a normal dictionary (error if we use the wrong key)
@@ -74,7 +71,7 @@ def solve_lp(dataStruct, kis, m: gp.Model, gamma: np.float64, variables: npt.NDA
     # This is slow
 
     # build a constraint for every point
-    for v, p in tqdm(zip(variables, features), desc="Building ball constraints", unit=" elems", total=N):
+    for v, p in tqdm(zip(variables, features), desc="Building ball constraints", unit=" elems", total=N, disable=True):
         indices = algo.get_ind_range(dataStruct, np.float_(gamma / 2.0), p)
 
         # add constraint that all the variables need to add up
@@ -91,12 +88,11 @@ def solve_lp(dataStruct, kis, m: gp.Model, gamma: np.float64, variables: npt.NDA
 
     # if we're feasible, return true otherwise return false
     # model is passed back automatically
-    sys.stdout.flush()
     if m.status == GRB.INFEASIBLE or m.status == GRB.INF_OR_UNBD:
-        print(f'Model for {gamma} is infeasible')
+        #print(f'Model for {gamma} is infeasible')
         return False
     elif m.status == GRB.OPTIMAL or m.status == GRB.SOLUTION_LIMIT:
-        print(f'Model for {gamma} is feasible')
+        #print(f'Model for {gamma} is feasible')
         return True
     else:
         print(f'\n\n\n***ERROR: Model returned status code {m.status}***')
@@ -160,8 +156,6 @@ def bin_lpsolve(features, colors, k, epsilon, a):
 
         feasible = solve_lp(data_struct, kis, m, np.float_(gamma), variables, colors, features)
 
-    print(f'High bound is {high}; binary search')
-
     # binary search over multiples of epsilon
     timer.split("Binary Search")
     low = 1
@@ -170,9 +164,6 @@ def bin_lpsolve(features, colors, k, epsilon, a):
     multiple = math.ceil((low + high) / 2.0)
     while low < high:
         # solve model once for current gamma
-        print(f'Current multiple is {multiple}')
-        sys.stdout.flush()
-
         gamma = multiple * epsilon
 
         feasible = solve_lp(data_struct, kis, m, np.float_(gamma), variables, colors, features)
@@ -189,8 +180,6 @@ def bin_lpsolve(features, colors, k, epsilon, a):
         multiple = math.ceil((low + high) / 2.0)
 
     gamma = multiple * epsilon
-
-    print(f'Final test for multiple {multiple} (gamma = {gamma}')
 
     while not solve_lp(data_struct, kis, m, np.float_(gamma), variables, colors, features):
         multiple -= 1
@@ -270,42 +259,21 @@ def bin_lpsolve(features, colors, k, epsilon, a):
     return diversity, total
 
 
-def epsilon_falloff(features, colors, coreset_size, k, a, epsilon):
+def epsilon_falloff(features, colors, upper_gamma, kis, epsilon, deltas=False):
     """
     starts at a high bound from the corest and repeatedly falls off by 1-epsilon
-    :param features:
-    :param colors:
-    :param k:
-    :param a:
-    :param epsilon:
+    :param features: the points in the dataset
+    :param colors: corresponding color labels for each point
+    :param kis: the map of points to select per color
+    :param epsilon: fallof value
+    :param deltas: whether to return delta between requested and selected
     :return:
     """
 
-    # all colors made by combining values in color_fields
-    color_names = np.unique(colors)
-
-    timer = utils.Stopwatch("Normalization")
-
-    # "normalize" features
-    # Should happen before coreset construction
-    means = features.mean(axis=0)
-    devs  = features.std(axis=0)
-    features = (features - means) / devs
-
-    timer.split("Coreset")
-
-    d = len(feature_fields)
-    m = len(color_names)
-    coreset = CORESET.Coreset_FMM(features, colors, k, m, d, coreset_size)
-    features, colors = coreset.compute()
-
     N = len(features)
 
-    timer.split("Building Kis")
 
-    kis = utils.buildKisMap(colors, k, a)
-
-    timer.split("Tree Creation")
+    timer = utils.Stopwatch("Tree Creation")
 
     # create data structure
     data_struct = algo.create(features)
@@ -320,7 +288,7 @@ def epsilon_falloff(features, colors, coreset_size, k, a, epsilon):
     m.Params.LogToConsole = 0
 
 
-    gamma = coreset.compute_gamma_upper_bound()
+    gamma = upper_gamma
 
     variables = m.addMVar(N, name="X", vtype=GRB.CONTINUOUS)
 
@@ -345,11 +313,13 @@ def epsilon_falloff(features, colors, coreset_size, k, a, epsilon):
     # compute diversity value of solution
     solution = features[S]
     diversity = utils.compute_maxmin_diversity(solution)
-    print(f'{k} solved!')
-    print(f'Diversity: {diversity}')
-    print(f'Time (S):  {total_time}')
 
-    return selected_count, diversity, total_time
+    if deltas:
+        delta_vals = utils.check_returned_kis(colors, kis, S)
+
+        return selected_count, diversity, delta_vals, total_time
+    else:
+        return selected_count, diversity, total_time
 
 
 if __name__ == '__main__':
@@ -389,19 +359,53 @@ if __name__ == '__main__':
     results = []
 
     # first for the proper 100
-    for k in range(10, 201, 5):
-        #div, time = bin_lpsolve(features, colors, k, 0.01, 0)
-        selected, div, time = epsilon_falloff(
-            features=features,
-            colors=colors,
-            coreset_size=10000,
-            k=k,
-            a=0,
+    for k in range(10, 101, 5):
+        # compute coreset of size
+        coreset_size = 100 * k
+        # all colors made by combining values in color_fields
+        color_names = np.unique(colors)
+
+        # "normalize" features
+        # Should happen before coreset construction
+        means = features.mean(axis=0)
+        devs = features.std(axis=0)
+        features = (features - means) / devs
+
+        d = len(feature_fields)
+        m = len(color_names)
+        coreset = CORESET.Coreset_FMM(features, colors, k, m, d, coreset_size)
+        # can't overwrite our original dataset
+        core_features, core_colors = coreset.compute()
+
+        # starting estimate
+        upper_gamma = coreset.compute_gamma_upper_bound()
+
+        # ki generation
+        kis = utils.buildKisMap(colors, k, 0.1)
+
+        # run LP
+        selected, div, deltas, time = epsilon_falloff(
+            features=core_features,
+            colors=core_colors,
+            upper_gamma=upper_gamma,
+            kis=kis,
             epsilon=.1,
+            deltas=True,
         )
-        results.append((k, selected, div, time))
+        results.append((k, selected, div, deltas, time))
+
+    # TODO: double check how many of each color compared to K map
+    # TODO: run another algorithm to compare diversity
 
     print('\n\nFINAL RESULTS:')
-    print('k,\tselected,\tdiversity,\ttime,')
-    for k, selected, div, time in results:
-        print(f'{k},\t{selected},{div},\t{time},')
+    print('k\tselected\tdiversity\ttime', end='\n')
+    #for color in deltas.keys():
+        #print(f'{color}', end='\t')
+    #print('', end='\n')
+
+    for k, selected, div, deltas, time in results:
+        print(f'{k}\t{selected}\t{div}\t{time}', end='\t')
+        for delta in deltas.values():
+            print(f'{delta}', end='\t')
+
+        print('', end='\n')
