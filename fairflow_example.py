@@ -66,6 +66,19 @@ if __name__ == '__main__':
         j = j + 1
     print(f'********************************')
     
+    print("***********Running FiarGreedyFlow on normalized dataset***********")
+    #sol1, div_sol1, t1 = algo.FairFlow(X=elements_normalized, k=kis_list, m=c,dist=utils.euclidean_dist)
+    sol1, div_sol1, t1 = fdmalgs.FairGreedyFlowWrapped(features, colors, kis, 0.1, 3.43, 1.37, normalize=True)
+    print("***********Running FiarGreedyFlow on non normalized dataset***********")
+    #sol2, div_sol2, t2 = algo.FairFlow(X=elements, k=kis_list, m=c,dist=utils.euclidean_dist)
+    sol2, div_sol2, t2 = fdmalgs.FairGreedyFlowWrapped(features, colors, kis, 0.1, 3.43, 1.37, normalize=False)
+
+    print("\n\n***********Results***********")
+    print(f'Solution diversity (normalized) = {div_sol1}')
+    print(f'Time taken (normalized) = {t1}')
+    print(f'Solution diversity = {div_sol2}')
+    print(f'Time taken = {t2}')
+    
 
     print("***********Running FiarFlow on normalized dataset***********")
     #sol1, div_sol1, t1 = algo.FairFlow(X=elements_normalized, k=kis_list, m=c,dist=utils.euclidean_dist)
