@@ -270,42 +270,20 @@ def bin_lpsolve(features, colors, k, epsilon, a):
     return diversity, total
 
 
-def epsilon_falloff(features, colors, coreset_size, k, a, epsilon):
+def epsilon_falloff(features, colors, upper_gamma, kis, epsilon):
     """
     starts at a high bound from the corest and repeatedly falls off by 1-epsilon
-    :param features:
-    :param colors:
-    :param k:
-    :param a:
-    :param epsilon:
+    :param features: the points in the dataset
+    :param colors: corresponding color labels for each point
+    :param kis: the map of points to select per color
+    :param epsilon: fallof value
     :return:
     """
 
-    # all colors made by combining values in color_fields
-    color_names = np.unique(colors)
-
-    timer = utils.Stopwatch("Normalization")
-
-    # "normalize" features
-    # Should happen before coreset construction
-    means = features.mean(axis=0)
-    devs  = features.std(axis=0)
-    features = (features - means) / devs
-
-    timer.split("Coreset")
-
-    d = len(feature_fields)
-    m = len(color_names)
-    coreset = CORESET.Coreset_FMM(features, colors, k, m, d, coreset_size)
-    features, colors = coreset.compute()
-
     N = len(features)
 
-    timer.split("Building Kis")
 
-    kis = utils.buildKisMap(colors, k, a)
-
-    timer.split("Tree Creation")
+    timer = utils.Stopwatch("Tree Creation")
 
     # create data structure
     data_struct = algo.create(features)
@@ -320,7 +298,7 @@ def epsilon_falloff(features, colors, coreset_size, k, a, epsilon):
     m.Params.LogToConsole = 0
 
 
-    gamma = coreset.compute_gamma_upper_bound()
+    gamma = upper_gamma
 
     variables = m.addMVar(N, name="X", vtype=GRB.CONTINUOUS)
 
@@ -345,7 +323,7 @@ def epsilon_falloff(features, colors, coreset_size, k, a, epsilon):
     # compute diversity value of solution
     solution = features[S]
     diversity = utils.compute_maxmin_diversity(solution)
-    print(f'{k} solved!')
+    print(f'Solved!')
     print(f'Diversity: {diversity}')
     print(f'Time (S):  {total_time}')
 
@@ -392,15 +370,36 @@ if __name__ == '__main__':
     results = []
 
     # first for the proper 100
-    for k in range(10, 501, 5):
-        #div, time = bin_lpsolve(features, colors, k, 0.01, 0)
+    for k in range(10, 101, 5):
+        # compute coreset of size
         coreset_size = 100 * k
+        # all colors made by combining values in color_fields
+        color_names = np.unique(colors)
+
+        # "normalize" features
+        # Should happen before coreset construction
+        means = features.mean(axis=0)
+        devs = features.std(axis=0)
+        features = (features - means) / devs
+
+        d = len(feature_fields)
+        m = len(color_names)
+        coreset = CORESET.Coreset_FMM(features, colors, k, m, d, coreset_size)
+        # can't overwrite our original dataset
+        core_features, core_colors = coreset.compute()
+
+        # starting estimate
+        upper_gamma = coreset.compute_gamma_upper_bound()
+
+        # ki generation
+        kis = utils.buildKisMap(colors, k, 0.1)
+
+        # run LP
         selected, div, deltas, time = epsilon_falloff(
-            features=features,
-            colors=colors,
-            coreset_size=coreset_size,
-            k=k,
-            a=0,
+            features=core_features,
+            colors=core_colors,
+            upper_gamma=upper_gamma,
+            kis=kis,
             epsilon=.1,
         )
         results.append((k, selected, div, deltas, time))
