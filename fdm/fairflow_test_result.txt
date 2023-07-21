@@ -1,0 +1,27 @@
+***********Parameters***********
+Dataset: ../datasets/ads/adult.data
+Result set size(k): 290
+EPS(e): 0.05
+Colors/Grouped By: ['race', 'sex']
+Num colors(c): 10
+		constraint		available			color
+	1	15		19174			White_Male
+	2	35		8642			White_Female
+	3	55		693			Asian-Pac-Islander_Male
+	4	35		346			Asian-Pac-Islander_Female
+	5	15		192			Amer-Indian-Eskimo_Male
+	6	35		119			Amer-Indian-Eskimo_Female
+	7	15		162			Other_Male
+	8	35		109			Other_Female
+	9	15		1569			Black_Male
+	10	35		1555			Black_Female
+********************************
+***********Running FiarFlow on normalized dataset***********
+***********Running FiarFlow on non normalized dataset***********
+
+
+***********Results***********
+Solution diversity (normalized) = 0.158191039782454
+Time taken (normalized) = 109.50584448099835
+Solution diversity = 643.3894621455966
+Time taken = 101.53931795601966
