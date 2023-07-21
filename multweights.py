@@ -257,6 +257,6 @@ if __name__ == '__main__':
         results.append((k, selected, div, time))
 
     print('\n\nFINAL RESULTS:')
-    print('k,\tselected,\tdiversity,\ttime,')
+    print('k\tselected\tdiversity\ttime')
     for k, selected, div, time in results:
         print(f'{k},\t{selected},\t{div},\t{time},')

@@ -349,7 +349,10 @@ def epsilon_falloff(features, colors, coreset_size, k, a, epsilon):
     print(f'Diversity: {diversity}')
     print(f'Time (S):  {total_time}')
 
-    return selected_count, diversity, total_time
+    deltas = utils.check_returned_kis(colors, kis, S)
+
+
+    return selected_count, diversity, deltas, total_time
 
 
 if __name__ == '__main__':
@@ -389,19 +392,31 @@ if __name__ == '__main__':
     results = []
 
     # first for the proper 100
-    for k in range(10, 201, 5):
+    for k in range(10, 501, 5):
         #div, time = bin_lpsolve(features, colors, k, 0.01, 0)
-        selected, div, time = epsilon_falloff(
+        coreset_size = 100 * k
+        selected, div, deltas, time = epsilon_falloff(
             features=features,
             colors=colors,
-            coreset_size=10000,
+            coreset_size=coreset_size,
             k=k,
             a=0,
             epsilon=.1,
         )
-        results.append((k, selected, div, time))
+        results.append((k, selected, div, deltas, time))
+
+    # TODO: double check how many of each color compared to K map
+    # TODO: run another algorithm to compare diversity
 
     print('\n\nFINAL RESULTS:')
-    print('k,\tselected,\tdiversity,\ttime,')
-    for k, selected, div, time in results:
-        print(f'{k},\t{selected},{div},\t{time},')
+    print('k\tselected\tdiversity\ttime', end='\n')
+    #for color in deltas.keys():
+        #print(f'{color}', end='\t')
+    #print('', end='\n')
+
+    for k, selected, div, deltas, time in results:
+        print(f'{k}\t{selected}\t{div}\t{time}', end='\t')
+        for delta in deltas.values():
+            print(f'{delta}', end='\t')
+
+        print('', end='\n')
