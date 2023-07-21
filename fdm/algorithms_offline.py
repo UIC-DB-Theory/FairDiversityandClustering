@@ -172,6 +172,46 @@ def FairGMM(X: ElemList, m: int, k: List[int], dist: Callable[[Any, Any], float]
     t1 = time.perf_counter()
     return max_sol, max_div, t1 - t0
 
+def FairFlowWrapped(features, colors, kis, normalize=False):
+    '''
+    A wrapper for FairFlow
+    Adjust the problem instance for a difference set of parameters
+    '''
+
+    c = len(kis)
+
+    # Create a map of indices to colors
+    color_number_map = list(kis.keys())
+
+    # As done in the paper we will pre-process the data
+    # by normalizing to have zero mean and unit standard deviation.
+    features = np.array(features)
+    features_normalized = features.copy()
+    mean = np.mean(features_normalized, axis=0)
+    std = np.std(features_normalized, axis=0)
+    features_normalized = features_normalized - mean
+    features_normalized = features_normalized/std
+    features = features.tolist()
+    features_normalized = features_normalized.tolist()
+
+    elements = []
+    elements_normalized = []
+    for i in range(0, len(features_normalized)):
+        elem_normalized = utils.Elem(i, color_number_map.index(colors[i]), features_normalized[i])
+        elem = utils.Elem(i, color_number_map.index(colors[i]), features[i])
+        elements.append(elem)
+        elements_normalized.append(elem_normalized)
+
+    # Adjust the constraints as a list
+    kis_list = []
+    for color in color_number_map:
+        kis_list.append(kis[color])
+    
+    if normalize:
+        return FairFlow(X=elements_normalized, k=kis_list, m=c ,dist=utils.euclidean_dist)
+    else:
+        return FairFlow(X=elements, k=kis_list, m=c ,dist=utils.euclidean_dist)
+
 
 def FairFlow(X: ElemList, m: int, k: List[int], dist: Callable[[Any, Any], float]) -> (List[int], float, float):
     t0 = time.perf_counter()
