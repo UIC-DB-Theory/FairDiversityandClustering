@@ -1,9 +1,8 @@
-from WeightedTree import *
 import utils
+from WeightedTree import *
 
 # Example usage.
 if __name__ == "__main__":
-
     # setup
     # File fields
     allFields = [
@@ -28,7 +27,6 @@ if __name__ == "__main__":
     color_field = ['race', 'sex']
     feature_fields = {'age', 'capital-gain', 'capital-loss', 'hours-per-week', 'fnlwgt', 'education-num'}
 
-
     # variables for running LP bin-search
 
     # coreset params
@@ -37,12 +35,11 @@ if __name__ == "__main__":
     colors, features = utils.read_CSV("./datasets/ads/adult.data", allFields, color_field, '_', feature_fields)
     assert (len(colors) == len(features))
     N = len(features)
-    h = np.full((N, 1), 1.0 / N, dtype=float) # weights
+    h = np.full((N, 1), 1.0 / N, dtype=float)  # weights
     # Initialize the tree and the subprocess.
     tree = WeightedTree(len(feature_fields))
     print(len(feature_fields))
     print(type(features))
-
 
     tree_construction_response = tree.construct_tree(features)
 
@@ -60,13 +57,13 @@ if __name__ == "__main__":
     #
     # # Run a query on the tree.
     #
-    result1 = tree.run_query(1, h)
+    time1, result1 = tree.run_query(1, h)
     # result1 = tree.run_query(1, np.array([1, 1, 1]))
     print(f"Query 1 Result: {result1}")
-    h = h/2
+    h = h / 2
     # # Run a query.
     #
-    result2 = tree.run_query(.5, h)
+    time2, result2 = tree.run_query(.5, h)
     print(f"Query 2 Result: {result2}")
     #
     # # Delete the tree. Ensures the process exits correctly
