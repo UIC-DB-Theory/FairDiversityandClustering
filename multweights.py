@@ -48,7 +48,7 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
     struct = KDTree2.create(features)
 
     # NOTE: should this be <= or was it 1 indexed?
-    for t in trange(math.ceil(T), desc='MWU Loop'):
+    for t in trange(math.ceil(T), desc='MWU Loop', disable=True):
 
         S = np.empty((0, features.shape[1]))  # points we select this round
         W = 0                                 # current weight sum
@@ -87,87 +87,38 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
 
         # update H
         oldH = np.copy(h)
-        # TODO: check sign of value
         h = h * (np.ones_like(M) - ((scaled_eps / 4.0) * M))
         h /= np.sum(h)
 
-        """
-        # print X for testing
-        file = f"test_{kis['red']}_{kis['blue']}_{gamma}_{epsilon}_output.txt"
-        if t == 0:
-            # zero file on first cycle
-            open(file, 'w').close()
-
-        with open(file, "a") as f:
-            with np.printoptions(linewidth=np.inf):
-                #print(f'{np.sum(X[0:4] / (t + 1))}', file=f)
-                #print(f'{W}', file=f, end="\n")
-                print((X / (t+1)).flatten(), file=f, end="\t")
-                print(f'\th distance: {np.linalg.norm(h - oldH)}', file=f)
-        """
-
-        # If things aren't changing, stop early
-        # TODO: figure out a better way to stop early
-
-        #if np.allclose(h, oldH, atol=1e-08):
-        #    print(f'Exiting early on iteration {t+1}')
-        #    break
 
         # check directly if X is a feasible solution
         if t % 50 == 0:
             X_weights = KDTree2.get_weight_ranges(struct, X / (1 + t), gamma / 2.0)
             if not np.any(X_weights > 1 + epsilon):
-                print(f'Breaking early due to feasible solution on iteration {t+1}!')
                 break
 
-
-        #tqdm.write(f'\th distance: {np.linalg.norm(h - oldH)}', end='')
-
-    # TODO: check if X changed or not
     X = X / (t + 1)
     return X
 
 
-def epsilon_falloff(features, colors, coreset_size, k, a, mwu_epsilon, falloff_epsilon):
+def epsilon_falloff(features, colors, kis, gamma_upper, mwu_epsilon, falloff_epsilon):
     """
     starts at a high bound (given by the corset estimate) and repeatedly falls off by 1-epsilon
     :param features: the data set
     :param colors:   color labels for the data set
-    :param coreset_size: the number of points to use in the corset
-    :param k:        total K to pick from the graph
-    :param a:        fraction of K acceptable to lose
+    :param kis:      map of colors to requested counts
+    :param gamma_upper: the starting value for gamma
     :param mwu_epsilon: epsilon for the MWU method (static error)
     :param falloff_epsilon: epsilon for the falloff system (fraction to reduce by each cycle)
     :return:
     """
 
-    # get the colors
-    color_names = np.unique(colors)
-
-    timer = utils.Stopwatch("Normalization")
-
-    # "normalize" features
-    # Should happen before coreset construction
-    means = features.mean(axis=0)
-    devs = features.std(axis=0)
-    features = (features - means) / devs
-
-    timer.split("Coreset")
-
-    d = len(feature_fields)
-    m = len(color_names)
-    coreset = CORESET.Coreset_FMM(features, colors, k, m, d, coreset_size)
-    features, colors = coreset.compute()
-
     N = len(features)
+    k = sum(kis.values())
 
-    timer.split("Building Kis")
+    timer = utils.Stopwatch("Falloff")
 
-    kis = utils.buildKisMap(colors, k, a)
-
-    timer.split("Falloff")
-
-    gamma = coreset.compute_gamma_upper_bound()
+    gamma = gamma_upper
 
     X = mult_weight_upd(gamma, N, k, features, colors, kis, mwu_epsilon)
     while X is None:
@@ -186,9 +137,6 @@ def epsilon_falloff(features, colors, coreset_size, k, a, mwu_epsilon, falloff_e
     solution = features[S]
 
     diversity = utils.compute_maxmin_diversity(solution)
-    print(f'{k} solved!')
-    print(f'Diversity: {diversity}')
-    print(f'Time (S):  {total_time}')
 
     return selected_count, diversity, total_time
 
@@ -241,16 +189,39 @@ if __name__ == '__main__':
     colors, features = utils.read_CSV("./datasets/ads/adult.data", allFields, color_field, '_', feature_fields)
     assert (len(colors) == len(features))
 
+    # get the colors
+    color_names = np.unique(colors)
+
+    # "normalize" features
+    # Should happen before coreset construction
+    means = features.mean(axis=0)
+    devs = features.std(axis=0)
+    features = (features - means) / devs
+
+
     # testing!
     results = []
 
     for k in range(10, 201, 5):
+        # compute coreset
+        coreset_size = 100 * k
+
+        d = len(feature_fields)
+        m = len(color_names)
+        coreset = CORESET.Coreset_FMM(features, colors, k, m, d, coreset_size)
+        core_features, core_colors = coreset.compute()
+
+        gamma_upper = coreset.compute_gamma_upper_bound()
+
+        # build KIs
+        kis = utils.buildKisMap(colors, k, 0)
+
+        # actually run the model
         selected, div, time = epsilon_falloff(
-            features=features,
-            colors=colors,
-            coreset_size=10000,
-            k=k,
-            a=0,
+            features=core_features,
+            colors=core_colors,
+            kis=kis,
+            gamma_upper=gamma_upper,
             mwu_epsilon=0.75,
             falloff_epsilon=0.1,
         )

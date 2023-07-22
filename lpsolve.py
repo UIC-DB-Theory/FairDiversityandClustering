@@ -359,9 +359,9 @@ if __name__ == '__main__':
     results = []
 
     # first for the proper 100
-    for k in range(10, 101, 5):
+    for k in range(10, 201, 5):
         # compute coreset of size
-        coreset_size = 100 * k
+        coreset_size = 250 * k
         # all colors made by combining values in color_fields
         color_names = np.unique(colors)
 
@@ -384,6 +384,7 @@ if __name__ == '__main__':
         kis = utils.buildKisMap(colors, k, 0.1)
 
         # run LP
+        print(f'Running LP for {k}')
         selected, div, deltas, time = epsilon_falloff(
             features=core_features,
             colors=core_colors,
@@ -392,6 +393,7 @@ if __name__ == '__main__':
             epsilon=.1,
             deltas=True,
         )
+        print(f'Finished in {time}! (diversity of {div})')
         results.append((k, selected, div, deltas, time))
 
     # TODO: double check how many of each color compared to K map

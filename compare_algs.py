@@ -3,6 +3,7 @@ from collections import defaultdict
 import fdmalgs
 import utils
 import lpsolve
+import multweights
 from coreset import Coreset_FMM
 
 import numpy as np
@@ -47,11 +48,31 @@ if __name__ == '__main__':
                 kis=kis,
                 epsilon=0.1,
             ),
+        'mwu':
+            lambda fs, cs, kis, gamma_upper: multweights.epsilon_falloff(
+                features=fs,
+                colors=cs,
+                kis=kis,
+                gamma_upper=gamma_upper,
+                mwu_epsilon=0.5,
+                falloff_epsilon=0.1,
+            ),
         'fairflow':
             lambda fs, cs, kis, gamma_upper: fdmalgs.FairFlowWrapped(
                 features=fs,
                 colors=cs,
                 kis=kis,
+                normalize=False,
+            ),
+        'FairGreedyFlow':
+            lambda fs, cs, kis, gamma_upper: fdmalgs.FairGreedyFlowWrapped(
+                features=fs,
+                colors=cs,
+                kis=kis,
+                epsilon=0.1,
+                # experiments used fixed, pre-supplied values?
+                gammahigh=3.43,
+                gammalow=1.37,
                 normalize=False,
             )
         }
@@ -60,9 +81,9 @@ if __name__ == '__main__':
     results = defaultdict(list)
 
     # first for the proper 100
-    for k in range(10, 201, 5):
+    for k in range(10, 151, 25):
         # compute coreset of size
-        coreset_size = 100 * k
+        coreset_size = 75 * k
         # all colors made by combining values in color_fields
         color_names = np.unique(colors)
 
