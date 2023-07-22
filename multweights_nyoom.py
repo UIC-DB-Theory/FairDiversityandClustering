@@ -8,7 +8,7 @@ from tqdm import tqdm, trange
 import typing as t
 import numpy.typing as npt
 
-import KDTree2
+from WeightedTree import WeightedTree
 import BallTree
 import coreset as CORESET
 import utils
@@ -40,21 +40,24 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
     # for calculating error
     mu = k - 1
 
-    h = np.full((N, 1), 1.0 / N, dtype=np.longdouble) # weights
+    h = np.full((N, 1), 1.0 / N, dtype=np.double) # weights
     X = np.zeros((N, 1))         # Output
 
     T = ((8 * mu) / (math.pow(scaled_eps, 2))) * math.log(N, math.e) # iterations
+
+
     # for now, we can recreate the structure in advance
-    struct = KDTree2.create(features)
+    dim = features.shape[1]
+    struct = WeightedTree(dim)
+    struct.construct_tree(features)
 
     # NOTE: should this be <= or was it 1 indexed?
     for t in trange(math.ceil(T), desc='MWU Loop', disable=True):
-
         S = np.empty((0, features.shape[1]))  # points we select this round
         W = 0                                 # current weight sum
 
-        # weights to every point
-        w_sums = KDTree2.get_weight_ranges(struct, h, gamma / 2.0)
+        # weights to every point (time is ignored for now)
+        _, w_sums = struct.run_query(gamma / 2.0, h)
         print(w_sums)
 
         # compute minimums per color
@@ -93,10 +96,11 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
 
         # check directly if X is a feasible solution
         if t % 50 == 0:
-            X_weights = KDTree2.get_weight_ranges(struct, X / (1 + t), gamma / 2.0)
+            _, X_weights = struct.run_query(gamma / 2.0, (X / (t + 1)))
             if not np.any(X_weights > 1 + epsilon):
                 break
 
+    struct.delete_tree()
     X = X / (t + 1)
     return X
 
@@ -162,22 +166,6 @@ if __name__ == '__main__':
     }
     k = sum(kis.values())
 
-    colors, features = utils.read_CSV("./datasets/mwutest/example.csv", allFields, color_field, '_', feature_fields)
-    assert (len(colors) == len(features))
-
-    # get the colors
-    color_names = np.unique(colors)
-
-    N = len(features)
-    gamma = 5
-    k = 3
-    kis = {'blue': 2, 'red': 1}
-    X = mult_weight_upd(5, N, k, features, colors, kis, 0.5)
-    if X is None:
-        print('None!')
-    else:
-        print(X)
-
     """
     # File fields
     allFields = [
@@ -201,24 +189,35 @@ if __name__ == '__main__':
     # fields we care about for parsing
     color_field = ['race', 'sex']
     feature_fields = {'age', 'capital-gain', 'capital-loss', 'hours-per-week', 'fnlwgt', 'education-num'}
+    """
 
-    colors, features = utils.read_CSV("./datasets/ads/adult.data", allFields, color_field, '_', feature_fields)
+    colors, features = utils.read_CSV("./datasets/mwutest/example.csv", allFields, color_field, '_', feature_fields)
     assert (len(colors) == len(features))
 
     # get the colors
     color_names = np.unique(colors)
 
+    N = len(features)
+    gamma = 5
+    k = 3
+    kis = {'blue': 2, 'red': 1}
+    X = mult_weight_upd(5, N, k, features, colors, kis, 0.5)
+    if X is None:
+        print('None!')
+    else:
+        print(X)
+
+    """
     # "normalize" features
     # Should happen before coreset construction
     means = features.mean(axis=0)
     devs = features.std(axis=0)
     features = (features - means) / devs
 
-
     # testing!
     results = []
 
-    for k in range(10, 201, 5):
+     for k in range(10, 201, 5):
         # compute coreset
         coreset_size = 100 * k
 
@@ -233,6 +232,7 @@ if __name__ == '__main__':
         kis = utils.buildKisMap(colors, k, 0)
 
         # actually run the model
+        print(f'running mwu for {k}')
         selected, div, time = epsilon_falloff(
             features=core_features,
             colors=core_colors,
@@ -241,6 +241,7 @@ if __name__ == '__main__':
             mwu_epsilon=0.75,
             falloff_epsilon=0.1,
         )
+        print(f'Finished!')
         results.append((k, selected, div, time))
 
     print('\n\nFINAL RESULTS:')

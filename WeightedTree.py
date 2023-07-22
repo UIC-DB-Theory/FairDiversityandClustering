@@ -21,12 +21,14 @@ class WeightedTree:
             [self.executable, str(dimension)],
             # [self.executable],
             stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE
+            stdout=subprocess.PIPE,
+            stderr=None,
         )
 
         self.points = np.array([])
+        self.N = None
 
-    def send_message(self, message_str):
+    def _send_message(self, message_str):
         """
         "Private method" used to actually send the message to the C++ application.
         :param message_str: The message string to send.
@@ -50,8 +52,10 @@ class WeightedTree:
             "points": points.flatten().tolist()
         }
 
+        self.N = len(points)
+
         message_str = json.dumps(message_json)
-        response = self.send_message(message_str)
+        response = self._send_message(message_str)
         # TODO: check response and handle if errors occurred
         assert response['status'] == 'OK', "construct tree response returned an error"
         return response['time']
@@ -63,6 +67,8 @@ class WeightedTree:
         :param weights: a np array of weights
         :return: a tuple of the time recorded to perform the action and an np array of weights.
         """
+        assert (self.N == len(weights.flatten()))
+
         message_json = {
             "type": "run-query",
             "radius": radius,
@@ -70,9 +76,10 @@ class WeightedTree:
 
         message_str = json.dumps(message_json)
 
-        response_json = self.send_message(message_str)
+        response_json = self._send_message(message_str)
         # TODO: check response and handle if errors occurred
         assert response_json['status'] == 'OK', "query response returned an error"
+
         return response_json['time'], np.array(response_json['result'])
 
     def delete_tree(self):
