@@ -52,13 +52,12 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
     struct.construct_tree(features)
 
     # NOTE: should this be <= or was it 1 indexed?
-    for t in trange(math.ceil(T), desc='MWU Loop', disable=True):
+    for t in trange(math.ceil(T), desc='MWU Loop', disable=False):
         S = np.empty((0, features.shape[1]))  # points we select this round
         W = 0                                 # current weight sum
 
         # weights to every point (time is ignored for now)
         _, w_sums = struct.run_query(gamma / 2.0, h)
-        print(w_sums)
 
         # compute minimums per color
         for color in kis.keys():
@@ -146,6 +145,7 @@ def epsilon_falloff(features, colors, kis, gamma_upper, mwu_epsilon, falloff_eps
 
 
 if __name__ == '__main__':
+    """ 
     # Testing field
     # File fields
     allFields = [
@@ -165,8 +165,8 @@ if __name__ == '__main__':
         'red': 1,
     }
     k = sum(kis.values())
-
     """
+
     # File fields
     allFields = [
         "age",
@@ -189,25 +189,13 @@ if __name__ == '__main__':
     # fields we care about for parsing
     color_field = ['race', 'sex']
     feature_fields = {'age', 'capital-gain', 'capital-loss', 'hours-per-week', 'fnlwgt', 'education-num'}
-    """
 
-    colors, features = utils.read_CSV("./datasets/mwutest/example.csv", allFields, color_field, '_', feature_fields)
+    colors, features = utils.read_CSV("./datasets/ads/adult.data", allFields, color_field, '_', feature_fields)
     assert (len(colors) == len(features))
 
     # get the colors
     color_names = np.unique(colors)
 
-    N = len(features)
-    gamma = 5
-    k = 3
-    kis = {'blue': 2, 'red': 1}
-    X = mult_weight_upd(5, N, k, features, colors, kis, 0.5)
-    if X is None:
-        print('None!')
-    else:
-        print(X)
-
-    """
     # "normalize" features
     # Should happen before coreset construction
     means = features.mean(axis=0)
@@ -217,7 +205,7 @@ if __name__ == '__main__':
     # testing!
     results = []
 
-     for k in range(10, 201, 5):
+    for k in range(10, 21, 10):
         # compute coreset
         coreset_size = 100 * k
 
@@ -248,4 +236,17 @@ if __name__ == '__main__':
     print('k\tselected\tdiversity\ttime')
     for k, selected, div, time in results:
         print(f'{k},\t{selected},\t{div},\t{time},')
+
+    """
+
+    N = len(features)
+    gamma = 5
+    k = 3
+    kis = {'blue': 2, 'red': 1}
+    X = mult_weight_upd(5, N, k, features, colors, kis, 0.5)
+    if X is None:
+        print('None!')
+    else:
+        print(X)
+
     """
