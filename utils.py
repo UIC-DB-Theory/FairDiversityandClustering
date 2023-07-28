@@ -83,6 +83,7 @@ class Stopwatch:
         """
         Stops the clock
         :return: a list of (split-name, delta-time) pairs for every segment created via "split" and creation
+                 as well as the total time
         """
         self.times.append(time.perf_counter())
         return zip(self.names, self._calc_deltas()), self.times[-1] - self.times[0]

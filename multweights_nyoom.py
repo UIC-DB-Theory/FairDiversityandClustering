@@ -32,8 +32,12 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
     :param kis: the color->count mapping
     :param epsilon: allowed error value
     :return: a nx1 vector X of the solution or None if infeasible
+    :return: the "removed time" for encoding and decoding
     """
     assert(k > 0)
+
+    # time spent translating queries
+    translation_time = 0
 
     scaled_eps = epsilon / (1.0 + (epsilon / 4.0))
 
@@ -52,12 +56,15 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
     struct.construct_tree(features)
 
     # NOTE: should this be <= or was it 1 indexed?
-    for t in trange(math.ceil(T), desc='MWU Loop', disable=False):
+    for t in trange(math.ceil(T), desc='MWU Loop', disable=True):
         S = np.empty((0, features.shape[1]))  # points we select this round
         W = 0                                 # current weight sum
 
         # weights to every point (time is ignored for now)
-        _, w_sums = struct.run_query(gamma / 2.0, h)
+        timer = utils.Stopwatch("Query")
+        inner_time, w_sums = struct.run_query(gamma / 2.0, h)
+        _, outer_time = timer.stop()
+        translation_time += (outer_time - inner_time)
 
         # compute minimums per color
         for color in kis.keys():
@@ -78,7 +85,8 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
             W += np.sum(w_sums[min_indecies])
 
         if W >= 1:
-            return None
+            struct.delete_tree()
+            return None, translation_time
 
         # get counts of points in each ball in M
         M = np.zeros_like(h)
@@ -95,13 +103,17 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
 
         # check directly if X is a feasible solution
         if t % 50 == 0:
+            timer = utils.Stopwatch("Query")
+            inner_time, w_sums = struct.run_query(gamma / 2.0, h)
             _, X_weights = struct.run_query(gamma / 2.0, (X / (t + 1)))
+            translation_time += (outer_time - inner_time)
+
             if not np.any(X_weights > 1 + epsilon):
                 break
 
     struct.delete_tree()
     X = X / (t + 1)
-    return X
+    return X, translation_time
 
 
 def epsilon_falloff(features, colors, kis, gamma_upper, mwu_epsilon, falloff_epsilon):
@@ -116,6 +128,9 @@ def epsilon_falloff(features, colors, kis, gamma_upper, mwu_epsilon, falloff_eps
     :return:
     """
 
+    # translation time to subtract from the total time
+    translation_time = 0
+
     N = len(features)
     k = sum(kis.values())
 
@@ -123,10 +138,13 @@ def epsilon_falloff(features, colors, kis, gamma_upper, mwu_epsilon, falloff_eps
 
     gamma = gamma_upper
 
-    X = mult_weight_upd(gamma, N, k, features, colors, kis, mwu_epsilon)
+    X, cur_trans_time = mult_weight_upd(gamma, N, k, features, colors, kis, mwu_epsilon)
+    translation_time += cur_trans_time
+
     while X is None:
         gamma = gamma * (1 - falloff_epsilon)
-        X = mult_weight_upd(gamma, N, k, features, colors, kis, mwu_epsilon)
+        X, cur_trans_time = mult_weight_upd(gamma, N, k, features, colors, kis, mwu_epsilon)
+        translation_time += cur_trans_time
 
     timer.split("Randomized Rounding")
 
@@ -135,13 +153,15 @@ def epsilon_falloff(features, colors, kis, gamma_upper, mwu_epsilon, falloff_eps
 
     _, total_time = timer.stop()
 
+    adjusted_time = total_time - translation_time
+
     # build up stats to return
     selected_count = len(S)
     solution = features[S]
 
     diversity = utils.compute_maxmin_diversity(solution)
 
-    return selected_count, diversity, total_time
+    return selected_count, diversity, total_time, adjusted_time
 
 
 if __name__ == '__main__':
@@ -221,7 +241,7 @@ if __name__ == '__main__':
 
         # actually run the model
         print(f'running mwu for {k}')
-        selected, div, time = epsilon_falloff(
+        selected, div, time, adj_time = epsilon_falloff(
             features=core_features,
             colors=core_colors,
             kis=kis,
@@ -229,8 +249,8 @@ if __name__ == '__main__':
             mwu_epsilon=0.75,
             falloff_epsilon=0.1,
         )
-        print(f'Finished!')
-        results.append((k, selected, div, time))
+        print(f'Finished! (time={time}) (adjusted={adj_time})')
+        results.append((k, selected, div, adj_time))
 
     print('\n\nFINAL RESULTS:')
     print('k\tselected\tdiversity\ttime')

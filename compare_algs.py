@@ -3,7 +3,7 @@ from collections import defaultdict
 import fdmalgs
 import utils
 import lpsolve
-import multweights
+import multweights_nyoom as multweights
 from coreset import Coreset_FMM
 
 import numpy as np
@@ -81,7 +81,7 @@ if __name__ == '__main__':
     results = defaultdict(list)
 
     # first for the proper 100
-    for k in range(10, 151, 25):
+    for k in range(1, 351, 50):
         # compute coreset of size
         coreset_size = 75 * k
         # all colors made by combining values in color_fields
