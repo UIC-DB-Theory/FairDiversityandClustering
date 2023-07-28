@@ -116,7 +116,7 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
     return X, translation_time
 
 
-def epsilon_falloff(features, colors, kis, gamma_upper, mwu_epsilon, falloff_epsilon):
+def epsilon_falloff(features, colors, kis, gamma_upper, mwu_epsilon, falloff_epsilon, return_unadjusted):
     """
     starts at a high bound (given by the corset estimate) and repeatedly falls off by 1-epsilon
     :param features: the data set
@@ -161,7 +161,10 @@ def epsilon_falloff(features, colors, kis, gamma_upper, mwu_epsilon, falloff_eps
 
     diversity = utils.compute_maxmin_diversity(solution)
 
-    return selected_count, diversity, total_time, adjusted_time
+    if return_unadjusted:
+        return selected_count, diversity, adjusted_time, total_time
+    else:
+        return selected_count, diversity, adjusted_time
 
 
 if __name__ == '__main__':
@@ -241,13 +244,14 @@ if __name__ == '__main__':
 
         # actually run the model
         print(f'running mwu for {k}')
-        selected, div, time, adj_time = epsilon_falloff(
+        selected, div, adj_time, time = epsilon_falloff(
             features=core_features,
             colors=core_colors,
             kis=kis,
             gamma_upper=gamma_upper,
             mwu_epsilon=0.75,
             falloff_epsilon=0.1,
+            return_unadjusted=True,
         )
         print(f'Finished! (time={time}) (adjusted={adj_time})')
         results.append((k, selected, div, adj_time))

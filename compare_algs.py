@@ -39,6 +39,7 @@ if __name__ == '__main__':
     # ALGORITHMS TO TEST
     # we wrap each one so it has the same signature
     # various "tuning" parameters are set here
+    # TODO SFDM2 FFMD-S
     algs = {
         'lp':
             lambda fs, cs, kis, gamma_upper: lpsolve.epsilon_falloff(
@@ -46,7 +47,7 @@ if __name__ == '__main__':
                 colors=cs,
                 upper_gamma=gamma_upper,
                 kis=kis,
-                epsilon=0.1,
+                epsilon=0.15,
             ),
         'mwu':
             lambda fs, cs, kis, gamma_upper: multweights.epsilon_falloff(
@@ -54,8 +55,9 @@ if __name__ == '__main__':
                 colors=cs,
                 kis=kis,
                 gamma_upper=gamma_upper,
-                mwu_epsilon=0.5,
-                falloff_epsilon=0.1,
+                mwu_epsilon=0.75,
+                falloff_epsilon=0.15,
+                return_unadjusted=False,
             ),
         'fairflow':
             lambda fs, cs, kis, gamma_upper: fdmalgs.FairFlowWrapped(
@@ -69,7 +71,7 @@ if __name__ == '__main__':
                 features=fs,
                 colors=cs,
                 kis=kis,
-                epsilon=0.1,
+                epsilon=0.15,
                 # experiments used fixed, pre-supplied values?
                 gammahigh=3.43,
                 gammalow=1.37,
@@ -81,7 +83,7 @@ if __name__ == '__main__':
     results = defaultdict(list)
 
     # first for the proper 100
-    for k in range(1, 351, 50):
+    for k in range(25, 351, 50):
         # compute coreset of size
         coreset_size = 75 * k
         # all colors made by combining values in color_fields

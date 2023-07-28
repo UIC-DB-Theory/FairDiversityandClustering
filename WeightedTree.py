@@ -93,3 +93,4 @@ class WeightedTree:
 
         self.proc.stdin.write(bytes(json_message + "\n", 'utf-8'))
         self.proc.stdin.flush()
+        self.proc.terminate()
