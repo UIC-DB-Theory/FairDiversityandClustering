@@ -1,7 +1,5 @@
 import math
-from collections import defaultdict
 
-import sys
 import numpy as np
 
 from tqdm import tqdm, trange
@@ -14,10 +12,6 @@ import coreset as CORESET
 import utils
 from rounding import rand_round
 
-import gurobipy as gp
-from gurobipy import GRB
-
-from lpsolve import solve_lp
 
 
 def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, epsilon):
@@ -65,7 +59,7 @@ def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, e
     # struct = WeightedTree(dim)
     # struct.construct_tree(features)
 
-    for t in trange(math.ceil(T), desc='MWU Loop', disable=True):
+    for t in trange(math.ceil(T), desc='MWU Loop', disable=False):
         S = np.empty((0, features.shape[1]))  # points we select this round
         W = 0                                 # current weight sum
 
@@ -108,12 +102,13 @@ def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, e
 
         # update H
         h = h * (np.ones_like(M) - ((scaled_eps / 4.0) * M))
+
         h /= np.sum(h)
 
         # TODO: check rate of change of X and h (euclidean distance) or l-inf
 
         # check directly if X is a feasible solution
-        if t % 50 == 0:
+        if t > 100 and t % 17 == 0:
             timer = utils.Stopwatch("Query")
 
             # TODO: new query function => boolean for "valid solution"
@@ -249,18 +244,20 @@ if __name__ == '__main__':
     results = []
 
     for k in range(10, 21, 10):
+        # build KIs
+        kis = utils.buildKisMap(colors, k, 0)
+
+        adj_k = sum(kis.values())
+
         # compute coreset
-        coreset_size = 10 * k
+        coreset_size = 15 * k
 
         d = len(feature_fields)
         m = len(color_names)
-        coreset = CORESET.Coreset_FMM(features, colors, k, m, d, coreset_size)
+        coreset = CORESET.Coreset_FMM(features, colors, adj_k, m, d, coreset_size)
         core_features, core_colors = coreset.compute()
 
         gamma_upper = coreset.compute_gamma_upper_bound()
-
-        # build KIs
-        kis = utils.buildKisMap(colors, k, 0)
 
         # actually run the model
         print(f'running mwu for {k}')
@@ -274,7 +271,7 @@ if __name__ == '__main__':
             return_unadjusted=True,
         )
         print(f'Finished! (time={time}) (adjusted={adj_time})')
-        results.append((k, selected, div, adj_time))
+        results.append((adj_k, selected, div, adj_time))
 
     print('\n\nFINAL RESULTS:')
     print('k\tselected\tdiversity\ttime')
