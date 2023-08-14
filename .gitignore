@@ -134,9 +134,9 @@ gurobi.log
 .idea/
 
 # data and results for fdm
-fdm/data/
-coreset_experiments/datasets/
-coreset_tests/datasets/
+experimental/fdm/datasets/
+experimental/coreset_experiments/datasets/
+experimental/coreset_tests/datasets/
 
 # lock files
 Pipfile.lock

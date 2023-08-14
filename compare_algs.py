@@ -76,7 +76,26 @@ if __name__ == '__main__':
                 gammahigh=3.43,
                 gammalow=1.37,
                 normalize=False,
-            )
+            ),
+        'FMMD-S':
+            lambda fs, cs, kis, gamma_upper: fdmalgs.FMMDSWrapped(
+                features=fs,
+                colors=cs,
+                kis=kis,
+                epsilon=0.15,
+                normalize=False,
+            ),
+        'SFDM-2':
+            lambda fs, cs, kis, gamma_upper: fdmalgs.FairGreedyFlowWrapped(
+                features=fs,
+                colors=cs,
+                kis=kis,
+                epsilon=0.15,
+                # experiments used fixed, pre-supplied values?
+                gammahigh=3.43,
+                gammalow=1.37,
+                normalize=False,
+            ),
         }
 
     # run some tests!
