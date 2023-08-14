@@ -20,7 +20,7 @@ from gurobipy import GRB
 from lpsolve import solve_lp
 
 
-def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
+def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, epsilon):
     """
     uses the multiplicative weight update method to
     generate an integer solution for the LP
@@ -29,11 +29,21 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
     :param k: total number of points selected
     :param features: dataset's features
     :param colors: matching colors
+    :param c_tree: The ParGeo C++ tree on the features (passed in so we can re-use it across problem instances)
     :param kis: the color->count mapping
     :param epsilon: allowed error value
     :return: a nx1 vector X of the solution or None if infeasible
     :return: the "removed time" for encoding and decoding
     """
+
+    """
+        Things to try
+            - softmax
+            - sampling based on weights
+            - counting approximation approach (ask professor for writeup)
+            - random ideas?
+    """
+
     assert(k > 0)
 
     # time spent translating queries
@@ -51,22 +61,22 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
 
 
     # for now, we can recreate the structure in advance
-    dim = features.shape[1]
-    struct = WeightedTree(dim)
-    struct.construct_tree(features)
+    # dim = features.shape[1]
+    # struct = WeightedTree(dim)
+    # struct.construct_tree(features)
 
-    # NOTE: should this be <= or was it 1 indexed?
     for t in trange(math.ceil(T), desc='MWU Loop', disable=True):
         S = np.empty((0, features.shape[1]))  # points we select this round
         W = 0                                 # current weight sum
 
         # weights to every point (time is ignored for now)
         timer = utils.Stopwatch("Query")
-        inner_time, w_sums = struct.run_query(gamma / 2.0, h)
+        inner_time, w_sums = c_tree.run_query(gamma / 2.0, h)
         _, outer_time = timer.stop()
         translation_time += (outer_time - inner_time)
 
         # compute minimums per color
+        # TODO pre-compute as much of this loop as possible
         for color in kis.keys():
             # need this to reverse things
             color_sums_ind = (color == colors).nonzero()[0] # tuple for reasons
@@ -85,7 +95,7 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
             W += np.sum(w_sums[min_indecies])
 
         if W >= 1:
-            struct.delete_tree()
+            # struct.delete_tree()
             return None, translation_time
 
         # get counts of points in each ball in M
@@ -100,18 +110,20 @@ def mult_weight_upd(gamma, N, k, features, colors, kis, epsilon):
         h = h * (np.ones_like(M) - ((scaled_eps / 4.0) * M))
         h /= np.sum(h)
 
+        # TODO: check rate of change of X and h (euclidean distance) or l-inf
 
         # check directly if X is a feasible solution
         if t % 50 == 0:
             timer = utils.Stopwatch("Query")
-            inner_time, w_sums = struct.run_query(gamma / 2.0, h)
-            _, X_weights = struct.run_query(gamma / 2.0, (X / (t + 1)))
+
+            # TODO: new query function => boolean for "valid solution"
+            _, X_weights = c_tree.run_query(gamma / 2.0, (X / (t + 1)))
+            _, outer_time = timer.stop()
             translation_time += (outer_time - inner_time)
 
             if not np.any(X_weights > 1 + epsilon):
                 break
 
-    struct.delete_tree()
     X = X / (t + 1)
     return X, translation_time
 
@@ -138,13 +150,21 @@ def epsilon_falloff(features, colors, kis, gamma_upper, mwu_epsilon, falloff_eps
 
     gamma = gamma_upper
 
-    X, cur_trans_time = mult_weight_upd(gamma, N, k, features, colors, kis, mwu_epsilon)
+    # a ParGeo tree for good measure
+    dim = features.shape[1]
+    pargeo_tree = WeightedTree(dim)
+    pargeo_tree.construct_tree(features)
+
+    X, cur_trans_time = mult_weight_upd(gamma, N, k, features, colors, pargeo_tree, kis, mwu_epsilon)
     translation_time += cur_trans_time
 
     while X is None:
         gamma = gamma * (1 - falloff_epsilon)
-        X, cur_trans_time = mult_weight_upd(gamma, N, k, features, colors, kis, mwu_epsilon)
+        X, cur_trans_time = mult_weight_upd(gamma, N, k, features, colors, pargeo_tree, kis, mwu_epsilon)
         translation_time += cur_trans_time
+
+    # "clean up" our tree
+    pargeo_tree.delete_tree()
 
     timer.split("Randomized Rounding")
 
@@ -230,7 +250,7 @@ if __name__ == '__main__':
 
     for k in range(10, 21, 10):
         # compute coreset
-        coreset_size = 100 * k
+        coreset_size = 10 * k
 
         d = len(feature_fields)
         m = len(color_names)

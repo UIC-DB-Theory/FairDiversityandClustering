@@ -361,7 +361,7 @@ if __name__ == '__main__':
     # first for the proper 100
     for k in range(10, 201, 5):
         # compute coreset of size
-        coreset_size = 250 * k
+        coreset_size = 500 * k
         # all colors made by combining values in color_fields
         color_names = np.unique(colors)
 

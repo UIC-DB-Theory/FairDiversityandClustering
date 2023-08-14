@@ -60,14 +60,14 @@ if __name__ == '__main__':
                 return_unadjusted=False,
             ),
         'fairflow':
-            lambda fs, cs, kis, gamma_upper: fdmalgs.FairFlowWrapped(
+            lambda fs, cs, kis, _: fdmalgs.FairFlowWrapped(
                 features=fs,
                 colors=cs,
                 kis=kis,
                 normalize=False,
             ),
         'FairGreedyFlow':
-            lambda fs, cs, kis, gamma_upper: fdmalgs.FairGreedyFlowWrapped(
+            lambda fs, cs, kis, _: fdmalgs.FairGreedyFlowWrapped(
                 features=fs,
                 colors=cs,
                 kis=kis,
@@ -85,7 +85,7 @@ if __name__ == '__main__':
     # first for the proper 100
     for k in range(25, 351, 50):
         # compute coreset of size
-        coreset_size = 75 * k
+        coreset_size = 10 * k
         # all colors made by combining values in color_fields
         color_names = np.unique(colors)
 
