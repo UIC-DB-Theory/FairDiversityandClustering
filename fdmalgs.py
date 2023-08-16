@@ -10,7 +10,7 @@ import math
 import utilsfdm
 import random
 
-import fdmalgs_originial as FDMO
+import fdmalgs_original as FDMO
 
 ElemList = Union[List[utilsfdm.Elem], List[utilsfdm.ElemSparse]]
 
