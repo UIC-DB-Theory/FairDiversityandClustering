@@ -12,18 +12,43 @@ import coreset as CORESET
 import utils
 from rounding import rand_round
 
+def inverse_weighted_sample(delta : float, weights):
+    """
+    :param delta: ratio in 0-1 to sample on
+    :param weights: an array of weights to sample indices off of
+    :return: a NP array of (len(weights) * delta) indices that are selected
+    """
+
+    assert(delta > 0 and delta <= 1)
+
+    weights = weights.flatten()
+
+    nonzero_indexes = np.nonzero(weights != 0)[0] # always a tuple
+    nonzeros = weights[nonzero_indexes]
+
+    # get a random permutation
+    rands = np.random.random_sample(size=len(nonzeros))
+    # of the original array!
+    inverted = (1.0 / nonzeros)
+    argsort = np.argsort(rands ** inverted)
+    indicies = nonzero_indexes[argsort]
+
+    count = math.ceil(len(weights) * delta)
+
+    return indicies[:count]
 
 
-def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, epsilon):
+
+def mult_weight_upd(gamma, delta, N, k, features, colors, kis, epsilon):
     """
     uses the multiplicative weight update method to
     generate an integer solution for the LP
     :param gamma: the minimum distance to optimize for
+    :param delta: Sampling percentage of the feature set
     :param N: the number of elements in the dataset
     :param k: total number of points selected
     :param features: dataset's features
     :param colors: matching colors
-    :param c_tree: The ParGeo C++ tree on the features (passed in so we can re-use it across problem instances)
     :param kis: the color->count mapping
     :param epsilon: allowed error value
     :return: a nx1 vector X of the solution or None if infeasible
@@ -49,11 +74,11 @@ def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, e
     mu = k - 1
 
     h = np.full((N, 1), 1.0 / N, dtype=np.double) # weights
-    X = np.zeros((N, 1))         # Output
+    X = np.zeros((N, 1))                          # Output
 
     T = ((8 * mu) / (math.pow(scaled_eps, 2))) * math.log(N, math.e) # iterations
 
-
+ 
     # for now, we can recreate the structure in advance
     # dim = features.shape[1]
     # struct = WeightedTree(dim)
@@ -63,11 +88,13 @@ def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, e
         S = np.empty((0, features.shape[1]))  # points we select this round
         W = 0                                 # current weight sum
 
-        # weights to every point (time is ignored for now)
-        timer = utils.Stopwatch("Query")
-        inner_time, w_sums = c_tree.run_query(gamma / 2.0, h)
-        _, outer_time = timer.stop()
-        translation_time += (outer_time - inner_time)
+        sampled_indices = inverse_weighted_sample(delta, h)
+
+        # build a tree off the randomized points
+        sampled_tree = BallTree.create(features[sampled_indices])
+
+        # approximate query using sampled tree
+        w_sums = BallTree.get_counts_in_range(sampled_tree, features, gamma / 2.0) / len(sampled_indices)
 
         # compute minimums per color
         # TODO pre-compute as much of this loop as possible
@@ -109,12 +136,8 @@ def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, e
 
         # check directly if X is a feasible solution
         if t > 100 and t % 17 == 0:
-            timer = utils.Stopwatch("Query")
 
-            # TODO: new query function => boolean for "valid solution"
-            _, X_weights = c_tree.run_query(gamma / 2.0, (X / (t + 1)))
-            _, outer_time = timer.stop()
-            translation_time += (outer_time - inner_time)
+            X_weights = BallTree.get_counts_in_range(sampled_tree, features, gamma / 2.0) / len(sampled_indices)
 
             if not np.any(X_weights > 1 + epsilon):
                 break
@@ -123,7 +146,7 @@ def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, e
     return X, translation_time
 
 
-def epsilon_falloff(features, colors, kis, gamma_upper, mwu_epsilon, falloff_epsilon, return_unadjusted):
+def epsilon_falloff(features, colors, kis, gamma_upper, mwu_epsilon, falloff_epsilon, sampling_delta, return_unadjusted):
     """
     starts at a high bound (given by the corset estimate) and repeatedly falls off by 1-epsilon
     :param features: the data set
@@ -145,21 +168,13 @@ def epsilon_falloff(features, colors, kis, gamma_upper, mwu_epsilon, falloff_eps
 
     gamma = gamma_upper
 
-    # a ParGeo tree for good measure
-    dim = features.shape[1]
-    pargeo_tree = WeightedTree(dim)
-    pargeo_tree.construct_tree(features)
-
-    X, cur_trans_time = mult_weight_upd(gamma, N, k, features, colors, pargeo_tree, kis, mwu_epsilon)
+    X, cur_trans_time = mult_weight_upd(gamma, sampling_delta, N, k, features, colors, kis, mwu_epsilon)
     translation_time += cur_trans_time
 
     while X is None:
         gamma = gamma * (1 - falloff_epsilon)
-        X, cur_trans_time = mult_weight_upd(gamma, N, k, features, colors, pargeo_tree, kis, mwu_epsilon)
+        X, cur_trans_time = mult_weight_upd(gamma, sampling_delta, N, k, features, colors, kis, mwu_epsilon)
         translation_time += cur_trans_time
-
-    # "clean up" our tree
-    pargeo_tree.delete_tree()
 
     timer.split("Randomized Rounding")
 
@@ -268,6 +283,7 @@ if __name__ == '__main__':
             gamma_upper=gamma_upper,
             mwu_epsilon=0.75,
             falloff_epsilon=0.1,
+            sampling_delta=1,
             return_unadjusted=True,
         )
         print(f'Finished! (time={time}) (adjusted={adj_time})')
