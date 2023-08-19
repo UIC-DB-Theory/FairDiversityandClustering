@@ -1,4 +1,5 @@
 from collections import defaultdict
+import matplotlib.pyplot as plt
 
 import fdmalgs
 import utils
@@ -7,7 +8,38 @@ import multweights_nyoom as multweights
 from coreset import Coreset_FMM
 
 import numpy as np
+def color(alg_name):
+    '''
+    Returns the color used for plotting the graph of the given algorithm
+    
+    alg_name - name of the algorithm
+    '''
+    if alg_name == "FMMD-LP":
+        # Blue
+        return 'tab:blue'
+    elif alg_name == "FMMD-MWU": 
+        # Yellow
+        return 'y-'
+    elif alg_name == "FMMD-S":
+        # Red
+        return 'tab:red'
+    elif alg_name == "FairFlow":
+        # Black
+        return 'k'
+    elif alg_name == "FairGreedyFlow":
+        # Purple
+        return 'tab:purple'
+    elif alg_name == "SFDM-2":
+        # Green
+        return 'tab:green'
+    # elif alg_name == "fairgreedyflow":
+    #     # Cyan
+    #     return 'tab:cyan'
+    # elif alg_name == "scalable_fmmd_modified_greedy":
+    #     # Brown
+    #     return 'tab:brown'
 
+           
 if __name__ == '__main__':
     # setup
     # File fields
@@ -41,7 +73,7 @@ if __name__ == '__main__':
     # various "tuning" parameters are set here
     # TODO SFDM2 FFMD-S
     algs = {
-        'lp':
+        'FMMD-LP':
             lambda fs, cs, kis, gamma_upper: lpsolve.epsilon_falloff(
                 features=fs,
                 colors=cs,
@@ -49,7 +81,7 @@ if __name__ == '__main__':
                 kis=kis,
                 epsilon=0.15,
             ),
-        'mwu':
+        'FMMD-MWU':
             lambda fs, cs, kis, gamma_upper: multweights.epsilon_falloff(
                 features=fs,
                 colors=cs,
@@ -59,7 +91,7 @@ if __name__ == '__main__':
                 falloff_epsilon=0.15,
                 return_unadjusted=False,
             ),
-        'fairflow':
+        'FairFlow':
             lambda fs, cs, kis, _: fdmalgs.FairFlowWrapped(
                 features=fs,
                 colors=cs,
@@ -140,11 +172,48 @@ if __name__ == '__main__':
     # TODO: double check how many of each color compared to K map
     # TODO: run another algorithm to compare diversity
 
+
+    data_per_alg_t_vs_k = {}
+    data_per_alg_d_vs_k = {}
     print('\n\nFINAL RESULTS:')
 
     for alg, resList in results.items():
         print(f'********{alg}********')
+        data_per_alg_t_vs_k[alg] = {"y":[], "x": []}
+        data_per_alg_d_vs_k[alg] = {"y":[], "x": []}
         for k, d, t in resList:
             print(f'{k}\t{d}\t{t}')
+            data_per_alg_t_vs_k[alg]["y"].append(t)
+            data_per_alg_t_vs_k[alg]["x"].append(k)
+            data_per_alg_d_vs_k[alg]["y"].append(d)
+            data_per_alg_d_vs_k[alg]["x"].append(k)
 
         print('\n\n', end='')
+    
+
+
+    # Plot the graph t vs k
+    plt.clf()
+    for alg in data_per_alg_t_vs_k:
+        plt.plot(data_per_alg_t_vs_k[alg]["x"], data_per_alg_t_vs_k[alg]["y"], color(alg), label=alg)
+    
+    plt.yscale("log")
+    plt.legend(title = "time vs k - Adult Full", bbox_to_anchor=(1.05, 1.0), loc='upper left')
+    plt.xlabel("k")
+    plt.ylabel("Time (s)")
+    plt.savefig("graphs/t_vs_k_adult_full", dpi=300, bbox_inches='tight')
+
+    # Plot the graph d vs k 
+    plt.clf()
+    for alg in data_per_alg_d_vs_k:
+        plt.plot(data_per_alg_d_vs_k[alg]["x"], data_per_alg_d_vs_k[alg]["y"], color(alg), label=alg)
+    
+    plt.yscale("log")
+    plt.legend(title = "d vs k - Adult Full", bbox_to_anchor=(1.05, 1.0), loc='upper left')
+    plt.xlabel("k")
+    plt.ylabel("d")
+    plt.savefig("graphs/d_vs_k_adult_full", dpi=300, bbox_inches='tight')
+
+    plt.close()
+
+
