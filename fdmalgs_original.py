@@ -14,6 +14,7 @@ import numpy as np
 from gurobipy import GRB
 
 ElemList = Union[List[utilsfdm.Elem], List[utilsfdm.ElemSparse]]
+TIME_LIMIT_ILP = 300
 
 class Instance:
     def __init__(self, k: int, mu: float, m: int):
