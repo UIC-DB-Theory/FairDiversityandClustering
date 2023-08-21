@@ -164,29 +164,41 @@ if __name__ == '__main__':
         # run every algorithm on this set
         for alg, runner in algs.items():
             print(f'Running {alg} for {k_rounded}...')
-            _, div, time = runner(core_features, core_colors, kis, upper_gamma)
-            print(f'{alg} finished in {time}! (diversity of {div})')
+            rep_div_avg = 0
+            calc_div_avg = 0
+            time_avg = 0
+            num_runs = 10
+            for i in range(0, num_runs):
+                sol, div, time = runner(core_features, core_colors, kis, upper_gamma)
+                rep_div_avg += div
+                calc_div_avg += utils.compute_maxmin_diversity(core_features[sol])
+                time_avg += time
+            rep_div_avg = rep_div_avg/num_runs
+            calc_div_avg = calc_div_avg/num_runs
+            time_avg = time_avg/num_runs
+            print(f'{alg} finished in {time}! (diversity of {rep_div_avg}, calculated diversity of {calc_div_avg})')
 
-            results[alg].append((k_rounded, div, time))
-
-    # TODO: double check how many of each color compared to K map
-    # TODO: run another algorithm to compare diversity
+            results[alg].append((k_rounded, rep_div_avg, calc_div_avg, time_avg))
 
 
     data_per_alg_t_vs_k = {}
-    data_per_alg_d_vs_k = {}
+    data_per_alg_rd_vs_k = {}
+    data_per_alg_cd_vs_k = {}
     print('\n\nFINAL RESULTS:')
 
     for alg, resList in results.items():
         print(f'********{alg}********')
         data_per_alg_t_vs_k[alg] = {"y":[], "x": []}
-        data_per_alg_d_vs_k[alg] = {"y":[], "x": []}
-        for k, d, t in resList:
-            print(f'{k}\t{d}\t{t}')
+        data_per_alg_rd_vs_k[alg] = {"y":[], "x": []}
+        data_per_alg_cd_vs_k[alg] = {"y":[], "x": []}
+        for k, rd, cd, t in resList:
+            print(f'{k}\t{rd}\t{cd}\t{t}')
             data_per_alg_t_vs_k[alg]["y"].append(t)
             data_per_alg_t_vs_k[alg]["x"].append(k)
-            data_per_alg_d_vs_k[alg]["y"].append(d)
-            data_per_alg_d_vs_k[alg]["x"].append(k)
+            data_per_alg_rd_vs_k[alg]["y"].append(rd)
+            data_per_alg_rd_vs_k[alg]["x"].append(k)
+            data_per_alg_cd_vs_k[alg]["y"].append(cd)
+            data_per_alg_cd_vs_k[alg]["x"].append(k)
 
         print('\n\n', end='')
     
@@ -201,18 +213,31 @@ if __name__ == '__main__':
     plt.legend(title = "time vs k - Adult Full", bbox_to_anchor=(1.05, 1.0), loc='upper left')
     plt.xlabel("k")
     plt.ylabel("Time (s)")
-    plt.savefig("graphs/t_vs_k_adult_full", dpi=300, bbox_inches='tight')
+    plt.savefig("t_vs_k_adult_full", dpi=300, bbox_inches='tight')
 
-    # Plot the graph d vs k 
+    # Plot the graph reported d vs k 
     plt.clf()
-    for alg in data_per_alg_d_vs_k:
-        plt.plot(data_per_alg_d_vs_k[alg]["x"], data_per_alg_d_vs_k[alg]["y"], color(alg), label=alg)
+    for alg in data_per_alg_rd_vs_k:
+        plt.plot(data_per_alg_rd_vs_k[alg]["x"], data_per_alg_rd_vs_k[alg]["y"], color(alg), label=alg)
     
-    plt.yscale("log")
-    plt.legend(title = "d vs k - Adult Full", bbox_to_anchor=(1.05, 1.0), loc='upper left')
+    # plt.yscale("log")
+    plt.legend(title = "d(reported) vs k - Adult Full", bbox_to_anchor=(1.05, 1.0), loc='upper left')
     plt.xlabel("k")
     plt.ylabel("d")
-    plt.savefig("graphs/d_vs_k_adult_full", dpi=300, bbox_inches='tight')
+    plt.savefig("d_reported_vs_k_adult_full", dpi=300, bbox_inches='tight')
+
+    plt.close()
+
+    # Plot the graph calculated d vs k 
+    plt.clf()
+    for alg in data_per_alg_rd_vs_k:
+        plt.plot(data_per_alg_rd_vs_k[alg]["x"], data_per_alg_rd_vs_k[alg]["y"], color(alg), label=alg)
+    
+    # plt.yscale("log")
+    plt.legend(title = "d(calcuated) vs k - Adult Full", bbox_to_anchor=(1.05, 1.0), loc='upper left')
+    plt.xlabel("k")
+    plt.ylabel("d")
+    plt.savefig("d_calcualted_vs_k_adult_full", dpi=300, bbox_inches='tight')
 
     plt.close()
 

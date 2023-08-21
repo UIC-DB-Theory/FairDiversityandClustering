@@ -176,10 +176,11 @@ def epsilon_falloff(features, colors, kis, gamma_upper, mwu_epsilon, falloff_eps
 
     diversity = utils.compute_maxmin_diversity(solution)
 
+    # TODO: Return solution set instead of size of solution
     if return_unadjusted:
-        return selected_count, diversity, adjusted_time, total_time
+        return S, diversity, adjusted_time, total_time
     else:
-        return selected_count, diversity, adjusted_time
+        return S, diversity, adjusted_time
 
 
 if __name__ == '__main__':

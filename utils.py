@@ -1,6 +1,6 @@
 import typing
 import typing as t
-
+import sys
 import numpy as np
 import numpy.typing as npt
 
@@ -88,6 +88,13 @@ class Stopwatch:
         self.times.append(time.perf_counter())
         return zip(self.names, self._calc_deltas()), self.times[-1] - self.times[0]
 
+def compute_diversity(points: npt.NDArray[np.float64]) -> float:
+    from scipy.spatial import distance
+    div = sys.float_info.max
+    for i in range(len(points)):
+        for j in range(i + 1, len(points)):
+            div = min(div, distance.euclidean(points[i], points[j]))
+    return div
 
 def compute_maxmin_diversity(points : npt.NDArray[np.float64]) -> float:
     """

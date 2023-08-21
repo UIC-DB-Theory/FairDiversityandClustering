@@ -317,9 +317,9 @@ def epsilon_falloff(features, colors, upper_gamma, kis, epsilon, deltas=False):
     if deltas:
         delta_vals = utils.check_returned_kis(colors, kis, S)
 
-        return selected_count, diversity, delta_vals, total_time
+        return S, diversity, delta_vals, total_time
     else:
-        return selected_count, diversity, total_time
+        return S, diversity, total_time
 
 
 if __name__ == '__main__':
