@@ -23,15 +23,13 @@ def inverse_weighted_sample(delta : float, weights):
 
     weights = weights.flatten()
 
-    nonzero_indexes = np.nonzero(weights != 0)[0] # always a tuple
-    nonzeros = weights[nonzero_indexes]
+    # smallest possible floating point to avoid divde by zero errors
+    bias = np.nextafter(0, 1)
 
     # get a random permutation
-    rands = np.random.random_sample(size=len(nonzeros))
+    rands = np.random.random_sample(size=len(weights))
     # of the original array!
-    inverted = (1.0 / nonzeros)
-    argsort = np.argsort(rands ** inverted)
-    indicies = nonzero_indexes[argsort]
+    indicies = np.argsort(rands ** (1 / (weights + bias)))
 
     count = math.ceil(len(weights) * delta)
 
@@ -135,12 +133,12 @@ def mult_weight_upd(gamma, delta, N, k, features, colors, kis, epsilon):
         # TODO: check rate of change of X and h (euclidean distance) or l-inf
 
         # check directly if X is a feasible solution
-        if t > 100 and t % 17 == 0:
+        # if t > 100 and t % 17 == 0:
 
-            X_weights = BallTree.get_counts_in_range(sampled_tree, features, gamma / 2.0) / len(sampled_indices)
+            # X_weights = BallTree.get_counts_in_range(sampled_tree, features, gamma / 2.0) / len(sampled_indices)
 
-            if not np.any(X_weights > 1 + epsilon):
-                break
+            # if not np.any(X_weights > 1 + epsilon):
+                # break
 
     X = X / (t + 1)
     return X, translation_time
@@ -283,7 +281,7 @@ if __name__ == '__main__':
             gamma_upper=gamma_upper,
             mwu_epsilon=0.75,
             falloff_epsilon=0.1,
-            sampling_delta=1,
+            sampling_delta=0.01,
             return_unadjusted=True,
         )
         print(f'Finished! (time={time}) (adjusted={adj_time})')
