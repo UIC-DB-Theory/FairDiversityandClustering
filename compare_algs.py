@@ -6,6 +6,7 @@ import utils
 import lpsolve
 import multweights_nyoom as multweights
 from coreset import Coreset_FMM
+import time
 
 import numpy as np
 def color(alg_name):
@@ -148,6 +149,8 @@ if __name__ == '__main__':
 
         d = len(feature_fields)
         m = len(color_names)
+        coreset_time = 0
+
         coreset = Coreset_FMM(features, colors, k, m, d, coreset_size)
         # can't overwrite our original dataset
         core_features, core_colors = coreset.compute()
@@ -167,17 +170,25 @@ if __name__ == '__main__':
             rep_div_avg = 0
             calc_div_avg = 0
             time_avg = 0
-            num_runs = 10
+            num_runs = 1
             for i in range(0, num_runs):
-                sol, div, time = runner(core_features, core_colors, kis, upper_gamma)
-                rep_div_avg += div
-                calc_div_avg += utils.compute_maxmin_diversity(core_features[sol])
-                time_avg += time
+                if alg == 'FMMD-MWU' or alg == 'FMMD-LP':
+                    sol, div, algtime = runner(core_features, core_colors, kis, upper_gamma)
+                    algtime = algtime + coreset.coreset_compute_time
+                    print(f'coreset compute time: {coreset.coreset_compute_time}')
+                    rep_div_avg += div
+                    # calc_div_avg += utils.compute_maxmin_diversity(core_features[sol])
+                    time_avg += algtime
+                else:
+                    sol, div, algtime = runner(features, colors, kis, upper_gamma)
+                    rep_div_avg += div
+                    # calc_div_avg += utils.compute_maxmin_diversity(core_features[sol])
+                    time_avg += algtime
             rep_div_avg = rep_div_avg/num_runs
-            calc_div_avg = calc_div_avg/num_runs
+            # calc_div_avg = calc_div_avg/num_runs
             time_avg = time_avg/num_runs
-            print(f'{alg} finished in {time}! (diversity of {rep_div_avg}, calculated diversity of {calc_div_avg})')
-
+            print(f'{alg} finished in {time_avg}! (diversity of {rep_div_avg}, calculated diversity of {calc_div_avg})')
+            
             results[alg].append((k_rounded, rep_div_avg, calc_div_avg, time_avg))
 
 
@@ -229,16 +240,16 @@ if __name__ == '__main__':
     plt.close()
 
     # Plot the graph calculated d vs k 
-    plt.clf()
-    for alg in data_per_alg_rd_vs_k:
-        plt.plot(data_per_alg_rd_vs_k[alg]["x"], data_per_alg_rd_vs_k[alg]["y"], color(alg), label=alg)
+    # plt.clf()
+    # for alg in data_per_alg_rd_vs_k:
+    #     plt.plot(data_per_alg_rd_vs_k[alg]["x"], data_per_alg_rd_vs_k[alg]["y"], color(alg), label=alg)
     
-    # plt.yscale("log")
-    plt.legend(title = "d(calcuated) vs k - Adult Full", bbox_to_anchor=(1.05, 1.0), loc='upper left')
-    plt.xlabel("k")
-    plt.ylabel("d")
-    plt.savefig("d_calcualted_vs_k_adult_full", dpi=300, bbox_inches='tight')
+    # # plt.yscale("log")
+    # plt.legend(title = "d(calcuated) vs k - Adult Full", bbox_to_anchor=(1.05, 1.0), loc='upper left')
+    # plt.xlabel("k")
+    # plt.ylabel("d")
+    # plt.savefig("d_calcualted_vs_k_adult_full", dpi=300, bbox_inches='tight')
 
-    plt.close()
+    # plt.close()
 
 

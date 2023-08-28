@@ -143,3 +143,6 @@ Pipfile.lock
 
 # vscode files
 .vscode
+
+# yash
+notes/*

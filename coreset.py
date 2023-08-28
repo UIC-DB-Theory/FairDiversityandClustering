@@ -2,7 +2,7 @@ import numpy as np
 import numpy.typing as npt
 import typing as t
 from tqdm import trange
-
+import time
 class Coreset_FMM:
     """
     Class to compute Fair Max Min Coreset.
@@ -60,6 +60,9 @@ class Coreset_FMM:
 
         # error value for calculated coreset
         self.e = pow(((k*m)/coreset_size),(1/d)) * 8
+
+        self.coreset_compute_time = 0
+        self.gamma_upper_bound_compute_time = 0
     
     def update_coreset_size(self, coreset_size):
         self.coreset_size = coreset_size
@@ -152,7 +155,7 @@ class Coreset_FMM:
     
     # Compute the coreset for FMM
     def compute(self):
-    
+        t0 = time.perf_counter()
         out_colors = []
         out_features = []
 
@@ -174,5 +177,6 @@ class Coreset_FMM:
 
         out_colors = np.concatenate(out_colors)
         out_features = np.concatenate(out_features)
-
+        t1 = time.perf_counter()
+        self.coreset_compute_time = t1- t0
         return out_features, out_colors
