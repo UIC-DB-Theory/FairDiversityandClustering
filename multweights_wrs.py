@@ -133,12 +133,12 @@ def mult_weight_upd(gamma, delta, N, k, features, colors, kis, epsilon):
         # TODO: check rate of change of X and h (euclidean distance) or l-inf
 
         # check directly if X is a feasible solution
-        # if t > 100 and t % 17 == 0:
+        if t > 100 and t % 17 == 0:
 
-            # X_weights = BallTree.get_counts_in_range(sampled_tree, features, gamma / 2.0) / len(sampled_indices)
+            X_weights = BallTree.get_counts_in_range(sampled_tree, features, gamma / 2.0) / len(sampled_indices)
 
-            # if not np.any(X_weights > 1 + epsilon):
-                # break
+            if not np.any(X_weights > 1 + epsilon):
+                break
 
     X = X / (t + 1)
     return X, translation_time
@@ -281,7 +281,7 @@ if __name__ == '__main__':
             gamma_upper=gamma_upper,
             mwu_epsilon=0.75,
             falloff_epsilon=0.1,
-            sampling_delta=0.01,
+            sampling_delta=0.1, # 0.1 is probably a good spot
             return_unadjusted=True,
         )
         print(f'Finished! (time={time}) (adjusted={adj_time})')
