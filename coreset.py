@@ -3,6 +3,7 @@ import numpy.typing as npt
 import typing as t
 from tqdm import trange
 import time
+import sys
 class Coreset_FMM:
     """
     Class to compute Fair Max Min Coreset.
@@ -61,13 +62,12 @@ class Coreset_FMM:
         # error value for calculated coreset
         self.e = pow(((k*m)/coreset_size),(1/d)) * 8
 
+        self.out_features = []
+        self.out_colors = []
+
         self.coreset_compute_time = 0
         self.gamma_upper_bound_compute_time = 0
-    
-    def update_coreset_size(self, coreset_size):
-        self.coreset_size = coreset_size
-        self.e = pow(((self.k*self.m)/coreset_size),(1/self.d)) * 8
-        self.gmm_result_size = int(coreset_size/self.m)
+        self.closest_pair_compute_time = 0
 
 
     # Compute Greedy k-center/GMM with polynomial 2-approximation
@@ -109,9 +109,36 @@ class Coreset_FMM:
 
         return result
     
-    # returns the upper bound for gamma as 2*div(U)
-    def compute_gamma_upper_bound(self):
+    # Returns the distance between the closest pair in the coreset
+    # NOTE: COMPUTED ON CORESET OF SIZE self.coreset_size
+    def compute_closest_pair(self):
+        t0 = time.perf_counter()
+        from scipy.spatial import distance
+        min_dist = sys.float_info.max
+        for i in range(len(self.out_features)):
+            for j in range(i + 1, len(self.out_features)):
+                new_dist = distance.euclidean(self.out_features[i], self.out_features[j])
+                min_dist = min(min_dist, new_dist)
 
+        # from scipy.spatial import KDTree
+
+        # # get nearest point to each element
+        # tree = KDTree(self.features)
+        # distances, _ = tree.query(self.features, k=2)
+        # nonzero_distances = distances[:, 1]
+
+        # min_dist = np.min(nonzero_distances)
+        t1 = time.perf_counter()
+        self.closest_pair_compute_time = t1 - t0
+        return min_dist
+
+
+    # returns the upper bound for gamma as 2*div(U)
+    # NOTE: CALCULATED ON A CORESET OF SIZE self.k
+    # The coreset used to calculate gamma upper bound is computed by
+    # selected k points using the GMM clustering algorithm
+    def compute_gamma_upper_bound(self):
+        t0 = time.perf_counter()
         gamma_high = float('inf')
 
         from scipy.spatial.distance import cdist
@@ -150,14 +177,13 @@ class Coreset_FMM:
             point = np.reshape(maximum_dist_point, (1, dim))
             new_point_distances = cdist(self.features, point)
             point_distances = np.minimum(point_distances, new_point_distances)
-        
+        t1 = time.perf_counter()
+        self.gamma_upper_bound_compute_time = t1- t0
         return 2*gamma_high
     
     # Compute the coreset for FMM
     def compute(self):
         t0 = time.perf_counter()
-        out_colors = []
-        out_features = []
 
         # run k-center on all possible colors
         all_colors, inverse = np.unique(self.colors, return_inverse=True)
@@ -172,11 +198,11 @@ class Coreset_FMM:
             # The coressponding color list
             color_colors = np.array([all_colors[color]]*len(color_coreset))
 
-            out_colors.append(color_colors)
-            out_features.append(color_coreset)
+            self.out_colors.append(color_colors)
+            self.out_features.append(color_coreset)
 
-        out_colors = np.concatenate(out_colors)
-        out_features = np.concatenate(out_features)
+        self.out_colors = np.concatenate(self.out_colors)
+        self.out_features = np.concatenate(self.out_features)
         t1 = time.perf_counter()
         self.coreset_compute_time = t1- t0
-        return out_features, out_colors
+        return self.out_features, self.out_colors

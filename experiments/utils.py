@@ -1,4 +1,5 @@
 import numpy as np
+import math
 
 def buildKisMap(colors, k, a):
     """
