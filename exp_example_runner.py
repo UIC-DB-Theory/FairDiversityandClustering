@@ -8,8 +8,6 @@ import json
 import numpy as np
 import signal
 from contextlib import contextmanager
-
-sys.path.append("..")
 from algorithms.coreset import Coreset_FMM
 
 setup = {}
@@ -53,7 +51,7 @@ for dataset in setup["datasets"]:
 def experiment_sfdm2(dataset, k, include_coreset_time = False, include_gamma_high_time = False, include_gamma_low_time = False):
     print("Running experiment for SFDM-2")
     print(f'\t\tk = {k}')
-    from experiments.utils import buildKisMap
+    from algorithms.utils import buildKisMap
     kis = buildKisMap(dataset["colors"], k, 0.1)
     d = dataset["d"]
     m = dataset["m"]
@@ -101,7 +99,7 @@ def experiment_sfdm2(dataset, k, include_coreset_time = False, include_gamma_hig
 def experiment_fmmds(dataset, k):
     print("Running experiment for FMMD-S")
     print(f'\t\tk = {k}')
-    from experiments.utils import buildKisMap
+    from algorithms.utils import buildKisMap
     kis = buildKisMap(dataset["colors"], k, 0.1)
     d = dataset["d"]
     m = dataset["m"]
@@ -124,7 +122,7 @@ def experiment_fmmds(dataset, k):
 def experiment_fairflow(dataset, k, include_coreset_time = False):
     print("Running experiment for FairFlow")
     print(f'\t\tk = {k}')
-    from experiments.utils import buildKisMap
+    from algorithms.utils import buildKisMap
     kis = buildKisMap(dataset["colors"], k, 0.1)
     d = dataset["d"]
     m = dataset["m"]
@@ -154,7 +152,7 @@ def experiment_fairflow(dataset, k, include_coreset_time = False):
 def experiment_fairgreedyflow(dataset, k, include_coreset_time = False, include_gamma_high_time = False, include_gamma_low_time = False):
     print("Running experiment for FairGreedyFlow")
     print(f'\t\tk = {k}')
-    from experiments.utils import buildKisMap
+    from algorithms.utils import buildKisMap
     kis = buildKisMap(dataset["colors"], k, 0.1)
     d = dataset["d"]
     m = dataset["m"]
@@ -202,7 +200,7 @@ def experiment_fairgreedyflow(dataset, k, include_coreset_time = False, include_
 def experiment_fmmdmwu(dataset, k, include_coreset_time = False, include_gamma_high_time = False):
     print("Running experiment for FMMD-MWU")
     print(f'\t\tk = {k}')
-    from experiments.utils import buildKisMap
+    from algorithms.utils import buildKisMap
     kis = buildKisMap(dataset["colors"], k, 0.1)
     d = dataset["d"]
     m = dataset["m"]
@@ -242,7 +240,7 @@ def experiment_fmmdmwu(dataset, k, include_coreset_time = False, include_gamma_h
 def experiment_fmmdlp(dataset, k, include_coreset_time = False, include_gamma_high_time = False):
     print("Running experiment for FMMD-LP")
     print(f'\t\tk = {k}')
-    from experiments.utils import buildKisMap
+    from algorithms.utils import buildKisMap
     kis = buildKisMap(dataset["colors"], k, 0.1)
     d = dataset["d"]
     m = dataset["m"]
