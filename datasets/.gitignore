@@ -1,0 +1,7 @@
+# Ignore all dataset files
+/diabetes/*
+/adult/*
+
+# Dont ignore the dataset generation files
+!/diabetes/diabetes_generate.py
+!/adult/adult_generate.py
