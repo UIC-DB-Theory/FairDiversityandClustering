@@ -24,10 +24,26 @@ setup = {
                 "fnlwgt", 
                 "education-num"],
             "normalize" : 1
+        },
+        "Diabetes" : {
+            "data_dir" : "../datasets/diabetes",
+            "color_fields" : [
+                "gender", 
+                "diabetesMed"
+            ],
+            "feature_fields" : [
+                "num_procedures", 
+                "num_lab_procedures", 
+                "number_outpatient", 
+                "number_emergency", 
+                "number_inpatient", 
+                "number_diagnoses"],
+            "normalize" : 1
         }
     },
-    "parametes" : {
-        "k" : [25, 101, 25]
+    "parameters" : {
+        "k" : [25, 50, 25],
+        "observations" : 5
     }
 }
 
@@ -296,16 +312,36 @@ for dataset_name, dataset in datasets.items():
         runtimes = []
         diversity_values = []
         # While varying k
-        for k in range(setup["parametes"]["k"][0] ,setup["parametes"]["k"][1], setup["parametes"]["k"][2]):
+        for k in range(setup["parameters"]["k"][0] ,setup["parameters"]["k"][1], setup["parameters"]["k"][2]):
+
             k_values.append(k)
-            t, div = runner(dataset, k)
+
+            t = 0
+            div = 0
+            for rn in range(0, setup["parameters"]["observations"]):
+                t_val, div_val = runner(dataset, k)
+                t = t + t_val
+                div = div+div_val
+            t = t/setup["parameters"]["observations"]
+            div = div/setup["parameters"]["observations"]
+
+            
             runtimes.append(t)
             diversity_values.append(div)
             print(f"k = {k}, t = {t}, div = {div}")
-        results[alg] = {
-            "xs" : {"k_values" : k_values},
-            "ys" : {"runtimes" : runtimes, "diversity_values" : diversity_values}
-        }
+
+        if dataset_name not in results:
+            results[dataset_name] = {
+                alg : {
+                    "xs" : {"k_values" : k_values},
+                    "ys" : {"runtimes" : runtimes, "diversity_values" : diversity_values}
+                } 
+            }
+        else:
+            results[dataset_name][alg] = {
+                "xs" : {"k_values" : k_values},
+                "ys" : {"runtimes" : runtimes, "diversity_values" : diversity_values}
+            }
 
 
 
@@ -318,42 +354,3 @@ summary = {
 json_object = json.dumps(summary, indent=4)
 with open("experiment1.json", "w") as outfile:
     outfile.write(json_object)
-
-
-# Plot the experiments
-import matplotlib.pyplot as plt
-alg_colors = {
-    'SFDM-2' : 'tab:blue',
-    'FMMD-S' : 'k',
-    'FairFlow' : 'y-',
-    'FairGreedyFlow' : 'tab:brown',
-    'FMMD-MWU' : 'tab:green',
-    'FMMD-LP' : 'tab:red',
-}
-
-plt.clf()
-# t vs k
-for alg,result in results.items():
-    x = result["xs"]["k_values"]
-    y =result["ys"]["runtimes"]
-    plt.plot(x,y, alg_colors[alg], label=alg)
-
-plt.legend(title = "runtime vs k - Adult", bbox_to_anchor=(1.05, 1.0), loc='upper left')
-plt.xlabel("k")
-plt.ylabel("runtime (s)")
-plt.savefig("t_vs_k_adult", dpi=300, bbox_inches='tight')
-plt.yscale("log")
-plt.savefig("log_t_vs_k_adult", dpi=300, bbox_inches='tight')
-
-plt.clf()
-# d vs k
-for alg,result in results.items():
-    x = result["xs"]["diversity_values"]
-    plt.plot(x,y, alg_colors[alg], label=alg)
-
-plt.legend(title = "d vs k - Adult", bbox_to_anchor=(1.05, 1.0), loc='upper left')
-plt.xlabel("k")
-plt.ylabel("d")
-plt.savefig("d_vs_k_adult", dpi=300, bbox_inches='tight')
-
-plt.close()
