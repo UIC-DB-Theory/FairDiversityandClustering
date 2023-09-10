@@ -36,8 +36,8 @@
                 350,
                 25
             ],
-            "observations": 5,
-            "observations_multiprocess": 1
+            "timeout": 100,
+            "observations": 1
         }
     },
     "results": {}

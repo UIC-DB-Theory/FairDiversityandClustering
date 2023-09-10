@@ -6,10 +6,12 @@ Description:
 import sys
 import json
 import numpy as np
-from multiprocessing import Pool
+import time
+import asyncio
 sys.path.append("..")
 
 result_file = "experiment1.json"
+results = {}
 setup = {
     "datasets" : {
         "Adult" : {
@@ -30,8 +32,8 @@ setup = {
     },
     "parameters" : {
         "k" : [25, 350, 25],
-        "observations" : 5,
-        "observations_multiprocess" : 1
+        "timeout" : 100,
+        "observations" : 1
     }
 }
 
@@ -308,66 +310,76 @@ alg_experiments = {
 }
 
 # For multiprocessing - functions are only picklable if they are defined at the top-level of a module
-def picklable_runner(alg, dataset, k):
+async def picklable_runner(alg, dataset, k):
     return alg_experiments[alg](dataset, k)
 
-# Run the experiments
-results = {}
-write_summary(setup, results)
-# For each dataset
-for dataset_name, dataset in datasets.items():
-    # Run each algorithm
-    for alg, runner in alg_experiments.items():
-        k_values = []
-        runtimes = []
-        diversity_values = []
-        # While varying k
-        for k in range(setup["parameters"]["k"][0] ,setup["parameters"]["k"][1], setup["parameters"]["k"][2]):
+async def main():
+    # Run the experiments
+    write_summary(setup, results)
+    # For each dataset
+    for dataset_name, dataset in datasets.items():
+        # Run each algorithm
+        for alg, runner in alg_experiments.items():
+            k_values = []
+            runtimes = []
+            diversity_values = []
+            # While varying k
+            for k in range(setup["parameters"]["k"][0] ,setup["parameters"]["k"][1], setup["parameters"]["k"][2]):
 
-            k_values.append(k)
-
-            t = 0
-            div = 0
-
-            if setup["parameters"]["observations_multiprocess"] == 1:
-                # Multiprocess
-                inputs = []
-                for rn in range(0, setup["parameters"]["observations"]):
-                    inputs.append((alg, dataset, k))
                 
-                with Pool(len(inputs)) as p:
-                    outputs = p.starmap(picklable_runner, inputs)
-                
-                for t_val, div_val in outputs:
-                    t = t + t_val
-                    div = div+div_val
-                t = t/setup["parameters"]["observations"]
-                div = div/setup["parameters"]["observations"]
+                t = 0
+                div = 0
+                timedout = False
+                if "timeout" in setup["parameters"]:
+                    # With timeout
+
+                    for rn in range(0, setup["parameters"]["observations"]):
+                        print(rn)
+                        task = asyncio.create_task(picklable_runner(alg, dataset, k))
+
+                        try:
+                            t_val, div_val = await asyncio.wait_for(task, timeout= 50)
+                        except asyncio.TimeoutError:
+                            timedout = True
+                            print("Timed out!")
+
+                        t = t + t_val
+                        div = div+div_val
+                    t = t/setup["parameters"]["observations"]
+                    div = div/setup["parameters"]["observations"]
+
+
+                else:
+                    # No timeout
+                    for rn in range(0, setup["parameters"]["observations"]):
+                        t_val, div_val = runner(dataset, k)
+                        t = t + t_val
+                        div = div+div_val
+                    t = t/setup["parameters"]["observations"]
+                    div = div/setup["parameters"]["observations"]
+                if not timedout:
+                    k_values.append(k)
+                    runtimes.append(t)
+                    diversity_values.append(div)
+                print(f"k = {k}, t = {t}, div = {div}")
+
+            if dataset_name not in results:
+                results[dataset_name] = {
+                    alg : {
+                        "xs" : {"k_values" : k_values},
+                        "ys" : {"runtimes" : runtimes, "diversity_values" : diversity_values}
+                    } 
+                }
             else:
-                #Serial
-                for rn in range(0, setup["parameters"]["observations"]):
-                    t_val, div_val = runner(dataset, k)
-                    t = t + t_val
-                    div = div+div_val
-                t = t/setup["parameters"]["observations"]
-                div = div/setup["parameters"]["observations"]
-
-            runtimes.append(t)
-            diversity_values.append(div)
-            print(f"k = {k}, t = {t}, div = {div}")
-
-        if dataset_name not in results:
-            results[dataset_name] = {
-                alg : {
+                results[dataset_name][alg] = {
                     "xs" : {"k_values" : k_values},
                     "ys" : {"runtimes" : runtimes, "diversity_values" : diversity_values}
-                } 
-            }
-        else:
-            results[dataset_name][alg] = {
-                "xs" : {"k_values" : k_values},
-                "ys" : {"runtimes" : runtimes, "diversity_values" : diversity_values}
-            }
-        write_summary(setup, results)
+                }
+            write_summary(setup, results)
 
-write_summary(setup, results)
+    write_summary(setup, results)
+
+if __name__ == "__main__":
+    # loop = asyncio.get_event_loop()
+    # loop.run_until_complete(main())
+    asyncio.run(main())
