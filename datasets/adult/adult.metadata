@@ -1,5 +1,6 @@
 {
     "filename": "adult.data",
+    "url": "https://archive.ics.uci.edu/dataset/2/adult",
     "fields": [
         "age",
         "workclass",
