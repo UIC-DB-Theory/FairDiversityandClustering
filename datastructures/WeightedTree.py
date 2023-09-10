@@ -14,7 +14,7 @@ class WeightedTree:
         """
         assert 1 < dimension < 8, "dimension is outside of acceptable values"
         self.dim = dimension
-        self.executable = '../ParGeoWeightedTree/build/example/TreeClient'
+        self.executable = './ParGeoWeightedTree/build/example/TreeClient'
         # self.executable = './ParGeoCtl/pargeoctl'
         # error value for calculated coreset
         self.proc = subprocess.Popen(
@@ -73,6 +73,31 @@ class WeightedTree:
             "type": "run-query",
             "radius": radius,
             "weights": weights.flatten().tolist()}
+
+        message_str = json.dumps(message_json)
+
+        response_json = self._send_message(message_str)
+        # TODO: check response and handle if errors occurred
+        assert response_json['status'] == 'OK', "query response returned an error"
+
+        return response_json['time'], np.array(response_json['result'])
+
+    def run_indices_query(self, radius, weights, indices):
+        """
+        Similar to run_query but allows to specify the points we wish to query directly
+        :param radius: The radius for the query
+        :param weights: a np array of weights (one for each point in the ENTIRE dataset)
+        :param indices: the indices of points in the dataset which we want to query
+        :return: a tuple of the time recorded to perform the action and an np array of weights.
+        """
+        assert (self.N == len(weights.flatten()))
+
+        message_json = {
+            "type": "run-query",
+            "radius": radius,
+            "weights": weights.flatten().tolist(),
+            "indices": indices.flatten().tolist(),
+        }
 
         message_str = json.dumps(message_json)
 
