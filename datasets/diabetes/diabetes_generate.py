@@ -34,8 +34,4 @@ with open(metadata_file, "w") as outfile:
 # ---------------Create file diabetes.data---------------
 with open(metadata["filename"], "w", newline="") as f:
     writer = csv.writer(f)
-    
-    # For the gender field - Ignore Unknown/Invalid value
-
-    
     writer.writerows(data)
