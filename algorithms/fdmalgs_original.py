@@ -6,7 +6,7 @@ import networkx as nx
 import numpy as np
 from scipy.special import comb
 import math
-import utilsfdm
+import algorithms.utilsfdm as utilsfdm
 import random
 import gurobipy as gp
 import numpy as np

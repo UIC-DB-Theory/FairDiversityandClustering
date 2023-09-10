@@ -7,7 +7,10 @@
 # from coreset import Coreset_FMM
 # import time
 from datasets.utils import read_dataset
-
+from algorithms.fairflow import FairFlow
+from algorithms.fairgreedyflow import FairGreedyFlow
+from algorithms.fmmds import FMMDS
+from algorithms.sfdm2 import StreamFairDivMax2
 import numpy as np
 def color(alg_name):
     '''
@@ -75,63 +78,63 @@ if __name__ == '__main__':
     # we wrap each one so it has the same signature
     # various "tuning" parameters are set here
     # TODO SFDM2 FFMD-S
-    # algs = {
-    #     'FMMD-LP':
-    #         lambda fs, cs, kis, gamma_upper: lpsolve.epsilon_falloff(
-    #             features=fs,
-    #             colors=cs,
-    #             upper_gamma=gamma_upper,
-    #             kis=kis,
-    #             epsilon=0.15,
-    #         ),
-    #     'FMMD-MWU':
-    #         lambda fs, cs, kis, gamma_upper: multweights.epsilon_falloff(
-    #             features=fs,
-    #             colors=cs,
-    #             kis=kis,
-    #             gamma_upper=gamma_upper,
-    #             mwu_epsilon=0.75,
-    #             falloff_epsilon=0.15,
-    #             return_unadjusted=False,
-    #         ),
-    #     'FairFlow':
-    #         lambda fs, cs, kis, _: fdmalgs.FairFlowWrapped(
-    #             features=fs,
-    #             colors=cs,
-    #             kis=kis,
-    #             normalize=False,
-    #         ),
-    #     'FairGreedyFlow':
-    #         lambda fs, cs, kis, _: fdmalgs.FairGreedyFlowWrapped(
-    #             features=fs,
-    #             colors=cs,
-    #             kis=kis,
-    #             epsilon=0.15,
-    #             # experiments used fixed, pre-supplied values?
-    #             gammahigh=3.43,
-    #             gammalow=1.37,
-    #             normalize=False,
-    #         ),
-    #     'FMMD-S':
-    #         lambda fs, cs, kis, gamma_upper: fdmalgs.FMMDSWrapped(
-    #             features=fs,
-    #             colors=cs,
-    #             kis=kis,
-    #             epsilon=0.15,
-    #             normalize=False,
-    #         ),
-    #     'SFDM-2':
-    #         lambda fs, cs, kis, gamma_upper: fdmalgs.FairGreedyFlowWrapped(
-    #             features=fs,
-    #             colors=cs,
-    #             kis=kis,
-    #             epsilon=0.15,
-    #             # experiments used fixed, pre-supplied values?
-    #             gammahigh=3.43,
-    #             gammalow=1.37,
-    #             normalize=False,
-    #         ),
-    #     }
+    algs = {
+        # 'FMMD-LP':
+        #     lambda fs, cs, kis, gamma_upper: lpsolve.epsilon_falloff(
+        #         features=fs,
+        #         colors=cs,
+        #         upper_gamma=gamma_upper,
+        #         kis=kis,
+        #         epsilon=0.15,
+        #     ),
+        # 'FMMD-MWU':
+        #     lambda fs, cs, kis, gamma_upper: multweights.epsilon_falloff(
+        #         features=fs,
+        #         colors=cs,
+        #         kis=kis,
+        #         gamma_upper=gamma_upper,
+        #         mwu_epsilon=0.75,
+        #         falloff_epsilon=0.15,
+        #         return_unadjusted=False,
+        #     ),
+        'FairFlow':
+            lambda fs, cs, kis, _: FairFlow(
+                features=fs,
+                colors=cs,
+                kis=kis,
+                normalize=False,
+            ),
+        'FairGreedyFlow':
+            lambda fs, cs, kis, _: FairGreedyFlow(
+                features=fs,
+                colors=cs,
+                kis=kis,
+                epsilon=0.15,
+                # experiments used fixed, pre-supplied values?
+                gammahigh=3.43,
+                gammalow=1.37,
+                normalize=False,
+            ),
+        'FMMD-S':
+            lambda fs, cs, kis, gamma_upper: FMMDS(
+                features=fs,
+                colors=cs,
+                kis=kis,
+                epsilon=0.15,
+                normalize=False,
+            ),
+        'SFDM-2':
+            lambda fs, cs, kis, gamma_upper: FairGreedyFlow(
+                features=fs,
+                colors=cs,
+                kis=kis,
+                epsilon=0.15,
+                # experiments used fixed, pre-supplied values?
+                gammahigh=3.43,
+                gammalow=1.37,
+                normalize=False,
+            ),
+        }
 
     # # run some tests!
     # results = defaultdict(list)

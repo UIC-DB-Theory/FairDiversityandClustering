@@ -7,14 +7,14 @@ import networkx as nx
 import numpy as np
 from scipy.special import comb
 import math
-import utilsfdm
+import algorithms.utilsfdm as utilsfdm
 import random
 
-import fdmalgs_original as FDMO
+import algorithms.fdmalgs_original as FDMO
 
 ElemList = Union[List[utilsfdm.Elem], List[utilsfdm.ElemSparse]]
 
-def FMMDSWrapped(features, colors, kis, epsilon, normalize=False):
+def FMMDS(features, colors, kis, epsilon, normalize=False):
     '''
     A wrapper for FairFlow
     Adjust the problem instance for a different set of parameters
