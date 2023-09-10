@@ -27,7 +27,7 @@ setup = {
         }
     },
     "parametes" : {
-        "k" : [25, 50, 25]
+        "k" : [25, 101, 25]
     }
 }
 
@@ -276,6 +276,7 @@ def experiment_fmmdlp(dataset, k, include_coreset_time = False, include_gamma_hi
     print(f'\t\tt = {t}, div = {div}')
     return t, div
 
+# Lambdas for running experiments
 alg_experiments = {
     'SFDM-2' : lambda dataset, k : experiment_sfdm2(dataset, k, include_coreset_time=True, include_gamma_high_time=True, include_gamma_low_time=True),
     'FMMD-S' : lambda dataset, k : experiment_fmmds(dataset, k),
@@ -285,6 +286,7 @@ alg_experiments = {
     'FMMD-LP' : lambda dataset,k : experiment_fmmdlp(dataset, k, include_coreset_time=True, include_gamma_high_time=True)
 }
 
+# Run the experiments
 results = {}
 # For each dataset
 for dataset_name, dataset in datasets.items():
@@ -301,7 +303,7 @@ for dataset_name, dataset in datasets.items():
             diversity_values.append(div)
             print(f"k = {k}, t = {t}, div = {div}")
         results[alg] = {
-            "x" : {"k_values" : k_values},
+            "xs" : {"k_values" : k_values},
             "ys" : {"runtimes" : runtimes, "diversity_values" : diversity_values}
         }
 
@@ -312,6 +314,46 @@ summary = {
     "results" : results
 }
 
+# Save the results from the experiment
 json_object = json.dumps(summary, indent=4)
 with open("experiment1.json", "w") as outfile:
     outfile.write(json_object)
+
+
+# Plot the experiments
+import matplotlib.pyplot as plt
+alg_colors = {
+    'SFDM-2' : 'tab:blue',
+    'FMMD-S' : 'k',
+    'FairFlow' : 'y-',
+    'FairGreedyFlow' : 'tab:brown',
+    'FMMD-MWU' : 'tab:green',
+    'FMMD-LP' : 'tab:red',
+}
+
+plt.clf()
+# t vs k
+for alg,result in results.items():
+    x = result["xs"]["k_values"]
+    y =result["ys"]["runtimes"]
+    plt.plot(x,y, alg_colors[alg], label=alg)
+
+plt.legend(title = "runtime vs k - Adult", bbox_to_anchor=(1.05, 1.0), loc='upper left')
+plt.xlabel("k")
+plt.ylabel("runtime (s)")
+plt.savefig("t_vs_k_adult", dpi=300, bbox_inches='tight')
+plt.yscale("log")
+plt.savefig("log_t_vs_k_adult", dpi=300, bbox_inches='tight')
+
+plt.clf()
+# d vs k
+for alg,result in results.items():
+    x = result["xs"]["diversity_values"]
+    plt.plot(x,y, alg_colors[alg], label=alg)
+
+plt.legend(title = "d vs k - Adult", bbox_to_anchor=(1.05, 1.0), loc='upper left')
+plt.xlabel("k")
+plt.ylabel("d")
+plt.savefig("d_vs_k_adult", dpi=300, bbox_inches='tight')
+
+plt.close()
