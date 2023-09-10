@@ -11,26 +11,13 @@ from contextlib import contextmanager
 from algorithms.coreset import Coreset_FMM
 
 setup = {}
-setup_file = sys.argv[1]
-result_file = setup_file.split('.')[0] + ".result"
-with open(setup_file, 'r') as json_file:
-    setup = json.load(json_file)
-
 results = {}
 
+setup_file = sys.argv[1]
+result_file = setup_file.split('.')[0] + ".result"
 
-def write_results(setup, result):
-    print("Writting summary...")
-    summary = {
-        "setup" : setup,
-        "results" : results
-    }
-    # Save the results from the experiment
-    json_object = json.dumps(summary, indent=4)
-    print(json_object)
-    with open(result_file, "w") as outfile:
-        outfile.write(json_object)
-        outfile.flush()
+with open(setup_file, 'r') as json_file:
+    setup = json.load(json_file)
 
 
 # Read all the datasets
@@ -46,6 +33,21 @@ for dataset in setup["datasets"]:
     setup["datasets"][dataset]["points_per_color"] = datasets[dataset]["points_per_color"]
     datasets[dataset]["d"] = len(setup["datasets"][dataset]["feature_fields"])
     datasets[dataset]["m"] = len(datasets[dataset]["points_per_color"])
+
+
+def write_results(setup, result):
+    print("Writting summary...")
+    summary = {
+        "setup" : setup,
+        "results" : results
+    }
+    # Save the results from the experiment
+    json_object = json.dumps(summary, indent=4)
+    print(json_object)
+    with open(result_file, "w") as outfile:
+        outfile.write(json_object)
+        outfile.flush()
+
 
 # Define experiment for SFDM-2
 def experiment_sfdm2(dataset, k, include_coreset_time = False, include_gamma_high_time = False, include_gamma_low_time = False):
@@ -287,6 +289,7 @@ alg_experiments = {
 }
 
 
+# Timeout implementation
 class TimeoutException(Exception): pass
 @contextmanager
 def time_limit(seconds):
