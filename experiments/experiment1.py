@@ -5,6 +5,7 @@ Description:
 import sys
 import json
 import numpy as np
+from multiprocessing import Pool
 sys.path.append("..")
 
 
@@ -302,6 +303,10 @@ alg_experiments = {
     'FMMD-LP' : lambda dataset,k : experiment_fmmdlp(dataset, k, include_coreset_time=True, include_gamma_high_time=True)
 }
 
+# For multiprocessing - functions are only picklable if they are defined at the top-level of a module
+def picklable_runner(alg, dataset, k):
+    return alg_experiments[alg](dataset, k)
+
 # Run the experiments
 results = {}
 # For each dataset
@@ -318,14 +323,30 @@ for dataset_name, dataset in datasets.items():
 
             t = 0
             div = 0
+
+            # Serial
+            # for rn in range(0, setup["parameters"]["observations"]):
+            #     t_val, div_val = runner(dataset, k)
+            #     t = t + t_val
+            #     div = div+div_val
+            # t = t/setup["parameters"]["observations"]
+            # div = div/setup["parameters"]["observations"]
+            
+            # Multiprocessing - map the inputs to outputs for independent operations
+            inputs = []
             for rn in range(0, setup["parameters"]["observations"]):
-                t_val, div_val = runner(dataset, k)
+                inputs.append((alg, dataset, k))
+            
+            with Pool(len(inputs)) as p:
+                outputs = p.starmap(picklable_runner, inputs)
+            
+            for t_val, div_val in outputs:
                 t = t + t_val
                 div = div+div_val
             t = t/setup["parameters"]["observations"]
             div = div/setup["parameters"]["observations"]
 
-            
+
             runtimes.append(t)
             diversity_values.append(div)
             print(f"k = {k}, t = {t}, div = {div}")
