@@ -9,12 +9,15 @@ import numpy as np
 import signal
 from contextlib import contextmanager
 from algorithms.coreset import Coreset_FMM
+from datetime import datetime
+timestamp = datetime.now().strftime('%H_%M_%d_%m_%Y')
 
 setup = {}
 results = {}
 
 setup_file = sys.argv[1]
-result_file = setup_file.split('.')[0] + ".result"
+result_file = setup_file.split('.')[0] + "_" + timestamp + ".result"
+
 
 with open(setup_file, 'r') as json_file:
     setup = json.load(json_file)
@@ -315,11 +318,11 @@ def main():
             # While varying k
             for k in range(setup["parameters"]["k"][0] ,setup["parameters"]["k"][1], setup["parameters"]["k"][2]):
 
-                
                 t = 0
                 div = 0
                 timedout = False
 
+                # Run the algorithms with or without timeout
                 if "timeout" in setup["parameters"]:
                     # With timeout
                     for rn in range(0, setup["parameters"]["observations"]):
@@ -344,6 +347,8 @@ def main():
                         div = div+div_val
                     t = t/setup["parameters"]["observations"]
                     div = div/setup["parameters"]["observations"]
+                
+                # Check if it timed out, only add values to result if it didnt
                 if not timedout:
                     k_values.append(k)
                     runtimes.append(t)
@@ -352,6 +357,7 @@ def main():
                     t = -1
                     div = -1
                 print(f"k = {k}, t = {t}, div = {div}")
+
 
             if dataset_name not in results:
                 results[dataset_name] = {
