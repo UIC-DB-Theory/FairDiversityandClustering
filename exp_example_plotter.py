@@ -3,20 +3,14 @@ import sys
 
 result_file = sys.argv[1]
 results = {}
+setup = {}
 with open(result_file, 'r') as json_file:
     data = json.load(json_file)
     results = data["results"]
+    setup = data["setup"]
 
 # Plot the experiments
 import matplotlib.pyplot as plt
-alg_colors = {
-    'SFDM-2' : 'tab:blue',
-    'FMMD-S' : 'k',
-    'FairFlow' : 'y-',
-    'FairGreedyFlow' : 'tab:brown',
-    'FMMD-MWU' : 'tab:green',
-    'FMMD-LP' : 'tab:red',
-}
 
 # For each dataset
 for dataset_name, dataset_results in results.items():
@@ -26,7 +20,7 @@ for dataset_name, dataset_results in results.items():
     for alg,result in dataset_results.items():
         x = result["xs"]["k_values"]
         y =result["ys"]["runtimes"]
-        plt.plot(x,y, alg_colors[alg], label=alg)
+        plt.plot(x,y, setup["algorithms"][alg]["color"], label=alg)
 
     plt.legend(title = f'runtime vs k - {dataset_name}', bbox_to_anchor=(1.05, 1.0), loc='upper left')
     plt.xlabel("k")
@@ -40,7 +34,7 @@ for dataset_name, dataset_results in results.items():
     for alg,result in dataset_results.items():
         x = result["xs"]["k_values"]
         y = result["ys"]["diversity_values"]
-        plt.plot(x,y, alg_colors[alg], label=alg)
+        plt.plot(x,y, setup["algorithms"][alg]["color"], label=alg)
 
     plt.legend(title = f'd vs k - {dataset_name}', bbox_to_anchor=(1.05, 1.0), loc='upper left')
     plt.xlabel("k")

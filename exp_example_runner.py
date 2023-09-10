@@ -36,6 +36,19 @@ for dataset in setup["datasets"]:
     setup["datasets"][dataset]["points_per_color"] = datasets[dataset]["points_per_color"]
     datasets[dataset]["d"] = len(setup["datasets"][dataset]["feature_fields"])
     datasets[dataset]["m"] = len(datasets[dataset]["points_per_color"])
+    
+    datasets[dataset]["coresets"] = {}
+
+    print("Precomputing coresets...")
+    # precompute the coreset for all values of k
+    for k in range(setup["parameters"]["k"][0] ,setup["parameters"]["k"][1], setup["parameters"]["k"][2]):
+        coreset_size = 10*k
+        coreset = Coreset_FMM(datasets[dataset]["features"], datasets[dataset]["colors"], k, datasets[dataset]["m"], datasets[dataset]["d"], coreset_size)
+        coreset.compute()
+        coreset.compute_gamma_upper_bound()
+        coreset.compute_closest_pair()
+        if k not in datasets[dataset]["coresets"]:
+            datasets[dataset]["coresets"][k] = coreset
 
 
 def write_results(setup, result):
@@ -53,35 +66,33 @@ def write_results(setup, result):
 
 
 # Define experiment for SFDM-2
-def experiment_sfdm2(dataset, k, include_coreset_time = False, include_gamma_high_time = False, include_gamma_low_time = False):
+def experiment_sfdm2(dataset, k, include_coreset_time = False, include_gamma_high_time = False, include_gamma_low_time = False, use_coreset = False):
     print("Running experiment for SFDM-2")
     print(f'\t\tk = {k}')
     from algorithms.utils import buildKisMap
     kis = buildKisMap(dataset["colors"], k, 0.1)
-    d = dataset["d"]
-    m = dataset["m"]
-    coreset_size = 10*k
+
     features = dataset["features"]
     colors = dataset["colors"]
-    print("\tCompute coreset")
-    coreset = Coreset_FMM(features, colors, k, m, d, coreset_size)
-    core_features, core_colors = coreset.compute()
-    print(f'\t\tcoreset_size = {len(core_features)}')
+
+    coreset = dataset["coresets"][k]
+    if use_coreset:
+        features = coreset.out_features
+        colors = coreset.out_colors
+        print(f'\t\tcoreset_size = {len(features)}')
 
     print("\tCompute gamma_high")
-    dmax = coreset.compute_gamma_upper_bound()
+    dmax = coreset.gamma_upper_bound
     print(f'\t\t{dmax}')
     print("\tCompute gamma_low")
-    dmin = coreset.compute_closest_pair()
-    while dmin == 0:
-        dmin = 0.1
+    dmin = coreset.closest_pair
     print(f'\t\t{dmin}')
 
     print("\tRunning algorithm instance...")
     from algorithms.sfdm2 import StreamFairDivMax2
     _, div, t = StreamFairDivMax2(
-        features = core_features, 
-        colors = core_colors, 
+        features = features, 
+        colors = colors, 
         kis = kis, 
         epsilon= 0.15, 
         gammahigh=dmax, 
@@ -101,14 +112,17 @@ def experiment_sfdm2(dataset, k, include_coreset_time = False, include_gamma_hig
     return t, div
 
 # Define experiment for FMMD-S
-def experiment_fmmds(dataset, k):
+def experiment_fmmds(dataset, k, use_coreset = False):
     print("Running experiment for FMMD-S")
     print(f'\t\tk = {k}')
     from algorithms.utils import buildKisMap
     kis = buildKisMap(dataset["colors"], k, 0.1)
-    d = dataset["d"]
-    m = dataset["m"]
-    coreset_size = 10*k
+
+    coreset = dataset["coresets"][k]
+    if use_coreset:
+        features = coreset.out_features
+        colors = coreset.out_colors
+        print(f'\t\tcoreset_size = {len(features)}')
     features = dataset["features"]
     colors = dataset["colors"]
     print("\tRunning algorithm instance...")
@@ -124,26 +138,25 @@ def experiment_fmmds(dataset, k):
     return t, div
 
 # Define experiment for FairFlow
-def experiment_fairflow(dataset, k, include_coreset_time = False):
+def experiment_fairflow(dataset, k, include_coreset_time = False, use_coreset = False):
     print("Running experiment for FairFlow")
     print(f'\t\tk = {k}')
     from algorithms.utils import buildKisMap
     kis = buildKisMap(dataset["colors"], k, 0.1)
-    d = dataset["d"]
-    m = dataset["m"]
-    coreset_size = 10*k
+
     features = dataset["features"]
     colors = dataset["colors"]
-    print("\tCompute coreset")
-    coreset = Coreset_FMM(features, colors, k, m, d, coreset_size)
-    core_features, core_colors = coreset.compute()
-    print(f'\t\tcoreset_size = {len(core_features)}')
+    coreset = dataset["coresets"][k]
+    if use_coreset:
+        features = coreset.out_features
+        colors = coreset.out_colors
+        print(f'\t\tcoreset_size = {len(features)}')
 
     print("\tRunning algorithm instance...")
     from algorithms.fairflow import FairFlow
     _, div, t = FairFlow(
-        features = core_features, 
-        colors = core_colors, 
+        features = features, 
+        colors = colors, 
         kis = kis, 
         normalize=False
     )
@@ -154,35 +167,29 @@ def experiment_fairflow(dataset, k, include_coreset_time = False):
     return t, div
 
 # Define experiment for FairGreedyFlow
-def experiment_fairgreedyflow(dataset, k, include_coreset_time = False, include_gamma_high_time = False, include_gamma_low_time = False):
+def experiment_fairgreedyflow(dataset, k, include_coreset_time = False, include_gamma_high_time = False, include_gamma_low_time = False, use_coreset = False):
     print("Running experiment for FairGreedyFlow")
     print(f'\t\tk = {k}')
     from algorithms.utils import buildKisMap
     kis = buildKisMap(dataset["colors"], k, 0.1)
-    d = dataset["d"]
-    m = dataset["m"]
-    coreset_size = 10*k
-    features = dataset["features"]
-    colors = dataset["colors"]
-    print("\tCompute coreset")
-    coreset = Coreset_FMM(features, colors, k, m, d, coreset_size)
-    core_features, core_colors = coreset.compute()
-    print(f'\t\tcoreset_size = {len(core_features)}')
 
-    print("\tCompute gamma_high")
-    dmax = coreset.compute_gamma_upper_bound()
+    if use_coreset:
+        features = coreset.out_features
+        colors = coreset.out_colors
+        print(f'\t\tcoreset_size = {len(features)}')
+
+        print("\tCompute gamma_high")
+    dmax = coreset.gamma_upper_bound
     print(f'\t\t{dmax}')
     print("\tCompute gamma_low")
-    dmin = coreset.compute_closest_pair()
-    while dmin == 0:
-        dmin = 0.1
+    dmin = coreset.closest_pair
     print(f'\t\t{dmin}')
 
     print("\tRunning algorithm instance...")
     from algorithms.fairgreedyflow import FairGreedyFlow
     _, div, t = FairGreedyFlow(
-        features = core_features, 
-        colors = core_colors, 
+        features = features, 
+        colors = colors, 
         kis = kis, 
         epsilon= 0.15, 
         gammahigh=dmax, 
@@ -202,30 +209,26 @@ def experiment_fairgreedyflow(dataset, k, include_coreset_time = False, include_
     return t, div
 
 # Define experiment for FMMD-MWU
-def experiment_fmmdmwu(dataset, k, include_coreset_time = False, include_gamma_high_time = False):
+def experiment_fmmdmwu(dataset, k, include_coreset_time = False, include_gamma_high_time = False, use_coreset = False):
     print("Running experiment for FMMD-MWU")
     print(f'\t\tk = {k}')
     from algorithms.utils import buildKisMap
     kis = buildKisMap(dataset["colors"], k, 0.1)
-    d = dataset["d"]
-    m = dataset["m"]
-    coreset_size = 10*k
-    features = dataset["features"]
-    colors = dataset["colors"]
-    print("\tCompute coreset")
-    coreset = Coreset_FMM(features, colors, k, m, d, coreset_size)
-    core_features, core_colors = coreset.compute()
-    print(f'\t\tcoreset_size = {len(core_features)}')
+    
+    if use_coreset:
+        features = coreset.out_features
+        colors = coreset.out_colors
+        print(f'\t\tcoreset_size = {len(features)}')
 
     print("\tCompute gamma_high")
-    dmax = coreset.compute_gamma_upper_bound()
+    dmax = coreset.gamma_upper_bound
     print(f'\t\t{dmax}')
 
     print("\tRunning algorithm instance...")
     from fmmdmwu_nyoom import epsilon_falloff as FMMDMWU
     _, div, t = FMMDMWU(
-        features = core_features, 
-        colors = core_colors, 
+        features = features, 
+        colors = colors, 
         kis = kis,
         gamma_upper=dmax,
         mwu_epsilon=0.75,
@@ -242,30 +245,27 @@ def experiment_fmmdmwu(dataset, k, include_coreset_time = False, include_gamma_h
     return t, div
 
 # Define experiment for FMMD-LP
-def experiment_fmmdlp(dataset, k, include_coreset_time = False, include_gamma_high_time = False):
+def experiment_fmmdlp(dataset, k, include_coreset_time = False, include_gamma_high_time = False, use_coreset = False):
     print("Running experiment for FMMD-LP")
     print(f'\t\tk = {k}')
     from algorithms.utils import buildKisMap
     kis = buildKisMap(dataset["colors"], k, 0.1)
-    d = dataset["d"]
-    m = dataset["m"]
-    coreset_size = 10*k
-    features = dataset["features"]
-    colors = dataset["colors"]
-    print("\tCompute coreset")
-    coreset = Coreset_FMM(features, colors, k, m, d, coreset_size)
-    core_features, core_colors = coreset.compute()
-    print(f'\t\tcoreset_size = {len(core_features)}')
+    
+    if use_coreset:
+        features = coreset.out_features
+        colors = coreset.out_colors
+        print(f'\t\tcoreset_size = {len(features)}')
 
     print("\tCompute gamma_high")
-    dmax = coreset.compute_gamma_upper_bound()
+    dmax = coreset.gamma_upper_bound
     print(f'\t\t{dmax}')
+
 
     print("\tRunning algorithm instance...")
     from fmmd_lp import epsilon_falloff as FMMDLP
     _, div, t = FMMDLP(
-        features = core_features, 
-        colors = core_colors,
+        features = features, 
+        colors = colors,
         upper_gamma = dmax,
         kis = kis, 
         epsilon = 0.15, 
@@ -283,12 +283,13 @@ def experiment_fmmdlp(dataset, k, include_coreset_time = False, include_gamma_hi
 
 # Lambdas for running experiments
 alg_experiments = {
-    'SFDM-2' : lambda dataset, k : experiment_sfdm2(dataset, k, include_coreset_time=True, include_gamma_high_time=True, include_gamma_low_time=True),
-    'FMMD-S' : lambda dataset, k : experiment_fmmds(dataset, k),
-    'FairFlow' : lambda dataset, k : experiment_fairflow(dataset, k, include_coreset_time=True),
-    'FairGreedyFlow' : lambda dataset, k : experiment_fairgreedyflow(dataset, k, include_coreset_time=True, include_gamma_high_time=True, include_gamma_low_time=True),
-    'FMMD-MWU' : lambda dataset, k : experiment_fmmdmwu(dataset, k, include_coreset_time=True, include_gamma_high_time=True),
-    'FMMD-LP' : lambda dataset,k : experiment_fmmdlp(dataset, k, include_coreset_time=True, include_gamma_high_time=True)
+    'SFDM-2' : lambda dataset, k : 
+        experiment_sfdm2(dataset, k, include_coreset_time=True, include_gamma_high_time=True, include_gamma_low_time=True, use_coreset=setup["algorithms"]['SFDM-2']["coreset"]),
+    'FMMD-S' : lambda dataset, k : experiment_fmmds(dataset, k, use_coreset=setup["algorithms"]['FMMD-S']["coreset"]),
+    'FairFlow' : lambda dataset, k : experiment_fairflow(dataset, k, include_coreset_time=True, use_coreset=setup["algorithms"]['FairFlow']["coreset"]),
+    'FairGreedyFlow' : lambda dataset, k : experiment_fairgreedyflow(dataset, k, include_coreset_time=True, include_gamma_high_time=True, include_gamma_low_time=True, use_coreset=setup["algorithms"]['FairGreedyFlow']["coreset"]),
+    'FMMD-MWU' : lambda dataset, k : experiment_fmmdmwu(dataset, k, include_coreset_time=True, include_gamma_high_time=True, use_coreset=setup["algorithms"]['FMMD-MWU']["coreset"]),
+    'FMMD-LP' : lambda dataset,k : experiment_fmmdlp(dataset, k, include_coreset_time=True, include_gamma_high_time=True, use_coreset=setup["algorithms"]['FMMD-LP']["coreset"])
 }
 
 

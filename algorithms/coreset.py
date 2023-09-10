@@ -64,6 +64,8 @@ class Coreset_FMM:
 
         self.out_features = []
         self.out_colors = []
+        self.gamma_upper_bound = 0
+        self.closest_pair = 0
 
         self.coreset_compute_time = 0
         self.gamma_upper_bound_compute_time = 0
@@ -130,6 +132,7 @@ class Coreset_FMM:
         # min_dist = np.min(nonzero_distances)
         t1 = time.perf_counter()
         self.closest_pair_compute_time = t1 - t0
+        self.closest_pair = min_dist
         return min_dist
 
 
@@ -179,6 +182,7 @@ class Coreset_FMM:
             point_distances = np.minimum(point_distances, new_point_distances)
         t1 = time.perf_counter()
         self.gamma_upper_bound_compute_time = t1- t0
+        self.gamma_upper_bound = 2*gamma_high
         return 2*gamma_high
     
     # Compute the coreset for FMM

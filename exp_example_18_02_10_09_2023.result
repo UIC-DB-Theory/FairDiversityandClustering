@@ -30,6 +30,32 @@
                 }
             }
         },
+        "algorithms": {
+            "SFDM-2": {
+                "color": "tab:blue",
+                "coreset": true
+            },
+            "FMMD-S": {
+                "color": "k",
+                "coreset": false
+            },
+            "FairFlow": {
+                "color": "y-",
+                "coreset": true
+            },
+            "FairGreedyFlow": {
+                "color": "tab:brown",
+                "coreset": true
+            },
+            "FMMD-MWU": {
+                "color": "tab:green",
+                "coreset": true
+            },
+            "FMMD-LP": {
+                "color": "tab:red",
+                "coreset": true
+            }
+        },
         "parameters": {
             "k": [
                 25,
@@ -50,7 +76,7 @@
                 },
                 "ys": {
                     "runtimes": [
-                        8.393397631007247
+                        6.657372697001847
                     ],
                     "diversity_values": [
                         3.4933943348114616
@@ -65,7 +91,7 @@
                 },
                 "ys": {
                     "runtimes": [
-                        9.34591678000288
+                        9.018841083001462
                     ],
                     "diversity_values": [
                         4.047709446056831
@@ -80,10 +106,10 @@
                 },
                 "ys": {
                     "runtimes": [
-                        0.7020367619988974
+                        0.7296870200007106
                     ],
                     "diversity_values": [
-                        0.7951416793588488
+                        0.7328886455781247
                     ]
                 }
             },
@@ -95,10 +121,10 @@
                 },
                 "ys": {
                     "runtimes": [
-                        1.1298567080084467
+                        1.009901130993967
                     ],
                     "diversity_values": [
-                        1.6369339783712007
+                        1.6304131097302623
                     ]
                 }
             },
@@ -110,10 +136,10 @@
                 },
                 "ys": {
                     "runtimes": [
-                        0.48465938658773666
+                        0.4667860633417149
                     ],
                     "diversity_values": [
-                        2.890004848946429
+                        2.8711194937514017
                     ]
                 }
             },
@@ -125,10 +151,10 @@
                 },
                 "ys": {
                     "runtimes": [
-                        0.13233041600324214
+                        0.2011158120003529
                     ],
                     "diversity_values": [
-                        2.706483688659624
+                        2.88608265777947
                     ]
                 }
             }
