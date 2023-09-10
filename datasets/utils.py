@@ -4,8 +4,9 @@ from csv import DictReader
 import os
 
 
-def read_dataset(datadir, feature_fields, color_fields):
-
+def read_dataset(datadir, feature_fields, color_fields, normalize = False):
+    print(f'Reading dataset at: {datadir}')
+    print(f'\tNormalize = {normalize}')
     metadatafilepath = ""
     for file in os.listdir(datadir):
         if file.endswith(".metadata"):
@@ -23,6 +24,11 @@ def read_dataset(datadir, feature_fields, color_fields):
               points_per_color[color] += 1
         else:
              points_per_color[color] = 1
+
+    if normalize:
+        means = features.mean(axis=0)
+        devs = features.std(axis=0)
+        features = (features - means) / devs
     return {
          "features" : features,
          "colors" : colors,
