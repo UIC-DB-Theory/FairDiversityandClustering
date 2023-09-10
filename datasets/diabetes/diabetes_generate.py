@@ -17,7 +17,9 @@ with open("./diabetic_data.csv", 'r') as file:
         if i == 0:
             fields = row
         else:
-            data.append(row)
+            # For the gender field - Ignore Unknown/Invalid value
+            if row[3] != 'Unknown/Invalid':
+                data.append(row)
         i = i + 1
 
 # ---------------Create file diabetes.metadata--------------

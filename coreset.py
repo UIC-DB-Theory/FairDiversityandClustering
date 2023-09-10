@@ -71,7 +71,7 @@ class Coreset_FMM:
 
 
     # Compute Greedy k-center/GMM with polynomial 2-approximation
-    def GMM(self, input_set: npt.NDArray[np.float64]):
+    def GMM(self, input_set: npt.NDArray[np.float64], duplicates=[]):
         from scipy.spatial.distance import cdist
 
         if len(input_set) < self.gmm_result_size:

@@ -17,236 +17,28 @@
                 ],
                 "normalize": 1,
                 "points_per_color": {
-                    "White_Male": 19174,
-                    "Black_Male": 1569,
-                    "Black_Female": 1555,
-                    "White_Female": 8642,
-                    "Asian-Pac-Islander_Male": 693,
-                    "Amer-Indian-Eskimo_Male": 192,
+                    "White_Male": 19009,
+                    "White_Female": 8594,
+                    "Black_Male": 1561,
+                    "Black_Female": 1552,
+                    "Other_Male": 162,
                     "Other_Female": 109,
-                    "Asian-Pac-Islander_Female": 346,
+                    "Amer-Indian-Eskimo_Male": 191,
                     "Amer-Indian-Eskimo_Female": 119,
-                    "Other_Male": 162
-                }
-            },
-            "Diabetes": {
-                "data_dir": "../datasets/diabetes",
-                "color_fields": [
-                    "gender",
-                    "diabetesMed"
-                ],
-                "feature_fields": [
-                    "num_procedures",
-                    "num_lab_procedures",
-                    "number_outpatient",
-                    "number_emergency",
-                    "number_inpatient",
-                    "number_diagnoses"
-                ],
-                "normalize": 1,
-                "points_per_color": {
-                    "Female_No": 12921,
-                    "Female_Yes": 41787,
-                    "Male_Yes": 36574,
-                    "Male_No": 10481,
-                    "Unknown/Invalid_Yes": 2,
-                    "Unknown/Invalid_No": 1
+                    "Asian-Pac-Islander_Female": 346,
+                    "Asian-Pac-Islander_Male": 691
                 }
             }
         },
         "parameters": {
             "k": [
                 25,
-                50,
+                350,
                 25
             ],
-            "observations": 5
+            "observations": 5,
+            "observations_multiprocess": 1
         }
     },
-    "results": {
-        "Adult": {
-            "SFDM-2": {
-                "xs": {
-                    "k_values": [
-                        25
-                    ]
-                },
-                "ys": {
-                    "runtimes": [
-                        6.907773407999048
-                    ],
-                    "diversity_values": [
-                        3.4103200190841205
-                    ]
-                }
-            },
-            "FMMD-S": {
-                "xs": {
-                    "k_values": [
-                        25
-                    ]
-                },
-                "ys": {
-                    "runtimes": [
-                        14.740857235199655
-                    ],
-                    "diversity_values": [
-                        3.5559041692965847
-                    ]
-                }
-            },
-            "FairFlow": {
-                "xs": {
-                    "k_values": [
-                        25
-                    ]
-                },
-                "ys": {
-                    "runtimes": [
-                        0.8877492895997421
-                    ],
-                    "diversity_values": [
-                        0.8004615531751067
-                    ]
-                }
-            },
-            "FairGreedyFlow": {
-                "xs": {
-                    "k_values": [
-                        25
-                    ]
-                },
-                "ys": {
-                    "runtimes": [
-                        1.224916997399123
-                    ],
-                    "diversity_values": [
-                        1.9096301317390634
-                    ]
-                }
-            },
-            "FMMD-MWU": {
-                "xs": {
-                    "k_values": [
-                        25
-                    ]
-                },
-                "ys": {
-                    "runtimes": [
-                        1.698782557265804
-                    ],
-                    "diversity_values": [
-                        2.8637987735130155
-                    ]
-                }
-            },
-            "FMMD-LP": {
-                "xs": {
-                    "k_values": [
-                        25
-                    ]
-                },
-                "ys": {
-                    "runtimes": [
-                        0.33849483620033427
-                    ],
-                    "diversity_values": [
-                        2.9736651897851436
-                    ]
-                }
-            }
-        },
-        "Diabetes": {
-            "SFDM-2": {
-                "xs": {
-                    "k_values": [
-                        25
-                    ]
-                },
-                "ys": {
-                    "runtimes": [
-                        2.8008085386005406
-                    ],
-                    "diversity_values": [
-                        2.5024221948129663
-                    ]
-                }
-            },
-            "FMMD-S": {
-                "xs": {
-                    "k_values": [
-                        25
-                    ]
-                },
-                "ys": {
-                    "runtimes": [
-                        101.05025232379958
-                    ],
-                    "diversity_values": [
-                        2.929098752056067
-                    ]
-                }
-            },
-            "FairFlow": {
-                "xs": {
-                    "k_values": [
-                        25
-                    ]
-                },
-                "ys": {
-                    "runtimes": [
-                        0.578273065400208
-                    ],
-                    "diversity_values": [
-                        1.8949382386696996
-                    ]
-                }
-            },
-            "FairGreedyFlow": {
-                "xs": {
-                    "k_values": [
-                        25
-                    ]
-                },
-                "ys": {
-                    "runtimes": [
-                        0.8557952561997808
-                    ],
-                    "diversity_values": [
-                        2.7191992779260667
-                    ]
-                }
-            },
-            "FMMD-MWU": {
-                "xs": {
-                    "k_values": [
-                        25
-                    ]
-                },
-                "ys": {
-                    "runtimes": [
-                        3.750708758121982
-                    ],
-                    "diversity_values": [
-                        3.2102695441510534
-                    ]
-                }
-            },
-            "FMMD-LP": {
-                "xs": {
-                    "k_values": [
-                        25
-                    ]
-                },
-                "ys": {
-                    "runtimes": [
-                        0.5369621685997117
-                    ],
-                    "diversity_values": [
-                        3.101607367433251
-                    ]
-                }
-            }
-        }
-    }
+    "results": {}
 }

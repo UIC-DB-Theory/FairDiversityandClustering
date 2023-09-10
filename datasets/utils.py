@@ -4,9 +4,23 @@ from csv import DictReader
 import os
 
 
-def read_dataset(datadir, feature_fields, color_fields, normalize = False):
+def read_dataset(datadir, feature_fields, color_fields, normalize = True, unique = True):
+    """
+    read_dataset.
+
+    Reads a database from a directory where original dataset files exist.
+
+    Returns a tuple of the colors of elements and their features
+
+    :param datadir: dataset directory
+    :param feature_fields: the fields which are numerical data values for the point
+    :param color_fields: the fields containing the object color; the end "color" will be a tuple of all the colors
+    :param normalize: set true to normalize the dataset else false
+    :param unique: set true to only read unique points from the dataset else false
+    """
     print(f'Reading dataset at: {datadir}')
     print(f'\tNormalize = {normalize}')
+    print(f'\tUnique = {unique}')
     metadatafilepath = ""
     for file in os.listdir(datadir):
         if file.endswith(".metadata"):
@@ -17,6 +31,13 @@ def read_dataset(datadir, feature_fields, color_fields, normalize = False):
     datafilepath = os.path.join(datadir, metadata["filename"])
     fields = metadata["fields"]
     colors, features = read_CSV(datafilepath, fields, color_fields, "_", feature_fields)
+    assert(len(features) == len(colors))
+
+    # Only read the unique points
+    if unique:
+        _, unique_features_indices = np.unique(features, return_index=True, axis=0)
+        features = features[unique_features_indices]
+        colors = colors[unique_features_indices]
 
     points_per_color = {}
     for color in colors:

@@ -1,7 +1,7 @@
 """
 Description:
     Measure runtime and diversity for varying k. Where k is the size of the output.
-    For the Adult dataset
+    For the Diabetes Dataset
 """
 import sys
 import json
@@ -9,29 +9,30 @@ import numpy as np
 from multiprocessing import Pool
 sys.path.append("..")
 
-result_file = "experiment1.json"
+result_file = "experiment2.json"
 setup = {
     "datasets" : {
-        "Adult" : {
-            "data_dir" : "../datasets/adult",
+        "Diabetes" : {
+            "data_dir" : "../datasets/diabetes",
             "color_fields" : [
-                "race", 
-                "sex"
+                "gender", 
+                "diabetesMed"
             ],
             "feature_fields" : [
-                "age", 
-                "capital-gain", 
-                "capital-loss", 
-                "hours-per-week", 
-                "fnlwgt", 
-                "education-num"],
+                "num_procedures", 
+                "num_lab_procedures", 
+                "number_outpatient", 
+                "number_emergency", 
+                "number_inpatient", 
+                "number_diagnoses"],
             "normalize" : 1
-        },
+        }
     },
     "parameters" : {
         "k" : [25, 350, 25],
         "observations" : 5,
         "observations_multiprocess" : 1
+
     }
 }
 
@@ -85,7 +86,7 @@ def experiment_sfdm2(dataset, k, include_coreset_time = False, include_gamma_hig
     print(f'\t\t{dmax}')
     print("\tCompute gamma_low")
     dmin = coreset.compute_closest_pair()
-    while dmin == 0:
+    if dmin == 0.0:
         dmin = 0.1
     print(f'\t\t{dmin}')
 
@@ -188,7 +189,7 @@ def experiment_fairgreedyflow(dataset, k, include_coreset_time = False, include_
     print(f'\t\t{dmax}')
     print("\tCompute gamma_low")
     dmin = coreset.compute_closest_pair()
-    while dmin == 0:
+    if dmin == 0.0:
         dmin = 0.1
     print(f'\t\t{dmin}')
 
@@ -352,6 +353,7 @@ for dataset_name, dataset in datasets.items():
                 t = t/setup["parameters"]["observations"]
                 div = div/setup["parameters"]["observations"]
 
+
             runtimes.append(t)
             diversity_values.append(div)
             print(f"k = {k}, t = {t}, div = {div}")
@@ -369,5 +371,4 @@ for dataset_name, dataset in datasets.items():
                 "ys" : {"runtimes" : runtimes, "diversity_values" : diversity_values}
             }
         write_summary(setup, results)
-
 write_summary(setup, results)
