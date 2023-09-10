@@ -18,7 +18,8 @@ from datastructures.WeightedTree import WeightedTree
 import datastructures.BallTree as BallTree
 from algorithms.rounding import rand_round
 import algorithms.coreset as CORESET
-import algorithms.utils as utils
+import algorithms.utils as algsU
+import datasets.utils as datsU
 
 
 def solve_lp(dataStruct, kis, m: gp.Model, gamma: np.float64, variables: npt.NDArray[gp.MVar], colors: npt.NDArray[t.AnyStr],
@@ -106,7 +107,7 @@ def bin_lpsolve(features, colors, k, epsilon, a):
     # all colors made by combining values in color_fields
     color_names = np.unique(colors)
 
-    timer = utils.Stopwatch("Normalization")
+    timer = algsU.Stopwatch("Normalization")
 
     # "normalize" features
     # Should happen before coreset construction
@@ -124,7 +125,7 @@ def bin_lpsolve(features, colors, k, epsilon, a):
 
     timer.split("Building Kis")
 
-    kis = utils.buildKisMap(colors, k, a)
+    kis = algsU.buildKisMap(colors, k, a)
 
     # keys are appended using underscores
     # TODO: group formulas => max(1, (1-a) * k n_c / n)
@@ -255,7 +256,7 @@ def bin_lpsolve(features, colors, k, epsilon, a):
     # compute diversity value of solution
     solution = features[S]
 
-    diversity = utils.compute_maxmin_diversity(solution)
+    diversity = algsU.compute_maxmin_diversity(solution)
     print(f'Solved diversity is {diversity}')
 
     return diversity, total
@@ -275,7 +276,7 @@ def epsilon_falloff(features, colors, upper_gamma, kis, epsilon, deltas=False):
     N = len(features)
 
 
-    timer = utils.Stopwatch("Tree Creation")
+    timer = algsU.Stopwatch("Tree Creation")
 
     # create data structure
     data_struct = algo.create(features)
@@ -314,10 +315,10 @@ def epsilon_falloff(features, colors, upper_gamma, kis, epsilon, deltas=False):
 
     # compute diversity value of solution
     solution = features[S]
-    diversity = utils.compute_maxmin_diversity(solution)
+    diversity = algsU.compute_maxmin_diversity(solution)
 
     if deltas:
-        delta_vals = utils.check_returned_kis(colors, kis, S)
+        delta_vals = algsU.check_returned_kis(colors, kis, S)
 
         return S, diversity, delta_vals, total_time
     else:
@@ -354,7 +355,7 @@ if __name__ == '__main__':
     # coreset params
     # Set the size of the coreset
 
-    colors, features = utils.read_CSV("./datasets/ads/adult.data", allFields, color_field, '_', feature_fields)
+    colors, features = datsU.read_CSV("./datasets/ads/adult.data", allFields, color_field, '_', feature_fields)
     assert (len(colors) == len(features))
 
     # run some tests!
@@ -363,7 +364,7 @@ if __name__ == '__main__':
     # first for the proper 100
     for k in range(10, 201, 5):
         # compute coreset of size
-        coreset_size = 500 * k
+        coreset_size = 50 * k
         # all colors made by combining values in color_fields
         color_names = np.unique(colors)
 
@@ -383,7 +384,7 @@ if __name__ == '__main__':
         upper_gamma = coreset.compute_gamma_upper_bound()
 
         # ki generation
-        kis = utils.buildKisMap(colors, k, 0.1)
+        kis = algsU.buildKisMap(colors, k, 0.1)
 
         # run LP
         print(f'Running LP for {k}')

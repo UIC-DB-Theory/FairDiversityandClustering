@@ -7,8 +7,8 @@ import sys
 from datastructures.WeightedTree import WeightedTree
 import datastructures.BallTree as BallTree
 from algorithms.rounding import rand_round
-import algorithms.coreset as CORESET
-import algorithms.utils as utils
+import algorithms.utils as algsU
+import datasets.utils as datsU
 
 def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, epsilon):
     """
@@ -60,7 +60,7 @@ def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, e
         W = 0                                 # current weight sum
 
         # weights to every point (time is ignored for now)
-        timer = utils.Stopwatch("Query")
+        timer = algsU.Stopwatch("Query")
         inner_time, w_sums = c_tree.run_query(gamma / 2.0, h)
         _, outer_time = timer.stop()
         translation_time += (outer_time - inner_time)
@@ -105,7 +105,7 @@ def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, e
 
         # check directly if X is a feasible solution
         if t > 100 and t % 17 == 0:
-            timer = utils.Stopwatch("Query")
+            timer = algsU.Stopwatch("Query")
 
             # TODO: new query function => boolean for "valid solution"
             _, X_weights = c_tree.run_query(gamma / 2.0, (X / (t + 1)))
@@ -137,7 +137,7 @@ def epsilon_falloff(features, colors, kis, gamma_upper, mwu_epsilon, falloff_eps
     N = len(features)
     k = sum(kis.values())
 
-    timer = utils.Stopwatch("Falloff")
+    timer = algsU.Stopwatch("Falloff")
 
     gamma = gamma_upper
 
@@ -170,7 +170,7 @@ def epsilon_falloff(features, colors, kis, gamma_upper, mwu_epsilon, falloff_eps
     selected_count = len(S)
     solution = features[S]
 
-    diversity = utils.compute_maxmin_diversity(solution)
+    diversity = algsU.compute_maxmin_diversity(solution)
 
     # TODO: Return solution set instead of size of solution
     if return_unadjusted:
@@ -225,7 +225,7 @@ if __name__ == '__main__':
     color_field = ['race', 'sex']
     feature_fields = {'age', 'capital-gain', 'capital-loss', 'hours-per-week', 'fnlwgt', 'education-num'}
 
-    colors, features = utils.read_CSV("./datasets/ads/adult.data", allFields, color_field, '_', feature_fields)
+    colors, features = datsU.read_CSV("./datasets/ads/adult.data", allFields, color_field, '_', feature_fields)
     assert (len(colors) == len(features))
 
     # get the colors
@@ -242,7 +242,7 @@ if __name__ == '__main__':
 
     for k in range(10, 21, 10):
         # build KIs
-        kis = utils.buildKisMap(colors, k, 0)
+        kis = algsU.buildKisMap(colors, k, 0)
 
         adj_k = sum(kis.values())
 
