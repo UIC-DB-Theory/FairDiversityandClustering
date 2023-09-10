@@ -1,0 +1,133 @@
+{
+    "setup": {
+        "datasets": {
+            "Adult": {
+                "data_dir": "../datasets/adult",
+                "color_fields": [
+                    "race",
+                    "sex"
+                ],
+                "feature_fields": [
+                    "age",
+                    "capital-gain",
+                    "capital-loss",
+                    "hours-per-week",
+                    "fnlwgt",
+                    "education-num"
+                ],
+                "normalize": 1,
+                "points_per_color": {
+                    "White_Male": 19174,
+                    "Black_Male": 1569,
+                    "Black_Female": 1555,
+                    "White_Female": 8642,
+                    "Asian-Pac-Islander_Male": 693,
+                    "Amer-Indian-Eskimo_Male": 192,
+                    "Other_Female": 109,
+                    "Asian-Pac-Islander_Female": 346,
+                    "Amer-Indian-Eskimo_Female": 119,
+                    "Other_Male": 162
+                }
+            }
+        },
+        "parametes": {
+            "k": [
+                25,
+                50,
+                25
+            ]
+        }
+    },
+    "results": {
+        "SFDM-2": {
+            "x": {
+                "k_values": [
+                    25
+                ]
+            },
+            "ys": {
+                "runtimes": [
+                    6.1582633930020165
+                ],
+                "diversity_values": [
+                    3.80871891422506
+                ]
+            }
+        },
+        "FMMD-S": {
+            "x": {
+                "k_values": [
+                    25
+                ]
+            },
+            "ys": {
+                "runtimes": [
+                    12.999253379000038
+                ],
+                "diversity_values": [
+                    3.555904169296585
+                ]
+            }
+        },
+        "FairFlow": {
+            "x": {
+                "k_values": [
+                    25
+                ]
+            },
+            "ys": {
+                "runtimes": [
+                    0.6452585079996425
+                ],
+                "diversity_values": [
+                    0.6024258280298413
+                ]
+            }
+        },
+        "FairGreedyFlow": {
+            "x": {
+                "k_values": [
+                    25
+                ]
+            },
+            "ys": {
+                "runtimes": [
+                    0.9104347480006254
+                ],
+                "diversity_values": [
+                    2.4975218552779603
+                ]
+            }
+        },
+        "FMMD-MWU": {
+            "x": {
+                "k_values": [
+                    25
+                ]
+            },
+            "ys": {
+                "runtimes": [
+                    0.3890734469950985
+                ],
+                "diversity_values": [
+                    2.8770854366906162
+                ]
+            }
+        },
+        "FMMD-LP": {
+            "x": {
+                "k_values": [
+                    25
+                ]
+            },
+            "ys": {
+                "runtimes": [
+                    0.13239332800003467
+                ],
+                "diversity_values": [
+                    3.147473248665736
+                ]
+            }
+        }
+    }
+}
