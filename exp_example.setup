@@ -1,0 +1,29 @@
+{
+        "datasets": {
+            "Adult": {
+                "data_dir": "./datasets/adult",
+                "color_fields": [
+                    "race",
+                    "sex"
+                ],
+                "feature_fields": [
+                    "age",
+                    "capital-gain",
+                    "capital-loss",
+                    "hours-per-week",
+                    "fnlwgt",
+                    "education-num"
+                ],
+                "normalize": 1
+            }
+        },
+        "parameters": {
+            "k": [
+                25,
+                50,
+                25
+            ],
+            "timeout": 100,
+            "observations": 1
+        }
+    }

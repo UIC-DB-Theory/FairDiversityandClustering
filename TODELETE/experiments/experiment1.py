@@ -6,11 +6,13 @@ Description:
 import sys
 import json
 import numpy as np
-import time
-import asyncio
-sys.path.append("..")
+import signal
+from contextlib import contextmanager
 
-result_file = "experiment1.json"
+sys.path.append("..")
+from algorithms.coreset import Coreset_FMM
+
+setup_file = "experiment1.json"
 results = {}
 setup = {
     "datasets" : {
@@ -31,7 +33,7 @@ setup = {
         },
     },
     "parameters" : {
-        "k" : [25, 350, 25],
+        "k" : [25, 50, 25],
         "timeout" : 100,
         "observations" : 1
     }
@@ -77,7 +79,6 @@ def experiment_sfdm2(dataset, k, include_coreset_time = False, include_gamma_hig
     features = dataset["features"]
     colors = dataset["colors"]
     print("\tCompute coreset")
-    from coreset import Coreset_FMM
     coreset = Coreset_FMM(features, colors, k, m, d, coreset_size)
     core_features, core_colors = coreset.compute()
     print(f'\t\tcoreset_size = {len(core_features)}')
@@ -149,7 +150,6 @@ def experiment_fairflow(dataset, k, include_coreset_time = False):
     features = dataset["features"]
     colors = dataset["colors"]
     print("\tCompute coreset")
-    from coreset import Coreset_FMM
     coreset = Coreset_FMM(features, colors, k, m, d, coreset_size)
     core_features, core_colors = coreset.compute()
     print(f'\t\tcoreset_size = {len(core_features)}')
@@ -180,7 +180,6 @@ def experiment_fairgreedyflow(dataset, k, include_coreset_time = False, include_
     features = dataset["features"]
     colors = dataset["colors"]
     print("\tCompute coreset")
-    from coreset import Coreset_FMM
     coreset = Coreset_FMM(features, colors, k, m, d, coreset_size)
     core_features, core_colors = coreset.compute()
     print(f'\t\tcoreset_size = {len(core_features)}')
@@ -229,7 +228,6 @@ def experiment_fmmdmwu(dataset, k, include_coreset_time = False, include_gamma_h
     features = dataset["features"]
     colors = dataset["colors"]
     print("\tCompute coreset")
-    from coreset import Coreset_FMM
     coreset = Coreset_FMM(features, colors, k, m, d, coreset_size)
     core_features, core_colors = coreset.compute()
     print(f'\t\tcoreset_size = {len(core_features)}')
@@ -239,7 +237,7 @@ def experiment_fmmdmwu(dataset, k, include_coreset_time = False, include_gamma_h
     print(f'\t\t{dmax}')
 
     print("\tRunning algorithm instance...")
-    from algorithms.fmmdmwu_nyoom import epsilon_falloff as FMMDMWU
+    from fmmdmwu_nyoom import epsilon_falloff as FMMDMWU
     _, div, t = FMMDMWU(
         features = core_features, 
         colors = core_colors, 
@@ -270,7 +268,6 @@ def experiment_fmmdlp(dataset, k, include_coreset_time = False, include_gamma_hi
     features = dataset["features"]
     colors = dataset["colors"]
     print("\tCompute coreset")
-    from coreset import Coreset_FMM
     coreset = Coreset_FMM(features, colors, k, m, d, coreset_size)
     core_features, core_colors = coreset.compute()
     print(f'\t\tcoreset_size = {len(core_features)}')
@@ -280,7 +277,7 @@ def experiment_fmmdlp(dataset, k, include_coreset_time = False, include_gamma_hi
     print(f'\t\t{dmax}')
 
     print("\tRunning algorithm instance...")
-    from algorithms.fmmd_lp import epsilon_falloff as FMMDLP
+    from fmmd_lp import epsilon_falloff as FMMDLP
     _, div, t = FMMDLP(
         features = core_features, 
         colors = core_colors,
@@ -309,11 +306,20 @@ alg_experiments = {
     'FMMD-LP' : lambda dataset,k : experiment_fmmdlp(dataset, k, include_coreset_time=True, include_gamma_high_time=True)
 }
 
-# For multiprocessing - functions are only picklable if they are defined at the top-level of a module
-async def picklable_runner(alg, dataset, k):
-    return alg_experiments[alg](dataset, k)
 
-async def main():
+class TimeoutException(Exception): pass
+@contextmanager
+def time_limit(seconds):
+    def signal_handler(signum, frame):
+        raise TimeoutException("Timed out!")
+    signal.signal(signal.SIGALRM, signal_handler)
+    signal.alarm(seconds)
+    try:
+        yield
+    finally:
+        signal.alarm(0)
+
+def main():
     # Run the experiments
     write_summary(setup, results)
     # For each dataset
@@ -330,16 +336,15 @@ async def main():
                 t = 0
                 div = 0
                 timedout = False
+
                 if "timeout" in setup["parameters"]:
                     # With timeout
-
                     for rn in range(0, setup["parameters"]["observations"]):
                         print(rn)
-                        task = asyncio.create_task(picklable_runner(alg, dataset, k))
-
                         try:
-                            t_val, div_val = await asyncio.wait_for(task, timeout= 50)
-                        except asyncio.TimeoutError:
+                            with time_limit(setup["parameters"]["timeout"]):
+                                t_val, div_val = runner(dataset, k)
+                        except TimeoutException as e:
                             timedout = True
                             print("Timed out!")
 
@@ -347,7 +352,6 @@ async def main():
                         div = div+div_val
                     t = t/setup["parameters"]["observations"]
                     div = div/setup["parameters"]["observations"]
-
 
                 else:
                     # No timeout
@@ -361,6 +365,9 @@ async def main():
                     k_values.append(k)
                     runtimes.append(t)
                     diversity_values.append(div)
+                else:
+                    t = -1
+                    div = -1
                 print(f"k = {k}, t = {t}, div = {div}")
 
             if dataset_name not in results:
@@ -380,6 +387,4 @@ async def main():
     write_summary(setup, results)
 
 if __name__ == "__main__":
-    # loop = asyncio.get_event_loop()
-    # loop.run_until_complete(main())
-    asyncio.run(main())
+    main()
