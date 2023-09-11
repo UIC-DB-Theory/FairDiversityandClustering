@@ -251,7 +251,7 @@ def experiment_fmmdmwu(dataset, k, include_coreset_time = False, include_gamma_h
     return t, div
 
 # Define experiment for FMMD-MWUs
-def experiment_fmmdmwu(dataset, k, include_coreset_time = False, include_gamma_high_time = False, use_coreset = False):
+def experiment_fmmdmwus(dataset, k, include_coreset_time = False, include_gamma_high_time = False, use_coreset = False):
     print("Running experiment for FMMD-MWU")
     print(f'\t\tk = {k}')
     from algorithms.utils import buildKisMap
