@@ -405,18 +405,17 @@ def main():
                         try:
                             with time_limit(setup["parameters"]["timeout"]):
                                 t_val, div_val = runner(rn, dataset, k)
+                                successful_observations += 1
                         except TimeoutException as e:
                             print("Timed out!")
-                            successful_observations += 1
-                        
-                        if successful_observations == 0:
-                            all_timedout = True
-                            break
 
                         t = t + t_val
                         div = div+div_val
-                    t = t/setup["parameters"]["observations"]
-                    div = div/setup["parameters"]["observations"]
+                    if successful_observations == 0:
+                            all_timedout = True
+                            break
+                    t = t/successful_observations
+                    div = div/successful_observations
 
                 else:
                     # No timeout

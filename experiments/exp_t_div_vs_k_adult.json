@@ -45,11 +45,11 @@
         },
         "parameters": {
             "k": [
-                25,
-                351,
-                25
+                10,
+                110,
+                10
             ],
-            "timeout": 300,
+            "timeout": 600,
             "observations": 5
         }
     }
