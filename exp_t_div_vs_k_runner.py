@@ -314,7 +314,9 @@ def main():
     # For each dataset
     for dataset_name, dataset in datasets.items():
         # Run each algorithm
-        for alg, runner in alg_experiments.items():
+        for alg in setup["algorithms"]:
+        #for alg, runner in alg_experiments.items():
+            runner = alg_experiments[alg]
             k_values = []
             runtimes = []
             diversity_values = []
