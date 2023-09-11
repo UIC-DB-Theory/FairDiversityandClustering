@@ -336,6 +336,9 @@ def main():
                         except TimeoutException as e:
                             timedout = True
                             print("Timed out!")
+                            t_val = 0
+                            div_val = 0
+                            break
 
                         t = t + t_val
                         div = div+div_val
@@ -359,6 +362,7 @@ def main():
                 else:
                     t = -1
                     div = -1
+                    break
                 print(f"k = {k}, t = {t}, div = {div}")
 
 
