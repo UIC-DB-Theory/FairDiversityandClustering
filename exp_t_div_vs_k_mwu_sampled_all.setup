@@ -1,5 +1,4 @@
 {
-    "setup": {
         "datasets": {
             "Diabetes": {
                 "data_dir": "./datasets/diabetes",
@@ -15,13 +14,7 @@
                     "number_inpatient",
                     "number_diagnoses"
                 ],
-                "normalize": 1,
-                "points_per_color": {
-                    "Male_No": 2560,
-                    "Female_Yes": 11165,
-                    "Male_Yes": 9515,
-                    "Female_No": 3181
-                }
+                "normalize": 1
             },
             "Adult": {
                 "data_dir": "./datasets/adult",
@@ -37,26 +30,14 @@
                     "fnlwgt",
                     "education-num"
                 ],
-                "normalize": 1,
-                "points_per_color": {
-                    "White_Male": 19009,
-                    "White_Female": 8594,
-                    "Black_Male": 1561,
-                    "Black_Female": 1552,
-                    "Other_Male": 162,
-                    "Other_Female": 109,
-                    "Amer-Indian-Eskimo_Male": 191,
-                    "Amer-Indian-Eskimo_Female": 119,
-                    "Asian-Pac-Islander_Female": 346,
-                    "Asian-Pac-Islander_Male": 691
-                }
+                "normalize": 1
             }
         },
-        "algorithms": {
-            "FMMD-MWU": {
-                "color": "tab:green",
-                "coreset": true
-            }
+        "algorithms" : {
+                "FMMD-MWUS" : {
+                    "color": "tab:green",
+                    "coreset" : true
+                }
         },
         "parameters": {
             "k": [
@@ -67,6 +48,4 @@
             "timeout": 1000,
             "observations": 5
         }
-    },
-    "results": {}
-}
+    }

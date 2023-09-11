@@ -246,6 +246,42 @@ def experiment_fmmdmwu(dataset, k, include_coreset_time = False, include_gamma_h
     print(f'\t\tt = {t}, div = {div}')
     return t, div
 
+# Define experiment for FMMD-MWUs
+def experiment_fmmdmwu(dataset, k, include_coreset_time = False, include_gamma_high_time = False, use_coreset = False):
+    print("Running experiment for FMMD-MWU")
+    print(f'\t\tk = {k}')
+    from algorithms.utils import buildKisMap
+    kis = buildKisMap(dataset["colors"], k, 0.1)
+    
+    if use_coreset:
+        features = coreset.out_features
+        colors = coreset.out_colors
+        print(f'\t\tcoreset_size = {len(features)}')
+
+    print("\tCompute gamma_high")
+    dmax = coreset.gamma_upper_bound
+    print(f'\t\t{dmax}')
+
+    print("\tRunning algorithm instance...")
+    from fmmdmwu_sampled import epsilon_falloff as FMMDMWUS
+    _, div, t = FMMDMWUS(
+        features = features, 
+        colors = colors, 
+        kis = kis,
+        gamma_upper=dmax,
+        mwu_epsilon=0.75,
+        falloff_epsilon=0.15,
+        return_unadjusted=False
+    )
+
+    if include_coreset_time:
+        t = t + coreset.coreset_compute_time
+    
+    if include_gamma_high_time:
+        t = t + coreset.gamma_upper_bound_compute_time
+    print(f'\t\tt = {t}, div = {div}')
+    return t, div
+
 # Define experiment for FMMD-LP
 def experiment_fmmdlp(dataset, k, include_coreset_time = False, include_gamma_high_time = False, use_coreset = False):
     print("Running experiment for FMMD-LP")
@@ -291,7 +327,8 @@ alg_experiments = {
     'FairFlow' : lambda dataset, k : experiment_fairflow(dataset, k, include_coreset_time=True, use_coreset=setup["algorithms"]['FairFlow']["coreset"]),
     'FairGreedyFlow' : lambda dataset, k : experiment_fairgreedyflow(dataset, k, include_coreset_time=True, include_gamma_high_time=True, include_gamma_low_time=True, use_coreset=setup["algorithms"]['FairGreedyFlow']["coreset"]),
     'FMMD-MWU' : lambda dataset, k : experiment_fmmdmwu(dataset, k, include_coreset_time=True, include_gamma_high_time=True, use_coreset=setup["algorithms"]['FMMD-MWU']["coreset"]),
-    'FMMD-LP' : lambda dataset,k : experiment_fmmdlp(dataset, k, include_coreset_time=True, include_gamma_high_time=True, use_coreset=setup["algorithms"]['FMMD-LP']["coreset"])
+    'FMMD-LP' : lambda dataset,k : experiment_fmmdlp(dataset, k, include_coreset_time=True, include_gamma_high_time=True, use_coreset=setup["algorithms"]['FMMD-LP']["coreset"]),
+    'FMMD-MWUS' : lambda dataset, k : experiment_fmmdmwu(dataset, k, include_coreset_time=True, include_gamma_high_time=True, use_coreset=setup["algorithms"]['FMMD-MWUS']["coreset"]),
 }
 
 
