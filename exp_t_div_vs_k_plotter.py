@@ -1,5 +1,6 @@
 import json
 import sys
+import os
 
 result_file = sys.argv[1]
 results = {}
@@ -8,6 +9,11 @@ with open(result_file, 'r') as json_file:
     data = json.load(json_file)
     results = data["results"]
     setup = data["setup"]
+
+directory = "./results/" + result_file.split(".")[0]
+
+if not os.path.exists(directory):
+	os.mkdir(directory)
 
 # Plot the experiments
 import matplotlib.pyplot as plt
@@ -25,9 +31,9 @@ for dataset_name, dataset_results in results.items():
     plt.legend(title = f'runtime vs k - {dataset_name}', bbox_to_anchor=(1.05, 1.0), loc='upper left')
     plt.xlabel("k")
     plt.ylabel("runtime (s)")
-    plt.savefig(f't_vs_k_{dataset_name}', dpi=300, bbox_inches='tight')
+    plt.savefig(f'{directory}/t_vs_k_{dataset_name}', dpi=300, bbox_inches='tight')
     plt.yscale("log")
-    plt.savefig(f'log_t_vs_k_{dataset_name}', dpi=300, bbox_inches='tight')
+    plt.savefig(f'{directory}/log_t_vs_k_{dataset_name}', dpi=300, bbox_inches='tight')
 
     plt.clf()
     # plot d vs k
@@ -39,6 +45,6 @@ for dataset_name, dataset_results in results.items():
     plt.legend(title = f'd vs k - {dataset_name}', bbox_to_anchor=(1.05, 1.0), loc='upper left')
     plt.xlabel("k")
     plt.ylabel("d")
-    plt.savefig(f'd_vs_k_{dataset_name}', dpi=300, bbox_inches='tight')
+    plt.savefig(f'{directory}/d_vs_k_{dataset_name}', dpi=300, bbox_inches='tight')
 
     plt.close()
