@@ -46,9 +46,13 @@ for dataset in setup["datasets"]:
     for k in range(setup["parameters"]["k"][0] ,setup["parameters"]["k"][1], setup["parameters"]["k"][2]):
         coreset_size = 10*k
         coreset = Coreset_FMM(datasets[dataset]["features"], datasets[dataset]["colors"], k, datasets[dataset]["m"], datasets[dataset]["d"], coreset_size)
-        coreset.compute()
-        coreset.compute_gamma_upper_bound()
-        coreset.compute_closest_pair()
+        print(f'\tComputing for k = {k}, coreset_size = {coreset_size}')
+        out, _= coreset.compute()
+        print(f'\t\tcomputed coreset_size = {len(out)}')
+        gup = coreset.compute_gamma_upper_bound()
+        print(f'\t\tgamma upper bound = {gup}')
+        clop = coreset.compute_closest_pair()
+        print(f'\t\tclosest pair distance = {clop}')
         if k not in datasets[dataset]["coresets"]:
             datasets[dataset]["coresets"][k] = coreset
 
