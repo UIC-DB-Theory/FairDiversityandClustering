@@ -14,7 +14,7 @@ with open(result_file, 'r') as json_file:
     results = data["results"]
     setup = data["setup"]
 
-directory = "./results/" + result_file.split(".")[0]
+directory = "./experiments/" + result_file.split(".")[0]
 
 if not os.path.exists(directory):
 	os.mkdir(directory)

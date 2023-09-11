@@ -34,16 +34,16 @@
             }
         },
         "algorithms" : {
-                "FMMD-MWUS" : {
+                "FMMD-MWU" : {
                     "color": "tab:green",
                     "coreset" : true
                 }
         },
         "parameters": {
             "k": [
-                100,
-                200,
-                25
+                300,
+                450,
+                100
             ],
             "timeout": 300,
             "observations": 5
