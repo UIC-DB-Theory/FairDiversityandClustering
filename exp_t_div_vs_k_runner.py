@@ -2,6 +2,8 @@
 Description:
     Measure runtime and diversity for varying k. Where k is the size of the output.
     For the Adult dataset
+    
+    Usage: python3 exp_t_div_vs_k_runner.py /path/to/setup/file.setup
 """
 import sys
 import json

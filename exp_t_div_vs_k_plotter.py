@@ -1,3 +1,7 @@
+"""
+Usage: python3 exp_t_div_vs_k_plotter.py /path/to/result/file.result
+NOTE: Result files can be found in ./results
+"""
 import json
 import sys
 import os
