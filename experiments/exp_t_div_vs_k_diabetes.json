@@ -45,9 +45,9 @@
         },
         "parameters": {
             "k": [
-                10,
-                110,
-                10
+                25,
+                500,
+                25
             ],
             "timeout": 600,
             "observations": 5
