@@ -14,10 +14,10 @@ with open(result_file, 'r') as json_file:
     results = data["results"]
     setup = data["setup"]
 
-directory = "./experiments/" + result_file.split(".")[0]
-
+directory = "./experiments/"+ result_file.split("/")[-1].split('.')[0]
+print(directory)
 if not os.path.exists(directory):
-	os.mkdir(directory)
+    os.mkdir(directory)
 
 # Plot the experiments
 import matplotlib.pyplot as plt
