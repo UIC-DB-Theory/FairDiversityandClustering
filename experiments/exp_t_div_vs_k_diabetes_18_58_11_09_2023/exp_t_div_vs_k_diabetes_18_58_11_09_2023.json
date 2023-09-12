@@ -1,0 +1,64 @@
+{
+    "setup": {
+        "datasets": {
+            "Diabetes": {
+                "data_dir": "./datasets/diabetes",
+                "color_fields": [
+                    "gender",
+                    "diabetesMed"
+                ],
+                "feature_fields": [
+                    "num_procedures",
+                    "num_lab_procedures",
+                    "number_outpatient",
+                    "number_emergency",
+                    "number_inpatient",
+                    "number_diagnoses"
+                ],
+                "normalize": 1,
+                "points_per_color": {
+                    "Male_No": 2560,
+                    "Female_Yes": 11165,
+                    "Male_Yes": 9515,
+                    "Female_No": 3181
+                }
+            }
+        },
+        "algorithms": {
+            "SFDM-2": {
+                "color": "tab:blue",
+                "coreset": true
+            },
+            "FMMD-S": {
+                "color": "k",
+                "coreset": false
+            },
+            "FairFlow": {
+                "color": "y-",
+                "coreset": true
+            },
+            "FairGreedyFlow": {
+                "color": "tab:brown",
+                "coreset": true
+            },
+            "FMMD-MWU": {
+                "color": "tab:green",
+                "coreset": true
+            },
+            "FMMD-LP": {
+                "color": "tab:red",
+                "coreset": true
+            }
+        },
+        "parameters": {
+            "k": [
+                10,
+                110,
+                10
+            ],
+            "timeout": 600,
+            "observations": 5
+        }
+    },
+    "results": {}
+}

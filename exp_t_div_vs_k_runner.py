@@ -67,7 +67,7 @@ for dataset in setup["datasets"]:
             datasets[dataset]["coresets"][k].append(coreset)
 
 
-def write_results(setup, result):
+def write_results(setup, results):
     print("Writting summary...")
     summary = {
         "setup" : setup,
