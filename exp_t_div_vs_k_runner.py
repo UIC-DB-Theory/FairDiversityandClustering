@@ -407,6 +407,8 @@ def main():
                                 t_val, div_val = runner(rn, dataset, k)
                                 successful_observations += 1
                         except TimeoutException as e:
+                            t_val = 0
+                            div_val = 0
                             print("Timed out!")
 
                         t = t + t_val
