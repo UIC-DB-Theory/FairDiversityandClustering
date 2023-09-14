@@ -9,6 +9,7 @@ import datastructures.BallTree as BallTree
 from algorithms.rounding import rand_round
 import algorithms.utils as algsU
 import datasets.utils as datsU
+import algorithms.coreset as CORESET
 
 def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, epsilon):
     """
@@ -34,6 +35,12 @@ def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, e
             - random ideas?
     """
 
+    gen = np.random.default_rng()
+    def getNextSolutionCheckWait():
+        return gen.integers(9, 29)
+
+    nextSolutionCheckWait = getNextSolutionCheckWait()
+
     assert(k > 0)
 
     # time spent translating queries
@@ -48,7 +55,6 @@ def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, e
     X = np.zeros((N, 1))         # Output
 
     T = ((8 * mu) / (math.pow(scaled_eps, 2))) * math.log(N, math.e) # iterations
-
 
     # for now, we can recreate the structure in advance
     # dim = features.shape[1]
@@ -104,7 +110,10 @@ def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, e
         # TODO: check rate of change of X and h (euclidean distance) or l-inf
 
         # check directly if X is a feasible solution
-        if t > 100 and t % 17 == 0:
+        if t > 100 and nextSolutionCheckWait == 0:
+            # reset the wait to a new time
+            nextSolutionCheckWait = getNextSolutionCheckWait()
+
             timer = algsU.Stopwatch("Query")
 
             # TODO: new query function => boolean for "valid solution"
@@ -114,6 +123,8 @@ def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, e
 
             if not np.any(X_weights > 1 + epsilon):
                 break
+        else:
+            nextSolutionCheckWait -= 1
 
     X = X / (t + 1)
     return X, translation_time
@@ -247,7 +258,7 @@ if __name__ == '__main__':
         adj_k = sum(kis.values())
 
         # compute coreset
-        coreset_size = 15 * k
+        coreset_size = 50 * k
 
         d = len(feature_fields)
         m = len(color_names)
