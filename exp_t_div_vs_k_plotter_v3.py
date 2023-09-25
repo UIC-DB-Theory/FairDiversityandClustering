@@ -70,3 +70,27 @@ for dataset_name, dataset_results in results.items():
     plt.ylabel("log(div/t)")
     plt.savefig(f'{plot_dir}/log_div_t_vs_k', dpi=300, bbox_inches='tight')
     plt.clf()
+    
+    # plot solution_size vs k
+    for alg,result in dataset_results.items():
+        x = result["xs"]["k"]
+        y = result["ys"]["solution_size"]
+        plt.plot(x,y, setup["algorithms"][alg]["color"], label=alg)
+
+    plt.legend(title = f'solution_size vs k - {dataset_name}', bbox_to_anchor=(1.05, 1.0), loc='upper left')
+    plt.xlabel("k")
+    plt.ylabel("solution size")
+    plt.savefig(f'{plot_dir}/sol_size_vs_k', dpi=300, bbox_inches='tight')
+    plt.clf()
+    
+    # plot data_size vs k
+    for alg,result in dataset_results.items():
+        x = result["xs"]["k"]
+        y = result["ys"]["data_size"]
+        plt.plot(x,y, setup["algorithms"][alg]["color"], label=alg)
+
+    plt.legend(title = f'data_size vs k - {dataset_name}', bbox_to_anchor=(1.05, 1.0), loc='upper left')
+    plt.xlabel("k")
+    plt.ylabel("data size")
+    plt.savefig(f'{plot_dir}/data_size_vs_k', dpi=300, bbox_inches='tight')
+    plt.clf()
