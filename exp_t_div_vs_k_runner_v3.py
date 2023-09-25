@@ -251,10 +251,10 @@ for dataset_name in setup["datasets"]:
                         'data_size' : [results_per_k_per_alg[k][alg][0]],
                         'dmax' : [results_per_k_per_alg[k][alg][1]],
                         'dmin' : [results_per_k_per_alg[k][alg][2]],
-                        'runtime' : [results_per_k_per_alg[k][alg][5]],
-                        'diversity' : [results_per_k_per_alg[k][alg][4]],
                         'solution_size' : [results_per_k_per_alg[k][alg][3]],
-                        'div/runtime' : [results_per_k_per_alg[k][alg][4]/results_per_k_per_alg[k][alg][5]]
+                        'diversity' : [results_per_k_per_alg[k][alg][4]],
+                        'runtime' : [results_per_k_per_alg[k][alg][5]],
+                        'div-runtime' : [results_per_k_per_alg[k][alg][4]/results_per_k_per_alg[k][alg][5]]
                     }
                 }
             else:
@@ -262,10 +262,10 @@ for dataset_name in setup["datasets"]:
                 results[dataset_name][alg]['ys']['data_size'].append(results_per_k_per_alg[k][alg][0])
                 results[dataset_name][alg]['ys']['dmax'].append(results_per_k_per_alg[k][alg][1])
                 results[dataset_name][alg]['ys']['dmin'].append(results_per_k_per_alg[k][alg][2])
-                results[dataset_name][alg]['ys']['runtime'].append(results_per_k_per_alg[k][alg][3])
+                results[dataset_name][alg]['ys']['solution_size'].append(results_per_k_per_alg[k][alg][3])
                 results[dataset_name][alg]['ys']['diversity'].append(results_per_k_per_alg[k][alg][4])
-                results[dataset_name][alg]['ys']['solution_size'].append(results_per_k_per_alg[k][alg][5])
-                results[dataset_name][alg]['ys']['div/runtime'].append(results_per_k_per_alg[k][alg][4]/results_per_k_per_alg[k][alg][5])
+                results[dataset_name][alg]['ys']['runtime'].append(results_per_k_per_alg[k][alg][5])
+                results[dataset_name][alg]['ys']['div-runtime'].append(results_per_k_per_alg[k][alg][4]/results_per_k_per_alg[k][alg][5])
 
 # End of dataset loop
 

@@ -14,6 +14,11 @@ result_file_name = result.group(2).split('.')[0]
 print(result.group(1))
 print(f'Plotting from file: {result_file_path}')
 
+# Create result location -- in the same directory as the setup file
+plot_dir = result_file_dir + '/result_' + result_file_name
+if not os.path.exists(plot_dir):
+   os.mkdir(plot_dir)
+
 with open(result_file_path, 'r') as json_file:
     data = json.load(json_file)
     results = data["results"]
@@ -23,22 +28,45 @@ import matplotlib.pyplot as plt
 
 for dataset_name, dataset_results in results.items():
     plt.clf()
-    for alg,alg_results in dataset_results.items():
-        
-        for x_label in alg_results['xs']:
 
-            x_vals = alg_results['xs'][x_label]
+    # plot t vs k
+    for alg,result in dataset_results.items():
+        x = result["xs"]["k"]
+        y =result["ys"]["runtime"]
+        plt.plot(x,y, setup["algorithms"][alg]["color"], label=alg)
 
-            for y_label in alg_results['ys']:
+    plt.legend(title = f'runtime vs k - {dataset_name}', bbox_to_anchor=(1.05, 1.0), loc='upper left')
+    plt.xlabel("k")
+    plt.ylabel("runtime (s)")
+    plt.savefig(f'{plot_dir}/t_vs_k', dpi=300, bbox_inches='tight')
+    plt.yscale("log")
+    plt.ylabel("log(runtime)")
+    plt.savefig(f'{plot_dir}/log_t_vs_k', dpi=300, bbox_inches='tight')
+    plt.clf()
 
-                y_vals = alg_results['xs'][y_label]
-                
-                plt.plot(x_vals, y_vals, setup['algorithms'][alg]['color'], label = alg)
-                plt.legend(title = f'{y_label} vs {x_label} - {dataset_name}', bbox_to_anchor=(1.05, 1.0), loc='upper left')
-                plt.xlabel(x_label)
-                plt.ylabel(y_label)
-                plt.savefig(f'{result_file_dir}/{x_label}_vs_{y_label}_{dataset_name}', dpi=300, bbox_inches='tight')
-                if(y_label == 'runtime'):
-                    plt.yscale("log")
-                    plt.savefig(f'{result_file_dir}/log_{x_label}_vs_{y_label}_{dataset_name}', dpi=300, bbox_inches='tight')
-                plt.clf()
+    # plot div vs k
+    for alg,result in dataset_results.items():
+        x = result["xs"]["k"]
+        y =result["ys"]["diversity"]
+        plt.plot(x,y, setup["algorithms"][alg]["color"], label=alg)
+
+    plt.legend(title = f'diversity vs k - {dataset_name}', bbox_to_anchor=(1.05, 1.0), loc='upper left')
+    plt.xlabel("k")
+    plt.ylabel("diversity")
+    plt.savefig(f'{plot_dir}/diversity_vs_k', dpi=300, bbox_inches='tight')
+    plt.clf()
+
+    # plot div/t vs k
+    for alg,result in dataset_results.items():
+        x = result["xs"]["k"]
+        y = result["ys"]["div-runtime"]
+        plt.plot(x,y, setup["algorithms"][alg]["color"], label=alg)
+
+    plt.legend(title = f'diversity vs k - {dataset_name}', bbox_to_anchor=(1.05, 1.0), loc='upper left')
+    plt.xlabel("k")
+    plt.ylabel("div/t")
+    plt.savefig(f'{plot_dir}/div_t_vs_k', dpi=300, bbox_inches='tight')
+    plt.yscale("log")
+    plt.ylabel("log(div/t)")
+    plt.savefig(f'{plot_dir}/log_div_t_vs_k', dpi=300, bbox_inches='tight')
+    plt.clf()

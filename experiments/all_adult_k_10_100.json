@@ -64,9 +64,9 @@
 	},
 	"parameters": {
 		"k": [
-			25,
-			100,
-			25
+			10,
+			110,
+			10
 		],
 		"observations": 1,
 		"buildkis_alpha" : 0.1
