@@ -101,9 +101,10 @@ algorithms = {
         colors = kwargs['colors'], 
         kis = buildKisMap(kwargs['colors'], k, setup['parameters']['buildkis_alpha']),
         gamma_upper=kwargs['dmax'],
-        mwu_epsilon=setup['algorithms']['FMMD-MWU']['mwu_epsilon'],
-        falloff_epsilon=setup['algorithms']['FMMD-MWU']['falloff_epsilon'],
-        return_unadjusted=False
+        mwu_epsilon=setup['algorithms']['FMMD-MWUS']['mwu_epsilon'],
+        falloff_epsilon=setup['algorithms']['FMMD-MWUS']['falloff_epsilon'],
+        return_unadjusted=False,
+        sample_percentage=setup['algorithms']['FMMD-MWUS']['sample_percentage'],
     ),
 }
 
