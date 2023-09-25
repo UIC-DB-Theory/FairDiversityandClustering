@@ -162,6 +162,7 @@ for dataset_name in setup["datasets"]:
                 unique=setup["datasets"][dataset_name]['filter_unique']
             )
             setup["datasets"][dataset_name]['points_per_color'] = dataset['points_per_color']
+            write_results(setup, results)
             features = dataset['features']
             colors = dataset['colors']
 
