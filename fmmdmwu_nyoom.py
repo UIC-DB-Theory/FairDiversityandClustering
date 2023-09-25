@@ -11,7 +11,7 @@ import algorithms.utils as algsU
 import datasets.utils as datsU
 import algorithms.coreset as CORESET
 
-def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, epsilon):
+def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, epsilon, percent_theoretical_limit=1.0):
     """
     uses the multiplicative weight update method to
     generate an integer solution for the LP
@@ -23,6 +23,7 @@ def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, e
     :param c_tree: The ParGeo C++ tree on the features (passed in so we can re-use it across problem instances)
     :param kis: the color->count mapping
     :param epsilon: allowed error value
+    :param percent_theoretical_limit: Percentage of the theoretical maximum number of iterations to run (default 1.0)
     :return: a nx1 vector X of the solution or None if infeasible
     :return: the "removed time" for encoding and decoding
     """
@@ -55,6 +56,8 @@ def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, e
     X = np.zeros((N, 1))         # Output
 
     T = ((8 * mu) / (math.pow(scaled_eps, 2))) * math.log(N, math.e) # iterations
+    # scale by the amount of the theoretical limit requested
+    T *= percent_theoretical_limit
 
     # for now, we can recreate the structure in advance
     # dim = features.shape[1]
@@ -130,7 +133,7 @@ def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, e
     return X, translation_time
 
 
-def epsilon_falloff(features, colors, kis, gamma_upper, mwu_epsilon, falloff_epsilon, return_unadjusted):
+def epsilon_falloff(features, colors, kis, gamma_upper, mwu_epsilon, falloff_epsilon, return_unadjusted, percent_theoretical_limit):
     """
     starts at a high bound (given by the corset estimate) and repeatedly falls off by 1-epsilon
     :param features: the data set
@@ -139,6 +142,8 @@ def epsilon_falloff(features, colors, kis, gamma_upper, mwu_epsilon, falloff_eps
     :param gamma_upper: the starting value for gamma
     :param mwu_epsilon: epsilon for the MWU method (static error)
     :param falloff_epsilon: epsilon for the falloff system (fraction to reduce by each cycle)
+    :param return_unadjusted: someone made this option worthless
+    :param percent_theoretical_limit: Percentage of the theoretical maximum number of iterations to run (default 1.0)
     :return:
     """
 
@@ -157,12 +162,12 @@ def epsilon_falloff(features, colors, kis, gamma_upper, mwu_epsilon, falloff_eps
     pargeo_tree = WeightedTree(dim)
     pargeo_tree.construct_tree(features)
 
-    X, cur_trans_time = mult_weight_upd(gamma, N, k, features, colors, pargeo_tree, kis, mwu_epsilon)
+    X, cur_trans_time = mult_weight_upd(gamma, N, k, features, colors, pargeo_tree, kis, mwu_epsilon, percent_theoretical_limit)
     translation_time += cur_trans_time
 
     while X is None:
         gamma = gamma * (1 - falloff_epsilon)
-        X, cur_trans_time = mult_weight_upd(gamma, N, k, features, colors, pargeo_tree, kis, mwu_epsilon)
+        X, cur_trans_time = mult_weight_upd(gamma, N, k, features, colors, pargeo_tree, kis, mwu_epsilon, percent_theoretical_limit)
         translation_time += cur_trans_time
 
     # "clean up" our tree
@@ -258,7 +263,7 @@ if __name__ == '__main__':
         adj_k = sum(kis.values())
 
         # compute coreset
-        coreset_size = 50 * k
+        coreset_size = 10 * k
 
         d = len(feature_fields)
         m = len(color_names)
@@ -277,6 +282,7 @@ if __name__ == '__main__':
             mwu_epsilon=0.75,
             falloff_epsilon=0.1,
             return_unadjusted=True,
+            percent_theoretical_limit=0.4,
         )
         print(f'Finished! (time={time}) (adjusted={adj_time})')
         results.append((adj_k, selected, div, adj_time))
@@ -284,7 +290,7 @@ if __name__ == '__main__':
     print('\n\nFINAL RESULTS:')
     print('k\tselected\tdiversity\ttime')
     for k, selected, div, time in results:
-        print(f'{k},\t{selected},\t{div},\t{time},')
+        print(f'{k},\t{len(selected)},\t{div},\t{time},')
 
     """
 
