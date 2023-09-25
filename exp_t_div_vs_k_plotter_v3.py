@@ -41,6 +41,7 @@ for dataset_name, dataset_results in results.items():
     plt.savefig(f'{plot_dir}/t_vs_k', dpi=300, bbox_inches='tight')
     plt.yscale("log")
     plt.ylabel("log(runtime)")
+    plt.legend(title = f'log(runtime) vs k - {dataset_name}', bbox_to_anchor=(1.05, 1.0), loc='upper left')
     plt.savefig(f'{plot_dir}/log_t_vs_k', dpi=300, bbox_inches='tight')
     plt.clf()
 
@@ -62,12 +63,13 @@ for dataset_name, dataset_results in results.items():
         y = result["ys"]["div-runtime"]
         plt.plot(x,y, setup["algorithms"][alg]["color"], label=alg)
 
-    plt.legend(title = f'diversity vs k - {dataset_name}', bbox_to_anchor=(1.05, 1.0), loc='upper left')
+    plt.legend(title = f'd/t vs k - {dataset_name}', bbox_to_anchor=(1.05, 1.0), loc='upper left')
     plt.xlabel("k")
     plt.ylabel("div/t")
     plt.savefig(f'{plot_dir}/div_t_vs_k', dpi=300, bbox_inches='tight')
     plt.yscale("log")
     plt.ylabel("log(div/t)")
+    plt.legend(title = f'log(d/t) vs k - {dataset_name}', bbox_to_anchor=(1.05, 1.0), loc='upper left')
     plt.savefig(f'{plot_dir}/log_div_t_vs_k', dpi=300, bbox_inches='tight')
     plt.clf()
     
