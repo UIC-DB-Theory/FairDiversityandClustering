@@ -15,7 +15,7 @@ print(result.group(1))
 print(f'Plotting from file: {result_file_path}')
 
 # Create result location -- in the same directory as the setup file
-plot_dir = result_file_dir + '/result_' + result_file_name
+plot_dir = result_file_dir + '/' + result_file_name
 if not os.path.exists(plot_dir):
    os.mkdir(plot_dir)
 
