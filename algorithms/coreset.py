@@ -80,7 +80,8 @@ class Coreset_FMM:
             return np.array(input_set)
 
         # Randomly select a point.
-        s_1 = np.random.default_rng().choice(input_set)
+        default_seed = 1000
+        s_1 = np.random.default_rng(default_seed).choice(input_set)
 
         # Initialize all distances initially to s_1.
         # we need to reshape the point vector into a row vector
