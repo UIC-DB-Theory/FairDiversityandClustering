@@ -11,6 +11,7 @@ import re
 import os
 import json
 import numpy as np
+import copy
 
 from datetime import datetime
 
@@ -87,6 +88,7 @@ algorithms = {
         gamma_upper = kwargs['dmax'],
         mwu_epsilon = setup['algorithms']['FMMD-MWU']['mwu_epsilon'],
         falloff_epsilon = setup['algorithms']['FMMD-MWU']['falloff_epsilon'],
+        percent_theoretical_limit = setup['algorithms']['FMMD-MWU']['percent_theoretical_limit'],
         return_unadjusted = False
     ),
     'FMMD-LP' : lambda k, kwargs : FMMDLP(
@@ -147,6 +149,7 @@ for dataset_name in setup["datasets"]:
     results_per_k_per_alg = {}
     for k in range(setup["parameters"]["k"][0] ,setup["parameters"]["k"][1], setup["parameters"]["k"][2]):
         print(f'\tRunning for k = {k}...')
+        print()
         # each observation in the list would consist of the t & div for each algorithm
         observations = []
 
@@ -185,12 +188,12 @@ for dataset_name in setup["datasets"]:
 
             result_per_alg = {}
             for alg in setup['algorithms']:
+                print()
                 print(f'\t\t\tRunning {alg}...')
                 t = 0
                 div = 0
                 data_size = 0
                 
-                import copy
                 alg_args = copy.deepcopy(setup['algorithms'][alg])
                 alg_args['features'] = features
                 alg_args['colors'] = colors
@@ -214,7 +217,7 @@ for dataset_name in setup["datasets"]:
                 runner = algorithms[alg]
                 sol, div, t_alg = runner(k, alg_args)
                 t = t + t_alg
-                print(f'\t\tsolution size = {len(sol)}')
+                print(f'\t\t***solution size = {len(sol)}***')
                 print(f'\t\tdiv = {div}')
                 print(f'\t\tt = {t}')
                 result_per_alg[alg] = [len(alg_args['features']), dmax, dmin, len(sol), div, t]

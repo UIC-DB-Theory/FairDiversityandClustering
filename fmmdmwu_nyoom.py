@@ -133,7 +133,7 @@ def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, e
     return X, translation_time
 
 
-def epsilon_falloff(features, colors, kis, gamma_upper, mwu_epsilon, falloff_epsilon, return_unadjusted, percent_theoretical_limit):
+def epsilon_falloff(features, colors, kis, gamma_upper, mwu_epsilon, falloff_epsilon, return_unadjusted, percent_theoretical_limit=1.0):
     """
     starts at a high bound (given by the corset estimate) and repeatedly falls off by 1-epsilon
     :param features: the data set
