@@ -68,7 +68,8 @@
                 "use_dmax": true,
                 "use_dmin": false,
                 "mwu_epsilon": 0.75,
-                "falloff_epsilon": 0.15
+                "falloff_epsilon": 0.15,
+                "percent_theoretical_limit": 0.4
             },
             "FMMD-LP": {
                 "color": "tab:red",
@@ -84,7 +85,7 @@
                 125,
                 25
             ],
-            "observations": 1,
+            "observations": 5,
             "buildkis_alpha": 0.1
         }
     },

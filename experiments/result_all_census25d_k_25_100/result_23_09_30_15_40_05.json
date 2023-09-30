@@ -1,0 +1,112 @@
+{
+    "setup": {
+        "datasets": {
+            "Census": {
+                "data_dir": "./datasets/census",
+                "color_fields": [
+                    "age-sex-color"
+                ],
+                "feature_fields": [
+                    "attr1",
+                    "attr2",
+                    "attr3",
+                    "attr4",
+                    "attr5",
+                    "attr6",
+                    "attr7",
+                    "attr8",
+                    "attr9",
+                    "attr10",
+                    "attr11",
+                    "attr12",
+                    "attr13",
+                    "attr14",
+                    "attr15",
+                    "attr16",
+                    "attr17",
+                    "attr18",
+                    "attr19",
+                    "attr20",
+                    "attr21",
+                    "attr22",
+                    "attr23",
+                    "attr24",
+                    "attr25"
+                ],
+                "normalize": false,
+                "filter_unique": true,
+                "points_per_color": {
+                    "7": 1294,
+                    "0": 1318,
+                    "8": 26784,
+                    "1": 32814,
+                    "2": 142508,
+                    "9": 112526,
+                    "3": 161132,
+                    "10": 126278,
+                    "4": 129835,
+                    "11": 100819,
+                    "12": 89667,
+                    "5": 127374,
+                    "13": 33448,
+                    "6": 50047
+                }
+            }
+        },
+        "algorithms": {
+            "FMMD-MWU": {
+                "color": "tab:green",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": false,
+                "mwu_epsilon": 0.75,
+                "falloff_epsilon": 0.15,
+                "percent_theoretical_limit": 0.4
+            },
+            "SFDM-2": {
+                "color": "tab:blue",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": true,
+                "epsilon": 0.15
+            },
+            "FMMD-S": {
+                "color": "k",
+                "use_coreset": false,
+                "use_dmax": false,
+                "use_dmin": false,
+                "epsilon": 0.15
+            },
+            "FairFlow": {
+                "color": "y-",
+                "use_coreset": true,
+                "use_dmax": false,
+                "use_dmin": false
+            },
+            "FairGreedyFlow": {
+                "color": "tab:brown",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": true,
+                "epsilon": 0.15
+            },
+            "FMMD-LP": {
+                "color": "tab:red",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": false,
+                "epsilon": 0.15
+            }
+        },
+        "parameters": {
+            "k": [
+                25,
+                125,
+                25
+            ],
+            "observations": 5,
+            "buildkis_alpha": 0.1
+        }
+    },
+    "results": {}
+}
