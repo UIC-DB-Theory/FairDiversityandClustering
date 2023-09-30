@@ -1,0 +1,73 @@
+{
+	"datasets": {
+		"Census": {
+			"data_dir": "./datasets/census",
+			"color_fields": [
+				"age-sex-color"
+			],
+			"feature_fields": [
+				"attr1",
+                "attr2",
+                "attr3",
+                "attr4",
+                "attr5",
+                "attr6"
+			],
+			"normalize": false,
+			"filter_unique" : true
+		}
+	},
+	"algorithms" : {
+		"SFDM-2" : {
+			"color": "tab:blue",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : true,
+			"epsilon" : 0.15
+		},
+		"FMMD-S" : {
+			"color": "k",
+			"use_coreset" : false,
+			"use_dmax" : false,
+			"use_dmin" : false,
+			"epsilon" : 0.15
+		},
+		"FairFlow" : {
+			"color": "y-",
+			"use_coreset" : true,
+			"use_dmax" : false,
+			"use_dmin" : false
+		},
+		"FairGreedyFlow" : {
+			"color": "tab:brown",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : true,
+			"epsilon" : 0.15
+		},
+		"FMMD-MWU" : {
+			"color": "tab:green",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : false,
+			"mwu_epsilon": 0.75,
+			"falloff_epsilon" : 0.15
+		},
+		"FMMD-LP" : {
+			"color": "tab:red",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : false,
+			"epsilon" : 0.15
+		}
+	},
+	"parameters": {
+		"k": [
+			25,
+			125,
+			25
+		],
+		"observations": 1,
+		"buildkis_alpha" : 0.1
+	}
+}
