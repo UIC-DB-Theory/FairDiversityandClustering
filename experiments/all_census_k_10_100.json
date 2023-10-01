@@ -56,7 +56,8 @@
 			"use_coreset" : false,
 			"use_dmax" : false,
 			"use_dmin" : false,
-			"epsilon" : 0.15
+			"epsilon" : 0.15,
+			"timeout" : 600
 		},
 		"FairFlow" : {
 			"color": "y-",

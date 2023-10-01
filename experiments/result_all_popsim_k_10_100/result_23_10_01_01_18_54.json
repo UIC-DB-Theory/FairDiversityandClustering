@@ -1,0 +1,92 @@
+{
+    "setup": {
+        "datasets": {
+            "Popsim": {
+                "data_dir": "./datasets/popsim",
+                "color_fields": [
+                    "race"
+                ],
+                "feature_fields": [
+                    "x",
+                    "y"
+                ],
+                "normalize": true,
+                "filter_unique": true,
+                "points_per_color": {
+                    "White": 3070882,
+                    "African American/Alaska Native": 38080,
+                    "Black/African American": 705193,
+                    "Asian": 294728,
+                    "Native Hawaiian/Other Pacific Islander": 1725
+                }
+            }
+        },
+        "algorithms": {
+            "FMMD-MWUS": {
+                "color": "tab:green",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": false,
+                "mwu_epsilon": 0.75,
+                "falloff_epsilon": 0.15,
+                "sample_percentage": 0.1
+            },
+            "FMMD-MWU": {
+                "color": "tab:orange",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": false,
+                "mwu_epsilon": 0.75,
+                "falloff_epsilon": 0.15,
+                "percent_theoretical_limit": 0.4
+            },
+            "FMMD-LP": {
+                "color": "tab:red",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": false,
+                "epsilon": 0.15
+            },
+            "SFDM-2": {
+                "color": "tab:blue",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": true,
+                "epsilon": 0.15,
+                "timeout": 600
+            },
+            "FMMD-S": {
+                "color": "k",
+                "use_coreset": false,
+                "use_dmax": false,
+                "use_dmin": false,
+                "epsilon": 0.15
+            },
+            "FairFlow": {
+                "color": "y-",
+                "use_coreset": true,
+                "use_dmax": false,
+                "use_dmin": false,
+                "timeout": 600
+            },
+            "FairGreedyFlow": {
+                "color": "tab:brown",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": true,
+                "epsilon": 0.15,
+                "timeout": 600
+            }
+        },
+        "parameters": {
+            "k": [
+                10,
+                110,
+                10
+            ],
+            "observations": 5,
+            "buildkis_alpha": 0.1
+        }
+    },
+    "results": {}
+}
