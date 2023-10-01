@@ -230,7 +230,7 @@ for dataset_name in setup["datasets"]:
                     if timeout_dict[alg]:
                         print('Timed out in previous iteration!')
                         continue
-                    
+                    import gurobipy
                     try:
                         with time_limit(timeout):
                             runner = algorithms[alg]
@@ -244,11 +244,21 @@ for dataset_name in setup["datasets"]:
                         print("Timed out!")
                         timeout_dict[alg] = True
                         continue
+                    except gurobipy.GurobiError as gbe:
+                        print(f'Gurobi Error - {gbe.message}')
+                        timeout_dict[alg] = True
+                        continue
 
                 # Else run without timeout
                 else:
+                    import gurobipy
                     runner = algorithms[alg]
-                    sol, div, t_alg = runner(k, alg_args)
+                    try:
+                        sol, div, t_alg = runner(k, alg_args)
+                    except gurobipy.GurobiError as gbe:
+                        print(f'Gurobi Error - {gbe.message}')
+                        timeout_dict[alg] = True
+                        continue
                     t = t + t_alg
                     print(f'\t\t***solution size = {len(sol)}***')
                     print(f'\t\tdiv = {div}')
