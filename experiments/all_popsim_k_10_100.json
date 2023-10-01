@@ -45,7 +45,7 @@
 			"use_dmax" : true,
 			"use_dmin" : true,
 			"epsilon" : 0.15,
-			"timeout" : 600
+			"timeout" : 1200
 		},
 		"FMMD-S" : {
 			"color": "k",
@@ -53,14 +53,14 @@
 			"use_dmax" : false,
 			"use_dmin" : false,
 			"epsilon" : 0.15,
-			"timeout" : 600
+			"timeout" : 1200
 		},
 		"FairFlow" : {
 			"color": "y-",
 			"use_coreset" : true,
 			"use_dmax" : false,
 			"use_dmin" : false,
-			"timeout" : 600
+			"timeout" : 1200
 		},
 		"FairGreedyFlow" : {
 			"color": "tab:brown",
@@ -68,7 +68,7 @@
 			"use_dmax" : true,
 			"use_dmin" : true,
 			"epsilon" : 0.15,
-			"timeout" : 600
+			"timeout" : 1200
 		}
 	},
 	"parameters": {
