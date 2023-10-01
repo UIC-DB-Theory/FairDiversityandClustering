@@ -45,7 +45,8 @@
 			"use_dmin" : false,
 			"mwu_epsilon": 0.75,
 			"falloff_epsilon" : 0.15,
-			"sample_percentage" : 0.1
+			"sample_percentage" : 0.1,
+			"timeout" : 1200
 		},
 		"FMMD-MWU" : {
 			"color": "tab:orange",
@@ -54,14 +55,16 @@
 			"use_dmin" : false,
 			"mwu_epsilon": 0.75,
 			"falloff_epsilon" : 0.15,
-			"percent_theoretical_limit": 0.4
+			"percent_theoretical_limit": 0.4,
+			"timeout" : 1200
 		},
 		"FMMD-LP" : {
 			"color": "tab:red",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : false,
-			"epsilon" : 0.15
+			"epsilon" : 0.15,
+			"timeout" : 1200
 		},
 		"SFDM-2" : {
 			"color": "tab:blue",
