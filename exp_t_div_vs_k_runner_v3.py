@@ -123,6 +123,14 @@ def write_results(setup, results):
         outfile.write(json_object)
         outfile.flush()
 
+
+
+timeout_dict = {}
+for alg in setup['algorithms']:
+    timeout_dict[alg] = False
+
+
+
 from contextlib import contextmanager
 import signal
 # Timeout implementation
@@ -213,22 +221,55 @@ for dataset_name in setup["datasets"]:
                     print(f'\t\tcomputed dmin = {dmin}')
                     t = t + coreset.closest_pair_compute_time
                     alg_args['dmin'] = dmin
+                
+                # Check if the alg is to be run with a timeout
+                if 'timeout' in setup['algorithms'][alg]:
+                    timeout = setup['algorithms'][alg]['timeout']
+                    print(f'\t\tUsing timeout of {timeout}')
+                    # Check if the alg has timedout before
+                    if timeout_dict[alg]:
+                        print('Timed out in previous iteration!')
+                        continue
+                    
+                    try:
+                        with time_limit(timeout):
+                            runner = algorithms[alg]
+                            sol, div, t_alg = runner(k, alg_args)
+                            t = t + t_alg
+                            print(f'\t\t***solution size = {len(sol)}***')
+                            print(f'\t\tdiv = {div}')
+                            print(f'\t\tt = {t}')
+                            result_per_alg[alg] = [len(alg_args['features']), dmax, dmin, len(sol), div, t]
+                    except TimeoutException as e:
+                        print("Timed out!")
+                        timeout_dict[alg] = True
+                        continue
 
-                runner = algorithms[alg]
-                sol, div, t_alg = runner(k, alg_args)
-                t = t + t_alg
-                print(f'\t\t***solution size = {len(sol)}***')
-                print(f'\t\tdiv = {div}')
-                print(f'\t\tt = {t}')
-                result_per_alg[alg] = [len(alg_args['features']), dmax, dmin, len(sol), div, t]
+                # Else run without timeout
+                else:
+                    runner = algorithms[alg]
+                    sol, div, t_alg = runner(k, alg_args)
+                    t = t + t_alg
+                    print(f'\t\t***solution size = {len(sol)}***')
+                    print(f'\t\tdiv = {div}')
+                    print(f'\t\tt = {t}')
+                    result_per_alg[alg] = [len(alg_args['features']), dmax, dmin, len(sol), div, t]
                 # End of algorithms loop
 
             observations.append(result_per_alg)
         # End of observations loop
 
+        # Delete observations of algorithms that timed-out
+        # for observation in observations:
+        #     for alg in list(observation.keys()):
+        #         if timeout_dict[alg]:
+        #             del observation[alg]
+
         avgs = {}
         # Average out the observations
         for alg in setup['algorithms']:
+            if timeout_dict[alg]:
+                continue
             for i in range(0, setup['parameters']['observations']):
                 observation = observations[i][alg]
                 if alg not in avgs:
@@ -236,6 +277,8 @@ for dataset_name in setup["datasets"]:
                 else:
                     avgs[alg].append(observation)
         for alg in avgs:
+            if timeout_dict[alg]:
+                continue
             avgs[alg] = np.mean(np.array(avgs[alg]), axis=0).tolist()
             if k not in results_per_k_per_alg:
                 results_per_k_per_alg[k] = {alg: avgs[alg]}

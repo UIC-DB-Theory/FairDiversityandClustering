@@ -38,8 +38,17 @@
 		}
 	},
 	"algorithms" : {
-		"FMMD-MWU" : {
+		"FMMD-MWUS" : {
 			"color": "tab:green",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : false,
+			"mwu_epsilon": 0.75,
+			"falloff_epsilon" : 0.15,
+			"sample_percentage" : 0.1
+		},
+		"FMMD-MWU" : {
+			"color": "tab:orange",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : false,
@@ -47,12 +56,20 @@
 			"falloff_epsilon" : 0.15,
 			"percent_theoretical_limit": 0.4
 		},
+		"FMMD-LP" : {
+			"color": "tab:red",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : false,
+			"epsilon" : 0.15
+		},
 		"SFDM-2" : {
 			"color": "tab:blue",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : true,
-			"epsilon" : 0.15
+			"epsilon" : 0.15,
+			"timeout" : 600
 		},
 		"FMMD-S" : {
 			"color": "k",
@@ -65,28 +82,23 @@
 			"color": "y-",
 			"use_coreset" : true,
 			"use_dmax" : false,
-			"use_dmin" : false
+			"use_dmin" : false,
+			"timeout" : 600
 		},
 		"FairGreedyFlow" : {
 			"color": "tab:brown",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : true,
-			"epsilon" : 0.15
-		},
-		"FMMD-LP" : {
-			"color": "tab:red",
-			"use_coreset" : true,
-			"use_dmax" : true,
-			"use_dmin" : false,
-			"epsilon" : 0.15
+			"epsilon" : 0.15,
+			"timeout" : 600
 		}
 	},
 	"parameters": {
 		"k": [
-			25,
-			125,
-			25
+			10,
+			110,
+			10
 		],
 		"observations": 5,
 		"buildkis_alpha" : 0.1
