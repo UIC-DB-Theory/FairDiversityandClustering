@@ -1,20 +1,16 @@
 {
 	"datasets": {
-		"Census": {
-			"data_dir": "./datasets/census",
+		"Popsim": {
+			"data_dir": "./datasets/popsim",
 			"color_fields": [
-				"age-sex-color"
+				"race"
 			],
 			"feature_fields": [
-				"attr1",
-                "attr2",
-                "attr3",
-                "attr4",
-                "attr5",
-                "attr6"
+				"x",
+				"y"
 			],
-			"normalize": false,
-			"filter_unique" : true
+			"normalize": true,
+			"filter_unique": true
 		}
 	},
 	"algorithms" : {
@@ -77,9 +73,9 @@
 	},
 	"parameters": {
 		"k": [
-			100,
-			1100,
-			100
+			10,
+			110,
+			10
 		],
 		"observations": 5,
 		"buildkis_alpha" : 0.1

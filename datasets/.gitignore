@@ -9,3 +9,4 @@
 !/adult/adult_generate.py
 !/census/census_generate.py
 !/popsim/popsim_generate.py
+!/popsim/vis.py
