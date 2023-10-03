@@ -232,7 +232,7 @@ def experiment_fairgreedyflow(i, dataset, k, include_coreset_time = False, inclu
     return t, div
 
 # Define experiment for FMMD-MWU
-def experiment_fmmdmwu(i, dataset, k, include_coreset_time = False, include_gamma_high_time = False, use_coreset = False):
+def experiment_fmmdmwu(i, dataset, k, percent_theoretical_limit, include_coreset_time = False, include_gamma_high_time = False, use_coreset = False):
     print("Running experiment for FMMD-MWU")
     print(f'\t\tk = {k}')
     from algorithms.utils import buildKisMap
@@ -260,7 +260,8 @@ def experiment_fmmdmwu(i, dataset, k, include_coreset_time = False, include_gamm
         gamma_upper=dmax,
         mwu_epsilon=0.75,
         falloff_epsilon=0.15,
-        return_unadjusted=False
+        return_unadjusted=False,
+        percent_theoretical_limit=percent_theoretical_limit,
     )
 
     if include_coreset_time:
@@ -272,7 +273,7 @@ def experiment_fmmdmwu(i, dataset, k, include_coreset_time = False, include_gamm
     return t, div
 
 # Define experiment for FMMD-MWUS - Sampled version
-def experiment_fmmdmwus(i, dataset, k, include_coreset_time = False, include_gamma_high_time = False, use_coreset = False):
+def experiment_fmmdmwus(i, dataset, k, sample_percentage, include_coreset_time = False, include_gamma_high_time = False, use_coreset = False):
     print("Running experiment for FMMD-MWU")
     print(f'\t\tk = {k}')
     from algorithms.utils import buildKisMap
@@ -300,6 +301,7 @@ def experiment_fmmdmwus(i, dataset, k, include_coreset_time = False, include_gam
         gamma_upper=dmax,
         mwu_epsilon=0.75,
         falloff_epsilon=0.15,
+        sample_percentage=sample_percentage,
         return_unadjusted=False
     )
 
@@ -354,15 +356,73 @@ def experiment_fmmdlp(i, dataset, k, include_coreset_time = False, include_gamma
 
 # Lambdas for running experiments
 alg_experiments = {
-    'SFDM-2' : lambda i, dataset, k : 
-        experiment_sfdm2(i, dataset, k, include_coreset_time=True, include_gamma_high_time=True, include_gamma_low_time=True, use_coreset=setup["algorithms"]['SFDM-2']["coreset"]),
-    'FMMD-S' : lambda i, dataset, k : experiment_fmmds(i, dataset, k, use_coreset=setup["algorithms"]['FMMD-S']["coreset"]),
-    'FairFlow' : lambda i, dataset, k : experiment_fairflow(i, dataset, k, include_coreset_time=True, use_coreset=setup["algorithms"]['FairFlow']["coreset"]),
-    'FairGreedyFlow' : lambda i, dataset, k : experiment_fairgreedyflow(i, dataset, k, include_coreset_time=True, include_gamma_high_time=True, include_gamma_low_time=True, use_coreset=setup["algorithms"]['FairGreedyFlow']["coreset"]),
-    'FMMD-MWU' : lambda i, dataset, k : experiment_fmmdmwu(i, dataset, k, include_coreset_time=True, include_gamma_high_time=True, use_coreset=setup["algorithms"]['FMMD-MWU']["coreset"]),
-    'FMMD-LP' : lambda i, dataset,k : experiment_fmmdlp(i, dataset, k, include_coreset_time=True, include_gamma_high_time=True, use_coreset=setup["algorithms"]['FMMD-LP']["coreset"]),
-    'FMMD-MWUS' : lambda i, dataset, k : experiment_fmmdmwu(i, dataset, k, include_coreset_time=True, include_gamma_high_time=True, use_coreset=setup["algorithms"]['FMMD-MWUS']["coreset"]),
-}
+        'SFDM-2': 
+        lambda i, dataset, k: experiment_sfdm2(
+            i,
+            dataset,
+            k,
+            include_coreset_time=True,
+            include_gamma_high_time=True,
+            include_gamma_low_time=True,
+            use_coreset=setup["algorithms"]['SFDM-2']["coreset"]
+            ),
+
+        'FMMD-S': 
+        lambda i, dataset, k: experiment_fmmds(
+            i,
+            dataset,
+            k,
+            use_coreset=setup["algorithms"]['FMMD-S']["coreset"]
+            ),
+
+        'FairFlow':
+        lambda i, dataset, k: experiment_fairflow(
+            i,
+            dataset,
+            k,
+            include_coreset_time=True,
+            use_coreset=setup["algorithms"]['FairFlow']["coreset"]
+            ),
+
+        'FairGreedyFlow': lambda i, dataset, k: experiment_fairgreedyflow(
+            i,
+            dataset,
+            k,
+            include_coreset_time=True,
+            include_gamma_high_time=True,
+            include_gamma_low_time=True,
+            use_coreset=setup["algorithms"]['FairGreedyFlow']["coreset"]
+            ),
+
+        'FMMD-MWU': lambda i, dataset, k: experiment_fmmdmwu(
+            i,
+            dataset,
+            k,
+            include_coreset_time=True,
+            include_gamma_high_time=True,
+            use_coreset=setup["algorithms"]['FMMD-MWU']["coreset"],
+            percent_theoretical_limit=setup["algorithms"]["FFMD-MWU"]["percent-limit"],
+            ),
+
+        'FMMD-LP': lambda i, dataset,k: experiment_fmmdlp(
+            i,
+            dataset,
+            k,
+            include_coreset_time=True,
+            include_gamma_high_time=True,
+            use_coreset=setup["algorithms"]['FMMD-LP']["coreset"],
+            ),
+
+        'FMMD-MWUS': lambda i, dataset, k: experiment_fmmdmwus(
+                i,
+                dataset,
+                k,
+                include_coreset_time=True,
+                include_gamma_high_time=True,
+                use_coreset=setup["algorithms"]['FMMD-MWUS']["coreset"],
+                sample_percentage=setup["algorithms"]["FMMD-MWUS"]["sample-percentage"],
+                ),
+        }
 
 
 # Timeout implementation

@@ -50,63 +50,64 @@ from fmmdmwu_sampled import epsilon_falloff as FMMDMWUS
 from algorithms.utils import buildKisMap
 # Lambdas for running experiments
 algorithms = {
-    'SFDM-2' : lambda k, kwargs: StreamFairDivMax2(
+    'SFDM-2' : lambda name, k, kwargs: StreamFairDivMax2(
         features = kwargs['features'], 
         colors = kwargs['colors'], 
         kis = buildKisMap(kwargs['colors'], k, setup['parameters']['buildkis_alpha']), 
-        epsilon = setup['algorithms']['SFDM-2']['epsilon'], 
+        epsilon = setup['algorithms'][name]['epsilon'], 
         gammahigh = kwargs['dmax'], 
         gammalow = kwargs['dmin'], 
         normalize = False
     ),
-    'FMMD-S' : lambda k, kwargs: FMMDS(
+    'FMMD-S' : lambda name, k, kwargs: FMMDS(
         features = kwargs['features'],
         colors = kwargs['colors'],
         kis = buildKisMap(kwargs['colors'], k, setup['parameters']['buildkis_alpha']),
-        epsilon = setup['algorithms']['FMMD-S']['epsilon'],
+        epsilon = setup['algorithms'][name]['epsilon'],
         normalize = False
     ),
-    'FairFlow' : lambda k, kwargs : FairFlow(
+    'FairFlow' : lambda name, k, kwargs : FairFlow(
         features = kwargs['features'], 
         colors = kwargs['colors'], 
         kis = buildKisMap(kwargs['colors'], k, setup['parameters']['buildkis_alpha']), 
         normalize = False
     ),
-    'FairGreedyFlow' : lambda k, kwargs : FairGreedyFlow(
+    'FairGreedyFlow' : lambda name, k, kwargs : FairGreedyFlow(
         features = kwargs['features'], 
         colors = kwargs['colors'], 
         kis = buildKisMap(kwargs['colors'], k, setup['parameters']['buildkis_alpha']), 
-        epsilon= setup['algorithms']['FairGreedyFlow']['epsilon'], 
+        epsilon= setup['algorithms'][name]['epsilon'], 
         gammahigh=kwargs['dmax'], 
         gammalow = kwargs['dmin'], 
         normalize=False
     ),
-    'FMMD-MWU' : lambda k, kwargs : FMMDMWU(
+    'FMMD-MWU' : lambda name, k, kwargs : FMMDMWU(
         features = kwargs['features'], 
         colors = kwargs['colors'], 
         kis = buildKisMap(kwargs['colors'], k, setup['parameters']['buildkis_alpha']),
         gamma_upper = kwargs['dmax'],
-        mwu_epsilon = setup['algorithms']['FMMD-MWU']['mwu_epsilon'],
-        falloff_epsilon = setup['algorithms']['FMMD-MWU']['falloff_epsilon'],
-        percent_theoretical_limit = setup['algorithms']['FMMD-MWU']['percent_theoretical_limit'],
+        mwu_epsilon = setup['algorithms'][name]['mwu_epsilon'],
+        falloff_epsilon = setup['algorithms'][name]['falloff_epsilon'],
+        percent_theoretical_limit = setup['algorithms'][name]['percent_theoretical_limit'],
         return_unadjusted = False
     ),
-    'FMMD-LP' : lambda k, kwargs : FMMDLP(
+    'FMMD-LP' : lambda name, k, kwargs : FMMDLP(
         features = kwargs['features'], 
         colors = kwargs['colors'],
         kis = buildKisMap(kwargs['colors'], k, setup['parameters']['buildkis_alpha']), 
         upper_gamma = kwargs['dmax'],
-        epsilon = setup['algorithms']['FMMD-LP']['epsilon'], 
+        epsilon = setup['algorithms'][name]['epsilon'], 
     ),
-    'FMMD-MWUS' : lambda k, kwargs : FMMDMWUS(
+    'FMMD-MWUS' : lambda name, k, kwargs : FMMDMWUS(
         features = kwargs['features'], 
         colors = kwargs['colors'], 
         kis = buildKisMap(kwargs['colors'], k, setup['parameters']['buildkis_alpha']),
         gamma_upper=kwargs['dmax'],
-        mwu_epsilon=setup['algorithms']['FMMD-MWUS']['mwu_epsilon'],
-        falloff_epsilon=setup['algorithms']['FMMD-MWUS']['falloff_epsilon'],
+        mwu_epsilon=setup['algorithms'][name]['mwu_epsilon'],
+        falloff_epsilon=setup['algorithms'][name]['falloff_epsilon'],
         return_unadjusted=False,
-        sample_percentage=setup['algorithms']['FMMD-MWUS']['sample_percentage'],
+        sample_percentage=setup['algorithms'][name]['sample_percentage'],
+        percent_theoretical_limit=setup['algorithms'][name]['percent_theoretical_limit'],
     ),
 }
 
@@ -187,40 +188,40 @@ for dataset_name in setup["datasets"]:
             dmin = coreset.compute_closest_pair()
 
             result_per_alg = {}
-            for alg in setup['algorithms']:
+            for name in setup['algorithms']:
                 print()
-                print(f'\t\t\tRunning {alg}...')
+                print(f'\t\t\tRunning {name}...')
                 t = 0
                 div = 0
                 data_size = 0
                 
-                alg_args = copy.deepcopy(setup['algorithms'][alg])
+                alg_args = copy.deepcopy(setup['algorithms'][name])
                 alg_args['features'] = features
                 alg_args['colors'] = colors
 
-                if (setup['algorithms'][alg]['use_coreset']):
+                if (setup['algorithms'][name]['use_coreset']):
                     print(f'\t\tcomputed coreset size  = {len(core_features)}')
                     t = t + coreset.coreset_compute_time
                     alg_args['features'] = core_features
                     alg_args['colors'] = core_colors
 
-                if (setup['algorithms'][alg]['use_dmax']):
+                if (setup['algorithms'][name]['use_dmax']):
                     print(f'\t\tcomputed dmax = {dmax}')
                     t = t + coreset.gamma_upper_bound_compute_time
                     alg_args['dmax'] = dmax
 
-                if (setup['algorithms'][alg]['use_dmin']):
+                if (setup['algorithms'][name]['use_dmin']):
                     print(f'\t\tcomputed dmin = {dmin}')
                     t = t + coreset.closest_pair_compute_time
                     alg_args['dmin'] = dmin
 
-                runner = algorithms[alg]
-                sol, div, t_alg = runner(k, alg_args)
+                runner = algorithms[setup['algorithms'][name]['alg']]
+                sol, div, t_alg = runner(name, k, alg_args)
                 t = t + t_alg
                 print(f'\t\t***solution size = {len(sol)}***')
                 print(f'\t\tdiv = {div}')
                 print(f'\t\tt = {t}')
-                result_per_alg[alg] = [len(alg_args['features']), dmax, dmin, len(sol), div, t]
+                result_per_alg[name] = [len(alg_args['features']), dmax, dmin, len(sol), div, t]
                 # End of algorithms loop
 
             observations.append(result_per_alg)

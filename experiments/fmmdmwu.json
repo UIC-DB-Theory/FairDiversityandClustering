@@ -1,0 +1,124 @@
+{
+	"datasets": {
+		"Adult": {
+			"data_dir": "./datasets/adult",
+			"color_fields": [
+				"race",
+				"sex"
+			],
+			"feature_fields": [
+				"age",
+				"capital-gain",
+				"capital-loss",
+				"hours-per-week",
+				"fnlwgt",
+				"education-num"
+			],
+			"normalize": true,
+			"filter_unique": true
+		}
+	},
+	"algorithms" : {
+		"sampled-0.2" : {
+			"alg": "FMMD-MWUS",
+			"color": "darkolivegreen",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : false,
+			"mwu_epsilon": 0.75,
+			"falloff_epsilon" : 0.15,
+			"sample_percentage" : 0.1,
+			"percent_theoretical_limit": 0.2
+		},
+		"sampled-0.4" : {
+			"alg": "FMMD-MWUS",
+			"color": "forestgreen",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : false,
+			"mwu_epsilon": 0.75,
+			"falloff_epsilon" : 0.15,
+			"sample_percentage" : 0.1,
+			"percent_theoretical_limit": 0.4
+		},
+		"sampled-0.6" : {
+			"alg": "FMMD-MWUS",
+			"color": "lime",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : false,
+			"mwu_epsilon": 0.75,
+			"falloff_epsilon" : 0.15,
+			"sample_percentage" : 0.1,
+			"percent_theoretical_limit": 0.6
+		},
+		"sampled-0.8" : {
+			"alg": "FMMD-MWUS",
+			"color": "turquoise",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : false,
+			"mwu_epsilon": 0.75,
+			"falloff_epsilon" : 0.15,
+			"sample_percentage" : 0.1,
+			"percent_theoretical_limit": 0.8
+		},
+		"nyoom-0.2" : {
+			"alg": "FMMD-MWU",
+			"color": "darkred",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : false,
+			"mwu_epsilon": 0.75,
+			"falloff_epsilon" : 0.15,
+			"percent_theoretical_limit": 0.2
+		},
+		"nyoom-0.4" : {
+			"alg": "FMMD-MWU",
+			"color": "red",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : false,
+			"mwu_epsilon": 0.75,
+			"falloff_epsilon" : 0.15,
+			"percent_theoretical_limit": 0.4
+		},
+		"nyoom-0.6" : {
+			"alg": "FMMD-MWU",
+			"color": "lightcoral",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : false,
+			"mwu_epsilon": 0.75,
+			"falloff_epsilon" : 0.15,
+			"percent_theoretical_limit": 0.6
+		},
+		"nyoom-0.8" : {
+			"alg": "FMMD-MWU",
+			"color": "chocolate",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : false,
+			"mwu_epsilon": 0.75,
+			"falloff_epsilon" : 0.15,
+			"percent_theoretical_limit": 0.8
+		},
+		"LP-15" : {
+			"alg": "FMMD-LP",
+			"color": "black",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : false,
+			"epsilon" : 0.15
+		}
+	},
+	"parameters": {
+		"k": [
+			10,
+			201,
+			10
+		],
+		"observations": 1,
+		"buildkis_alpha" : 0.1
+	}
+}
