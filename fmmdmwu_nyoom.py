@@ -59,11 +59,6 @@ def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, e
     # scale by the amount of the theoretical limit requested
     T *= percent_theoretical_limit
 
-    # for now, we can recreate the structure in advance
-    # dim = features.shape[1]
-    # struct = WeightedTree(dim)
-    # struct.construct_tree(features)
-
     for t in trange(math.ceil(T), desc='MWU Loop', disable=False):
         S = np.empty((0, features.shape[1]))  # points we select this round
         W = 0                                 # current weight sum
@@ -119,7 +114,6 @@ def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, e
 
             timer = algsU.Stopwatch("Query")
 
-            # TODO: new query function => boolean for "valid solution"
             _, X_weights = c_tree.run_query(gamma / 2.0, (X / (t + 1)))
             _, outer_time = timer.stop()
             translation_time += (outer_time - inner_time)
@@ -129,6 +123,7 @@ def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, e
         else:
             nextSolutionCheckWait -= 1
 
+    # t is always bound, unless we run for 0 iterations, which is an error
     X = X / (t + 1)
     return X, translation_time
 
@@ -142,7 +137,7 @@ def epsilon_falloff(features, colors, kis, gamma_upper, mwu_epsilon, falloff_eps
     :param gamma_upper: the starting value for gamma
     :param mwu_epsilon: epsilon for the MWU method (static error)
     :param falloff_epsilon: epsilon for the falloff system (fraction to reduce by each cycle)
-    :param return_unadjusted: someone made this option worthless
+    :param return_unadjusted: whether to also return the "real" time
     :param percent_theoretical_limit: Percentage of the theoretical maximum number of iterations to run (default 1.0)
     :return:
     """
@@ -188,7 +183,6 @@ def epsilon_falloff(features, colors, kis, gamma_upper, mwu_epsilon, falloff_eps
 
     diversity = algsU.compute_maxmin_diversity(solution)
 
-    # TODO: Return solution set instead of size of solution
     if return_unadjusted:
         return S, diversity, adjusted_time, total_time
     else:

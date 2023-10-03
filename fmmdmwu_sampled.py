@@ -13,7 +13,7 @@ import algorithms.utils as algsU
 import datasets.utils as datsU
 
 
-def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, epsilon, sample_percentage):
+def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, epsilon, sample_percentage, percent_theoretical_limit=1.0):
     """
     uses the multiplicative weight update method to
     generate an integer solution for the LP
@@ -26,6 +26,7 @@ def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, e
     :param kis: the color->count mapping
     :param epsilon: allowed error value
     :param sample_percentage: amount of points to query each iteration
+    :param percent_theoretical_limit: Percentage of the theoretical maximum number of iterations to run (default 1.0)
     :return: a nx1 vector X of the solution or None if infeasible
     :return: the "removed time" for encoding and decoding
     """
@@ -37,6 +38,12 @@ def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, e
             - counting approximation approach (ask professor for writeup)
             - random ideas?
     """
+
+    gen = np.random.default_rng()
+    def getNextSolutionCheckWait():
+        return gen.integers(9, 29)
+
+    nextSolutionCheckWait = getNextSolutionCheckWait()
 
     assert(k > 0)
 
@@ -52,12 +59,8 @@ def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, e
     X = np.zeros((N, 1))         # Output
 
     T = ((8 * mu) / (math.pow(scaled_eps, 2))) * math.log(N, math.e) # iterations
-
-
-    # for now, we can recreate the structure in advance
-    # dim = features.shape[1]
-    # struct = WeightedTree(dim)
-    # struct.construct_tree(features)
+    # scale by the amount of the theoretical limit requested
+    T *= percent_theoretical_limit
 
     # all indices in the features array
     indices = np.array(range(len(features)))
@@ -129,22 +132,27 @@ def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, e
         # TODO: check rate of change of X and h (euclidean distance) or l-inf
 
         # check directly if X is a feasible solution
-        if t > 100 and t % 17 == 0:
+        if t > 100 and nextSolutionCheckWait == 0:
+            # reset the wait to a new time
+            nextSolutionCheckWait = getNextSolutionCheckWait()
+
             timer = algsU.Stopwatch("Query")
 
-            # TODO: new query function => boolean for "valid solution"
             _, X_weights = c_tree.run_query(gamma / 2.0, (X / (t + 1)))
             _, outer_time = timer.stop()
             translation_time += (outer_time - inner_time)
 
             if not np.any(X_weights > 1 + epsilon):
                 break
+        else:
+            nextSolutionCheckWait -= 1
 
+    # t is always bound, unless we run for 0 iterations, which is an error
     X = X / (t + 1)
     return X, translation_time
 
 
-def epsilon_falloff(features, colors, kis, gamma_upper, mwu_epsilon, falloff_epsilon, sample_percentage, return_unadjusted):
+def epsilon_falloff(features, colors, kis, gamma_upper, mwu_epsilon, falloff_epsilon, sample_percentage, return_unadjusted, percent_theoretical_limit=1.0):
     """
     starts at a high bound (given by the corset estimate) and repeatedly falls off by 1-epsilon
     :param features: the data set
@@ -154,6 +162,7 @@ def epsilon_falloff(features, colors, kis, gamma_upper, mwu_epsilon, falloff_eps
     :param mwu_epsilon: epsilon for the MWU method (static error)
     :param falloff_epsilon: epsilon for the falloff system (fraction to reduce by each cycle)
     :param sample_percentage: amount of points to query each iteration
+    :param percent_theoretical_limit: Percentage of the theoretical maximum number of iterations to run (default 1.0)
     :return:
     """
 
@@ -172,12 +181,12 @@ def epsilon_falloff(features, colors, kis, gamma_upper, mwu_epsilon, falloff_eps
     pargeo_tree = WeightedTree(dim)
     pargeo_tree.construct_tree(features)
 
-    X, cur_trans_time = mult_weight_upd(gamma, N, k, features, colors, pargeo_tree, kis, mwu_epsilon, sample_percentage)
+    X, cur_trans_time = mult_weight_upd(gamma, N, k, features, colors, pargeo_tree, kis, mwu_epsilon, sample_percentage, percent_theoretical_limit)
     translation_time += cur_trans_time
 
     while X is None:
         gamma = gamma * (1 - falloff_epsilon)
-        X, cur_trans_time = mult_weight_upd(gamma, N, k, features, colors, pargeo_tree, kis, mwu_epsilon, sample_percentage)
+        X, cur_trans_time = mult_weight_upd(gamma, N, k, features, colors, pargeo_tree, kis, mwu_epsilon, sample_percentage, percent_theoretical_limit)
         translation_time += cur_trans_time
 
     # "clean up" our tree
@@ -293,6 +302,7 @@ if __name__ == '__main__':
             falloff_epsilon=0.1,
             return_unadjusted=True,
             sample_percentage=0.1,
+            percent_theoretical_limit=0.5,
         )
         print(f'Finished! (time={time}) (adjusted={adj_time})')
         results.append((adj_k, selected, div, adj_time))
