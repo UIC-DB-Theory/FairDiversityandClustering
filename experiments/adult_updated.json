@@ -26,7 +26,8 @@
 			"use_dmin" : false,
 			"mwu_epsilon": 0.75,
 			"falloff_epsilon" : 0.15,
-			"sample_percentage" : 0.1
+			"sample_percentage" : 0.1,
+			"percent_theoretical_limit": 0.4
 		},
 		"SFDM-2" : {
 			"color": "tab:blue",

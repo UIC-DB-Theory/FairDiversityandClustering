@@ -1,18 +1,13 @@
 {
 	"datasets": {
-		"Adult": {
-			"data_dir": "./datasets/adult",
+		"Popsim": {
+			"data_dir": "./datasets/popsim",
 			"color_fields": [
-				"race",
-				"sex"
+				"race"
 			],
 			"feature_fields": [
-				"age",
-				"capital-gain",
-				"capital-loss",
-				"hours-per-week",
-				"fnlwgt",
-				"education-num"
+				"x",
+				"y"
 			],
 			"normalize": true,
 			"filter_unique": true
@@ -50,7 +45,7 @@
 			"use_dmax" : true,
 			"use_dmin" : true,
 			"epsilon" : 0.15,
-			"timeout" : 1200
+			"timeout" : 600
 		},
 		"FMMD-S" : {
 			"color": "k",
@@ -58,14 +53,14 @@
 			"use_dmax" : false,
 			"use_dmin" : false,
 			"epsilon" : 0.15,
-			"timeout" : 1200
+			"timeout" : 600
 		},
 		"FairFlow" : {
 			"color": "y-",
 			"use_coreset" : true,
 			"use_dmax" : false,
 			"use_dmin" : false,
-			"timeout" : 1200
+			"timeout" : 600
 		},
 		"FairGreedyFlow" : {
 			"color": "tab:brown",
@@ -73,7 +68,7 @@
 			"use_dmax" : true,
 			"use_dmin" : true,
 			"epsilon" : 0.15,
-			"timeout" : 1200
+			"timeout" : 600
 		}
 	},
 	"parameters": {

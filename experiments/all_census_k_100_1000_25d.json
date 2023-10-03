@@ -1,21 +1,40 @@
 {
 	"datasets": {
-		"Adult": {
-			"data_dir": "./datasets/adult",
+		"Census": {
+			"data_dir": "./datasets/census",
 			"color_fields": [
-				"race",
-				"sex"
+				"age-sex-color"
 			],
 			"feature_fields": [
-				"age",
-				"capital-gain",
-				"capital-loss",
-				"hours-per-week",
-				"fnlwgt",
-				"education-num"
+				"attr1",
+				"attr2",
+				"attr3",
+				"attr4",
+				"attr5",
+				"attr6",
+				"attr7",
+				"attr8",
+				"attr9",
+				"attr10",
+				"attr11",
+				"attr12",
+				"attr13",
+				"attr14",
+				"attr15",
+				"attr16",
+				"attr17",
+				"attr18",
+				"attr19",
+				"attr20",
+				"attr21",
+				"attr22",
+				"attr23",
+				"attr24",
+				"attr25"
+				
 			],
-			"normalize": true,
-			"filter_unique": true
+			"normalize": false,
+			"filter_unique" : true
 		}
 	},
 	"algorithms" : {
@@ -26,7 +45,8 @@
 			"use_dmin" : false,
 			"mwu_epsilon": 0.75,
 			"falloff_epsilon" : 0.15,
-			"sample_percentage" : 0.1
+			"sample_percentage" : 0.1,
+			"timeout" : 1200
 		},
 		"FMMD-MWU" : {
 			"color": "tab:orange",
@@ -35,14 +55,16 @@
 			"use_dmin" : false,
 			"mwu_epsilon": 0.75,
 			"falloff_epsilon" : 0.15,
-			"percent_theoretical_limit": 0.4
+			"percent_theoretical_limit": 0.4,
+			"timeout" : 1200
 		},
 		"FMMD-LP" : {
 			"color": "tab:red",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : false,
-			"epsilon" : 0.15
+			"epsilon" : 0.15,
+			"timeout" : 1200
 		},
 		"SFDM-2" : {
 			"color": "tab:blue",
@@ -50,7 +72,7 @@
 			"use_dmax" : true,
 			"use_dmin" : true,
 			"epsilon" : 0.15,
-			"timeout" : 1200
+			"timeout" : 600
 		},
 		"FMMD-S" : {
 			"color": "k",
@@ -58,14 +80,14 @@
 			"use_dmax" : false,
 			"use_dmin" : false,
 			"epsilon" : 0.15,
-			"timeout" : 1200
+			"timeout" : 600
 		},
 		"FairFlow" : {
 			"color": "y-",
 			"use_coreset" : true,
 			"use_dmax" : false,
 			"use_dmin" : false,
-			"timeout" : 1200
+			"timeout" : 600
 		},
 		"FairGreedyFlow" : {
 			"color": "tab:brown",
@@ -73,14 +95,14 @@
 			"use_dmax" : true,
 			"use_dmin" : true,
 			"epsilon" : 0.15,
-			"timeout" : 1200
+			"timeout" : 600
 		}
 	},
 	"parameters": {
 		"k": [
-			10,
-			110,
-			10
+			100,
+			1100,
+			100
 		],
 		"observations": 5,
 		"buildkis_alpha" : 0.1

@@ -1,18 +1,13 @@
 {
 	"datasets": {
-		"Adult": {
-			"data_dir": "./datasets/adult",
+		"Popsim": {
+			"data_dir": "./datasets/popsim",
 			"color_fields": [
-				"race",
-				"sex"
+				"race"
 			],
 			"feature_fields": [
-				"age",
-				"capital-gain",
-				"capital-loss",
-				"hours-per-week",
-				"fnlwgt",
-				"education-num"
+				"x",
+				"y"
 			],
 			"normalize": true,
 			"filter_unique": true

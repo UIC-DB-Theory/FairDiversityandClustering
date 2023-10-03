@@ -12,7 +12,7 @@ class WeightedTree:
         use the ParGeoWeightedKdtree via json strings sent over pipe.
         :param dimension: the dimensions for the tree.
         """
-        assert 1 < dimension < 8, "dimension is outside of acceptable values"
+        assert 1 < dimension < 8 or dimension == 25, "dimension is outside of acceptable values"
         self.dim = dimension
         self.executable = './ParGeoWeightedTree/build/example/TreeClient'
         # self.executable = './ParGeoCtl/pargeoctl'
