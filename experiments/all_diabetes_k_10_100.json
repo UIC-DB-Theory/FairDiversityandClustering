@@ -4,8 +4,8 @@
 			"data_dir": "./datasets/diabetes",
 			"color_fields": [
 				"gender",
-				"diabetesMed",
-				"age"
+				"age",
+				"diabetesMed"
 			],
 			"feature_fields": [
 				"num_procedures",
@@ -13,7 +13,9 @@
 				"number_outpatient",
 				"number_emergency",
 				"number_inpatient",
-				"number_diagnoses"
+				"number_diagnoses",
+				"time_in_hospital",
+				"num_medications"
 			],
 			"normalize": true,
 			"filter_unique" : true

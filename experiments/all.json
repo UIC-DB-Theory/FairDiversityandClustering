@@ -81,7 +81,9 @@
 				"number_outpatient",
 				"number_emergency",
 				"number_inpatient",
-				"number_diagnoses"
+				"number_diagnoses",
+				"time_in_hospital",
+				"num_medications"
 			],
 			"normalize": true,
 			"filter_unique" : true
