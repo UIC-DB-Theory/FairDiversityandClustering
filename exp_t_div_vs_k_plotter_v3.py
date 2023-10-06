@@ -23,6 +23,7 @@ with open(result_file_path, 'r') as json_file:
     data = json.load(json_file)
     results = data["results"]
     setup = data["setup"]
+    color_results = data["color_results"]
 
 import matplotlib.pyplot as plt
 
@@ -96,3 +97,40 @@ for dataset_name, dataset_results in results.items():
     plt.ylabel("data size")
     plt.savefig(f'{plot_dir}/data_size_vs_k', dpi=300, bbox_inches='tight')
     plt.clf()
+    
+# plot the delta of points returned per color
+temp = {}
+for result in color_results:
+    dataset_name = result[0]
+    alg_name = result[1]
+    k_value = result[2]
+    kis_delta = result[3]
+    if dataset_name not in temp:
+        temp[dataset_name] = {
+
+            alg_name : {
+                        "xs" : {
+                            "k" : [k_value]
+                            },
+                        "ys" : {
+                            c: [count] for c, count in kis_delta.items()
+                            }
+                        }
+        }
+    else:
+        if alg_name not in temp[dataset_name]:
+            temp[dataset_name][alg_name] = {
+            "xs" : {
+                "k" : [k_value]
+                },
+            "ys" : {
+                c: [count] for c, count in kis_delta.items()
+                }
+            }
+        else:
+            temp[dataset_name][alg_name]["xs"]["k"].append(k_value)
+            for c, count in kis_delta.items():
+                temp[dataset_name][alg_name]["ys"][c].append(count)
+    
+json_object = json.dumps(temp, indent=4)
+print(json_object)

@@ -111,15 +111,32 @@ algorithms = {
     ),
 }
 
+def points_per_color(s):
+    '''
+    Returns the points per color obtained in the solution
+    '''
+    pass
 
-def write_results(setup, results):
+def write_results(setup, results, color_results):
+
+    class NpEncoder(json.JSONEncoder):
+        def default(self, obj):
+            if isinstance(obj, np.integer):
+                return int(obj)
+            if isinstance(obj, np.floating):
+                return float(obj)
+            if isinstance(obj, np.ndarray):
+                return obj.tolist()
+            return super(NpEncoder, self).default(obj)
+    
     print("Writting summary...")
     summary = {
         "setup" : setup,
-        "results" : results
+        "results" : results,
+        "color_results" : color_results
     }
     # Save the results from the experiment
-    json_object = json.dumps(summary, indent=4)
+    json_object = json.dumps(summary, indent=4, cls=NpEncoder)
     with open(result_file_path, "w") as outfile:
         outfile.write(json_object)
         outfile.flush()
@@ -150,6 +167,7 @@ def time_limit(seconds):
 
 # Main experiment loop
 results = {}
+color_results = []
 from datasets.utils import read_dataset
 for dataset_name in setup["datasets"]:
     print(f'****************************MAIN LOOP******************************', file=sys.stderr)
@@ -175,7 +193,7 @@ for dataset_name in setup["datasets"]:
                 unique=setup["datasets"][dataset_name]['filter_unique']
             )
             setup["datasets"][dataset_name]['points_per_color'] = dataset['points_per_color']
-            write_results(setup, results)
+            write_results(setup, results, color_results)
             features = dataset['features']
             colors = dataset['colors']
 
@@ -250,7 +268,6 @@ for dataset_name in setup["datasets"]:
                         timeout_dict[name] = True
                         continue
 
-                    #<<<<<<< HEAD
                     runner = algorithms[setup['algorithms'][name]['alg']]
                     sol, div, t_alg = runner(name, k, alg_args)
                     t = t + t_alg
@@ -274,16 +291,18 @@ for dataset_name in setup["datasets"]:
                     print(f'\t\tdiv = {div}')
                     print(f'\t\tt = {t}')
                     result_per_alg[name] = [len(alg_args['features']), dmax, dmin, len(sol), div, t]
+                
+                if not timeout_dict[name]:
+                    from algorithms.utils import check_returned_kis
+                    kis = buildKisMap(alg_args['colors'], k, setup['parameters']['buildkis_alpha'])
+                    kis_delta = check_returned_kis(alg_args['colors'], kis, sol)
+                    color_results.append([dataset_name, name, k, kis_delta])
+
+
                 # End of algorithms loop
 
             observations.append(result_per_alg)
         # End of observations loop
-
-        # Delete observations of algorithms that timed-out
-        # for observation in observations:
-        #     for alg in list(observation.keys()):
-        #         if timeout_dict[alg]:
-        #             del observation[alg]
 
         avgs = {}
         # Average out the observations
@@ -333,7 +352,5 @@ for dataset_name in setup["datasets"]:
                 results[dataset_name][alg]['ys']['diversity'].append(results_per_k_per_alg[k][alg][4])
                 results[dataset_name][alg]['ys']['runtime'].append(results_per_k_per_alg[k][alg][5])
                 results[dataset_name][alg]['ys']['div-runtime'].append(results_per_k_per_alg[k][alg][4]/results_per_k_per_alg[k][alg][5])
-
 # End of dataset loop
-
-write_results(setup, results)
+write_results(setup, results, color_results)
