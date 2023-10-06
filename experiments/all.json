@@ -102,7 +102,7 @@
 	"algorithms" : {
 		"sampled-0.2" : {
 			"alg": "FMMD-MWUS",
-			"color": "darkolivegreen",
+			"color": "#3cb043", 
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : false,
@@ -113,7 +113,7 @@
 		},
 		"sampled-0.4" : {
 			"alg": "FMMD-MWUS",
-			"color": "forestgreen",
+			"color": "#b0fc38",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : false,
@@ -124,7 +124,7 @@
 		},
 		"sampled-0.6" : {
 			"alg": "FMMD-MWUS",
-			"color": "lime",
+			"color": "#3a5311",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : false,
@@ -135,7 +135,7 @@
 		},
 		"sampled-0.8" : {
 			"alg": "FMMD-MWUS",
-			"color": "turquoise",
+			"color": "#728c69",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : false,
@@ -146,7 +146,7 @@
 		},
 		"nyoom-0.2" : {
 			"alg": "FMMD-MWU",
-			"color": "darkred",
+			"color": "#d0312d",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : false,
@@ -156,7 +156,7 @@
 		},
 		"nyoom-0.4" : {
 			"alg": "FMMD-MWU",
-			"color": "red",
+			"color": "#990f02",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : false,
@@ -166,7 +166,7 @@
 		},
 		"nyoom-0.6" : {
 			"alg": "FMMD-MWU",
-			"color": "lightcoral",
+			"color": "#e242b",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : false,
@@ -176,7 +176,7 @@
 		},
 		"nyoom-0.8" : {
 			"alg": "FMMD-MWU",
-			"color": "chocolate",
+			"color": "#60100b",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : false,
@@ -203,7 +203,7 @@
 		},
 		"SFDM-2-30" : {
 			"alg" : "SFDM-2",
-			"color": "tab:blue",
+			"color": "#3944bc",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : true,
@@ -212,7 +212,7 @@
 		},
 		"SFDM-2-50" : {
 			"alg" : "SFDM-2",
-			"color": "tab:blue",
+			"color": "#63c5da",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : true,
@@ -221,7 +221,7 @@
 		},
 		"SFDM-2-75" : {
 			"alg" : "SFDM-2",
-			"color": "tab:blue",
+			"color": "#0a1172",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : true,
@@ -230,7 +230,7 @@
 		},
 		"FMMD-S-15" : {
 			"alg" : "FMMD-S",
-			"color": "k",
+			"color": "#f9e076",
 			"use_coreset" : false,
 			"use_dmax" : false,
 			"use_dmin" : false,
@@ -239,7 +239,7 @@
 		},
 		"FMMD-S-30" : {
 			"alg" : "FMMD-S",
-			"color": "k",
+			"color": "#c9bb8e",
 			"use_coreset" : false,
 			"use_dmax" : false,
 			"use_dmin" : false,
@@ -248,7 +248,7 @@
 		},
 		"FMMD-S-50" : {
 			"alg" : "FMMD-S",
-			"color": "k",
+			"color": "#f8e473",
 			"use_coreset" : false,
 			"use_dmax" : false,
 			"use_dmin" : false,
@@ -257,7 +257,7 @@
 		},
 		"FairFlow" : {
 			"alg" : "FairFlow",
-			"color": "y-",
+			"color": "#ed7014",
 			"use_coreset" : true,
 			"use_dmax" : false,
 			"use_dmin" : false,
@@ -265,7 +265,7 @@
 		},
 		"FairGreedyFlow-15" : {
 			"alg" : "FairGreedyFlow",
-			"color": "tab:brown",
+			"color": "#a32cc4",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : true,
