@@ -252,8 +252,8 @@ for dataset_name in setup["datasets"]:
                     import gurobipy
                     try:
                         with time_limit(timeout):
-                            runner = algorithms[name]
-                            sol, div, t_alg = runner(k, alg_args)
+                            runner = algorithms[setup['algorithms'][name]['alg']]
+                            sol, div, t_alg = runner(name, k, alg_args)
                             t = t + t_alg
                             print(f'\t\t***solution size = {len(sol)}***')
                             print(f'\t\tdiv = {div}')
@@ -267,13 +267,6 @@ for dataset_name in setup["datasets"]:
                         print(f'Gurobi Error - {gbe.message}')
                         timeout_dict[name] = True
                         continue
-
-                    runner = algorithms[setup['algorithms'][name]['alg']]
-                    sol, div, t_alg = runner(name, k, alg_args)
-                    t = t + t_alg
-                    print(f'\t\t***solution size = {len(sol)}***')
-                    print(f'\t\tdiv = {div}')
-                    print(f'\t\tt = {t}')
                     result_per_alg[name] = [len(alg_args['features']), dmax, dmin, len(sol), div, t]
 
                 # Else run without timeout

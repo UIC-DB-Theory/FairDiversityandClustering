@@ -69,4 +69,4 @@ def StreamFairDivMax2(features, colors, kis, epsilon, gammahigh, gammalow, norma
                                 dmax=gammahigh,
                                 dmin=gammalow,
                             )
-    return sol, sol_div, t
+    return np.array(list(sol)), sol_div, t

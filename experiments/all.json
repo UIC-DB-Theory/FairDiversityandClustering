@@ -1,0 +1,285 @@
+{
+	"datasets": {
+		"Adult": {
+			"data_dir": "./datasets/adult",
+			"color_fields": [
+				"race",
+				"sex"
+			],
+			"feature_fields": [
+				"age",
+				"capital-gain",
+				"capital-loss",
+				"hours-per-week",
+				"fnlwgt",
+				"education-num"
+			],
+			"normalize": true,
+			"filter_unique": true
+		},
+		"Census25": {
+			"data_dir": "./datasets/census",
+			"color_fields": [
+				"age-sex-color"
+			],
+			"feature_fields": [
+				"attr1",
+				"attr2",
+				"attr3",
+				"attr4",
+				"attr5",
+				"attr6",
+				"attr7",
+				"attr8",
+				"attr9",
+				"attr10",
+				"attr11",
+				"attr12",
+				"attr13",
+				"attr14",
+				"attr15",
+				"attr16",
+				"attr17",
+				"attr18",
+				"attr19",
+				"attr20",
+				"attr21",
+				"attr22",
+				"attr23",
+				"attr24",
+				"attr25"
+				
+			],
+			"normalize": false,
+			"filter_unique" : true
+		},
+		"Census": {
+			"data_dir": "./datasets/census",
+			"color_fields": [
+				"age-sex-color"
+			],
+			"feature_fields": [
+				"attr1",
+                "attr2",
+                "attr3",
+                "attr4",
+                "attr5",
+                "attr6"
+			],
+			"normalize": false,
+			"filter_unique" : true
+		},
+		"Diabetes": {
+			"data_dir": "./datasets/diabetes",
+			"color_fields": [
+				"gender",
+				"diabetesMed"
+			],
+			"feature_fields": [
+				"num_procedures",
+				"num_lab_procedures",
+				"number_outpatient",
+				"number_emergency",
+				"number_inpatient",
+				"number_diagnoses"
+			],
+			"normalize": true,
+			"filter_unique" : true
+		},
+		"Popsim": {
+			"data_dir": "./datasets/popsim",
+			"color_fields": [
+				"race"
+			],
+			"feature_fields": [
+				"x",
+				"y"
+			],
+			"normalize": true,
+			"filter_unique": true
+		}
+	},
+	"algorithms" : {
+		"sampled-0.2" : {
+			"alg": "FMMD-MWUS",
+			"color": "darkolivegreen",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : false,
+			"mwu_epsilon": 0.75,
+			"falloff_epsilon" : 0.15,
+			"sample_percentage" : 0.1,
+			"percent_theoretical_limit": 0.2
+		},
+		"sampled-0.4" : {
+			"alg": "FMMD-MWUS",
+			"color": "forestgreen",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : false,
+			"mwu_epsilon": 0.75,
+			"falloff_epsilon" : 0.15,
+			"sample_percentage" : 0.1,
+			"percent_theoretical_limit": 0.4
+		},
+		"sampled-0.6" : {
+			"alg": "FMMD-MWUS",
+			"color": "lime",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : false,
+			"mwu_epsilon": 0.75,
+			"falloff_epsilon" : 0.15,
+			"sample_percentage" : 0.1,
+			"percent_theoretical_limit": 0.6
+		},
+		"sampled-0.8" : {
+			"alg": "FMMD-MWUS",
+			"color": "turquoise",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : false,
+			"mwu_epsilon": 0.75,
+			"falloff_epsilon" : 0.15,
+			"sample_percentage" : 0.1,
+			"percent_theoretical_limit": 0.8
+		},
+		"nyoom-0.2" : {
+			"alg": "FMMD-MWU",
+			"color": "darkred",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : false,
+			"mwu_epsilon": 0.75,
+			"falloff_epsilon" : 0.15,
+			"percent_theoretical_limit": 0.2
+		},
+		"nyoom-0.4" : {
+			"alg": "FMMD-MWU",
+			"color": "red",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : false,
+			"mwu_epsilon": 0.75,
+			"falloff_epsilon" : 0.15,
+			"percent_theoretical_limit": 0.4
+		},
+		"nyoom-0.6" : {
+			"alg": "FMMD-MWU",
+			"color": "lightcoral",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : false,
+			"mwu_epsilon": 0.75,
+			"falloff_epsilon" : 0.15,
+			"percent_theoretical_limit": 0.6
+		},
+		"nyoom-0.8" : {
+			"alg": "FMMD-MWU",
+			"color": "chocolate",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : false,
+			"mwu_epsilon": 0.75,
+			"falloff_epsilon" : 0.15,
+			"percent_theoretical_limit": 0.8
+		},
+		"LP-15" : {
+			"alg": "FMMD-LP",
+			"color": "black",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : false,
+			"epsilon" : 0.15
+		},
+		"SFDM-2-15" : {
+			"alg" : "SFDM-2",
+			"color": "tab:blue",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : true,
+			"epsilon" : 0.15,
+			"timeout" : 1800
+		},
+		"SFDM-2-30" : {
+			"alg" : "SFDM-2",
+			"color": "tab:blue",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : true,
+			"epsilon" : 0.30,
+			"timeout" : 1800
+		},
+		"SFDM-2-50" : {
+			"alg" : "SFDM-2",
+			"color": "tab:blue",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : true,
+			"epsilon" : 0.5,
+			"timeout" : 1800
+		},
+		"SFDM-2-75" : {
+			"alg" : "SFDM-2",
+			"color": "tab:blue",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : true,
+			"epsilon" : 0.75,
+			"timeout" : 1800
+		},
+		"FMMD-S-15" : {
+			"alg" : "FMMD-S",
+			"color": "k",
+			"use_coreset" : false,
+			"use_dmax" : false,
+			"use_dmin" : false,
+			"epsilon" : 0.15,
+			"timeout" : 1800
+		},
+		"FMMD-S-30" : {
+			"alg" : "FMMD-S",
+			"color": "k",
+			"use_coreset" : false,
+			"use_dmax" : false,
+			"use_dmin" : false,
+			"epsilon" : 0.3,
+			"timeout" : 1800
+		},
+		"FMMD-S-50" : {
+			"alg" : "FMMD-S",
+			"color": "k",
+			"use_coreset" : false,
+			"use_dmax" : false,
+			"use_dmin" : false,
+			"epsilon" : 0.5,
+			"timeout" : 1800
+		},
+		"FairFlow" : {
+			"alg" : "FairFlow",
+			"color": "y-",
+			"use_coreset" : true,
+			"use_dmax" : false,
+			"use_dmin" : false,
+			"timeout" : 1800
+		},
+		"FairGreedyFlow-15" : {
+			"alg" : "FairGreedyFlow",
+			"color": "tab:brown",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : true,
+			"epsilon" : 0.15,
+			"timeout" : 1800
+		}
+	},
+	"parameters": {
+		"k": [
+			10,
+			20,
+			10
+		],
+		"observations": 1,
+		"buildkis_alpha" : 0.1
+	}
+}
