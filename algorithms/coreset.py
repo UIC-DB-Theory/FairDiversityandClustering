@@ -118,9 +118,15 @@ class Coreset_FMM:
         t0 = time.perf_counter()
         from scipy.spatial import distance
         min_dist = sys.float_info.max
-        for i in range(len(self.out_features)):
-            for j in range(i + 1, len(self.out_features)):
-                new_dist = distance.euclidean(self.out_features[i], self.out_features[j])
+    
+        # Only calculate the closest distance for the unique points
+        # We ignore the case of closest pair distance being 0
+        _, unique_features_indices = np.unique(self.out_features, return_index=True, axis=0)
+        unique_features = self.out_features[unique_features_indices]
+
+        for i in range(len(unique_features)):
+            for j in range(i + 1, len(unique_features)):
+                new_dist = distance.euclidean(unique_features[i], unique_features[j])
                 min_dist = min(min_dist, new_dist)
 
         # from scipy.spatial import KDTree
