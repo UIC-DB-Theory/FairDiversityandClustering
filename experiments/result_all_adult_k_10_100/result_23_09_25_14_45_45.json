@@ -33,7 +33,7 @@
         },
         "algorithms": {
             "FMMD-MWUS": {
-                "color": "skyblue",
+                "color": "#63c5da",
                 "use_coreset": true,
                 "use_dmax": true,
                 "use_dmin": false,
@@ -42,7 +42,7 @@
                 "sample_percentage": 0.1
             },
             "SFDM-2": {
-                "color": "tab:blue",
+                "color": "#d0312d",
                 "use_coreset": true,
                 "use_dmax": true,
                 "use_dmin": true,
@@ -811,5 +811,6 @@
                 }
             }
         }
-    }
+    },
+	"color_results" : []
 }
