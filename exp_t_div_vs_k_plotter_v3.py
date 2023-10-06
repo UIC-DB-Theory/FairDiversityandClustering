@@ -132,5 +132,32 @@ for result in color_results:
             for c, count in kis_delta.items():
                 temp[dataset_name][alg_name]["ys"][c].append(count)
     
-json_object = json.dumps(temp, indent=4)
-print(json_object)
+# json_object = json.dumps(temp, indent=4)
+# print(json_object)
+def rand_jitter(arr):
+    stdev = .01 * (max(arr) - min(arr))
+    return arr + np.random.randn(len(arr)) * stdev
+
+def jitter(x, y, s=20, color='b', marker='o', cmap=None, norm=None, vmin=None, vmax=None, alpha=None, linewidths=None, verts=None, hold=None, **kwargs):
+    return plt.scatter(rand_jitter(x), rand_jitter(y), s=s, color=color, marker=marker, cmap=cmap, norm=norm, vmin=vmin, vmax=vmax, alpha=alpha, linewidths=linewidths, **kwargs)
+
+plot_dir = plot_dir + '/color_deltas'
+if not os.path.exists(plot_dir):
+   os.mkdir(plot_dir)
+for dataset_name in temp:
+    for alg_name in temp[dataset_name]:
+        plt.clf()
+        result_file_path = f'{plot_dir}/{dataset_name}_{alg_name}.png'
+        x = temp[dataset_name][alg_name]["xs"]["k"]
+        print(f'{alg_name} : {x}')
+        for color_name in temp[dataset_name][alg_name]["ys"]:
+            y = temp[dataset_name][alg_name]["ys"][color_name]
+            print(f'\t\t{color_name} : {y}')
+            import numpy as np
+            jitter(x,y,color = (np.random.random(), np.random.random(), np.random.random()), label=color_name)
+        plt.legend(title = f'color delta vs k - {dataset_name} - {alg_name}', bbox_to_anchor=(1.05, 1.0), loc='upper left')
+        plt.xlabel("k")
+        plt.ylabel("color delta")
+        plt.savefig(result_file_path, dpi=300, bbox_inches='tight')
+        plt.clf()
+        
