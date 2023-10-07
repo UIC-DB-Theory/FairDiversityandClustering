@@ -97,6 +97,29 @@ def buildKisMap(colors, k, a):
 
     return kis
 
+
+def buildKisMap_equal(colors, k):
+    """
+    builds a map to build constraints of k/m points per color
+
+    :param colors: an array of every color of the points in the dataset
+    :param k: total # to select
+    :return: a map of unique colors to counts
+    """
+    N = len(colors)
+
+    color_names, color_counts = np.unique(colors, return_counts=True)
+
+    # number of colors
+    m = len(color_names)
+
+    # number of points per color
+    k_j = int(math.ceil(k/m))
+
+    kis = {n: k_j for n in color_names}
+
+    return kis
+
 def check_returned_kis(colors, kis, S):
     """
     Computes the differences between each color value and chosen colors

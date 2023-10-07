@@ -1,0 +1,108 @@
+{
+    "setup": {
+        "datasets": {
+            "Popsim": {
+                "data_dir": "./datasets/popsim",
+                "color_fields": [
+                    "race"
+                ],
+                "feature_fields": [
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "normalize": false,
+                "filter_unique": false,
+                "points_per_color": {
+                    "White": 3070882,
+                    "Black/African American": 705193,
+                    "Asian": 294728,
+                    "Native Hawaiian/Other Pacific Islander": 1725,
+                    "African American/Alaska Native": 38080
+                },
+                "size": 4110608
+            }
+        },
+        "algorithms": {
+            "sampled-0.3": {
+                "alg": "FMMD-MWUS",
+                "color": "#006600",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": false,
+                "mwu_epsilon": 0.75,
+                "falloff_epsilon": 0.15,
+                "sample_percentage": 0.1,
+                "percent_theoretical_limit": 0.3
+            },
+            "nyoom-0.8": {
+                "alg": "FMMD-MWU",
+                "color": "#e0115f",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": false,
+                "mwu_epsilon": 0.75,
+                "falloff_epsilon": 0.15,
+                "percent_theoretical_limit": 0.3
+            },
+            "LP-15": {
+                "alg": "FMMD-LP",
+                "color": "black",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": false,
+                "epsilon": 0.15
+            },
+            "SFDM-2-15": {
+                "alg": "SFDM-2",
+                "color": "#00ffff",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": true,
+                "epsilon": 0.15
+            },
+            "SFDM-2-75": {
+                "alg": "SFDM-2",
+                "color": "#0000ff",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": true,
+                "epsilon": 0.75
+            },
+            "FMMD-S-15": {
+                "alg": "FMMD-S",
+                "color": "#f5e107",
+                "use_coreset": false,
+                "use_dmax": false,
+                "use_dmin": false,
+                "epsilon": 0.15
+            },
+            "FairFlow": {
+                "alg": "FairFlow",
+                "color": "#ed7014",
+                "use_coreset": true,
+                "use_dmax": false,
+                "use_dmin": false
+            },
+            "FairGreedyFlow-15": {
+                "alg": "FairGreedyFlow",
+                "color": "#a32cc4",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": true,
+                "epsilon": 0.15
+            }
+        },
+        "parameters": {
+            "k": [
+                500,
+                501,
+                100
+            ],
+            "observations": 1,
+            "buildkis_alpha": 0.1
+        }
+    },
+    "results": {},
+    "color_results": []
+}
