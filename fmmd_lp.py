@@ -103,7 +103,8 @@ def solve_lp(dataStruct, kis, m: gp.Model, gamma: np.float64, variables: npt.NDA
         exit(-1)
 
 
-def bin_lpsolve(features, colors, k, epsilon, a):
+# NOTE: DO NOT USE; HAS BUILT IN CORESET
+def bin_lpsolve(gen, features, colors, k, epsilon, a):
     # all colors made by combining values in color_fields
     color_names = np.unique(colors)
 
@@ -119,7 +120,7 @@ def bin_lpsolve(features, colors, k, epsilon, a):
 
     d = len(feature_fields)
     m = len(color_names)
-    features, colors = CORESET.Coreset_FMM(features, colors, k, m, d, coreset_size).compute()
+    features, colors = CORESET.Coreset_FMM(gen, features, colors, k, m, d, coreset_size).compute()
 
     N = len(features)
 
@@ -218,7 +219,7 @@ def bin_lpsolve(features, colors, k, epsilon, a):
     timer.split("Randomized Rounding")
 
     # do we want all points included or just the ones in S?
-    S = rand_round(gamma / 2, X, features, colors, kis)
+    S = rand_round(gen, gamma / 2, X, features, colors, kis)
 
     """
     print(f'Final Solution (len = {len(S)}):')
@@ -262,9 +263,10 @@ def bin_lpsolve(features, colors, k, epsilon, a):
     return diversity, total
 
 
-def epsilon_falloff(features, colors, upper_gamma, kis, epsilon, deltas=False):
+def epsilon_falloff(gen, features, colors, upper_gamma, kis, epsilon, deltas=False):
     """
     starts at a high bound from the corest and repeatedly falls off by 1-epsilon
+    :param gen: a random number generator
     :param features: the points in the dataset
     :param colors: corresponding color labels for each point
     :param kis: the map of points to select per color
@@ -307,7 +309,7 @@ def epsilon_falloff(features, colors, upper_gamma, kis, epsilon, deltas=False):
     assert(len(X) == N)
 
     # do we want all points included or just the ones in S?
-    S = rand_round(gamma / 2.0, X, features, colors, kis)
+    S = rand_round(gen, gamma / 2.0, X, features, colors, kis)
 
     _, total_time = timer.stop()
 
@@ -326,6 +328,8 @@ def epsilon_falloff(features, colors, upper_gamma, kis, epsilon, deltas=False):
 
 
 if __name__ == '__main__':
+    gen = np.default_rng()
+
     # setup
     # File fields
     allFields = [
@@ -376,7 +380,7 @@ if __name__ == '__main__':
 
         d = len(feature_fields)
         m = len(color_names)
-        coreset = CORESET.Coreset_FMM(features, colors, k, m, d, coreset_size)
+        coreset = CORESET.Coreset_FMM(gen, features, colors, k, m, d, coreset_size)
         # can't overwrite our original dataset
         core_features, core_colors = coreset.compute()
 
@@ -389,6 +393,7 @@ if __name__ == '__main__':
         # run LP
         print(f'Running LP for {k}')
         selected, div, deltas, time = epsilon_falloff(
+            gen=gen,
             features=core_features,
             colors=core_colors,
             upper_gamma=upper_gamma,

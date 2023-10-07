@@ -15,6 +15,14 @@ import copy
 
 from datetime import datetime
 
+import random
+# just in case, but we don't use these
+random.seed(0)
+np.random.seed(0)
+
+# global generator used for all randomness
+gen = np.random.default_rng(seed=0)
+
 # Parse setup file path
 setup_file_path = sys.argv[1]
 result = re.search(r'^(.+)\/([^\/]+)$', setup_file_path)
@@ -50,7 +58,7 @@ from fmmdmwu_sampled import epsilon_falloff as FMMDMWUS
 from algorithms.utils import buildKisMap
 # Lambdas for running experiments
 algorithms = {
-    'SFDM-2' : lambda name, k, kwargs: StreamFairDivMax2(
+    'SFDM-2' : lambda gen, name, k, kwargs: StreamFairDivMax2(
         features = kwargs['features'], 
         colors = kwargs['colors'], 
         kis = buildKisMap(kwargs['colors'], k, setup['parameters']['buildkis_alpha']), 
@@ -59,20 +67,20 @@ algorithms = {
         gammalow = kwargs['dmin'], 
         normalize = False
     ),
-    'FMMD-S' : lambda name, k, kwargs: FMMDS(
+    'FMMD-S' : lambda gen, name, k, kwargs: FMMDS(
         features = kwargs['features'],
         colors = kwargs['colors'],
         kis = buildKisMap(kwargs['colors'], k, setup['parameters']['buildkis_alpha']),
         epsilon = setup['algorithms'][name]['epsilon'],
         normalize = False
     ),
-    'FairFlow' : lambda name, k, kwargs : FairFlow(
+    'FairFlow' : lambda gen, name, k, kwargs : FairFlow(
         features = kwargs['features'], 
         colors = kwargs['colors'], 
         kis = buildKisMap(kwargs['colors'], k, setup['parameters']['buildkis_alpha']), 
         normalize = False
     ),
-    'FairGreedyFlow' : lambda name, k, kwargs : FairGreedyFlow(
+    'FairGreedyFlow' : lambda gen, name, k, kwargs : FairGreedyFlow(
         features = kwargs['features'], 
         colors = kwargs['colors'], 
         kis = buildKisMap(kwargs['colors'], k, setup['parameters']['buildkis_alpha']), 
@@ -81,7 +89,8 @@ algorithms = {
         gammalow = kwargs['dmin'], 
         normalize=False
     ),
-    'FMMD-MWU' : lambda name, k, kwargs : FMMDMWU(
+    'FMMD-MWU' : lambda gen, name, k, kwargs : FMMDMWU(
+        gen=gen,
         features = kwargs['features'], 
         colors = kwargs['colors'], 
         kis = buildKisMap(kwargs['colors'], k, setup['parameters']['buildkis_alpha']),
@@ -91,14 +100,16 @@ algorithms = {
         percent_theoretical_limit = setup['algorithms'][name]['percent_theoretical_limit'],
         return_unadjusted = False
     ),
-    'FMMD-LP' : lambda name, k, kwargs : FMMDLP(
+    'FMMD-LP' : lambda gen, name, k, kwargs : FMMDLP(
+        gen=gen,
         features = kwargs['features'], 
         colors = kwargs['colors'],
         kis = buildKisMap(kwargs['colors'], k, setup['parameters']['buildkis_alpha']), 
         upper_gamma = kwargs['dmax'],
         epsilon = setup['algorithms'][name]['epsilon'], 
     ),
-    'FMMD-MWUS' : lambda name, k, kwargs : FMMDMWUS(
+    'FMMD-MWUS' : lambda gen, name, k, kwargs : FMMDMWUS(
+        gen=gen,
         features = kwargs['features'], 
         colors = kwargs['colors'], 
         kis = buildKisMap(kwargs['colors'], k, setup['parameters']['buildkis_alpha']),
@@ -204,6 +215,7 @@ for dataset_name in setup["datasets"]:
             num_colors = len(setup["datasets"][dataset_name]['points_per_color'])
             coreset_size = num_colors * k
             coreset = Coreset_FMM(
+                gen,
                 features, 
                 colors, 
                 k, 
@@ -254,7 +266,7 @@ for dataset_name in setup["datasets"]:
                     try:
                         with time_limit(timeout):
                             runner = algorithms[setup['algorithms'][name]['alg']]
-                            sol, div, t_alg = runner(name, k, alg_args)
+                            sol, div, t_alg = runner(gen, name, k, alg_args)
                             t = t + t_alg
                             print(f'\t\t***solution size = {len(sol)}***')
                             print(f'\t\tdiv = {div}')
@@ -275,7 +287,7 @@ for dataset_name in setup["datasets"]:
                     import gurobipy
                     runner = algorithms[setup['algorithms'][name]['alg']]
                     try:
-                        sol, div, t_alg = runner(name, k, alg_args)
+                        sol, div, t_alg = runner(gen, name, k, alg_args)
                     except gurobipy.GurobiError as gbe:
                         print(f'Gurobi Error - {gbe.message}')
                         timeout_dict[name] = True

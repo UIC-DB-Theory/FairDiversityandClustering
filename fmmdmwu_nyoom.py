@@ -11,7 +11,7 @@ import algorithms.utils as algsU
 import datasets.utils as datsU
 import algorithms.coreset as CORESET
 
-def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, epsilon, percent_theoretical_limit=1.0):
+def mult_weight_upd(gen, gamma, N, k, features, colors, c_tree : WeightedTree, kis, epsilon, percent_theoretical_limit=1.0):
     """
     uses the multiplicative weight update method to
     generate an integer solution for the LP
@@ -36,7 +36,6 @@ def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, e
             - random ideas?
     """
 
-    gen = np.random.default_rng()
     def getNextSolutionCheckWait():
         return gen.integers(9, 29)
 
@@ -128,9 +127,10 @@ def mult_weight_upd(gamma, N, k, features, colors, c_tree : WeightedTree, kis, e
     return X, translation_time
 
 
-def epsilon_falloff(features, colors, kis, gamma_upper, mwu_epsilon, falloff_epsilon, return_unadjusted, percent_theoretical_limit=1.0):
+def epsilon_falloff(gen, features, colors, kis, gamma_upper, mwu_epsilon, falloff_epsilon, return_unadjusted, percent_theoretical_limit=1.0):
     """
     starts at a high bound (given by the corset estimate) and repeatedly falls off by 1-epsilon
+    :param gen: RNG generator
     :param features: the data set
     :param colors:   color labels for the data set
     :param kis:      map of colors to requested counts
@@ -157,12 +157,12 @@ def epsilon_falloff(features, colors, kis, gamma_upper, mwu_epsilon, falloff_eps
     pargeo_tree = WeightedTree(dim)
     pargeo_tree.construct_tree(features)
 
-    X, cur_trans_time = mult_weight_upd(gamma, N, k, features, colors, pargeo_tree, kis, mwu_epsilon, percent_theoretical_limit)
+    X, cur_trans_time = mult_weight_upd(gen, gamma, N, k, features, colors, pargeo_tree, kis, mwu_epsilon, percent_theoretical_limit)
     translation_time += cur_trans_time
 
     while X is None:
         gamma = gamma * (1 - falloff_epsilon)
-        X, cur_trans_time = mult_weight_upd(gamma, N, k, features, colors, pargeo_tree, kis, mwu_epsilon, percent_theoretical_limit)
+        X, cur_trans_time = mult_weight_upd(gen, gamma, N, k, features, colors, pargeo_tree, kis, mwu_epsilon, percent_theoretical_limit)
         translation_time += cur_trans_time
 
     # "clean up" our tree
@@ -171,7 +171,7 @@ def epsilon_falloff(features, colors, kis, gamma_upper, mwu_epsilon, falloff_eps
     timer.split("Randomized Rounding")
 
     # we need to flatten X since it expects an array rather than a 1D vector
-    S = rand_round(gamma / 2.0, X.flatten(), features, colors, kis)
+    S = rand_round(gen, gamma / 2.0, X.flatten(), features, colors, kis)
 
     _, total_time = timer.stop()
 
@@ -190,6 +190,7 @@ def epsilon_falloff(features, colors, kis, gamma_upper, mwu_epsilon, falloff_eps
 
 
 if __name__ == '__main__':
+    gen = np.random.default_rng()
     """ 
     # Testing field
     # File fields
@@ -261,7 +262,7 @@ if __name__ == '__main__':
 
         d = len(feature_fields)
         m = len(color_names)
-        coreset = CORESET.Coreset_FMM(features, colors, adj_k, m, d, coreset_size)
+        coreset = CORESET.Coreset_FMM(gen, features, colors, adj_k, m, d, coreset_size)
         core_features, core_colors = coreset.compute()
 
         gamma_upper = coreset.compute_gamma_upper_bound()
@@ -269,6 +270,7 @@ if __name__ == '__main__':
         # actually run the model
         print(f'running mwu for {k}')
         selected, div, adj_time, time = epsilon_falloff(
+            gen=gen,
             features=core_features,
             colors=core_colors,
             kis=kis,
