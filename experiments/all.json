@@ -15,7 +15,7 @@
 				"education-num"
 			],
 			"normalize": true,
-			"filter_unique": true
+			"filter_unique": false
 		},
 		"Census25": {
 			"data_dir": "./datasets/census",
@@ -51,7 +51,7 @@
 				
 			],
 			"normalize": false,
-			"filter_unique" : true
+			"filter_unique" : false
 		},
 		"Census": {
 			"data_dir": "./datasets/census",
@@ -67,7 +67,7 @@
                 "attr6"
 			],
 			"normalize": false,
-			"filter_unique" : true
+			"filter_unique" : false
 		},
 		"Diabetes": {
 			"data_dir": "./datasets/diabetes",
@@ -81,10 +81,32 @@
 				"number_outpatient",
 				"number_emergency",
 				"number_inpatient",
-				"number_diagnoses"
+				"number_diagnoses",
+				"time_in_hospital",
+				"num_medications"
 			],
 			"normalize": true,
-			"filter_unique" : true
+			"filter_unique" : false
+		},
+		"Diabetes40": {
+			"data_dir": "./datasets/diabetes",
+			"color_fields": [
+				"gender",
+				"diabetesMed",
+				"age"
+			],
+			"feature_fields": [
+				"num_procedures",
+				"num_lab_procedures",
+				"number_outpatient",
+				"number_emergency",
+				"number_inpatient",
+				"number_diagnoses",
+				"time_in_hospital",
+				"num_medications"
+			],
+			"normalize": true,
+			"filter_unique" : false
 		},
 		"Popsim": {
 			"data_dir": "./datasets/popsim",
@@ -96,93 +118,30 @@
 				"y"
 			],
 			"normalize": true,
-			"filter_unique": true
+			"filter_unique": false
 		}
 	},
 	"algorithms" : {
-		"sampled-0.2" : {
+		"sampled-0.3" : {
 			"alg": "FMMD-MWUS",
-			"color": "#3cb043", 
+			"color": "#006600",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : false,
 			"mwu_epsilon": 0.75,
 			"falloff_epsilon" : 0.15,
 			"sample_percentage" : 0.1,
-			"percent_theoretical_limit": 0.2
-		},
-		"sampled-0.4" : {
-			"alg": "FMMD-MWUS",
-			"color": "#b0fc38",
-			"use_coreset" : true,
-			"use_dmax" : true,
-			"use_dmin" : false,
-			"mwu_epsilon": 0.75,
-			"falloff_epsilon" : 0.15,
-			"sample_percentage" : 0.1,
-			"percent_theoretical_limit": 0.4
-		},
-		"sampled-0.6" : {
-			"alg": "FMMD-MWUS",
-			"color": "#3a5311",
-			"use_coreset" : true,
-			"use_dmax" : true,
-			"use_dmin" : false,
-			"mwu_epsilon": 0.75,
-			"falloff_epsilon" : 0.15,
-			"sample_percentage" : 0.1,
-			"percent_theoretical_limit": 0.6
-		},
-		"sampled-0.8" : {
-			"alg": "FMMD-MWUS",
-			"color": "#728c69",
-			"use_coreset" : true,
-			"use_dmax" : true,
-			"use_dmin" : false,
-			"mwu_epsilon": 0.75,
-			"falloff_epsilon" : 0.15,
-			"sample_percentage" : 0.1,
-			"percent_theoretical_limit": 0.8
-		},
-		"nyoom-0.2" : {
-			"alg": "FMMD-MWU",
-			"color": "#d0312d",
-			"use_coreset" : true,
-			"use_dmax" : true,
-			"use_dmin" : false,
-			"mwu_epsilon": 0.75,
-			"falloff_epsilon" : 0.15,
-			"percent_theoretical_limit": 0.2
-		},
-		"nyoom-0.4" : {
-			"alg": "FMMD-MWU",
-			"color": "#990f02",
-			"use_coreset" : true,
-			"use_dmax" : true,
-			"use_dmin" : false,
-			"mwu_epsilon": 0.75,
-			"falloff_epsilon" : 0.15,
-			"percent_theoretical_limit": 0.4
-		},
-		"nyoom-0.6" : {
-			"alg": "FMMD-MWU",
-			"color": "#e242b",
-			"use_coreset" : true,
-			"use_dmax" : true,
-			"use_dmin" : false,
-			"mwu_epsilon": 0.75,
-			"falloff_epsilon" : 0.15,
-			"percent_theoretical_limit": 0.6
+			"percent_theoretical_limit": 0.3
 		},
 		"nyoom-0.8" : {
 			"alg": "FMMD-MWU",
-			"color": "#60100b",
+			"color": "#e0115f",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : false,
 			"mwu_epsilon": 0.75,
 			"falloff_epsilon" : 0.15,
-			"percent_theoretical_limit": 0.8
+			"percent_theoretical_limit": 0.3
 		},
 		"LP-15" : {
 			"alg": "FMMD-LP",
@@ -194,74 +153,34 @@
 		},
 		"SFDM-2-15" : {
 			"alg" : "SFDM-2",
-			"color": "tab:blue",
+			"color": "#00ffff",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : true,
-			"epsilon" : 0.15,
-			"timeout" : 1800
-		},
-		"SFDM-2-30" : {
-			"alg" : "SFDM-2",
-			"color": "#3944bc",
-			"use_coreset" : true,
-			"use_dmax" : true,
-			"use_dmin" : true,
-			"epsilon" : 0.30,
-			"timeout" : 1800
-		},
-		"SFDM-2-50" : {
-			"alg" : "SFDM-2",
-			"color": "#63c5da",
-			"use_coreset" : true,
-			"use_dmax" : true,
-			"use_dmin" : true,
-			"epsilon" : 0.5,
-			"timeout" : 1800
+			"epsilon" : 0.15
 		},
 		"SFDM-2-75" : {
 			"alg" : "SFDM-2",
-			"color": "#0a1172",
+			"color": "#0000ff",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : true,
-			"epsilon" : 0.75,
-			"timeout" : 1800
+			"epsilon" : 0.75
 		},
 		"FMMD-S-15" : {
 			"alg" : "FMMD-S",
-			"color": "#f9e076",
+			"color": "#f5e107",
 			"use_coreset" : false,
 			"use_dmax" : false,
 			"use_dmin" : false,
-			"epsilon" : 0.15,
-			"timeout" : 1800
-		},
-		"FMMD-S-30" : {
-			"alg" : "FMMD-S",
-			"color": "#c9bb8e",
-			"use_coreset" : false,
-			"use_dmax" : false,
-			"use_dmin" : false,
-			"epsilon" : 0.3,
-			"timeout" : 1800
-		},
-		"FMMD-S-50" : {
-			"alg" : "FMMD-S",
-			"color": "#f8e473",
-			"use_coreset" : false,
-			"use_dmax" : false,
-			"use_dmin" : false,
-			"epsilon" : 0.5,
-			"timeout" : 1800
+			"epsilon" : 0.15
 		},
 		"FairFlow" : {
 			"alg" : "FairFlow",
 			"color": "#ed7014",
 			"use_coreset" : true,
 			"use_dmax" : false,
-			"use_dmin" : false,
-			"timeout" : 1800
+			"use_dmin" : false
 		},
 		"FairGreedyFlow-15" : {
 			"alg" : "FairGreedyFlow",
@@ -269,8 +188,7 @@
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : true,
-			"epsilon" : 0.15,
-			"timeout" : 1800
+			"epsilon" : 0.15
 		}
 	},
 	"parameters": {
@@ -279,7 +197,7 @@
 			201,
 			10
 		],
-		"observations": 1,
+		"observations": 10,
 		"buildkis_alpha" : 0.1
 	}
 }

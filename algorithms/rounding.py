@@ -1,9 +1,10 @@
 import numpy as np
 import datastructures.KDTree2 as algo
 
-def rand_round(min_dist, X, features, colors, kis, theory_accurate=True):
+def rand_round(gen, min_dist, X, features, colors, kis, theory_accurate=True):
     """
     Randomly rounds a real solution to an integer one
+    :param gen: a random generator
     :param X: the variables of the program
     :param features: feature set
     :param colors: colors of features
@@ -16,7 +17,7 @@ def rand_round(min_dist, X, features, colors, kis, theory_accurate=True):
     nonzeros = X[nonzero_indexes]
 
     # get a random permutation
-    rands = np.random.random_sample(size=len(nonzeros))
+    rands = gen.random(size=len(nonzeros))
     # of the original array!
     argsort = np.argsort(rands ** (1.0 / nonzeros))
     i_permutation = nonzero_indexes[argsort]

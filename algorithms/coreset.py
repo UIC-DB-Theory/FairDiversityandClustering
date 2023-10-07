@@ -31,7 +31,7 @@ class Coreset_FMM:
     """
 
     # Initialize with parameters
-    def __init__(self, features: npt.NDArray[np.float64], colors: npt.NDArray[t.AnyStr], k, m, d, coreset_size):
+    def __init__(self, gen, features: npt.NDArray[np.float64], colors: npt.NDArray[t.AnyStr], k, m, d, coreset_size):
 
         # Convert features and colors to numpy arrays
         if isinstance(features, np.ndarray):
@@ -43,6 +43,9 @@ class Coreset_FMM:
             self.colors = colors
         else:
             self.colors = np.array(colors)
+
+        # RNG
+        self.gen = gen
 
         # Minimum size of the result set (FMMD)
         self.k = k
@@ -80,8 +83,8 @@ class Coreset_FMM:
             return np.array(input_set)
 
         # Randomly select a point.
-        default_seed = 1000
-        s_1 = np.random.default_rng(default_seed).choice(input_set)
+        # TODO: fix seeding in total!
+        s_1 = self.gen.choice(input_set)
 
         # Initialize all distances initially to s_1.
         # we need to reshape the point vector into a row vector
@@ -118,9 +121,15 @@ class Coreset_FMM:
         t0 = time.perf_counter()
         from scipy.spatial import distance
         min_dist = sys.float_info.max
-        for i in range(len(self.out_features)):
-            for j in range(i + 1, len(self.out_features)):
-                new_dist = distance.euclidean(self.out_features[i], self.out_features[j])
+    
+        # Only calculate the closest distance for the unique points
+        # We ignore the case of closest pair distance being 0
+        _, unique_features_indices = np.unique(self.out_features, return_index=True, axis=0)
+        unique_features = self.out_features[unique_features_indices]
+
+        for i in range(len(unique_features)):
+            for j in range(i + 1, len(unique_features)):
+                new_dist = distance.euclidean(unique_features[i], unique_features[j])
                 min_dist = min(min_dist, new_dist)
 
         # from scipy.spatial import KDTree
@@ -148,7 +157,7 @@ class Coreset_FMM:
         from scipy.spatial.distance import cdist
 
         # Randomly select a point.
-        s_1 = np.random.default_rng().choice(self.features)
+        s_1 = self.gen.choice(self.features)
 
         # Initialize all distances initially to s_1.
         # we need to reshape the point vector into a row vector
