@@ -115,7 +115,8 @@
 			],
 			"feature_fields": [
 				"x",
-				"y"
+				"y",
+				"z"
 			],
 			"normalize": true,
 			"filter_unique": false

@@ -7,10 +7,11 @@
 			],
 			"feature_fields": [
 				"x",
-				"y"
+				"y",
+				"z"
 			],
-			"normalize": true,
-			"filter_unique": true
+			"normalize": false,
+			"filter_unique": false
 		}
 	},
 	"algorithms" : {

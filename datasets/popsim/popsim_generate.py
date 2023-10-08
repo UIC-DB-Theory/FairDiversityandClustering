@@ -1,5 +1,6 @@
 import json
 import csv
+import math
 
 metadata_file = "popsim.metadata"
 metadata = {
@@ -25,16 +26,17 @@ with open("./popsim_5m.csv", 'r') as file:
     for row in csvreader:
         i = i + 1
         if i == 0:
-            fields = ['race', 'x', 'y']
+            fields = ['race', 'x', 'y', 'z']
             continue
         # only append rows with race mappings
         if row[2] in race_mappings:
             # Convert lat lon to 2-D points
-            MAP_WIDTH = 10000
-            MAP_HEIGHT = 10000
-            x = ((MAP_WIDTH/360.0) * (180 + float(row[3])))
-            y = ((MAP_HEIGHT/180.0) * (90 - float(row[4])))
-            data.append([race_mappings[row[2]], x, y])
+            lat = math.radians(float(row[4]))
+            lon = math.radians(float(row[3]))
+            x = 6371*math.cos(lat)*math.cos(lon)
+            y = 6371*math.cos(lat)*math.sin(lon)
+            z = 6371*math.sin(lat)
+            data.append([race_mappings[row[2]], x, y, z])
 
 
 # ---------------Create file diabetes.metadata--------------
