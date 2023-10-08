@@ -180,6 +180,7 @@ def time_limit(seconds):
 # Main experiment loop
 results = {}
 color_results = []
+alg_status = []
 from datasets.utils import read_dataset
 for dataset_name in setup["datasets"]:
     print(f'****************************MAIN LOOP******************************', file=sys.stderr)
@@ -269,7 +270,7 @@ for dataset_name in setup["datasets"]:
                     print(f'\t\tUsing timeout of {timeout}')
                     # Check if the alg has timedout before
                     if timeout_dict[name]:
-                        print('Timed out in previous iteration!')
+                        print('Timed out/Exception occured in previous iteration!')
                         continue
                     import gurobipy
                     try:
@@ -284,21 +285,37 @@ for dataset_name in setup["datasets"]:
                     except TimeoutException as e:
                         print("Timed out!")
                         timeout_dict[name] = True
+                        alg_status.append(f'{name} timed out at k = {adj_k}')
                         continue
                     except gurobipy.GurobiError as gbe:
                         print(f'Gurobi Error - {gbe.message}')
                         timeout_dict[name] = True
+                        alg_status.append(f'{name} gurobi errored at k = {adj_k}')
+                        continue
+                    except Exception as e:
+                        print(f'Some exception occured = {e.message}')
+                        timeout_dict[name] = True
+                        alg_status.append(f'{name} exception occured at k = {adj_k}')
                         continue
                     result_per_alg[name] = [len(alg_args['features']), dmax, dmin, len(sol), div, t]
 
                 # Else run without timeout
                 else:
+                    if timeout_dict[name]:
+                        print('Timed out/Exception occured in previous iteration!')
+                        continue
                     import gurobipy
                     runner = algorithms[setup['algorithms'][name]['alg']]
                     try:
                             sol, div, t_alg = runner(gen, name, kimap, alg_args)
                     except gurobipy.GurobiError as gbe:
                         print(f'Gurobi Error - {gbe.message}')
+                        alg_status.append(f'{name} gurobi errored at k = {adj_k}')
+                        timeout_dict[name] = True
+                        continue
+                    except Exception as e:
+                        print(f'Some exception occured = {e.message}')
+                        alg_status.append(f'{name} exception occured at k = {adj_k}')
                         timeout_dict[name] = True
                         continue
                     t = t + t_alg
@@ -371,3 +388,4 @@ for dataset_name in setup["datasets"]:
                 results[dataset_name][alg]['ys']['div-runtime'].append(results_per_k_per_alg[k][alg][4]/results_per_k_per_alg[k][alg][5])
 # End of dataset loop
 write_results(setup, results, color_results)
+print(alg_status)

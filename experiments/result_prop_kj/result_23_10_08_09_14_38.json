@@ -1,0 +1,442 @@
+{
+    "setup": {
+        "datasets": {
+            "Adult": {
+                "data_dir": "./datasets/adult",
+                "color_fields": [
+                    "race",
+                    "sex"
+                ],
+                "feature_fields": [
+                    "age",
+                    "capital-gain",
+                    "capital-loss",
+                    "hours-per-week",
+                    "fnlwgt",
+                    "education-num"
+                ],
+                "normalize": true,
+                "filter_unique": false,
+                "points_per_color": {
+                    "White_Male": 19174,
+                    "Black_Male": 1569,
+                    "Black_Female": 1555,
+                    "White_Female": 8642,
+                    "Asian-Pac-Islander_Male": 693,
+                    "Amer-Indian-Eskimo_Male": 192,
+                    "Other_Female": 109,
+                    "Asian-Pac-Islander_Female": 346,
+                    "Amer-Indian-Eskimo_Female": 119,
+                    "Other_Male": 162
+                },
+                "size": 32561
+            },
+            "Census25": {
+                "data_dir": "./datasets/census",
+                "color_fields": [
+                    "age-sex-color"
+                ],
+                "feature_fields": [
+                    "attr1",
+                    "attr2",
+                    "attr3",
+                    "attr4",
+                    "attr5",
+                    "attr6",
+                    "attr7",
+                    "attr8",
+                    "attr9",
+                    "attr10",
+                    "attr11",
+                    "attr12",
+                    "attr13",
+                    "attr14",
+                    "attr15",
+                    "attr16",
+                    "attr17",
+                    "attr18",
+                    "attr19",
+                    "attr20",
+                    "attr21",
+                    "attr22",
+                    "attr23",
+                    "attr24",
+                    "attr25"
+                ],
+                "normalize": false,
+                "filter_unique": false
+            },
+            "Census": {
+                "data_dir": "./datasets/census",
+                "color_fields": [
+                    "age-sex-color"
+                ],
+                "feature_fields": [
+                    "attr1",
+                    "attr2",
+                    "attr3",
+                    "attr4",
+                    "attr5",
+                    "attr6"
+                ],
+                "normalize": false,
+                "filter_unique": false
+            },
+            "Diabetes": {
+                "data_dir": "./datasets/diabetes",
+                "color_fields": [
+                    "gender",
+                    "diabetesMed"
+                ],
+                "feature_fields": [
+                    "num_procedures",
+                    "num_lab_procedures",
+                    "number_outpatient",
+                    "number_inpatient",
+                    "number_diagnoses",
+                    "time_in_hospital",
+                    "num_medications"
+                ],
+                "normalize": true,
+                "filter_unique": false
+            },
+            "Diabetes40": {
+                "data_dir": "./datasets/diabetes",
+                "color_fields": [
+                    "gender",
+                    "diabetesMed",
+                    "age"
+                ],
+                "feature_fields": [
+                    "num_procedures",
+                    "num_lab_procedures",
+                    "number_outpatient",
+                    "number_inpatient",
+                    "number_diagnoses",
+                    "time_in_hospital",
+                    "num_medications"
+                ],
+                "normalize": true,
+                "filter_unique": false
+            },
+            "Popsim": {
+                "data_dir": "./datasets/popsim",
+                "color_fields": [
+                    "race"
+                ],
+                "feature_fields": [
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "normalize": true,
+                "filter_unique": false
+            }
+        },
+        "algorithms": {
+            "sampled-0.3": {
+                "alg": "FMMD-MWUS",
+                "color": "#006600",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": false,
+                "mwu_epsilon": 0.75,
+                "falloff_epsilon": 0.15,
+                "sample_percentage": 0.1,
+                "percent_theoretical_limit": 0.3,
+                "timeout": 1800
+            },
+            "nyoom-0.8": {
+                "alg": "FMMD-MWU",
+                "color": "#e0115f",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": false,
+                "mwu_epsilon": 0.75,
+                "falloff_epsilon": 0.15,
+                "percent_theoretical_limit": 0.3,
+                "timeout": 1800
+            },
+            "LP-15": {
+                "alg": "FMMD-LP",
+                "color": "black",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": false,
+                "epsilon": 0.15,
+                "timeout": 1800
+            },
+            "SFDM-2-15": {
+                "alg": "SFDM-2",
+                "color": "#00ffff",
+                "use_coreset": false,
+                "use_dmax": true,
+                "use_dmin": true,
+                "epsilon": 0.15,
+                "timeout": 1800
+            },
+            "SFDM-2-75": {
+                "alg": "SFDM-2",
+                "color": "#0000ff",
+                "use_coreset": false,
+                "use_dmax": true,
+                "use_dmin": true,
+                "epsilon": 0.75,
+                "timeout": 1800
+            },
+            "SFDM-2-15-CORE": {
+                "alg": "SFDM-2",
+                "color": "#0f52ba",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": true,
+                "epsilon": 0.15,
+                "timeout": 1800
+            },
+            "SFDM-2-75-CORE": {
+                "alg": "SFDM-2",
+                "color": "#3a7ca5",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": true,
+                "epsilon": 0.75,
+                "timeout": 1800
+            },
+            "FMMD-S-15": {
+                "alg": "FMMD-S",
+                "color": "#f5e107",
+                "use_coreset": false,
+                "use_dmax": false,
+                "use_dmin": false,
+                "epsilon": 0.15,
+                "timeout": 1800
+            },
+            "FairFlow": {
+                "alg": "FairFlow",
+                "color": "#ed7014",
+                "use_coreset": true,
+                "use_dmax": false,
+                "use_dmin": false,
+                "timeout": 1800
+            },
+            "FairGreedyFlow-15": {
+                "alg": "FairGreedyFlow",
+                "color": "#a32cc4",
+                "use_coreset": false,
+                "use_dmax": true,
+                "use_dmin": true,
+                "epsilon": 0.15,
+                "timeout": 1800
+            },
+            "FairGreedyFlow-15-CORE": {
+                "alg": "FairGreedyFlow",
+                "color": "#c42ca6",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": true,
+                "epsilon": 0.15,
+                "timeout": 1800
+            }
+        },
+        "parameters": {
+            "k": [
+                10,
+                101,
+                10
+            ],
+            "observations": 1,
+            "buildkis_alpha": 0.1,
+            "buildkis_equal_k_js": false
+        }
+    },
+    "results": {},
+    "color_results": [
+        [
+            "Adult",
+            "sampled-0.3",
+            17,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": -1,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": -1,
+                "White_Female": 0,
+                "White_Male": -2
+            }
+        ],
+        [
+            "Adult",
+            "nyoom-0.8",
+            17,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": -1,
+                "White_Female": 0,
+                "White_Male": -1
+            }
+        ],
+        [
+            "Adult",
+            "LP-15",
+            17,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            }
+        ],
+        [
+            "Adult",
+            "SFDM-2-15",
+            17,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            }
+        ],
+        [
+            "Adult",
+            "SFDM-2-75",
+            17,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            }
+        ],
+        [
+            "Adult",
+            "SFDM-2-15-CORE",
+            17,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            }
+        ],
+        [
+            "Adult",
+            "SFDM-2-75-CORE",
+            17,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            }
+        ],
+        [
+            "Adult",
+            "FMMD-S-15",
+            17,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            }
+        ],
+        [
+            "Adult",
+            "FairFlow",
+            17,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            }
+        ],
+        [
+            "Adult",
+            "FairGreedyFlow-15",
+            17,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            }
+        ],
+        [
+            "Adult",
+            "FairGreedyFlow-15-CORE",
+            17,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            }
+        ]
+    ]
+}
