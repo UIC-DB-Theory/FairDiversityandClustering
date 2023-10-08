@@ -58,61 +58,61 @@ from fmmdmwu_sampled import epsilon_falloff as FMMDMWUS
 from algorithms.utils import buildKisMap
 # Lambdas for running experiments
 algorithms = {
-    'SFDM-2' : lambda gen, name, k, kwargs: StreamFairDivMax2(
+    'SFDM-2' : lambda gen, name, kis, kwargs: StreamFairDivMax2(
         features = kwargs['features'], 
         colors = kwargs['colors'], 
-        kis = buildKisMap(kwargs['colors'], k, setup['parameters']['buildkis_alpha']), 
+        kis = kis, 
         epsilon = setup['algorithms'][name]['epsilon'], 
         gammahigh = kwargs['dmax'], 
         gammalow = kwargs['dmin'], 
         normalize = False
     ),
-    'FMMD-S' : lambda gen, name, k, kwargs: FMMDS(
+    'FMMD-S' : lambda gen, name, kis, kwargs: FMMDS(
         features = kwargs['features'],
         colors = kwargs['colors'],
-        kis = buildKisMap(kwargs['colors'], k, setup['parameters']['buildkis_alpha']),
+        kis = kis,
         epsilon = setup['algorithms'][name]['epsilon'],
         normalize = False
     ),
-    'FairFlow' : lambda gen, name, k, kwargs : FairFlow(
+    'FairFlow' : lambda gen, name, kis, kwargs : FairFlow(
         features = kwargs['features'], 
         colors = kwargs['colors'], 
-        kis = buildKisMap(kwargs['colors'], k, setup['parameters']['buildkis_alpha']), 
+        kis = kis, 
         normalize = False
     ),
-    'FairGreedyFlow' : lambda gen, name, k, kwargs : FairGreedyFlow(
+    'FairGreedyFlow' : lambda gen, name, kis, kwargs : FairGreedyFlow(
         features = kwargs['features'], 
         colors = kwargs['colors'], 
-        kis = buildKisMap(kwargs['colors'], k, setup['parameters']['buildkis_alpha']), 
+        kis = kis, 
         epsilon= setup['algorithms'][name]['epsilon'], 
         gammahigh=kwargs['dmax'], 
         gammalow = kwargs['dmin'], 
         normalize=False
     ),
-    'FMMD-MWU' : lambda gen, name, k, kwargs : FMMDMWU(
+    'FMMD-MWU' : lambda gen, name, kis, kwargs : FMMDMWU(
         gen=gen,
         features = kwargs['features'], 
         colors = kwargs['colors'], 
-        kis = buildKisMap(kwargs['colors'], k, setup['parameters']['buildkis_alpha']),
+        kis = kis,
         gamma_upper = kwargs['dmax'],
         mwu_epsilon = setup['algorithms'][name]['mwu_epsilon'],
         falloff_epsilon = setup['algorithms'][name]['falloff_epsilon'],
         percent_theoretical_limit = setup['algorithms'][name]['percent_theoretical_limit'],
         return_unadjusted = False
     ),
-    'FMMD-LP' : lambda gen, name, k, kwargs : FMMDLP(
+    'FMMD-LP' : lambda gen, name, kis, kwargs : FMMDLP(
         gen=gen,
         features = kwargs['features'], 
         colors = kwargs['colors'],
-        kis = buildKisMap(kwargs['colors'], k, setup['parameters']['buildkis_alpha']), 
+        kis = kis, 
         upper_gamma = kwargs['dmax'],
         epsilon = setup['algorithms'][name]['epsilon'], 
     ),
-    'FMMD-MWUS' : lambda gen, name, k, kwargs : FMMDMWUS(
+    'FMMD-MWUS' : lambda gen, name, kis, kwargs : FMMDMWUS(
         gen=gen,
         features = kwargs['features'], 
         colors = kwargs['colors'], 
-        kis = buildKisMap(kwargs['colors'], k, setup['parameters']['buildkis_alpha']),
+        kis = kis,
         gamma_upper=kwargs['dmax'],
         mwu_epsilon=setup['algorithms'][name]['mwu_epsilon'],
         falloff_epsilon=setup['algorithms'][name]['falloff_epsilon'],
@@ -186,39 +186,45 @@ for dataset_name in setup["datasets"]:
 
     results_per_k_per_alg = {}
     for k in range(setup["parameters"]["k"][0] ,setup["parameters"]["k"][1], setup["parameters"]["k"][2]):
-        print(f'\tRunning for k = {k}...')
-        print()
+
         # each observation in the list would consist of the t & div for each algorithm
         observations = []
+
+        # Read the dataset everytime -- to prevent overwriting the features and colors
+        dataset = read_dataset(
+            setup['datasets'][dataset_name]['data_dir'],
+            setup['datasets'][dataset_name]['feature_fields'],
+            setup['datasets'][dataset_name]['color_fields'],
+            normalize=setup["datasets"][dataset_name]['normalize'],
+            unique=setup["datasets"][dataset_name]['filter_unique']
+        )
+        setup["datasets"][dataset_name]['points_per_color'] = dataset['points_per_color']
+        setup["datasets"][dataset_name]['size'] = len(dataset['features'])
+        write_results(setup, results, color_results)
+        features = dataset['features']
+        colors = dataset['colors']
+
+        # one kis' map to ask for
+        kimap = buildKisMap(dataset['colors'], k, setup['parameters']['buildkis_alpha'])
+        adj_k = sum(kimap.values()) # the actual number of points we asked for
+
+        print(f'\tRunning for k = {adj_k}...')
+        print()
 
         for obs in range(0, setup['parameters']['observations']):
 
             print(f'Observation number = {obs + 1}')
 
-            # Read the dataset everytime -- to prevent overwriting the features and colors
-            dataset = read_dataset(
-                setup['datasets'][dataset_name]['data_dir'],
-                setup['datasets'][dataset_name]['feature_fields'],
-                setup['datasets'][dataset_name]['color_fields'],
-                normalize=setup["datasets"][dataset_name]['normalize'],
-                unique=setup["datasets"][dataset_name]['filter_unique']
-            )
-            setup["datasets"][dataset_name]['points_per_color'] = dataset['points_per_color']
-            setup["datasets"][dataset_name]['size'] = len(dataset['features'])
-            write_results(setup, results, color_results)
-            features = dataset['features']
-            colors = dataset['colors']
-
             # Calculate the coreset, dmax, dmin (same for each alg in each observation)
             from algorithms.coreset import Coreset_FMM
             dimensions = len(setup["datasets"][dataset_name]["feature_fields"])
             num_colors = len(setup["datasets"][dataset_name]['points_per_color'])
-            coreset_size = num_colors * k
+            coreset_size = num_colors * adj_k
             coreset = Coreset_FMM(
                 gen,
                 features, 
                 colors, 
-                k, 
+                adj_k, 
                 num_colors, 
                 dimensions, 
                 coreset_size)
@@ -235,14 +241,14 @@ for dataset_name in setup["datasets"]:
                 data_size = 0
                 
                 alg_args = copy.deepcopy(setup['algorithms'][name])
-                alg_args['features'] = features
-                alg_args['colors'] = colors
+                alg_args['features'] = copy.deepcopy(features)
+                alg_args['colors'] = copy.deepcopy(colors)
 
                 if (setup['algorithms'][name]['use_coreset']):
                     print(f'\t\tcomputed coreset size  = {len(core_features)}')
                     t = t + coreset.coreset_compute_time
-                    alg_args['features'] = core_features
-                    alg_args['colors'] = core_colors
+                    alg_args['features'] = copy.deepcopy(core_features)
+                    alg_args['colors'] = copy.deepcopy(core_colors)
 
                 if (setup['algorithms'][name]['use_dmax']):
                     print(f'\t\tcomputed dmax = {dmax}')
@@ -266,7 +272,7 @@ for dataset_name in setup["datasets"]:
                     try:
                         with time_limit(timeout):
                             runner = algorithms[setup['algorithms'][name]['alg']]
-                            sol, div, t_alg = runner(gen, name, k, alg_args)
+                            sol, div, t_alg = runner(gen, name, kimap, alg_args)
                             t = t + t_alg
                             print(f'\t\t***solution size = {len(sol)}***')
                             print(f'\t\tdiv = {div}')
@@ -287,7 +293,7 @@ for dataset_name in setup["datasets"]:
                     import gurobipy
                     runner = algorithms[setup['algorithms'][name]['alg']]
                     try:
-                        sol, div, t_alg = runner(gen, name, k, alg_args)
+                            sol, div, t_alg = runner(gen, name, kimap, alg_args)
                     except gurobipy.GurobiError as gbe:
                         print(f'Gurobi Error - {gbe.message}')
                         timeout_dict[name] = True
@@ -300,9 +306,8 @@ for dataset_name in setup["datasets"]:
                 
                 if not timeout_dict[name]:
                     from algorithms.utils import check_returned_kis
-                    kis = buildKisMap(alg_args['colors'], k, setup['parameters']['buildkis_alpha'])
-                    kis_delta = check_returned_kis(alg_args['colors'], kis, sol)
-                    color_results.append([dataset_name, name, k, kis_delta])
+                    kis_delta = check_returned_kis(alg_args['colors'], kimap, sol)
+                    color_results.append([dataset_name, name, adj_k, kis_delta])
 
 
                 # End of algorithms loop
@@ -325,13 +330,16 @@ for dataset_name in setup["datasets"]:
             if timeout_dict[alg]:
                 continue
             avgs[alg] = np.mean(np.array(avgs[alg]), axis=0).tolist()
-            if k not in results_per_k_per_alg:
-                results_per_k_per_alg[k] = {alg: avgs[alg]}
+            if adj_k not in results_per_k_per_alg:
+                results_per_k_per_alg[adj_k] = {alg: avgs[alg]}
             else:
-                results_per_k_per_alg[k][alg] = avgs[alg]
+                results_per_k_per_alg[adj_k][alg] = avgs[alg]
+
     # End of k loop
     print(results_per_k_per_alg)
     results[dataset_name] = {}
+    # we can go back to normal "k" here
+    # since we're iterating over the adj_k keys we added to the map
     for k in results_per_k_per_alg:
         for alg in results_per_k_per_alg[k]:
             if alg not in results[dataset_name]:
