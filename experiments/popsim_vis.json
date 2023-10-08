@@ -15,7 +15,7 @@
 		}
 	},
 	"algorithms" : {
-		"sampled-0.3" : {
+		"sampled-0.15" : {
 			"alg": "FMMD-MWUS",
 			"color": "#006600",
 			"use_coreset" : true,
@@ -24,9 +24,9 @@
 			"mwu_epsilon": 0.75,
 			"falloff_epsilon" : 0.15,
 			"sample_percentage" : 0.1,
-			"percent_theoretical_limit": 0.3
+			"percent_theoretical_limit": 0.15
 		},
-		"nyoom-0.8" : {
+		"nyoom-0.15" : {
 			"alg": "FMMD-MWU",
 			"color": "#e0115f",
 			"use_coreset" : true,
@@ -34,7 +34,7 @@
 			"use_dmin" : false,
 			"mwu_epsilon": 0.75,
 			"falloff_epsilon" : 0.15,
-			"percent_theoretical_limit": 0.3
+			"percent_theoretical_limit": 0.15
 		},
 		"LP-15" : {
 			"alg": "FMMD-LP",

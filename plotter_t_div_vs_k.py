@@ -39,11 +39,11 @@ for dataset_name, dataset_results in results.items():
     plt.legend(title = f'runtime vs k - {dataset_name}', bbox_to_anchor=(1.05, 1.0), loc='upper left')
     plt.xlabel("k")
     plt.ylabel("runtime (s)")
-    plt.savefig(f'{plot_dir}/t_vs_k', dpi=300, bbox_inches='tight')
+    plt.savefig(f'{plot_dir}/{dataset_name}_t_vs_k', dpi=300, bbox_inches='tight')
     plt.yscale("log")
     plt.ylabel("log(runtime)")
     plt.legend(title = f'log(runtime) vs k - {dataset_name}', bbox_to_anchor=(1.05, 1.0), loc='upper left')
-    plt.savefig(f'{plot_dir}/log_t_vs_k', dpi=300, bbox_inches='tight')
+    plt.savefig(f'{plot_dir}/{dataset_name}_log_t_vs_k', dpi=300, bbox_inches='tight')
     plt.clf()
 
     # plot div vs k
@@ -55,7 +55,7 @@ for dataset_name, dataset_results in results.items():
     plt.legend(title = f'diversity vs k - {dataset_name}', bbox_to_anchor=(1.05, 1.0), loc='upper left')
     plt.xlabel("k")
     plt.ylabel("diversity")
-    plt.savefig(f'{plot_dir}/diversity_vs_k', dpi=300, bbox_inches='tight')
+    plt.savefig(f'{plot_dir}/{dataset_name}_diversity_vs_k', dpi=300, bbox_inches='tight')
     plt.clf()
 
     # plot div/t vs k
@@ -67,11 +67,11 @@ for dataset_name, dataset_results in results.items():
     plt.legend(title = f'd/t vs k - {dataset_name}', bbox_to_anchor=(1.05, 1.0), loc='upper left')
     plt.xlabel("k")
     plt.ylabel("div/t")
-    plt.savefig(f'{plot_dir}/div_t_vs_k', dpi=300, bbox_inches='tight')
+    plt.savefig(f'{plot_dir}/{dataset_name}_div_t_vs_k', dpi=300, bbox_inches='tight')
     plt.yscale("log")
     plt.ylabel("log(div/t)")
     plt.legend(title = f'log(d/t) vs k - {dataset_name}', bbox_to_anchor=(1.05, 1.0), loc='upper left')
-    plt.savefig(f'{plot_dir}/log_div_t_vs_k', dpi=300, bbox_inches='tight')
+    plt.savefig(f'{plot_dir}/{dataset_name}_log_div_t_vs_k', dpi=300, bbox_inches='tight')
     plt.clf()
     
     # plot solution_size vs k
@@ -83,7 +83,7 @@ for dataset_name, dataset_results in results.items():
     plt.legend(title = f'solution_size vs k - {dataset_name}', bbox_to_anchor=(1.05, 1.0), loc='upper left')
     plt.xlabel("k")
     plt.ylabel("solution size")
-    plt.savefig(f'{plot_dir}/sol_size_vs_k', dpi=300, bbox_inches='tight')
+    plt.savefig(f'{plot_dir}/{dataset_name}_sol_size_vs_k', dpi=300, bbox_inches='tight')
     plt.clf()
     
     # plot data_size vs k
@@ -95,7 +95,7 @@ for dataset_name, dataset_results in results.items():
     plt.legend(title = f'data_size vs k - {dataset_name}', bbox_to_anchor=(1.05, 1.0), loc='upper left')
     plt.xlabel("k")
     plt.ylabel("data size")
-    plt.savefig(f'{plot_dir}/data_size_vs_k', dpi=300, bbox_inches='tight')
+    plt.savefig(f'{plot_dir}/{dataset_name}_data_size_vs_k', dpi=300, bbox_inches='tight')
     plt.clf()
     
 # plot the delta of points returned per color
