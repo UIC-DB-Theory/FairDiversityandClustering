@@ -15,74 +15,122 @@
 				"education-num"
 			],
 			"normalize": true,
-			"filter_unique": true
+			"filter_unique": false
 		}
 	},
 	"algorithms" : {
-		"FMMD-MWUS" : {
-			"color": "tab:green",
+		"sampled-0.3" : {
+			"alg": "FMMD-MWUS",
+			"color": "#006600",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : false,
 			"mwu_epsilon": 0.75,
 			"falloff_epsilon" : 0.15,
-			"sample_percentage" : 0.1
+			"sample_percentage" : 0.1,
+			"percent_theoretical_limit": 0.3,
+			"timeout" : 1800
 		},
-		"FMMD-MWU" : {
-			"color": "tab:orange",
+		"nyoom-0.8" : {
+			"alg": "FMMD-MWU",
+			"color": "#e0115f",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : false,
 			"mwu_epsilon": 0.75,
 			"falloff_epsilon" : 0.15,
-			"percent_theoretical_limit": 0.4
+			"percent_theoretical_limit": 0.3,
+			"timeout" : 1800
 		},
-		"FMMD-LP" : {
-			"color": "tab:red",
+		"LP-15" : {
+			"alg": "FMMD-LP",
+			"color": "black",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : false,
-			"epsilon" : 0.15
+			"epsilon" : 0.15,
+			"timeout" : 1800
 		},
-		"SFDM-2" : {
-			"color": "tab:blue",
+		"SFDM-2-15" : {
+			"alg" : "SFDM-2",
+			"color": "#00ffff",
+			"use_coreset" : false,
+			"use_dmax" : true,
+			"use_dmin" : true,
+			"epsilon" : 0.15,
+			"timeout" : 1800
+		},
+		"SFDM-2-75" : {
+			"alg" : "SFDM-2",
+			"color": "#0000ff",
+			"use_coreset" : false,
+			"use_dmax" : true,
+			"use_dmin" : true,
+			"epsilon" : 0.75,
+			"timeout" : 1800
+		},
+		"SFDM-2-15-CORE" : {
+			"alg" : "SFDM-2",
+			"color": "#0f52ba",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : true,
 			"epsilon" : 0.15,
-			"timeout" : 1200
+			"timeout" : 1800
 		},
-		"FMMD-S" : {
-			"color": "k",
+		"SFDM-2-75-CORE" : {
+			"alg" : "SFDM-2",
+			"color": "#3a7ca5",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : true,
+			"epsilon" : 0.75,
+			"timeout" : 1800
+		},
+		"FMMD-S-15" : {
+			"alg" : "FMMD-S",
+			"color": "#f5e107",
 			"use_coreset" : false,
 			"use_dmax" : false,
 			"use_dmin" : false,
 			"epsilon" : 0.15,
-			"timeout" : 1200
+			"timeout" : 1800
 		},
 		"FairFlow" : {
-			"color": "y-",
+			"alg" : "FairFlow",
+			"color": "#ed7014",
 			"use_coreset" : true,
 			"use_dmax" : false,
 			"use_dmin" : false,
-			"timeout" : 1200
+			"timeout" : 1800
 		},
-		"FairGreedyFlow" : {
-			"color": "tab:brown",
+		"FairGreedyFlow-15" : {
+			"alg" : "FairGreedyFlow",
+			"color": "#a32cc4",
+			"use_coreset" : false,
+			"use_dmax" : true,
+			"use_dmin" : true,
+			"epsilon" : 0.15,
+			"timeout" : 1800
+		},
+		"FairGreedyFlow-15-CORE" : {
+			"alg" : "FairGreedyFlow",
+			"color": "#c42ca6",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : true,
 			"epsilon" : 0.15,
-			"timeout" : 1200
+			"timeout" : 1800
 		}
 	},
 	"parameters": {
 		"k": [
 			10,
-			110,
-			10
+			31,
+			1
 		],
-		"observations": 5,
-		"buildkis_alpha" : 0.1
+		"observations": 1,
+		"buildkis_alpha" : 0.1,
+		"buildkis_equal_k_js" : true
 	}
 }
