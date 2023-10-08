@@ -70,25 +70,6 @@
 			"normalize": true,
 			"filter_unique" : false
 		},
-		"Diabetes40": {
-			"data_dir": "./datasets/diabetes",
-			"color_fields": [
-				"gender",
-				"diabetesMed",
-				"age"
-			],
-			"feature_fields": [
-				"num_procedures",
-				"num_lab_procedures",
-				"number_outpatient",
-				"number_inpatient",
-				"number_diagnoses",
-				"time_in_hospital",
-				"num_medications"
-			],
-			"normalize": true,
-			"filter_unique" : false
-		},
 		"Popsim": {
 			"data_dir": "./datasets/popsim",
 			"color_fields": [
