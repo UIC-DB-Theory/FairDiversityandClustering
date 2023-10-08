@@ -121,6 +121,18 @@
 		}
 	},
 	"algorithms" : {
+		"sampled-0.05" : {
+			"alg": "FMMD-MWUS",
+			"color": "#1ad102",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : false,
+			"mwu_epsilon": 0.75,
+			"falloff_epsilon" : 0.15,
+			"sample_percentage" : 0.1,
+			"percent_theoretical_limit": 0.05,
+			"timeout" : 1800
+		},
 		"sampled-0.3" : {
 			"alg": "FMMD-MWUS",
 			"color": "#006600",
@@ -133,9 +145,20 @@
 			"percent_theoretical_limit": 0.3,
 			"timeout" : 1800
 		},
-		"nyoom-0.8" : {
+		"nyoom-0.05" : {
 			"alg": "FMMD-MWU",
-			"color": "#e0115f",
+			"color": "#f20505",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : false,
+			"mwu_epsilon": 0.75,
+			"falloff_epsilon" : 0.15,
+			"percent_theoretical_limit": 0.05,
+			"timeout" : 1800
+		},
+		"nyoom-0.3" : {
+			"alg": "FMMD-MWU",
+			"color": "#6e0202",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : false,
