@@ -231,7 +231,7 @@
 			101,
 			10
 		],
-		"observations": 10,
+		"observations": 1,
 		"buildkis_alpha" : 0.1,
 		"buildkis_equal_k_js" : true
 	}
