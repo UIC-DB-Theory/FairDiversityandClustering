@@ -209,8 +209,10 @@ for dataset_name in setup["datasets"]:
         kimap = buildKisMap(dataset['colors'], k, setup['parameters']['buildkis_alpha'], equal_k_js=check_flag(setup['parameters'],'buildkis_equal_k_js'))
         adj_k = sum(kimap.values()) # the actual number of points we asked for
 
-        print(f'\tRunning for k = {adj_k}...')
-        print()
+        print(f'***************************************')
+        print(f'\t***Running for k = {adj_k}, {k}...')
+        print(json.dumps(kimap, indent=4))
+        print(f'***************************************')
 
         for obs in range(0, setup['parameters']['observations']):
 

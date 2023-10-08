@@ -235,6 +235,6 @@
 		],
 		"observations": 1,
 		"buildkis_alpha" : 0.1,
-		"buildkis_equal_k_js" : true
+		"buildkis_equal_k_js" : false
 	}
 }
