@@ -290,17 +290,17 @@ for dataset_name in setup["datasets"]:
                     except TimeoutException as e:
                         print("Timed out!")
                         timeout_dict[name] = True
-                        alg_status.append(f'{name} timed out at k = {adj_k}')
+                        alg_status.append([f'{name} timed out at k = {adj_k}'])
                         continue
                     except gurobipy.GurobiError as gbe:
                         print(f'Gurobi Error - {gbe.message}')
                         timeout_dict[name] = True
-                        alg_status.append(f'{name} gurobi errored at k = {adj_k}')
+                        alg_status.append([f'{name} gurobi errored at k = {adj_k}', e.message])
                         continue
                     except Exception as e:
                         print(f'Some exception occured = {e.message}')
                         timeout_dict[name] = True
-                        alg_status.append(f'{name} exception occured at k = {adj_k}')
+                        alg_status.append([f'{name} exception occured at k = {adj_k}', e.message])
                         continue
                     result_per_alg[name] = [len(alg_args['features']), dmax, dmin, len(sol), div, t]
 
@@ -315,12 +315,12 @@ for dataset_name in setup["datasets"]:
                             sol, div, t_alg = runner(gen, name, kimap, alg_args)
                     except gurobipy.GurobiError as gbe:
                         print(f'Gurobi Error - {gbe.message}')
-                        alg_status.append(f'{name} gurobi errored at k = {adj_k}')
+                        alg_status.append([f'{name} gurobi errored at k = {adj_k}', e.message])
                         timeout_dict[name] = True
                         continue
                     except Exception as e:
                         print(f'Some exception occured = {e.message}')
-                        alg_status.append(f'{name} exception occured at k = {adj_k}')
+                        alg_status.append([f'{name} exception occured at k = {adj_k}', e.message])
                         timeout_dict[name] = True
                         continue
                     t = t + t_alg
