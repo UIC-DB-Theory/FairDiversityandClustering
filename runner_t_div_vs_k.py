@@ -187,6 +187,10 @@ for dataset_name in setup["datasets"]:
     print(f'****************************MAIN LOOP******************************', file=sys.stderr)
     print(f'Dataset: {dataset_name}')
 
+    # reset the timeout dict for each dataset
+    for alg in setup['algorithms']:
+        timeout_dict[alg] = False
+
     results_per_k_per_alg = {}
     for k in range(setup["parameters"]["k"][0] ,setup["parameters"]["k"][1], setup["parameters"]["k"][2]):
 
