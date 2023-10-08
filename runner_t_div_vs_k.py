@@ -122,11 +122,12 @@ algorithms = {
     ),
 }
 
-def points_per_color(s):
-    '''
-    Returns the points per color obtained in the solution
-    '''
-    pass
+def check_flag(struct, flag):
+    
+    if flag in struct:
+        return struct[flag]
+    else:
+        return False
 
 def write_results(setup, results, color_results):
 
@@ -205,7 +206,7 @@ for dataset_name in setup["datasets"]:
         colors = dataset['colors']
 
         # one kis' map to ask for
-        kimap = buildKisMap(dataset['colors'], k, setup['parameters']['buildkis_alpha'], equal_k_js=setup['parameters']['buildkis_equal_k_js'])
+        kimap = buildKisMap(dataset['colors'], k, setup['parameters']['buildkis_alpha'], equal_k_js=check_flag(setup['parameters'],'buildkis_equal_k_js')
         adj_k = sum(kimap.values()) # the actual number of points we asked for
 
         print(f'\tRunning for k = {adj_k}...')
@@ -244,18 +245,18 @@ for dataset_name in setup["datasets"]:
                 alg_args['features'] = copy.deepcopy(features)
                 alg_args['colors'] = copy.deepcopy(colors)
 
-                if (setup['algorithms'][name]['use_coreset']):
+                if (check_flag(setup['algorithms'][name],'use_coreset')):
                     print(f'\t\tcomputed coreset size  = {len(core_features)}')
                     t = t + coreset.coreset_compute_time
                     alg_args['features'] = copy.deepcopy(core_features)
                     alg_args['colors'] = copy.deepcopy(core_colors)
 
-                if (setup['algorithms'][name]['use_dmax']):
+                if (check_flag(setup['algorithms'][name],'use_dmax')):
                     print(f'\t\tcomputed dmax = {dmax}')
                     t = t + coreset.gamma_upper_bound_compute_time
                     alg_args['dmax'] = dmax
 
-                if (setup['algorithms'][name]['use_dmin']):
+                if (check_flag(setup['algorithms'][name],'use_dmin')):
                     print(f'\t\tcomputed dmin = {dmin}')
                     t = t + coreset.closest_pair_compute_time
                     alg_args['dmin'] = dmin
