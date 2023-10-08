@@ -72,7 +72,7 @@ def compute_maxmin_diversity(points : npt.NDArray[np.float64]) -> float:
     return np.min(nonzero_distances)
 
 
-def buildKisMap(colors, k, a):
+def buildKisMap(colors, k, a, equal_k_js = False):
     """
     builds a map to select at least (1-a) * k total points, spaced out in all colors
     The amount per color is calculated via the formula:
@@ -94,6 +94,9 @@ def buildKisMap(colors, k, a):
         return math.ceil(raw)
 
     kis = {n: calcKi(a, k, c) for n, c in zip(color_names, color_counts)}
+
+    if equal_k_js:
+        return buildKisMap_equal(colors, k)
 
     return kis
 

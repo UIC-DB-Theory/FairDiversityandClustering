@@ -205,7 +205,7 @@ for dataset_name in setup["datasets"]:
         colors = dataset['colors']
 
         # one kis' map to ask for
-        kimap = buildKisMap(dataset['colors'], k, setup['parameters']['buildkis_alpha'])
+        kimap = buildKisMap(dataset['colors'], k, setup['parameters']['buildkis_alpha'], equal_k_js=setup['parameters']['buildkis_equal_k_js'])
         adj_k = sum(kimap.values()) # the actual number of points we asked for
 
         print(f'\tRunning for k = {adj_k}...')

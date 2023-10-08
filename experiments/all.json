@@ -199,6 +199,7 @@
 			10
 		],
 		"observations": 10,
-		"buildkis_alpha" : 0.1
+		"buildkis_alpha" : 0.1,
+		"use_buildkis_equal" : false
 	}
 }
