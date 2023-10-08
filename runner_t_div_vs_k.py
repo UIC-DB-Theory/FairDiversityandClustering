@@ -129,7 +129,7 @@ def check_flag(struct, flag):
     else:
         return False
 
-def write_results(setup, results, color_results):
+def write_results(setup, results, color_results, alg_status):
 
     class NpEncoder(json.JSONEncoder):
         def default(self, obj):
@@ -145,6 +145,7 @@ def write_results(setup, results, color_results):
     summary = {
         "setup" : setup,
         "results" : results,
+        "alg_status" : alg_status,
         "color_results" : color_results
     }
     # Save the results from the experiment
@@ -202,7 +203,7 @@ for dataset_name in setup["datasets"]:
         )
         setup["datasets"][dataset_name]['points_per_color'] = dataset['points_per_color']
         setup["datasets"][dataset_name]['size'] = len(dataset['features'])
-        write_results(setup, results, color_results)
+        write_results(setup, results, color_results, alg_status)
         features = dataset['features']
         colors = dataset['colors']
 
@@ -387,5 +388,5 @@ for dataset_name in setup["datasets"]:
                 results[dataset_name][alg]['ys']['runtime'].append(results_per_k_per_alg[k][alg][5])
                 results[dataset_name][alg]['ys']['div-runtime'].append(results_per_k_per_alg[k][alg][4]/results_per_k_per_alg[k][alg][5])
 # End of dataset loop
-write_results(setup, results, color_results)
+write_results(setup, results, color_results, alg_status)
 print(alg_status)

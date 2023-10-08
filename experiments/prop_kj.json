@@ -160,7 +160,7 @@
 			"use_dmax" : true,
 			"use_dmin" : true,
 			"epsilon" : 0.15,
-			"timeout" : 10
+			"timeout" : 1800
 		},
 		"SFDM-2-75" : {
 			"alg" : "SFDM-2",
@@ -169,7 +169,7 @@
 			"use_dmax" : true,
 			"use_dmin" : true,
 			"epsilon" : 0.75,
-			"timeout" : 10
+			"timeout" : 1800
 		},
 		"SFDM-2-15-CORE" : {
 			"alg" : "SFDM-2",
@@ -178,7 +178,7 @@
 			"use_dmax" : true,
 			"use_dmin" : true,
 			"epsilon" : 0.15,
-			"timeout" : 10
+			"timeout" : 1800
 		},
 		"SFDM-2-75-CORE" : {
 			"alg" : "SFDM-2",
@@ -187,7 +187,7 @@
 			"use_dmax" : true,
 			"use_dmin" : true,
 			"epsilon" : 0.75,
-			"timeout" : 10
+			"timeout" : 1800
 		},
 		"FMMD-S-15" : {
 			"alg" : "FMMD-S",
@@ -196,7 +196,7 @@
 			"use_dmax" : false,
 			"use_dmin" : false,
 			"epsilon" : 0.15,
-			"timeout" : 10
+			"timeout" : 1800
 		},
 		"FairFlow" : {
 			"alg" : "FairFlow",
@@ -204,7 +204,7 @@
 			"use_coreset" : true,
 			"use_dmax" : false,
 			"use_dmin" : false,
-			"timeout" : 10
+			"timeout" : 1800
 		},
 		"FairGreedyFlow-15" : {
 			"alg" : "FairGreedyFlow",
@@ -213,7 +213,7 @@
 			"use_dmax" : true,
 			"use_dmin" : true,
 			"epsilon" : 0.15,
-			"timeout" : 10
+			"timeout" : 1800
 		},
 		"FairGreedyFlow-15-CORE" : {
 			"alg" : "FairGreedyFlow",
@@ -222,7 +222,7 @@
 			"use_dmax" : true,
 			"use_dmin" : true,
 			"epsilon" : 0.15,
-			"timeout" : 10
+			"timeout" : 1800
 		}
 	},
 	"parameters": {
@@ -231,7 +231,7 @@
 			101,
 			10
 		],
-		"observations": 1,
+		"observations": 10,
 		"buildkis_alpha" : 0.1,
 		"buildkis_equal_k_js" : false
 	}

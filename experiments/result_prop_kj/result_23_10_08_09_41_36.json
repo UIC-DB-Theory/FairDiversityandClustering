@@ -1,0 +1,258 @@
+{
+    "setup": {
+        "datasets": {
+            "Census25": {
+                "data_dir": "./datasets/census",
+                "color_fields": [
+                    "age-sex-color"
+                ],
+                "feature_fields": [
+                    "attr1",
+                    "attr2",
+                    "attr3",
+                    "attr4",
+                    "attr5",
+                    "attr6",
+                    "attr7",
+                    "attr8",
+                    "attr9",
+                    "attr10",
+                    "attr11",
+                    "attr12",
+                    "attr13",
+                    "attr14",
+                    "attr15",
+                    "attr16",
+                    "attr17",
+                    "attr18",
+                    "attr19",
+                    "attr20",
+                    "attr21",
+                    "attr22",
+                    "attr23",
+                    "attr24",
+                    "attr25"
+                ],
+                "normalize": false,
+                "filter_unique": false,
+                "points_per_color": {
+                    "11": 159836,
+                    "12": 173735,
+                    "9": 185709,
+                    "10": 205969,
+                    "13": 192077,
+                    "7": 215441,
+                    "0": 225807,
+                    "2": 185246,
+                    "4": 152989,
+                    "3": 198566,
+                    "5": 157523,
+                    "6": 130707,
+                    "8": 118167,
+                    "1": 124344
+                },
+                "size": 2426116
+            },
+            "Census": {
+                "data_dir": "./datasets/census",
+                "color_fields": [
+                    "age-sex-color"
+                ],
+                "feature_fields": [
+                    "attr1",
+                    "attr2",
+                    "attr3",
+                    "attr4",
+                    "attr5",
+                    "attr6"
+                ],
+                "normalize": false,
+                "filter_unique": false
+            },
+            "Diabetes": {
+                "data_dir": "./datasets/diabetes",
+                "color_fields": [
+                    "gender",
+                    "diabetesMed"
+                ],
+                "feature_fields": [
+                    "num_procedures",
+                    "num_lab_procedures",
+                    "number_outpatient",
+                    "number_inpatient",
+                    "number_diagnoses",
+                    "time_in_hospital",
+                    "num_medications"
+                ],
+                "normalize": true,
+                "filter_unique": false
+            },
+            "Diabetes40": {
+                "data_dir": "./datasets/diabetes",
+                "color_fields": [
+                    "gender",
+                    "diabetesMed",
+                    "age"
+                ],
+                "feature_fields": [
+                    "num_procedures",
+                    "num_lab_procedures",
+                    "number_outpatient",
+                    "number_inpatient",
+                    "number_diagnoses",
+                    "time_in_hospital",
+                    "num_medications"
+                ],
+                "normalize": true,
+                "filter_unique": false
+            },
+            "Popsim": {
+                "data_dir": "./datasets/popsim",
+                "color_fields": [
+                    "race"
+                ],
+                "feature_fields": [
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "normalize": true,
+                "filter_unique": false
+            },
+            "Adult": {
+                "data_dir": "./datasets/adult",
+                "color_fields": [
+                    "race",
+                    "sex"
+                ],
+                "feature_fields": [
+                    "age",
+                    "capital-gain",
+                    "capital-loss",
+                    "hours-per-week",
+                    "fnlwgt",
+                    "education-num"
+                ],
+                "normalize": true,
+                "filter_unique": false
+            }
+        },
+        "algorithms": {
+            "sampled-0.3": {
+                "alg": "FMMD-MWUS",
+                "color": "#006600",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": false,
+                "mwu_epsilon": 0.75,
+                "falloff_epsilon": 0.15,
+                "sample_percentage": 0.1,
+                "percent_theoretical_limit": 0.3,
+                "timeout": 1800
+            },
+            "nyoom-0.8": {
+                "alg": "FMMD-MWU",
+                "color": "#e0115f",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": false,
+                "mwu_epsilon": 0.75,
+                "falloff_epsilon": 0.15,
+                "percent_theoretical_limit": 0.3,
+                "timeout": 1800
+            },
+            "LP-15": {
+                "alg": "FMMD-LP",
+                "color": "black",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": false,
+                "epsilon": 0.15,
+                "timeout": 1800
+            },
+            "SFDM-2-15": {
+                "alg": "SFDM-2",
+                "color": "#00ffff",
+                "use_coreset": false,
+                "use_dmax": true,
+                "use_dmin": true,
+                "epsilon": 0.15,
+                "timeout": 10
+            },
+            "SFDM-2-75": {
+                "alg": "SFDM-2",
+                "color": "#0000ff",
+                "use_coreset": false,
+                "use_dmax": true,
+                "use_dmin": true,
+                "epsilon": 0.75,
+                "timeout": 10
+            },
+            "SFDM-2-15-CORE": {
+                "alg": "SFDM-2",
+                "color": "#0f52ba",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": true,
+                "epsilon": 0.15,
+                "timeout": 10
+            },
+            "SFDM-2-75-CORE": {
+                "alg": "SFDM-2",
+                "color": "#3a7ca5",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": true,
+                "epsilon": 0.75,
+                "timeout": 10
+            },
+            "FMMD-S-15": {
+                "alg": "FMMD-S",
+                "color": "#f5e107",
+                "use_coreset": false,
+                "use_dmax": false,
+                "use_dmin": false,
+                "epsilon": 0.15,
+                "timeout": 10
+            },
+            "FairFlow": {
+                "alg": "FairFlow",
+                "color": "#ed7014",
+                "use_coreset": true,
+                "use_dmax": false,
+                "use_dmin": false,
+                "timeout": 10
+            },
+            "FairGreedyFlow-15": {
+                "alg": "FairGreedyFlow",
+                "color": "#a32cc4",
+                "use_coreset": false,
+                "use_dmax": true,
+                "use_dmin": true,
+                "epsilon": 0.15,
+                "timeout": 10
+            },
+            "FairGreedyFlow-15-CORE": {
+                "alg": "FairGreedyFlow",
+                "color": "#c42ca6",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": true,
+                "epsilon": 0.15,
+                "timeout": 10
+            }
+        },
+        "parameters": {
+            "k": [
+                10,
+                101,
+                10
+            ],
+            "observations": 1,
+            "buildkis_alpha": 0.1,
+            "buildkis_equal_k_js": false
+        }
+    },
+    "results": {},
+    "color_results": []
+}
