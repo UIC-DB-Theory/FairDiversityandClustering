@@ -16,7 +16,7 @@ data = []
 race_mappings = {
     'P1_003N' : 'White',
     'P1_004N' : 'Black/African American',
-    'P1_005N' : 'African American/Alaska Native',
+    'P1_005N' : 'American Indian/Alaska Native',
     'P1_006N' : 'Asian',
     'P1_007N' : 'Native Hawaiian/Other Pacific Islander',
 }
@@ -26,7 +26,7 @@ with open("./popsim_5m.csv", 'r') as file:
     for row in csvreader:
         i = i + 1
         if i == 0:
-            fields = ['race', 'x', 'y', 'z']
+            fields = ['race', 'x', 'y', 'z', 'None']
             continue
         # only append rows with race mappings
         if row[2] in race_mappings:
@@ -36,7 +36,7 @@ with open("./popsim_5m.csv", 'r') as file:
             x = 6371*math.cos(lat)*math.cos(lon)
             y = 6371*math.cos(lat)*math.sin(lon)
             z = 6371*math.sin(lat)
-            data.append([race_mappings[row[2]], x, y, z])
+            data.append([race_mappings[row[2]], x, y, z, 'None'])
 
 
 # ---------------Create file diabetes.metadata--------------
