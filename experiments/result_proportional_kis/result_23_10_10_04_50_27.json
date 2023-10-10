@@ -20416,6 +20416,481 @@
                 "Native Hawaiian/Other Pacific Islander": 1,
                 "White": 34
             }
+        ],
+        [
+            "Popsim",
+            "MWUS-0.3-15",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim",
+            "LP-15",
+            57,
+            {
+                "American Indian/Alaska Native": -1,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": -1
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim",
+            "SFDM-2-75",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim",
+            "FairFlow",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim",
+            "FairGreedyFlow",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim",
+            "MWUS-0.3-15",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": -4
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim",
+            "LP-15",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": -1
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim",
+            "SFDM-2-75",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim",
+            "FairFlow",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim",
+            "FairGreedyFlow",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim",
+            "MWUS-0.3-15",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": -4
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim",
+            "LP-15",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": -1,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim",
+            "SFDM-2-75",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim",
+            "FairFlow",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim",
+            "FairGreedyFlow",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim",
+            "MWUS-0.3-15",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim",
+            "LP-15",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": -1
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim",
+            "SFDM-2-75",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim",
+            "FairFlow",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim",
+            "FairGreedyFlow",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim",
+            "MWUS-0.3-15",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": -6
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim",
+            "LP-15",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim",
+            "SFDM-2-75",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim",
+            "FairFlow",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim",
+            "FairGreedyFlow",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
         ]
     ]
 }
