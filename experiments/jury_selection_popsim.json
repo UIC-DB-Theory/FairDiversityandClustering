@@ -1,6 +1,6 @@
 {
 	"datasets": {
-		"Popsim": {
+		"Popsim-FMMD": {
 			"data_dir": "./datasets/popsim",
 			"color_fields": [
 				"race"
@@ -12,100 +12,93 @@
 			],
 			"normalize": true,
 			"filter_unique": false
+		},
+		"Popsim-MMD": {
+			"data_dir": "./datasets/popsim",
+			"color_fields": [
+				"None"
+			],
+			"feature_fields": [
+				"x",
+				"y",
+				"z"
+			],
+			"normalize": true,
+			"filter_unique": false
 		}
 	},
 	"algorithms" : {
-		"sampled-0.15" : {
+		"MWUS-0.3-15" : {
 			"alg": "FMMD-MWUS",
-			"color": "#006600",
+			"color": "#fc0303",
+			"marker": "o",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : false,
 			"mwu_epsilon": 0.75,
 			"falloff_epsilon" : 0.15,
 			"sample_percentage" : 0.1,
-			"percent_theoretical_limit": 0.15
-		},
-		"nyoom-0.15" : {
-			"alg": "FMMD-MWU",
-			"color": "#e0115f",
-			"use_coreset" : true,
-			"use_dmax" : true,
-			"use_dmin" : false,
-			"mwu_epsilon": 0.75,
-			"falloff_epsilon" : 0.15,
-			"percent_theoretical_limit": 0.15
+			"percent_theoretical_limit": 0.3,
+			"timeout" : 1800
 		},
 		"LP-15" : {
 			"alg": "FMMD-LP",
 			"color": "black",
+			"marker": ".",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : false,
-			"epsilon" : 0.15
+			"epsilon" : 0.15,
+			"timeout" : 1800
 		},
 		"SFDM-2-15" : {
 			"alg" : "SFDM-2",
-			"color": "#00ffff",
+			"color": "#4afc03",
+			"marker": "+",
 			"use_coreset" : false,
 			"use_dmax" : true,
 			"use_dmin" : true,
-			"epsilon" : 0.15
+			"epsilon" : 0.15,
+			"timeout" : 1800
 		},
 		"SFDM-2-75" : {
 			"alg" : "SFDM-2",
-			"color": "#0000ff",
+			"color": "#1b5902",
+			"marker": "x",
 			"use_coreset" : false,
 			"use_dmax" : true,
 			"use_dmin" : true,
-			"epsilon" : 0.75
+			"epsilon" : 0.75,
+			"timeout" : 1800
 		},
-		"SFDM-2-15-CORE" : {
-			"alg" : "SFDM-2",
-			"color": "#0f52ba",
-			"use_coreset" : true,
-			"use_dmax" : true,
-			"use_dmin" : true,
-			"epsilon" : 0.15
-		},
-		"SFDM-2-75-CORE" : {
-			"alg" : "SFDM-2",
-			"color": "#3a7ca5",
-			"use_coreset" : true,
-			"use_dmax" : true,
-			"use_dmin" : true,
-			"epsilon" : 0.75
-		},
-		"FMMD-S-15" : {
+		"FMMD-S" : {
 			"alg" : "FMMD-S",
-			"color": "#f5e107",
+			"color": "#05faee",
+			"marker": "s",
 			"use_coreset" : false,
 			"use_dmax" : false,
 			"use_dmin" : false,
-			"epsilon" : 0.15
+			"epsilon" : 0.15,
+			"timeout" : 1800
 		},
 		"FairFlow" : {
 			"alg" : "FairFlow",
-			"color": "#ed7014",
+			"color": "#052efa",
+			"marker": "p",
 			"use_coreset" : true,
 			"use_dmax" : false,
-			"use_dmin" : false
+			"use_dmin" : false,
+			"timeout" : 1800
 		},
-		"FairGreedyFlow-15" : {
+		"FairGreedyFlow" : {
 			"alg" : "FairGreedyFlow",
-			"color": "#a32cc4",
-			"use_coreset" : false,
-			"use_dmax" : true,
-			"use_dmin" : true,
-			"epsilon" : 0.15
-		},
-		"FairGreedyFlow-15-CORE" : {
-			"alg" : "FairGreedyFlow",
-			"color": "#c42ca6",
+			"color": "#faac05",
+			"marker": "v",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : true,
-			"epsilon" : 0.15
+			"epsilon" : 0.15,
+			"timeout" : 1800
 		}
 	},
 	"parameters": {

@@ -222,7 +222,7 @@ for dataset_name in setup["datasets"]:
 
         for obs in range(0, setup['parameters']['observations']):
 
-            print(f'Observation number = {obs + 1}')
+            print(f'\n\nObservation number = {obs + 1}')
 
             # Calculate the coreset, dmax, dmin (same for each alg in each observation)
             from algorithms.coreset import Coreset_FMM
@@ -330,10 +330,10 @@ for dataset_name in setup["datasets"]:
                     result_per_alg[name] = [len(alg_args['features']), dmax, dmin, len(sol), div, t]
                 
                 if not timeout_dict[name]:
-                    from algorithms.utils import check_returned_kis
+                    from algorithms.utils import check_returned_kis, get_solution_kis
                     kis_delta = check_returned_kis(alg_args['colors'], kimap, sol)
-                    color_results.append([dataset_name, name, adj_k, kis_delta])
-
+                    kis_solution = get_solution_kis(alg_args['colors'], sol)
+                    color_results.append([dataset_name, name, adj_k, kis_delta, kimap, kis_soltion])
 
                 # End of algorithms loop
 
