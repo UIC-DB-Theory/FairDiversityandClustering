@@ -333,7 +333,7 @@ for dataset_name in setup["datasets"]:
                     from algorithms.utils import check_returned_kis, get_solution_kis
                     kis_delta = check_returned_kis(alg_args['colors'], kimap, sol)
                     kis_solution = get_solution_kis(alg_args['colors'], sol)
-                    color_results.append([dataset_name, name, adj_k, kis_delta, kimap, kis_soltion])
+                    color_results.append([dataset_name, name, adj_k, kis_delta, kimap, kis_solution])
 
                 # End of algorithms loop
 
