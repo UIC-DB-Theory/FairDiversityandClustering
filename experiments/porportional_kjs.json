@@ -1,5 +1,22 @@
 {
 	"datasets": {
+		"Adult": {
+			"data_dir": "./datasets/adult",
+			"color_fields": [
+				"race",
+				"sex"
+			],
+			"feature_fields": [
+				"age",
+				"capital-gain",
+				"capital-loss",
+				"hours-per-week",
+				"fnlwgt",
+				"education-num"
+			],
+			"normalize": true,
+			"filter_unique": false
+		},
 		"Diabetes": {
 			"data_dir": "./datasets/diabetes",
 			"color_fields": [
@@ -31,22 +48,21 @@
 			"normalize": true,
 			"filter_unique": false
 		},
-		"Adult": {
-			"data_dir": "./datasets/adult",
+		"Census": {
+			"data_dir": "./datasets/census",
 			"color_fields": [
-				"race",
-				"sex"
+				"age-sex-color"
 			],
 			"feature_fields": [
-				"age",
-				"capital-gain",
-				"capital-loss",
-				"hours-per-week",
-				"fnlwgt",
-				"education-num"
+				"attr1",
+                "attr2",
+                "attr3",
+                "attr4",
+                "attr5",
+                "attr6"
 			],
-			"normalize": true,
-			"filter_unique": false
+			"normalize": false,
+			"filter_unique" : false
 		},
 		"Census25": {
 			"data_dir": "./datasets/census",
@@ -83,74 +99,26 @@
 			],
 			"normalize": false,
 			"filter_unique" : false
-		},
-		"Census": {
-			"data_dir": "./datasets/census",
-			"color_fields": [
-				"age-sex-color"
-			],
-			"feature_fields": [
-				"attr1",
-                "attr2",
-                "attr3",
-                "attr4",
-                "attr5",
-                "attr6"
-			],
-			"normalize": false,
-			"filter_unique" : false
 		}
 	},
 	"algorithms" : {
-		"sampled-0.05" : {
+		"MWUS-0.3-15" : {
 			"alg": "FMMD-MWUS",
-			"color": "#1ad102",
+			"color": "#fc0303",
+			"marker": "o",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : false,
 			"mwu_epsilon": 0.75,
 			"falloff_epsilon" : 0.15,
 			"sample_percentage" : 0.1,
-			"percent_theoretical_limit": 0.05,
-			"timeout" : 1800
-		},
-		"sampled-0.3" : {
-			"alg": "FMMD-MWUS",
-			"color": "#006600",
-			"use_coreset" : true,
-			"use_dmax" : true,
-			"use_dmin" : false,
-			"mwu_epsilon": 0.75,
-			"falloff_epsilon" : 0.15,
-			"sample_percentage" : 0.1,
-			"percent_theoretical_limit": 0.3,
-			"timeout" : 1800
-		},
-		"nyoom-0.05" : {
-			"alg": "FMMD-MWU",
-			"color": "#f20505",
-			"use_coreset" : true,
-			"use_dmax" : true,
-			"use_dmin" : false,
-			"mwu_epsilon": 0.75,
-			"falloff_epsilon" : 0.15,
-			"percent_theoretical_limit": 0.05,
-			"timeout" : 1800
-		},
-		"nyoom-0.3" : {
-			"alg": "FMMD-MWU",
-			"color": "#6e0202",
-			"use_coreset" : true,
-			"use_dmax" : true,
-			"use_dmin" : false,
-			"mwu_epsilon": 0.75,
-			"falloff_epsilon" : 0.15,
 			"percent_theoretical_limit": 0.3,
 			"timeout" : 1800
 		},
 		"LP-15" : {
 			"alg": "FMMD-LP",
 			"color": "black",
+			"marker": ".",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : false,
@@ -159,7 +127,8 @@
 		},
 		"SFDM-2-15" : {
 			"alg" : "SFDM-2",
-			"color": "#00ffff",
+			"color": "#4afc03",
+			"marker": "+",
 			"use_coreset" : false,
 			"use_dmax" : true,
 			"use_dmin" : true,
@@ -168,34 +137,18 @@
 		},
 		"SFDM-2-75" : {
 			"alg" : "SFDM-2",
-			"color": "#0000ff",
+			"color": "#1b5902",
+			"marker": "x",
 			"use_coreset" : false,
 			"use_dmax" : true,
 			"use_dmin" : true,
 			"epsilon" : 0.75,
 			"timeout" : 1800
 		},
-		"SFDM-2-15-CORE" : {
-			"alg" : "SFDM-2",
-			"color": "#0f52ba",
-			"use_coreset" : true,
-			"use_dmax" : true,
-			"use_dmin" : true,
-			"epsilon" : 0.15,
-			"timeout" : 1800
-		},
-		"SFDM-2-75-CORE" : {
-			"alg" : "SFDM-2",
-			"color": "#3a7ca5",
-			"use_coreset" : true,
-			"use_dmax" : true,
-			"use_dmin" : true,
-			"epsilon" : 0.75,
-			"timeout" : 1800
-		},
-		"FMMD-S-15" : {
+		"FMMD-S" : {
 			"alg" : "FMMD-S",
-			"color": "#f5e107",
+			"color": "#05faee",
+			"marker": "s",
 			"use_coreset" : false,
 			"use_dmax" : false,
 			"use_dmin" : false,
@@ -204,24 +157,17 @@
 		},
 		"FairFlow" : {
 			"alg" : "FairFlow",
-			"color": "#ed7014",
+			"color": "#052efa",
+			"marker": "p",
 			"use_coreset" : true,
 			"use_dmax" : false,
 			"use_dmin" : false,
 			"timeout" : 1800
 		},
-		"FairGreedyFlow-15" : {
+		"FairGreedyFlow" : {
 			"alg" : "FairGreedyFlow",
-			"color": "#a32cc4",
-			"use_coreset" : false,
-			"use_dmax" : true,
-			"use_dmin" : true,
-			"epsilon" : 0.15,
-			"timeout" : 1800
-		},
-		"FairGreedyFlow-15-CORE" : {
-			"alg" : "FairGreedyFlow",
-			"color": "#c42ca6",
+			"color": "#faac05",
+			"marker": "v",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : true,
@@ -235,7 +181,7 @@
 			101,
 			10
 		],
-		"observations": 1,
+		"observations": 5,
 		"buildkis_alpha" : 0.1,
 		"buildkis_equal_k_js" : false
 	}
