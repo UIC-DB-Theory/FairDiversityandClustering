@@ -146,6 +146,7 @@
             "sampled-0.05": {
                 "alg": "FMMD-MWUS",
                 "color": "#1ad102",
+                "marker": "o",
                 "use_coreset": true,
                 "use_dmax": true,
                 "use_dmin": false,
@@ -158,6 +159,7 @@
             "sampled-0.3": {
                 "alg": "FMMD-MWUS",
                 "color": "#006600",
+                "marker": "s",
                 "use_coreset": true,
                 "use_dmax": true,
                 "use_dmin": false,
@@ -170,6 +172,7 @@
             "nyoom-0.05": {
                 "alg": "FMMD-MWU",
                 "color": "#f20505",
+                "marker": "+",
                 "use_coreset": true,
                 "use_dmax": true,
                 "use_dmin": false,
@@ -181,6 +184,7 @@
             "nyoom-0.3": {
                 "alg": "FMMD-MWU",
                 "color": "#6e0202",
+                "marker": "x",
                 "use_coreset": true,
                 "use_dmax": true,
                 "use_dmin": false,
@@ -192,6 +196,7 @@
             "LP-15": {
                 "alg": "FMMD-LP",
                 "color": "black",
+                "marker": "o",
                 "use_coreset": true,
                 "use_dmax": true,
                 "use_dmin": false,
@@ -201,6 +206,7 @@
             "SFDM-2-15": {
                 "alg": "SFDM-2",
                 "color": "#00ffff",
+                "marker": "o",
                 "use_coreset": false,
                 "use_dmax": true,
                 "use_dmin": true,
@@ -210,6 +216,7 @@
             "SFDM-2-75": {
                 "alg": "SFDM-2",
                 "color": "#0000ff",
+                "marker": "o",
                 "use_coreset": false,
                 "use_dmax": true,
                 "use_dmin": true,
@@ -219,6 +226,7 @@
             "SFDM-2-15-CORE": {
                 "alg": "SFDM-2",
                 "color": "#0f52ba",
+                "marker": "o",
                 "use_coreset": true,
                 "use_dmax": true,
                 "use_dmin": true,
@@ -228,6 +236,7 @@
             "SFDM-2-75-CORE": {
                 "alg": "SFDM-2",
                 "color": "#3a7ca5",
+                "marker": "o",
                 "use_coreset": true,
                 "use_dmax": true,
                 "use_dmin": true,
@@ -237,6 +246,7 @@
             "FMMD-S-15": {
                 "alg": "FMMD-S",
                 "color": "#f5e107",
+                "marker": "o",
                 "use_coreset": false,
                 "use_dmax": false,
                 "use_dmin": false,
@@ -246,6 +256,7 @@
             "FairFlow": {
                 "alg": "FairFlow",
                 "color": "#ed7014",
+                "marker": "o",
                 "use_coreset": true,
                 "use_dmax": false,
                 "use_dmin": false,
@@ -254,6 +265,7 @@
             "FairGreedyFlow-15": {
                 "alg": "FairGreedyFlow",
                 "color": "#a32cc4",
+                "marker": "o",
                 "use_coreset": false,
                 "use_dmax": true,
                 "use_dmin": true,
@@ -263,6 +275,7 @@
             "FairGreedyFlow-15-CORE": {
                 "alg": "FairGreedyFlow",
                 "color": "#c42ca6",
+                "marker": "o",
                 "use_coreset": true,
                 "use_dmax": true,
                 "use_dmin": true,
@@ -2638,7 +2651,7 @@
                 }
             }
         },
-		"Diabetes": {
+        "Diabetes": {
             "sampled-0.05": {
                 "xs": {
                     "k": [
@@ -11188,7 +11201,7 @@
                 "9": 0
             }
         ],
-		[
+        [
             "Diabetes",
             "sampled-0.05",
             11,
