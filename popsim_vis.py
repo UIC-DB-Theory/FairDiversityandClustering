@@ -129,15 +129,24 @@ def check_flag(struct, flag):
     else:
         return False
 
-def plot(name, features, colors):
+def plot(features, colors, filename, s = 10):
+    print('Plotting..')
 
     race_color = {
     'White' : 'red',
-    'Black/African American' : 'pink',
-    'African American/Alaska Native' : 'yellow',
+    'Black/African American' : 'cyan',
+    'American Indian/Alaska Native' : 'yellow',
     'Asian' : 'blue',
     'Native Hawaiian/Other Pacific Islander' : 'green',
     }
+
+    color_names, color_counts = np.unique(colors, return_counts=True)
+    if len(color_names) == 1:
+        race_color = {'None' : 'black'}
+
+
+    import matplotlib.patches as mpatches
+    label_handles = [mpatches.Patch(color=c, label=r) for r, c in race_color.items()]
 
     import matplotlib.pyplot as plt
     from tqdm import trange
@@ -155,11 +164,16 @@ def plot(name, features, colors):
         zs.append(z)
         cs.append(color)
 
-    fig = plt.figure(figsize=(20, 20))
+    fig = plt.figure(figsize=(10, 10))
 
     ax = fig.add_subplot(projection='3d')
-    ax.scatter(xs, ys, zs, c = cs, s = 10)
-    plt.savefig(name, dpi=300, bbox_inches='tight')
+    ax.scatter(xs, ys, zs, c = cs, s = s)
+    ax.legend(title = f'Race (k = {len(features)})',
+    handles = label_handles,
+    loc='center left',
+    bbox_to_anchor=(1, 0.5)
+        )
+    plt.savefig(filename, dpi=300, bbox_inches='tight')
 
 
 
@@ -216,6 +230,7 @@ for dataset_name in setup["datasets"]:
         setup["datasets"][dataset_name]['size'] = len(dataset['features'])
         features = dataset['features']
         colors = dataset['colors']
+        plot(features, colors, f'{result_file_dir}/{dataset_name}.png', s = 0.5)
 
         # one kis' map to ask for
         kimap = buildKisMap(dataset['colors'], k, setup['parameters']['buildkis_alpha'], equal_k_js=check_flag(setup['parameters'],'buildkis_equal_k_js'))
@@ -341,8 +356,7 @@ for dataset_name in setup["datasets"]:
                     color_results.append([dataset_name, name, adj_k, kis_delta, kimap])
                     sol_features = alg_args['features'][sol]
                     sol_colors = alg_args['colors'][sol]
-                    plot(f'{result_file_dir}/{name}_{dataset}_{k}_{obs}.png', sol_features, sol_colors)
-
+                    plot(sol_features, sol_colors, f'{result_file_dir}/{dataset_name}_{k}_{obs}_{name}.png', s = 30)
                 # End of algorithms loop
 
             observations.append(result_per_alg)
@@ -369,7 +383,6 @@ for dataset_name in setup["datasets"]:
                 results_per_k_per_alg[adj_k][alg] = avgs[alg]
 
     # End of k loop
-    print(results_per_k_per_alg)
     results[dataset_name] = {}
     # we can go back to normal "k" here
     # since we're iterating over the adj_k keys we added to the map

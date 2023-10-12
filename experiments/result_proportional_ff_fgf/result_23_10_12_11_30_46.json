@@ -67,7 +67,15 @@
                     "z"
                 ],
                 "normalize": true,
-                "filter_unique": false
+                "filter_unique": false,
+                "points_per_color": {
+                    "White": 614099,
+                    "Black/African American": 141083,
+                    "Asian": 58671,
+                    "Native Hawaiian/Other Pacific Islander": 335,
+                    "American Indian/Alaska Native": 7616
+                },
+                "size": 821804
             },
             "Popsim": {
                 "data_dir": "./datasets/popsim",
@@ -560,9 +568,423 @@
                     ]
                 }
             }
+        },
+        "Diabetes": {
+            "FairFlow": {
+                "xs": {
+                    "k": [
+                        11,
+                        20,
+                        29,
+                        37,
+                        47,
+                        56,
+                        64,
+                        74,
+                        84,
+                        92
+                    ]
+                },
+                "ys": {
+                    "data_size": [
+                        101763.0,
+                        101763.0,
+                        101763.0,
+                        101763.0,
+                        101763.0,
+                        101763.0,
+                        101763.0,
+                        101763.0,
+                        101763.0,
+                        101763.0
+                    ],
+                    "dmax": [
+                        14.541580869396881,
+                        11.929536511717496,
+                        10.825807141748452,
+                        9.986574759958456,
+                        9.225148299807248,
+                        8.666738776450595,
+                        8.352651348521913,
+                        7.860534027572203,
+                        7.57839658790741,
+                        7.3835394429103705
+                    ],
+                    "dmin": [
+                        0.7361885876557436,
+                        0.6837028751132787,
+                        0.7920900770240068,
+                        0.8164343940472316,
+                        0.5089183573125423,
+                        0.5596506802748172,
+                        0.6961432409626203,
+                        0.4814896394139917,
+                        0.6316801817145842,
+                        0.516406214267876
+                    ],
+                    "solution_size": [
+                        11.0,
+                        20.0,
+                        29.0,
+                        37.0,
+                        47.0,
+                        56.0,
+                        64.0,
+                        74.0,
+                        84.0,
+                        92.0
+                    ],
+                    "diversity": [
+                        2.9464192442730304,
+                        2.452823356116677,
+                        2.452823356116677,
+                        2.452823356116677,
+                        2.452823356116677,
+                        1.5705404327429542,
+                        1.2730606925603811,
+                        1.2730606925603811,
+                        1.2730606925603811,
+                        1.2730606925603811
+                    ],
+                    "runtime": [
+                        5.83647632060165,
+                        10.596955712200725,
+                        15.478850699399482,
+                        19.90830991839757,
+                        25.572537792404184,
+                        30.467034074399272,
+                        34.710767885603126,
+                        40.582616682798836,
+                        50.31088140679931,
+                        54.0930601546017
+                    ],
+                    "div-runtime": [
+                        0.5048284414129689,
+                        0.23146490584014023,
+                        0.15846288615031584,
+                        0.12320600624415566,
+                        0.09591630584451574,
+                        0.05154884551308006,
+                        0.036676246885578245,
+                        0.031369605920457434,
+                        0.025303883711890848,
+                        0.023534639913546873
+                    ]
+                }
+            },
+            "FairGreedyFlow": {
+                "xs": {
+                    "k": [
+                        11,
+                        20,
+                        29,
+                        37,
+                        47,
+                        56,
+                        64,
+                        74,
+                        84,
+                        92
+                    ]
+                },
+                "ys": {
+                    "data_size": [
+                        101763.0,
+                        101763.0,
+                        101763.0,
+                        101763.0,
+                        101763.0,
+                        101763.0,
+                        101763.0,
+                        101763.0,
+                        101763.0,
+                        101763.0
+                    ],
+                    "dmax": [
+                        14.541580869396881,
+                        11.929536511717496,
+                        10.825807141748452,
+                        9.986574759958456,
+                        9.225148299807248,
+                        8.666738776450595,
+                        8.352651348521913,
+                        7.860534027572203,
+                        7.57839658790741,
+                        7.3835394429103705
+                    ],
+                    "dmin": [
+                        0.7361885876557436,
+                        0.6837028751132787,
+                        0.7920900770240068,
+                        0.8164343940472316,
+                        0.5089183573125423,
+                        0.5596506802748172,
+                        0.6961432409626203,
+                        0.4814896394139917,
+                        0.6316801817145842,
+                        0.516406214267876
+                    ],
+                    "solution_size": [
+                        11.0,
+                        20.0,
+                        29.0,
+                        37.0,
+                        47.0,
+                        56.0,
+                        64.0,
+                        74.0,
+                        84.0,
+                        92.0
+                    ],
+                    "diversity": [
+                        3.0133190092886895,
+                        2.207452697556932,
+                        2.1246551686186743,
+                        1.8718922828471498,
+                        1.7792844480596923,
+                        1.641677609081452,
+                        1.5577341160749807,
+                        1.457524134278107,
+                        1.4079415517863065,
+                        1.3958103403113442
+                    ],
+                    "runtime": [
+                        111.19159839960048,
+                        130.13380156340136,
+                        146.16612105859676,
+                        162.1743768224027,
+                        173.19482665059914,
+                        190.5792174162052,
+                        205.52621341820048,
+                        229.56811517020105,
+                        265.2826338599931,
+                        272.4315285807999
+                    ],
+                    "div-runtime": [
+                        0.027100240060039613,
+                        0.016962946375476923,
+                        0.014535893497282576,
+                        0.011542466322513208,
+                        0.010273311752256875,
+                        0.008614148128734303,
+                        0.007579247873872592,
+                        0.006348983321126731,
+                        0.005307326496650244,
+                        0.0051235271761042285
+                    ]
+                }
+            },
+            "FairFlow-C": {
+                "xs": {
+                    "k": [
+                        11,
+                        20,
+                        29,
+                        37,
+                        47,
+                        56,
+                        64,
+                        74,
+                        84,
+                        92
+                    ]
+                },
+                "ys": {
+                    "data_size": [
+                        44.0,
+                        80.0,
+                        116.0,
+                        148.0,
+                        188.0,
+                        224.0,
+                        256.0,
+                        296.0,
+                        336.0,
+                        368.0
+                    ],
+                    "dmax": [
+                        14.541580869396881,
+                        11.929536511717496,
+                        10.825807141748452,
+                        9.986574759958456,
+                        9.225148299807248,
+                        8.666738776450595,
+                        8.352651348521913,
+                        7.860534027572203,
+                        7.57839658790741,
+                        7.3835394429103705
+                    ],
+                    "dmin": [
+                        0.7361885876557436,
+                        0.6837028751132787,
+                        0.7920900770240068,
+                        0.8164343940472316,
+                        0.5089183573125423,
+                        0.5596506802748172,
+                        0.6961432409626203,
+                        0.4814896394139917,
+                        0.6316801817145842,
+                        0.516406214267876
+                    ],
+                    "solution_size": [
+                        11.0,
+                        20.0,
+                        29.0,
+                        37.0,
+                        47.0,
+                        56.0,
+                        64.0,
+                        74.0,
+                        84.0,
+                        92.0
+                    ],
+                    "diversity": [
+                        2.9460628572049226,
+                        2.525083128288158,
+                        2.044505592944629,
+                        1.9500568153988127,
+                        1.89733802285325,
+                        1.560355647978128,
+                        1.6424409121244667,
+                        1.2661528331019904,
+                        1.2831420740189903,
+                        1.2640112922702549
+                    ],
+                    "runtime": [
+                        0.0768835823982954,
+                        0.1406021973991301,
+                        0.23983056319411844,
+                        0.33776263320760336,
+                        0.49931112859630955,
+                        0.6725808065995806,
+                        0.8202709339995635,
+                        1.160256578004919,
+                        1.5183793844043976,
+                        1.681127493994427
+                    ],
+                    "div-runtime": [
+                        38.31849096134522,
+                        17.95905878426748,
+                        8.52479169341653,
+                        5.773453377242664,
+                        3.7999113462324567,
+                        2.3199526847442167,
+                        2.0023151425298957,
+                        1.0912696873299885,
+                        0.8450734297359537,
+                        0.7518830646609157
+                    ]
+                }
+            },
+            "FairGreedyFlow-C": {
+                "xs": {
+                    "k": [
+                        11,
+                        20,
+                        29,
+                        37,
+                        47,
+                        56,
+                        64,
+                        74,
+                        84,
+                        92
+                    ]
+                },
+                "ys": {
+                    "data_size": [
+                        44.0,
+                        80.0,
+                        116.0,
+                        148.0,
+                        188.0,
+                        224.0,
+                        256.0,
+                        296.0,
+                        336.0,
+                        368.0
+                    ],
+                    "dmax": [
+                        14.541580869396881,
+                        11.929536511717496,
+                        10.825807141748452,
+                        9.986574759958456,
+                        9.225148299807248,
+                        8.666738776450595,
+                        8.352651348521913,
+                        7.860534027572203,
+                        7.57839658790741,
+                        7.3835394429103705
+                    ],
+                    "dmin": [
+                        0.7361885876557436,
+                        0.6837028751132787,
+                        0.7920900770240068,
+                        0.8164343940472316,
+                        0.5089183573125423,
+                        0.5596506802748172,
+                        0.6961432409626203,
+                        0.4814896394139917,
+                        0.6316801817145842,
+                        0.516406214267876
+                    ],
+                    "solution_size": [
+                        11.0,
+                        20.0,
+                        29.0,
+                        37.0,
+                        47.0,
+                        56.0,
+                        64.0,
+                        74.0,
+                        84.0,
+                        92.0
+                    ],
+                    "diversity": [
+                        4.394598534493406,
+                        3.3920394025478315,
+                        2.934248614074348,
+                        2.3688513894279417,
+                        2.196898577783582,
+                        2.0171371994913407,
+                        1.795225550198452,
+                        1.7959215588195954,
+                        1.6605976531487738,
+                        1.562221447925916
+                    ],
+                    "runtime": [
+                        0.16828122419537977,
+                        0.3161424826044822,
+                        0.4857011907966807,
+                        0.6548338004125981,
+                        0.8995343270013109,
+                        1.150094689996331,
+                        1.3909734418004518,
+                        1.7288160582073033,
+                        2.246168030190165,
+                        2.5015218777931296
+                    ],
+                    "div-runtime": [
+                        26.114609966178637,
+                        10.729464052420711,
+                        6.0412629610015784,
+                        3.617484906758592,
+                        2.442262081434031,
+                        1.7538879337820228,
+                        1.290625324862237,
+                        1.038815870718992,
+                        0.7393025057916902,
+                        0.6245084089786674
+                    ]
+                }
+            }
         }
     },
-    "alg_status": [],
+    "alg_status": [
+        [
+            "FairGreedyFlow timed out at k = 12"
+        ]
+    ],
     "color_results": [
         [
             "Adult",
@@ -8402,6 +8824,3076 @@
                 "Female_Yes": 23,
                 "Male_No": 6,
                 "Male_Yes": 20
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow",
+            64,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 8,
+                "Female_Yes": 26,
+                "Male_No": 7,
+                "Male_Yes": 23
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow",
+            64,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 8,
+                "Female_Yes": 26,
+                "Male_No": 7,
+                "Male_Yes": 23
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow-C",
+            64,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 8,
+                "Female_Yes": 26,
+                "Male_No": 7,
+                "Male_Yes": 23
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow-C",
+            64,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 8,
+                "Female_Yes": 26,
+                "Male_No": 7,
+                "Male_Yes": 23
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow",
+            64,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 8,
+                "Female_Yes": 26,
+                "Male_No": 7,
+                "Male_Yes": 23
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow",
+            64,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 8,
+                "Female_Yes": 26,
+                "Male_No": 7,
+                "Male_Yes": 23
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow-C",
+            64,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 8,
+                "Female_Yes": 26,
+                "Male_No": 7,
+                "Male_Yes": 23
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow-C",
+            64,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 8,
+                "Female_Yes": 26,
+                "Male_No": 7,
+                "Male_Yes": 23
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow",
+            64,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 8,
+                "Female_Yes": 26,
+                "Male_No": 7,
+                "Male_Yes": 23
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow",
+            64,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 8,
+                "Female_Yes": 26,
+                "Male_No": 7,
+                "Male_Yes": 23
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow-C",
+            64,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 8,
+                "Female_Yes": 26,
+                "Male_No": 7,
+                "Male_Yes": 23
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow-C",
+            64,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 8,
+                "Female_Yes": 26,
+                "Male_No": 7,
+                "Male_Yes": 23
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow",
+            64,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 8,
+                "Female_Yes": 26,
+                "Male_No": 7,
+                "Male_Yes": 23
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow",
+            64,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 8,
+                "Female_Yes": 26,
+                "Male_No": 7,
+                "Male_Yes": 23
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow-C",
+            64,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 8,
+                "Female_Yes": 26,
+                "Male_No": 7,
+                "Male_Yes": 23
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow-C",
+            64,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 8,
+                "Female_Yes": 26,
+                "Male_No": 7,
+                "Male_Yes": 23
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow",
+            64,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 8,
+                "Female_Yes": 26,
+                "Male_No": 7,
+                "Male_Yes": 23
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow",
+            64,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 8,
+                "Female_Yes": 26,
+                "Male_No": 7,
+                "Male_Yes": 23
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow-C",
+            64,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 8,
+                "Female_Yes": 26,
+                "Male_No": 7,
+                "Male_Yes": 23
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow-C",
+            64,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 8,
+                "Female_Yes": 26,
+                "Male_No": 7,
+                "Male_Yes": 23
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow",
+            74,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 30,
+                "Male_No": 8,
+                "Male_Yes": 26
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow",
+            74,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 30,
+                "Male_No": 8,
+                "Male_Yes": 26
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow-C",
+            74,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 30,
+                "Male_No": 8,
+                "Male_Yes": 26
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow-C",
+            74,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 30,
+                "Male_No": 8,
+                "Male_Yes": 26
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow",
+            74,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 30,
+                "Male_No": 8,
+                "Male_Yes": 26
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow",
+            74,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 30,
+                "Male_No": 8,
+                "Male_Yes": 26
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow-C",
+            74,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 30,
+                "Male_No": 8,
+                "Male_Yes": 26
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow-C",
+            74,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 30,
+                "Male_No": 8,
+                "Male_Yes": 26
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow",
+            74,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 30,
+                "Male_No": 8,
+                "Male_Yes": 26
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow",
+            74,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 30,
+                "Male_No": 8,
+                "Male_Yes": 26
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow-C",
+            74,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 30,
+                "Male_No": 8,
+                "Male_Yes": 26
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow-C",
+            74,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 30,
+                "Male_No": 8,
+                "Male_Yes": 26
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow",
+            74,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 30,
+                "Male_No": 8,
+                "Male_Yes": 26
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow",
+            74,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 30,
+                "Male_No": 8,
+                "Male_Yes": 26
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow-C",
+            74,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 30,
+                "Male_No": 8,
+                "Male_Yes": 26
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow-C",
+            74,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 30,
+                "Male_No": 8,
+                "Male_Yes": 26
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow",
+            74,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 30,
+                "Male_No": 8,
+                "Male_Yes": 26
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow",
+            74,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 30,
+                "Male_No": 8,
+                "Male_Yes": 26
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow-C",
+            74,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 30,
+                "Male_No": 8,
+                "Male_Yes": 26
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow-C",
+            74,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 30,
+                "Male_No": 8,
+                "Male_Yes": 26
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow",
+            84,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 11,
+                "Female_Yes": 34,
+                "Male_No": 9,
+                "Male_Yes": 30
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow",
+            84,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 11,
+                "Female_Yes": 34,
+                "Male_No": 9,
+                "Male_Yes": 30
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow-C",
+            84,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 11,
+                "Female_Yes": 34,
+                "Male_No": 9,
+                "Male_Yes": 30
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow-C",
+            84,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 11,
+                "Female_Yes": 34,
+                "Male_No": 9,
+                "Male_Yes": 30
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow",
+            84,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 11,
+                "Female_Yes": 34,
+                "Male_No": 9,
+                "Male_Yes": 30
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow",
+            84,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 11,
+                "Female_Yes": 34,
+                "Male_No": 9,
+                "Male_Yes": 30
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow-C",
+            84,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 11,
+                "Female_Yes": 34,
+                "Male_No": 9,
+                "Male_Yes": 30
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow-C",
+            84,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 11,
+                "Female_Yes": 34,
+                "Male_No": 9,
+                "Male_Yes": 30
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow",
+            84,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 11,
+                "Female_Yes": 34,
+                "Male_No": 9,
+                "Male_Yes": 30
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow",
+            84,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 11,
+                "Female_Yes": 34,
+                "Male_No": 9,
+                "Male_Yes": 30
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow-C",
+            84,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 11,
+                "Female_Yes": 34,
+                "Male_No": 9,
+                "Male_Yes": 30
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow-C",
+            84,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 11,
+                "Female_Yes": 34,
+                "Male_No": 9,
+                "Male_Yes": 30
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow",
+            84,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 11,
+                "Female_Yes": 34,
+                "Male_No": 9,
+                "Male_Yes": 30
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow",
+            84,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 11,
+                "Female_Yes": 34,
+                "Male_No": 9,
+                "Male_Yes": 30
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow-C",
+            84,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 11,
+                "Female_Yes": 34,
+                "Male_No": 9,
+                "Male_Yes": 30
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow-C",
+            84,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 11,
+                "Female_Yes": 34,
+                "Male_No": 9,
+                "Male_Yes": 30
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow",
+            84,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 11,
+                "Female_Yes": 34,
+                "Male_No": 9,
+                "Male_Yes": 30
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow",
+            84,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 11,
+                "Female_Yes": 34,
+                "Male_No": 9,
+                "Male_Yes": 30
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow-C",
+            84,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 11,
+                "Female_Yes": 34,
+                "Male_No": 9,
+                "Male_Yes": 30
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow-C",
+            84,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 11,
+                "Female_Yes": 34,
+                "Male_No": 9,
+                "Male_Yes": 30
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow",
+            92,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 12,
+                "Female_Yes": 37,
+                "Male_No": 10,
+                "Male_Yes": 33
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow",
+            92,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 12,
+                "Female_Yes": 37,
+                "Male_No": 10,
+                "Male_Yes": 33
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow-C",
+            92,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 12,
+                "Female_Yes": 37,
+                "Male_No": 10,
+                "Male_Yes": 33
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow-C",
+            92,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 12,
+                "Female_Yes": 37,
+                "Male_No": 10,
+                "Male_Yes": 33
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow",
+            92,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 12,
+                "Female_Yes": 37,
+                "Male_No": 10,
+                "Male_Yes": 33
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow",
+            92,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 12,
+                "Female_Yes": 37,
+                "Male_No": 10,
+                "Male_Yes": 33
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow-C",
+            92,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 12,
+                "Female_Yes": 37,
+                "Male_No": 10,
+                "Male_Yes": 33
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow-C",
+            92,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 12,
+                "Female_Yes": 37,
+                "Male_No": 10,
+                "Male_Yes": 33
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow",
+            92,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 12,
+                "Female_Yes": 37,
+                "Male_No": 10,
+                "Male_Yes": 33
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow",
+            92,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 12,
+                "Female_Yes": 37,
+                "Male_No": 10,
+                "Male_Yes": 33
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow-C",
+            92,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 12,
+                "Female_Yes": 37,
+                "Male_No": 10,
+                "Male_Yes": 33
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow-C",
+            92,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 12,
+                "Female_Yes": 37,
+                "Male_No": 10,
+                "Male_Yes": 33
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow",
+            92,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 12,
+                "Female_Yes": 37,
+                "Male_No": 10,
+                "Male_Yes": 33
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow",
+            92,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 12,
+                "Female_Yes": 37,
+                "Male_No": 10,
+                "Male_Yes": 33
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow-C",
+            92,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 12,
+                "Female_Yes": 37,
+                "Male_No": 10,
+                "Male_Yes": 33
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow-C",
+            92,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 12,
+                "Female_Yes": 37,
+                "Male_No": 10,
+                "Male_Yes": 33
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow",
+            92,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 12,
+                "Female_Yes": 37,
+                "Male_No": 10,
+                "Male_Yes": 33
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow",
+            92,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 12,
+                "Female_Yes": 37,
+                "Male_No": 10,
+                "Male_Yes": 33
+            }
+        ],
+        [
+            "Diabetes",
+            "FairFlow-C",
+            92,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 12,
+                "Female_Yes": 37,
+                "Male_No": 10,
+                "Male_Yes": 33
+            }
+        ],
+        [
+            "Diabetes",
+            "FairGreedyFlow-C",
+            92,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 12,
+                "Female_Yes": 37,
+                "Male_No": 10,
+                "Male_Yes": 33
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            12,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 1,
+                "Black/African American": 2,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 7
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            12,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 1,
+                "Black/African American": 2,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 7
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            12,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 1,
+                "Black/African American": 2,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 7
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            12,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 1,
+                "Black/African American": 2,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 7
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            12,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 1,
+                "Black/African American": 2,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 7
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            12,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 1,
+                "Black/African American": 2,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 7
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            12,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 1,
+                "Black/African American": 2,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 7
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            12,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 1,
+                "Black/African American": 2,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 7
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            12,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 1,
+                "Black/African American": 2,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 7
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            12,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 1,
+                "Black/African American": 2,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 7
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            12,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 1,
+                "Black/African American": 2,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 7
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            12,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 1,
+                "Black/African American": 2,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 7
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            12,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 1,
+                "Black/African American": 2,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 7
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            12,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 1,
+                "Black/African American": 2,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 7
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            12,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 1,
+                "Black/African American": 2,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 7
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            22,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 2,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 14
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            22,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 2,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 14
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            22,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 2,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 14
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            22,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 2,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 14
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            22,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 2,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 14
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            22,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 2,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 14
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            22,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 2,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 14
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            22,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 2,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 14
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            22,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 2,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 14
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            22,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 2,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 14
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            22,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 2,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 14
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            22,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 2,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 14
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            22,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 2,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 14
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            22,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 2,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 14
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            22,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 2,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 14
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            30,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 2,
+                "Black/African American": 5,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 21
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            30,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 2,
+                "Black/African American": 5,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 21
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            30,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 2,
+                "Black/African American": 5,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 21
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            30,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 2,
+                "Black/African American": 5,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 21
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            30,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 2,
+                "Black/African American": 5,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 21
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            30,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 2,
+                "Black/African American": 5,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 21
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            30,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 2,
+                "Black/African American": 5,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 21
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            30,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 2,
+                "Black/African American": 5,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 21
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            30,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 2,
+                "Black/African American": 5,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 21
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            30,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 2,
+                "Black/African American": 5,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 21
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            30,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 2,
+                "Black/African American": 5,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 21
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            30,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 2,
+                "Black/African American": 5,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 21
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            30,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 2,
+                "Black/African American": 5,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 21
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            30,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 2,
+                "Black/African American": 5,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 21
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            30,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 2,
+                "Black/African American": 5,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 21
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            39,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 3,
+                "Black/African American": 7,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 27
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            39,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 3,
+                "Black/African American": 7,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 27
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            39,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 3,
+                "Black/African American": 7,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 27
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            39,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 3,
+                "Black/African American": 7,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 27
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            39,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 3,
+                "Black/African American": 7,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 27
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            39,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 3,
+                "Black/African American": 7,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 27
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            39,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 3,
+                "Black/African American": 7,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 27
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            39,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 3,
+                "Black/African American": 7,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 27
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            39,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 3,
+                "Black/African American": 7,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 27
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            39,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 3,
+                "Black/African American": 7,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 27
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            39,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 3,
+                "Black/African American": 7,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 27
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            39,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 3,
+                "Black/African American": 7,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 27
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            39,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 3,
+                "Black/African American": 7,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 27
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            39,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 3,
+                "Black/African American": 7,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 27
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            39,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 3,
+                "Black/African American": 7,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 27
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            48,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 34
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            48,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 34
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            48,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 34
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            48,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 34
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            48,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 34
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            48,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 34
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            48,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 34
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            48,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 34
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            48,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 34
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            48,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 34
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            48,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 34
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            48,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 34
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            48,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 34
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            48,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 34
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            48,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 34
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            57,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 4,
+                "Black/African American": 10,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 41
             }
         ]
     ]

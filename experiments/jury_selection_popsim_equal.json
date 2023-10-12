@@ -54,19 +54,6 @@
 		}
 	},
 	"algorithms" : {
-		"MWUS-0.3-15" : {
-			"alg": "FMMD-MWUS",
-			"color": "#fc0303",
-			"marker": "o",
-			"use_coreset" : true,
-			"use_dmax" : true,
-			"use_dmin" : false,
-			"mwu_epsilon": 0.75,
-			"falloff_epsilon" : 0.15,
-			"sample_percentage" : 0.1,
-			"percent_theoretical_limit": 0.3,
-			"timeout" : 1800
-		},
 		"LP-15" : {
 			"alg": "FMMD-LP",
 			"color": "black",
@@ -75,63 +62,14 @@
 			"use_dmax" : true,
 			"use_dmin" : false,
 			"epsilon" : 0.15,
-			"timeout" : 1800
-		},
-		"SFDM-2-15" : {
-			"alg" : "SFDM-2",
-			"color": "#4afc03",
-			"marker": "+",
-			"use_coreset" : false,
-			"use_dmax" : true,
-			"use_dmin" : true,
-			"epsilon" : 0.15,
-			"timeout" : 1800
-		},
-		"SFDM-2-75" : {
-			"alg" : "SFDM-2",
-			"color": "#1b5902",
-			"marker": "x",
-			"use_coreset" : false,
-			"use_dmax" : true,
-			"use_dmin" : true,
-			"epsilon" : 0.75,
-			"timeout" : 1800
-		},
-		"FMMD-S" : {
-			"alg" : "FMMD-S",
-			"color": "#05faee",
-			"marker": "s",
-			"use_coreset" : false,
-			"use_dmax" : false,
-			"use_dmin" : false,
-			"epsilon" : 0.15,
-			"timeout" : 1800
-		},
-		"FairFlow" : {
-			"alg" : "FairFlow",
-			"color": "#052efa",
-			"marker": "p",
-			"use_coreset" : true,
-			"use_dmax" : false,
-			"use_dmin" : false,
-			"timeout" : 1800
-		},
-		"FairGreedyFlow" : {
-			"alg" : "FairGreedyFlow",
-			"color": "#faac05",
-			"marker": "v",
-			"use_coreset" : true,
-			"use_dmax" : true,
-			"use_dmin" : true,
-			"epsilon" : 0.15,
-			"timeout" : 1800
+			"timeout" : 180
 		}
 	},
 	"parameters": {
 		"k": [
-			100,
-			101,
-			100
+			10,
+			210,
+			200
 		],
 		"observations": 1,
 		"buildkis_alpha" : 0.1,
