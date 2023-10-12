@@ -54,25 +54,29 @@
 		}
 	},
 	"algorithms" : {
-		"LP-15" : {
-			"alg": "FMMD-LP",
-			"color": "black",
-			"marker": ".",
+		"MWUS-0.3-15" : {
+			"alg": "FMMD-MWUS",
+			"color": "#fc0303",
+			"marker": "o",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : false,
-			"epsilon" : 0.15,
-			"timeout" : 180
+			"mwu_epsilon": 0.75,
+			"falloff_epsilon" : 0.15,
+			"sample_percentage" : 0.1,
+			"percent_theoretical_limit": 0.3,
+			"timeout" : 1800
 		}
 	},
 	"parameters": {
 		"k": [
 			10,
 			210,
-			200
+			100
 		],
 		"observations": 1,
 		"buildkis_alpha" : 0.1,
-		"buildkis_equal_k_js" : true
+		"buildkis_equal_k_js" : true,
+		"coreset_multiplier" : 2
 	}
 }

@@ -249,7 +249,11 @@ for dataset_name in setup["datasets"]:
             from algorithms.coreset import Coreset_FMM
             dimensions = len(setup["datasets"][dataset_name]["feature_fields"])
             num_colors = len(setup["datasets"][dataset_name]['points_per_color'])
+
             coreset_size = num_colors * adj_k
+            if check_flag(setup['parameters'],'coreset_multiplier') is not False:
+                coreset_size = check_flag(setup['parameters'],'coreset_multiplier')*coreset_size
+                
             coreset = Coreset_FMM(
                 gen,
                 features, 
@@ -276,6 +280,7 @@ for dataset_name in setup["datasets"]:
 
                 if (check_flag(setup['algorithms'][name],'use_coreset')):
                     print(f'\t\tcomputed coreset size  = {len(core_features)}')
+                    print(f'\t\tcompute time  = {coreset.coreset_compute_time}')
                     t = t + coreset.coreset_compute_time
                     alg_args['features'] = copy.deepcopy(core_features)
                     alg_args['colors'] = copy.deepcopy(core_colors)
@@ -283,10 +288,12 @@ for dataset_name in setup["datasets"]:
                 if (check_flag(setup['algorithms'][name],'use_dmax')):
                     print(f'\t\tcomputed dmax = {dmax}')
                     t = t + coreset.gamma_upper_bound_compute_time
+                    print(f'\t\tcompute time  = {coreset.gamma_upper_bound_compute_time}')
                     alg_args['dmax'] = dmax
 
                 if (check_flag(setup['algorithms'][name],'use_dmin')):
                     print(f'\t\tcomputed dmin = {dmin}')
+                    print(f'\t\tcompute time  = {coreset.closest_pair_compute_time}')
                     t = t + coreset.closest_pair_compute_time
                     alg_args['dmin'] = dmin
                 
@@ -413,3 +420,28 @@ for dataset_name in setup["datasets"]:
                 results[dataset_name][alg]['ys']['runtime'].append(results_per_k_per_alg[k][alg][5])
                 results[dataset_name][alg]['ys']['div-runtime'].append(results_per_k_per_alg[k][alg][4]/results_per_k_per_alg[k][alg][5])
 # End of dataset loop
+def write_results(setup, results, color_results, alg_status):
+
+    class NpEncoder(json.JSONEncoder):
+        def default(self, obj):
+            if isinstance(obj, np.integer):
+                return int(obj)
+            if isinstance(obj, np.floating):
+                return float(obj)
+            if isinstance(obj, np.ndarray):
+                return obj.tolist()
+            return super(NpEncoder, self).default(obj)
+    
+    print("Writting summary...")
+    summary = {
+        "setup" : setup,
+        "results" : results,
+        "alg_status" : alg_status,
+        "color_results" : color_results
+    }
+    # Save the results from the experiment
+    json_object = json.dumps(summary, indent=4, cls=NpEncoder)
+    with open(result_file_path, "w") as outfile:
+        outfile.write(json_object)
+        outfile.flush()
+write_results(setup, results, color_results, alg_status)

@@ -255,17 +255,20 @@ for dataset_name in setup["datasets"]:
 
                 if (check_flag(setup['algorithms'][name],'use_coreset')):
                     print(f'\t\tcomputed coreset size  = {len(core_features)}')
+                    print(f'\t\tcompute time  = {coreset.coreset_compute_time}')
                     t = t + coreset.coreset_compute_time
                     alg_args['features'] = copy.deepcopy(core_features)
                     alg_args['colors'] = copy.deepcopy(core_colors)
 
                 if (check_flag(setup['algorithms'][name],'use_dmax')):
                     print(f'\t\tcomputed dmax = {dmax}')
+                    print(f'\t\tcompute time  = {coreset.gamma_upper_bound_compute_time}')
                     t = t + coreset.gamma_upper_bound_compute_time
                     alg_args['dmax'] = dmax
 
                 if (check_flag(setup['algorithms'][name],'use_dmin')):
                     print(f'\t\tcomputed dmin = {dmin}')
+                    print(f'\t\tcompute time  = {coreset.closest_pair_compute_time}')
                     t = t + coreset.closest_pair_compute_time
                     alg_args['dmin'] = dmin
                 
