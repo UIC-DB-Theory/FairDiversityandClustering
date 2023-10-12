@@ -196,8 +196,10 @@ def plot_color_results(algorithm):
             bottom += returned_counts[color]
         ax.set_xticks(ind + width/2 + 0.025, ks)
         ax.set_title(f'{dataset}')
+        handles, labels = ax.get_legend_handles_labels()
         ax.legend(
-            title = f'{dataset}',
+            handles[::-1], labels[::-1],
+            title = f'Colors in {dataset}',
             loc='center left',
             bbox_to_anchor=(1, 0.5)
         )
