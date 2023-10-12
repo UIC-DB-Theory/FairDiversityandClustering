@@ -25,6 +25,32 @@
 			],
 			"normalize": true,
 			"filter_unique": false
+		},
+		"Popsim1M-FMMD": {
+			"data_dir": "./datasets/popsim_1M",
+			"color_fields": [
+				"race"
+			],
+			"feature_fields": [
+				"x",
+				"y",
+				"z"
+			],
+			"normalize": true,
+			"filter_unique": false
+		},
+		"Popsim1M-MMD": {
+			"data_dir": "./datasets/popsim_1M",
+			"color_fields": [
+				"None"
+			],
+			"feature_fields": [
+				"x",
+				"y",
+				"z"
+			],
+			"normalize": true,
+			"filter_unique": false
 		}
 	},
 	"algorithms" : {
