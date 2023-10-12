@@ -98,6 +98,7 @@ use_ratio = True
 use_deltas = False
 color_mappings = {}
 color_mappings2 = {}
+runner_ks = [k for k in range(setup["parameters"]["k"][0] ,setup["parameters"]["k"][1], setup["parameters"]["k"][2])]
 data = {}
 for color_result in color_results:
     dataset = color_result[0]
@@ -178,11 +179,31 @@ for color_result in color_results:
 def plot_color_results(algorithm):
     plt.clf()
     width = 0.4
+    only_odds = True
     for dataset in  data:
         fig, ax = plt.subplots()
         ks = data[dataset][algorithm]['ks']
         returned_counts = data[dataset][algorithm]['returned_counts']
         required_counts = data[dataset][algorithm]['required_counts']
+        if only_odds:
+                temp1 = []
+                max_ind= len(ks)
+                for i in range(0, max_ind):
+                    if (i+1)%2 == 0:
+                        temp1.append(ks[i])
+                ks = temp1
+                for color in required_counts:
+                    prev1 = required_counts[color]
+                    prev2 = returned_counts[color]
+                    new1 = []
+                    new2 = []
+                    for i in range(0, max_ind):
+                        if (i+1)%2 == 0:
+                            new1.append(prev1[i])
+                            new2.append(prev2[i])
+                    required_counts[color] = new1
+                    returned_counts[color] = new2
+
         bottom = np.zeros(len(ks))
         ind = np.arange(len(ks))
         for color in required_counts:
@@ -205,7 +226,6 @@ def plot_color_results(algorithm):
         )
         plt.savefig(f'{plot_dir}/{dataset}_{algorithm}.png', dpi=300, bbox_inches='tight')
         plt.close()
-
 
 for alg in setup['algorithms']:
     plot_color_results(alg)
