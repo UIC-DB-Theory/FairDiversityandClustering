@@ -210,10 +210,6 @@ def plot_color_results(algorithm):
         plt.savefig(f'{plot_dir}/{dataset}_{algorithm}.png', dpi=300, bbox_inches='tight')
         plt.close()
 
-plot_color_results('MWUS-0.3-15')
-plot_color_results('LP-15')
-plot_color_results('SFDM-2-15')
-plot_color_results('SFDM-2-75')
-plot_color_results('FMMD-S')
-plot_color_results('FairFlow')
-plot_color_results('FairGreedyFlow')
+
+for alg in setup['algorithms']:
+    plot_color_results(alg)
