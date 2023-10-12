@@ -1,5 +1,18 @@
 {
 	"datasets": {
+		"Popsim_1M": {
+			"data_dir": "./datasets/popsim_1M",
+			"color_fields": [
+				"race"
+			],
+			"feature_fields": [
+				"x",
+				"y",
+				"z"
+			],
+			"normalize": true,
+			"filter_unique": false
+		},
 		"Adult": {
 			"data_dir": "./datasets/adult",
 			"color_fields": [

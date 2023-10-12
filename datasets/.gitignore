@@ -3,6 +3,8 @@
 /adult/*
 /census/*
 /popsim/*
+/popsim_1M/*
+
 
 # Dont ignore the dataset generation files
 !/diabetes/diabetes_generate.py
@@ -10,3 +12,4 @@
 !/census/census_generate.py
 !/popsim/popsim_generate.py
 !/popsim/vis.py
+!/popsim_1M/popsim_generate.py
