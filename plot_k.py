@@ -207,7 +207,7 @@ def plot_color_results(algorithm):
         bottom = np.zeros(len(ks))
         ind = np.arange(len(ks))
         for color in required_counts:
-            ax.bar(ind, required_counts[color], width, label=color, bottom=bottom, color = color_mappings[dataset][color])
+            ax.bar(ind, required_counts[color], width, label=color, bottom=bottom, color = color_mappings[dataset][color], edgecolor='black', linewidth = 2)
             bottom += required_counts[color]
         
         bottom = np.zeros(len(ks))
