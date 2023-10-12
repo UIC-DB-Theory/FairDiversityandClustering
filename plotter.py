@@ -23,7 +23,6 @@ with open(result_file_path, 'r') as json_file:
     data = json.load(json_file)
     results = data["results"]
     setup = data["setup"]
-    color_results = data["color_results"]
 
 import matplotlib.pyplot as plt
 from matplotlib import gridspec
@@ -34,8 +33,8 @@ def plot(y_key, x_key, ylogscale = False):
     plt.clf()
 
     # Each dataset gets 1 subplot
-    fig = plt.figure(figsize=(15, 10))
-    grid_specs = gridspec.GridSpec(2, 3, width_ratios=[1, 1, 1], height_ratios=[1, 1])
+    fig = plt.figure(figsize=(20, 5))
+    grid_specs = gridspec.GridSpec(1, 4, width_ratios=[1, 1, 1, 1], height_ratios=[1])
     legend_handles = []
 
 
@@ -55,15 +54,23 @@ def plot(y_key, x_key, ylogscale = False):
             ax.set_ylabel(y_key)
             ax.set_title(f'{dataset_name}')
 
-    ax_legend = plt.subplot(grid_specs[5])
-    ax_legend.axis('off')  # Hide the empty subplot
-    ax_legend.legend(title = f'log(t) vs k',  handles=legend_handles[:len(setup["algorithms"])], bbox_to_anchor=[0.5, 0.5], loc='center',)
+    
+    ax_legend = plt.subplot(grid_specs[0])
+    # ax_legend.axis('off') 
+    #ax_legend.legend(title = f'log(t) vs k',  handles=legend_handles[:len(setup["algorithms"])], bbox_to_anchor=[0.5, 0.5], loc='center',)
+    # ax_legend.legend(ncol=3, loc='upper center', bbox_to_anchor=(0.5, -0.05), fancybox=True, shadow=True, fontsize='large')
+    #legend(bbox_to_anchor=(0., 1.02, 1., .102), loc='lower left', ncols=2, mode="expand", borderaxespad=0.)
+    # pos = ax_legend.get_position()
+    # ax_legend.set_position([pos.x0, pos.y0, pos.width, pos.height * 0.85])
+    ax_legend.legend(
+        title = f't vs k',  
+        handles=legend_handles[:len(setup["algorithms"])],
+        ncol=len(setup["algorithms"]),
+        loc='lower left', 
+        bbox_to_anchor=(0.9, 1.1),borderaxespad=0
+    )
     plt.savefig(f'{plot_dir}/{y_key}_vs_{x_key}', dpi=300)
 
 plot( "runtime", "k", ylogscale = True)
 plot( "diversity", "k", ylogscale = False)
 plot( "div-runtime", "k", ylogscale = True)
-
-
-#TODO: Plot Color deltas below
-color_results
