@@ -1,5 +1,5 @@
 """
-Usage: python3 exp_t_div_vs_k_plotter.py /path/to/result/file.result
+Usage: python3 plot_k.py /path/to/result/file
 """
 import json
 import sys
