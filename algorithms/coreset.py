@@ -226,12 +226,13 @@ class Coreset_FMM:
         from scipy.spatial.distance import cdist
         t0 = time.perf_counter()
 
+        self.gmm_result_size = self.coreset_size
         if len(input_set) < self.gmm_result_size:
             return np.array(input_set)
 
         # Randomly select a point.
         # TODO: fix seeding in total!
-        i_1 = self.gen.choice(0, len(input_set))
+        i_1 = self.gen.integers(0, len(input_set))
         s_1 = input_set[i_1]
 
         # Initialize all distances initially to s_1.
@@ -266,5 +267,7 @@ class Coreset_FMM:
             point_distances = np.minimum(point_distances, new_point_distances)
 
         t1 = time.perf_counter()
+        self.out_colors = self.colors[indices]
+        self.out_features = result
         self.coreset_compute_time = t1- t0
         return result, indices

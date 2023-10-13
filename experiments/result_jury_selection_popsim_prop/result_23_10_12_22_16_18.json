@@ -1,0 +1,327 @@
+{
+    "setup": {
+        "datasets": {
+            "Popsim-MMD": {
+                "data_dir": "./datasets/popsim",
+                "color_fields": [
+                    "race"
+                ],
+                "feature_fields": [
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "normalize": true,
+                "filter_unique": false,
+                "mmd": true,
+                "points_per_color": {
+                    "White": 3070882,
+                    "Black/African American": 705193,
+                    "Asian": 294728,
+                    "Native Hawaiian/Other Pacific Islander": 1725,
+                    "American Indian/Alaska Native": 38080
+                },
+                "size": 4110608
+            },
+            "Popsim-FMMD": {
+                "data_dir": "./datasets/popsim",
+                "color_fields": [
+                    "race"
+                ],
+                "feature_fields": [
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "normalize": true,
+                "filter_unique": false,
+                "points_per_color": {
+                    "White": 3070882,
+                    "Black/African American": 705193,
+                    "Asian": 294728,
+                    "Native Hawaiian/Other Pacific Islander": 1725,
+                    "American Indian/Alaska Native": 38080
+                },
+                "size": 4110608
+            },
+            "Popsim1M-MMD": {
+                "data_dir": "./datasets/popsim_1M",
+                "color_fields": [
+                    "race"
+                ],
+                "feature_fields": [
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "normalize": true,
+                "filter_unique": false,
+                "mmd": true,
+                "points_per_color": {
+                    "White": 614099,
+                    "Black/African American": 141083,
+                    "Asian": 58671,
+                    "Native Hawaiian/Other Pacific Islander": 335,
+                    "American Indian/Alaska Native": 7616
+                },
+                "size": 821804
+            },
+            "Popsim1M-FMMD": {
+                "data_dir": "./datasets/popsim_1M",
+                "color_fields": [
+                    "race"
+                ],
+                "feature_fields": [
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "normalize": true,
+                "filter_unique": false,
+                "points_per_color": {
+                    "White": 614099,
+                    "Black/African American": 141083,
+                    "Asian": 58671,
+                    "Native Hawaiian/Other Pacific Islander": 335,
+                    "American Indian/Alaska Native": 7616
+                },
+                "size": 821804
+            }
+        },
+        "algorithms": {
+            "MWUS-0.3-15": {
+                "alg": "FMMD-MWUS",
+                "color": "#fc0303",
+                "marker": "o",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": false,
+                "mwu_epsilon": 0.75,
+                "falloff_epsilon": 0.15,
+                "sample_percentage": 0.1,
+                "percent_theoretical_limit": 0.3,
+                "timeout": 1800
+            }
+        },
+        "parameters": {
+            "k": [
+                100,
+                101,
+                1
+            ],
+            "observations": 1,
+            "buildkis_alpha": 0.1,
+            "buildkis_equal_k_js": false,
+            "coreset_multiplier": 1
+        }
+    },
+    "results": {
+        "Popsim-MMD": {
+            "MWUS-0.3-15": {
+                "xs": {
+                    "k": [
+                        93
+                    ]
+                },
+                "ys": {
+                    "data_size": [
+                        4110608.0
+                    ],
+                    "dmax": [
+                        0.8571021212479256
+                    ],
+                    "dmin": [
+                        0.0005068122550070253
+                    ],
+                    "solution_size": [
+                        93.0
+                    ],
+                    "diversity": [
+                        0.43869384210739565
+                    ],
+                    "runtime": [
+                        11.009335052003735
+                    ],
+                    "div-runtime": [
+                        0.039847442196570444
+                    ]
+                }
+            }
+        },
+        "Popsim-FMMD": {
+            "MWUS-0.3-15": {
+                "xs": {
+                    "k": [
+                        93
+                    ]
+                },
+                "ys": {
+                    "data_size": [
+                        465.0
+                    ],
+                    "dmax": [
+                        0.8589057077118462
+                    ],
+                    "dmin": [
+                        0.0007694104237558607
+                    ],
+                    "solution_size": [
+                        92.0
+                    ],
+                    "diversity": [
+                        0.2725714763420336
+                    ],
+                    "runtime": [
+                        30.989750671142247
+                    ],
+                    "div-runtime": [
+                        0.008795536280188695
+                    ]
+                }
+            }
+        },
+        "Popsim1M-MMD": {
+            "MWUS-0.3-15": {
+                "xs": {
+                    "k": [
+                        93
+                    ]
+                },
+                "ys": {
+                    "data_size": [
+                        821804.0
+                    ],
+                    "dmax": [
+                        0.8441694051294956
+                    ],
+                    "dmin": [
+                        0.002066104886884732
+                    ],
+                    "solution_size": [
+                        93.0
+                    ],
+                    "diversity": [
+                        0.4245836477044272
+                    ],
+                    "runtime": [
+                        2.479183308998472
+                    ],
+                    "div-runtime": [
+                        0.17125948136362226
+                    ]
+                }
+            }
+        },
+        "Popsim1M-FMMD": {
+            "MWUS-0.3-15": {
+                "xs": {
+                    "k": [
+                        93
+                    ]
+                },
+                "ys": {
+                    "data_size": [
+                        465.0
+                    ],
+                    "dmax": [
+                        0.8579446715864492
+                    ],
+                    "dmin": [
+                        0.0020762904715674406
+                    ],
+                    "solution_size": [
+                        91.0
+                    ],
+                    "diversity": [
+                        0.26682877789582166
+                    ],
+                    "runtime": [
+                        12.311467558145523
+                    ],
+                    "div-runtime": [
+                        0.021673190189197403
+                    ]
+                }
+            }
+        }
+    },
+    "alg_status": [],
+    "color_results": [
+        [
+            "Popsim-MMD",
+            "MWUS-0.3-15",
+            93,
+            {
+                "American Indian/Alaska Native": -1,
+                "Asian": -7,
+                "Black/African American": -15,
+                "Native Hawaiian/Other Pacific Islander": -1,
+                "White": 24
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim-FMMD",
+            "MWUS-0.3-15",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": -1
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim1M-MMD",
+            "MWUS-0.3-15",
+            93,
+            {
+                "American Indian/Alaska Native": -1,
+                "Asian": -7,
+                "Black/African American": -15,
+                "Native Hawaiian/Other Pacific Islander": -1,
+                "White": 24
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim1M-FMMD",
+            "MWUS-0.3-15",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": -2
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ]
+    ]
+}

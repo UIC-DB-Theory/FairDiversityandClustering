@@ -275,7 +275,8 @@ for dataset_name in setup["datasets"]:
                 num_colors, 
                 dimensions, 
                 adj_k)
-            core_k_features, core_k_colors = coreset_k.compute()
+            core_k_features, indices= coreset_k.GMM_index(features)
+            core_k_colors = colors[indices]
             dmax_k = coreset_k.compute_gamma_upper_bound()
             dmin_k = coreset_k.compute_closest_pair()
 
