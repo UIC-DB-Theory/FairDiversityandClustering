@@ -3,7 +3,7 @@
 		"Popsim-MMD": {
 			"data_dir": "./datasets/popsim",
 			"color_fields": [
-				"None"
+				"race"
 			],
 			"feature_fields": [
 				"x",
@@ -11,7 +11,8 @@
 				"z"
 			],
 			"normalize": true,
-			"filter_unique": false
+			"filter_unique": false,
+			"mmd" : true
 		},
 		"Popsim-FMMD": {
 			"data_dir": "./datasets/popsim",
@@ -29,7 +30,7 @@
 		"Popsim1M-MMD": {
 			"data_dir": "./datasets/popsim_1M",
 			"color_fields": [
-				"None"
+				"race"
 			],
 			"feature_fields": [
 				"x",
@@ -37,7 +38,8 @@
 				"z"
 			],
 			"normalize": true,
-			"filter_unique": false
+			"filter_unique": false,
+			"mmd" : true
 		},
 		"Popsim1M-FMMD": {
 			"data_dir": "./datasets/popsim_1M",
@@ -70,9 +72,9 @@
 	},
 	"parameters": {
 		"k": [
-			50,
-			201,
-			50
+			100,
+			101,
+			1
 		],
 		"observations": 1,
 		"buildkis_alpha" : 0.1,
