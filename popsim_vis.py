@@ -309,8 +309,14 @@ for dataset_name in setup["datasets"]:
                     import gurobipy
                     try:
                         with time_limit(timeout):
-                            runner = algorithms[setup['algorithms'][name]['alg']]
-                            sol, div, t_alg = runner(gen, name, kimap, alg_args)
+                            if not len(kimap) == 1:
+                                runner = algorithms[setup['algorithms'][name]['alg']]
+                                sol, div, t_alg = runner(gen, name, kimap, alg_args)
+                            else:
+                                print("***MMD instance - solution is coreset***")
+                                sol = np.array([i for i in range(0, alg_args['features'])])
+                                div = dmin
+                                t_alg = 0
                             t = t + t_alg
                             print(f'\t\t***solution size = {len(sol)}***')
                             print(f'\t\tdiv = {div}')
@@ -341,7 +347,14 @@ for dataset_name in setup["datasets"]:
                     import gurobipy
                     runner = algorithms[setup['algorithms'][name]['alg']]
                     try:
-                            sol, div, t_alg = runner(gen, name, kimap, alg_args)
+                            if not len(kimap) == 1:
+                                runner = algorithms[setup['algorithms'][name]['alg']]
+                                sol, div, t_alg = runner(gen, name, kimap, alg_args)
+                            else:
+                                print("***MMD instance - solution is coreset***")
+                                sol = np.array([i for i in range(0, alg_args['features'])])
+                                div = dmin
+                                t_alg = 0
                     except gurobipy.GurobiError as gbe:
                         print(f'Gurobi Error - {gbe.message}')
                         alg_status.append([f'{name} gurobi errored at k = {adj_k}', e.message])

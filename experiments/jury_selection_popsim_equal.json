@@ -1,18 +1,5 @@
 {
 	"datasets": {
-		"Popsim-FMMD": {
-			"data_dir": "./datasets/popsim",
-			"color_fields": [
-				"race"
-			],
-			"feature_fields": [
-				"x",
-				"y",
-				"z"
-			],
-			"normalize": true,
-			"filter_unique": false
-		},
 		"Popsim-MMD": {
 			"data_dir": "./datasets/popsim",
 			"color_fields": [
@@ -26,8 +13,8 @@
 			"normalize": true,
 			"filter_unique": false
 		},
-		"Popsim1M-FMMD": {
-			"data_dir": "./datasets/popsim_1M",
+		"Popsim-FMMD": {
+			"data_dir": "./datasets/popsim",
 			"color_fields": [
 				"race"
 			],
@@ -43,6 +30,19 @@
 			"data_dir": "./datasets/popsim_1M",
 			"color_fields": [
 				"None"
+			],
+			"feature_fields": [
+				"x",
+				"y",
+				"z"
+			],
+			"normalize": true,
+			"filter_unique": false
+		},
+		"Popsim1M-FMMD": {
+			"data_dir": "./datasets/popsim_1M",
+			"color_fields": [
+				"race"
 			],
 			"feature_fields": [
 				"x",
@@ -77,6 +77,6 @@
 		"observations": 1,
 		"buildkis_alpha" : 0.1,
 		"buildkis_equal_k_js" : true,
-		"coreset_multiplier" : 2
+		"coreset_multiplier" : 1
 	}
 }

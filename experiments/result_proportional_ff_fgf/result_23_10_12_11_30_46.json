@@ -88,7 +88,15 @@
                     "z"
                 ],
                 "normalize": true,
-                "filter_unique": false
+                "filter_unique": false,
+                "points_per_color": {
+                    "White": 3070882,
+                    "Black/African American": 705193,
+                    "Asian": 294728,
+                    "Native Hawaiian/Other Pacific Islander": 1725,
+                    "American Indian/Alaska Native": 38080
+                },
+                "size": 4110608
             },
             "Census": {
                 "data_dir": "./datasets/census",
@@ -975,6 +983,314 @@
                         1.038815870718992,
                         0.7393025057916902,
                         0.6245084089786674
+                    ]
+                }
+            }
+        },
+        "Popsim_1M": {
+            "FairFlow": {
+                "xs": {
+                    "k": [
+                        12,
+                        22,
+                        30,
+                        39,
+                        48,
+                        57,
+                        66,
+                        75,
+                        83,
+                        93
+                    ]
+                },
+                "ys": {
+                    "data_size": [
+                        821804.0,
+                        821804.0,
+                        821804.0,
+                        821804.0,
+                        821804.0,
+                        821804.0,
+                        821804.0,
+                        821804.0,
+                        821804.0,
+                        821804.0
+                    ],
+                    "dmax": [
+                        2.777721968039918,
+                        1.885562699241683,
+                        1.6353426007416885,
+                        1.402707017042034,
+                        1.2222097023620695,
+                        1.0841245881572252,
+                        1.0129812133155058,
+                        0.9505661465100423,
+                        0.908859090918875,
+                        0.8460004169507481
+                    ],
+                    "dmin": [
+                        0.007655221184949224,
+                        0.004835660860925193,
+                        0.0038073696471246756,
+                        0.002197828085899878,
+                        0.0020762904715674406,
+                        0.0020762904715674406,
+                        0.002043940718485866,
+                        0.0019264206394507218,
+                        0.0019075577354411882,
+                        0.0008170233230963862
+                    ],
+                    "solution_size": [
+                        12.0,
+                        22.0,
+                        30.0,
+                        39.0,
+                        48.0,
+                        57.0,
+                        66.0,
+                        75.0,
+                        83.0,
+                        93.0
+                    ],
+                    "diversity": [
+                        0.688261867420863,
+                        0.4420491569328697,
+                        0.22417116255508113,
+                        0.21053277201517068,
+                        0.22417116255508113,
+                        0.17909616675003162,
+                        0.17909616675003162,
+                        0.16611688874038072,
+                        0.12646832292975996,
+                        0.1007288715128389
+                    ],
+                    "runtime": [
+                        49.604878052001006,
+                        90.00555510299746,
+                        122.92717142740148,
+                        159.9175215097959,
+                        197.7511112794018,
+                        237.64415599719797,
+                        278.0191654260008,
+                        314.4262718037993,
+                        352.0902448651992,
+                        456.7724515312031
+                    ],
+                    "div-runtime": [
+                        0.013874882762524991,
+                        0.004911354153940973,
+                        0.001823609540120855,
+                        0.0013165084727896703,
+                        0.0011336025426342637,
+                        0.0007536316893571888,
+                        0.000644186405191195,
+                        0.0005283174582944424,
+                        0.0003591929193556028,
+                        0.0002205230879733952
+                    ]
+                }
+            },
+            "FairFlow-C": {
+                "xs": {
+                    "k": [
+                        12,
+                        22,
+                        30,
+                        39,
+                        48,
+                        57,
+                        66,
+                        75,
+                        83,
+                        93
+                    ]
+                },
+                "ys": {
+                    "data_size": [
+                        60.0,
+                        110.0,
+                        150.0,
+                        195.0,
+                        240.0,
+                        285.0,
+                        330.0,
+                        375.0,
+                        415.0,
+                        465.0
+                    ],
+                    "dmax": [
+                        2.777721968039918,
+                        1.885562699241683,
+                        1.6353426007416885,
+                        1.402707017042034,
+                        1.2222097023620695,
+                        1.0841245881572252,
+                        1.0129812133155058,
+                        0.9505661465100423,
+                        0.908859090918875,
+                        0.8460004169507481
+                    ],
+                    "dmin": [
+                        0.007655221184949224,
+                        0.004835660860925193,
+                        0.0038073696471246756,
+                        0.002197828085899878,
+                        0.0020762904715674406,
+                        0.0020762904715674406,
+                        0.002043940718485866,
+                        0.0019264206394507218,
+                        0.0019075577354411882,
+                        0.0008170233230963862
+                    ],
+                    "solution_size": [
+                        12.0,
+                        22.0,
+                        30.0,
+                        39.0,
+                        48.0,
+                        57.0,
+                        66.0,
+                        75.0,
+                        83.0,
+                        93.0
+                    ],
+                    "diversity": [
+                        0.5655704420213012,
+                        0.34611271878154803,
+                        0.2858364661147725,
+                        0.22117619109532058,
+                        0.20619672831598823,
+                        0.1788209709034281,
+                        0.15861829981413417,
+                        0.1328077862202754,
+                        0.11938953504187491,
+                        0.12059572345942952
+                    ],
+                    "runtime": [
+                        0.6888301158032846,
+                        0.9559323581925128,
+                        1.2056028370017884,
+                        1.528127500208211,
+                        1.9163545815972611,
+                        2.307636501194793,
+                        2.699240533798002,
+                        3.2140276400052246,
+                        3.758243267002399,
+                        4.611572185598197
+                    ],
+                    "div-runtime": [
+                        0.8210594006357531,
+                        0.3620682110144087,
+                        0.23709007422844053,
+                        0.14473673896005718,
+                        0.10759842165750216,
+                        0.0774909613411135,
+                        0.058764047823092004,
+                        0.04132129561277186,
+                        0.03176737814981861,
+                        0.026150674565183298
+                    ]
+                }
+            },
+            "FairGreedyFlow-C": {
+                "xs": {
+                    "k": [
+                        12,
+                        22,
+                        30,
+                        39,
+                        48,
+                        57,
+                        66,
+                        75,
+                        83,
+                        93
+                    ]
+                },
+                "ys": {
+                    "data_size": [
+                        60.0,
+                        110.0,
+                        150.0,
+                        195.0,
+                        240.0,
+                        285.0,
+                        330.0,
+                        375.0,
+                        415.0,
+                        465.0
+                    ],
+                    "dmax": [
+                        2.777721968039918,
+                        1.885562699241683,
+                        1.6353426007416885,
+                        1.402707017042034,
+                        1.2222097023620695,
+                        1.0841245881572252,
+                        1.0129812133155058,
+                        0.9505661465100423,
+                        0.908859090918875,
+                        0.8460004169507481
+                    ],
+                    "dmin": [
+                        0.007655221184949224,
+                        0.004835660860925193,
+                        0.0038073696471246756,
+                        0.002197828085899878,
+                        0.0020762904715674406,
+                        0.0020762904715674406,
+                        0.002043940718485866,
+                        0.0019264206394507218,
+                        0.0019075577354411882,
+                        0.0008170233230963862
+                    ],
+                    "solution_size": [
+                        12.0,
+                        22.0,
+                        30.0,
+                        39.0,
+                        48.0,
+                        57.0,
+                        66.0,
+                        75.0,
+                        83.0,
+                        93.0
+                    ],
+                    "diversity": [
+                        0.8164633361200849,
+                        0.38568761810246766,
+                        0.3151050958480097,
+                        0.2742286612066231,
+                        0.22320158753053732,
+                        0.2051345638169571,
+                        0.19328414761940751,
+                        0.17634929755713508,
+                        0.15834361023362153,
+                        0.15011091856866146
+                    ],
+                    "runtime": [
+                        1.0340459229977568,
+                        1.5873750799917616,
+                        2.072220068992465,
+                        2.635709356406005,
+                        3.2942974212084666,
+                        3.9648201791977042,
+                        4.617003776604543,
+                        5.307881255404209,
+                        6.091091950799455,
+                        7.445877574000042
+                    ],
+                    "div-runtime": [
+                        0.7895813115853813,
+                        0.24297194970735544,
+                        0.1520615983616147,
+                        0.1040435890778774,
+                        0.0677539271632186,
+                        0.051738680329877364,
+                        0.04186354548783874,
+                        0.03322404723684905,
+                        0.02599593168394691,
+                        0.020160272187771083
                     ]
                 }
             }
@@ -12749,6 +13065,291 @@
                 "Black/African American": 14,
                 "Native Hawaiian/Other Pacific Islander": 1,
                 "White": 61
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairFlow-C",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim_1M",
+            "FairGreedyFlow-C",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
             }
         ]
     ]
