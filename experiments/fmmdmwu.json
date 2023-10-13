@@ -1,5 +1,18 @@
 {
 	"datasets": {
+		"Popsim_1M": {
+			"data_dir": "./datasets/popsim_1M",
+			"color_fields": [
+				"race"
+			],
+			"feature_fields": [
+				"x",
+				"y",
+				"z"
+			],
+			"normalize": true,
+			"filter_unique": false
+		},
 		"Adult": {
 			"data_dir": "./datasets/adult",
 			"color_fields": [
@@ -16,6 +29,53 @@
 			],
 			"normalize": true,
 			"filter_unique": false
+		},
+		"Diabetes": {
+			"data_dir": "./datasets/diabetes",
+			"color_fields": [
+				"gender",
+				"diabetesMed"
+			],
+			"feature_fields": [
+				"num_procedures",
+				"num_lab_procedures",
+				"number_outpatient",
+				"number_inpatient",
+				"number_diagnoses",
+				"time_in_hospital",
+				"num_medications"
+			],
+			"normalize": true,
+			"filter_unique" : false
+		},
+		"Popsim": {
+			"data_dir": "./datasets/popsim",
+			"color_fields": [
+				"race"
+			],
+			"feature_fields": [
+				"x",
+				"y",
+				"z"
+			],
+			"normalize": true,
+			"filter_unique": false
+		},
+		"Census": {
+			"data_dir": "./datasets/census",
+			"color_fields": [
+				"age-sex-color"
+			],
+			"feature_fields": [
+				"attr1",
+                "attr2",
+                "attr3",
+                "attr4",
+                "attr5",
+                "attr6"
+			],
+			"normalize": false,
+			"filter_unique" : false
 		},
 		"Census25": {
 			"data_dir": "./datasets/census",
@@ -52,73 +112,6 @@
 			],
 			"normalize": false,
 			"filter_unique" : false
-		},
-		"Census": {
-			"data_dir": "./datasets/census",
-			"color_fields": [
-				"age-sex-color"
-			],
-			"feature_fields": [
-				"attr1",
-                "attr2",
-                "attr3",
-                "attr4",
-                "attr5",
-                "attr6"
-			],
-			"normalize": false,
-			"filter_unique" : false
-		},
-		"Diabetes": {
-			"data_dir": "./datasets/diabetes",
-			"color_fields": [
-				"gender",
-				"diabetesMed"
-			],
-			"feature_fields": [
-				"num_procedures",
-				"num_lab_procedures",
-				"number_outpatient",
-				"number_emergency",
-				"number_inpatient",
-				"number_diagnoses",
-				"time_in_hospital",
-				"num_medications"
-			],
-			"normalize": true,
-			"filter_unique" : false
-		},
-		"Diabetes40": {
-			"data_dir": "./datasets/diabetes",
-			"color_fields": [
-				"gender",
-				"diabetesMed",
-				"age"
-			],
-			"feature_fields": [
-				"num_procedures",
-				"num_lab_procedures",
-				"number_outpatient",
-				"number_emergency",
-				"number_inpatient",
-				"number_diagnoses",
-				"time_in_hospital",
-				"num_medications"
-			],
-			"normalize": true,
-			"filter_unique" : false
-		},
-		"Popsim": {
-			"data_dir": "./datasets/popsim",
-			"color_fields": [
-				"race"
-			],
-			"feature_fields": [
-				"x",
-				"y"
-			],
-			"normalize": true,
-			"filter_unique": false
 		}
 	},
 	"algorithms" : {
