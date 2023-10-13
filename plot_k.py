@@ -44,14 +44,14 @@ with open(result_file_path, 'r') as json_file:
 ######################################################################################
 # Plots for y vs k
 ######################################################################################
-
+print('Plotting y vs k...')
 def plot(y_key, x_key, ylogscale = False):
 
     plt.clf()
 
     # Each dataset gets 1 subplot
-    fig = plt.figure(figsize=(20, 5))
-    grid_specs = gridspec.GridSpec(1, 4, width_ratios=[1, 1, 1, 1], height_ratios=[1])
+    fig = plt.figure(figsize=(25, 5))
+    grid_specs = gridspec.GridSpec(1, 5, width_ratios=[1, 1, 1, 1, 1], height_ratios=[1])
     legend_handles = []
 
 
@@ -91,6 +91,7 @@ plt.close()
 ######################################################################################
 # Plots of color results
 ######################################################################################
+print('Plotting color ratios...')
 plot_dir = result_file_dir + '/' + result_file_name + '/color_results'
 if not os.path.exists(plot_dir):
    os.mkdir(plot_dir)
@@ -179,9 +180,11 @@ for color_result in color_results:
 def plot_color_results(algorithm):
     plt.clf()
     width = 0.4
-    only_odds = True
+    only_odds = False
     for dataset in  data:
         fig, ax = plt.subplots()
+        if algorithm not in data[dataset]:
+            return
         ks = data[dataset][algorithm]['ks']
         returned_counts = data[dataset][algorithm]['returned_counts']
         required_counts = data[dataset][algorithm]['required_counts']
@@ -228,4 +231,5 @@ def plot_color_results(algorithm):
         plt.close()
 
 for alg in setup['algorithms']:
+    plt.close()
     plot_color_results(alg)
