@@ -314,7 +314,7 @@ for dataset_name in setup["datasets"]:
                                 sol, div, t_alg = runner(gen, name, kimap, alg_args)
                             else:
                                 print("***MMD instance - solution is coreset***")
-                                sol = np.array([i for i in range(0, alg_args['features'])])
+                                sol = np.array([i for i in range(0, len(alg_args['features']))])
                                 div = dmin
                                 t_alg = 0
                             t = t + t_alg
@@ -352,7 +352,7 @@ for dataset_name in setup["datasets"]:
                                 sol, div, t_alg = runner(gen, name, kimap, alg_args)
                             else:
                                 print("***MMD instance - solution is coreset***")
-                                sol = np.array([i for i in range(0, alg_args['features'])])
+                                sol = np.array([i for i in range(0, len(alg_args['features']))])
                                 div = dmin
                                 t_alg = 0
                     except gurobipy.GurobiError as gbe:
