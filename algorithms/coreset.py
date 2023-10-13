@@ -220,3 +220,51 @@ class Coreset_FMM:
         t1 = time.perf_counter()
         self.coreset_compute_time = t1- t0
         return self.out_features, self.out_colors
+
+
+    def GMM_index(self, input_set: npt.NDArray[np.float64]):
+        from scipy.spatial.distance import cdist
+        t0 = time.perf_counter()
+
+        if len(input_set) < self.gmm_result_size:
+            return np.array(input_set)
+
+        # Randomly select a point.
+        # TODO: fix seeding in total!
+        i_1 = self.gen.choice(0, len(input_set))
+        s_1 = input_set[i_1]
+
+        # Initialize all distances initially to s_1.
+        # we need to reshape the point vector into a row vector
+        dim = s_1.shape[0]  # this is a tuple (reasons!)
+        point = np.reshape(s_1, (1, dim)) # point is the current "max_dist" point we're working with
+
+        # comes out as a Nx1 matrix
+        point_distances = cdist(input_set, point)
+
+        # Result set for GMM
+        result = np.zeros((self.gmm_result_size, self.d), np.float64)
+        result[0] = point
+
+        indices = [i_1]
+
+        for i in range(1, self.gmm_result_size):
+
+            # Get the farthest point from current point
+            # max_point_index = point_distances.index(max(point_distances))
+            # maximum_dist_point = input_set[max_point_index]
+            max_dist_index = point_distances.argmax()
+            maximum_dist_point = input_set[max_dist_index]
+
+            result[i] = maximum_dist_point
+            indices.append(max_dist_index)
+
+            # Update point distances with respect to the maximum_dis_point.
+            # we keep the minimum distance any point is to our selected point
+            point = np.reshape(maximum_dist_point, (1, dim))
+            new_point_distances = cdist(input_set, point)
+            point_distances = np.minimum(point_distances, new_point_distances)
+
+        t1 = time.perf_counter()
+        self.coreset_compute_time = t1- t0
+        return result, indices
