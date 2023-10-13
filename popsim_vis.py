@@ -230,7 +230,8 @@ for dataset_name in setup["datasets"]:
         setup["datasets"][dataset_name]['size'] = len(dataset['features'])
         features = dataset['features']
         colors = dataset['colors']
-        plot(features, colors, f'{result_file_dir}/{dataset_name}.png', s = 0.5)
+        if not os.path.exists(f'{result_file_dir}/{dataset_name}.png'):
+               plot(features, colors, f'{result_file_dir}/{dataset_name}.png', s = 0.5)
 
         # one kis' map to ask for
         kimap = buildKisMap(dataset['colors'], k, setup['parameters']['buildkis_alpha'], equal_k_js=check_flag(setup['parameters'],'buildkis_equal_k_js'))

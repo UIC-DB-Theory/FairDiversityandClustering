@@ -70,9 +70,9 @@
 	},
 	"parameters": {
 		"k": [
-			10,
-			210,
-			100
+			50,
+			201,
+			50
 		],
 		"observations": 1,
 		"buildkis_alpha" : 0.1,
