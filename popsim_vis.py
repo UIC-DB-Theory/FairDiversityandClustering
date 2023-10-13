@@ -267,6 +267,18 @@ for dataset_name in setup["datasets"]:
             dmax = coreset.compute_gamma_upper_bound()
             dmin = coreset.compute_closest_pair()
 
+            coreset_k = Coreset_FMM(
+                gen,
+                features, 
+                colors, 
+                adj_k, 
+                num_colors, 
+                dimensions, 
+                adj_k)
+            core_k_features, core_k_colors = coreset_k.compute()
+            dmax_k = coreset_k.compute_gamma_upper_bound()
+            dmin_k = coreset_k.compute_closest_pair()
+
             result_per_alg = {}
             for name in setup['algorithms']:
                 print()
@@ -279,20 +291,20 @@ for dataset_name in setup["datasets"]:
                 alg_args['features'] = copy.deepcopy(features)
                 alg_args['colors'] = copy.deepcopy(colors)
 
-                if (check_flag(setup['algorithms'][name],'use_coreset')):
+                if (check_flag(setup['algorithms'][name],'use_coreset')) and not (check_flag(setup['datasets'][dataset_name],'mmd')):
                     print(f'\t\tcomputed coreset size  = {len(core_features)}')
                     print(f'\t\tcompute time  = {coreset.coreset_compute_time}')
                     t = t + coreset.coreset_compute_time
                     alg_args['features'] = copy.deepcopy(core_features)
                     alg_args['colors'] = copy.deepcopy(core_colors)
 
-                if (check_flag(setup['algorithms'][name],'use_dmax')) and not len(kimap) == 1:
+                if (check_flag(setup['algorithms'][name],'use_dmax')) and not (check_flag(setup['datasets'][dataset_name],'mmd')):
                     print(f'\t\tcomputed dmax = {dmax}')
                     t = t + coreset.gamma_upper_bound_compute_time
                     print(f'\t\tcompute time  = {coreset.gamma_upper_bound_compute_time}')
                     alg_args['dmax'] = dmax
 
-                if (check_flag(setup['algorithms'][name],'use_dmin')) and not len(kimap) == 1:
+                if (check_flag(setup['algorithms'][name],'use_dmin')) and not (check_flag(setup['datasets'][dataset_name],'mmd')):
                     print(f'\t\tcomputed dmin = {dmin}')
                     print(f'\t\tcompute time  = {coreset.closest_pair_compute_time}')
                     t = t + coreset.closest_pair_compute_time
@@ -309,15 +321,15 @@ for dataset_name in setup["datasets"]:
                     import gurobipy
                     try:
                         with time_limit(timeout):
-                            if not len(kimap) == 1:
+                            if not (check_flag(setup['datasets'][dataset_name],'mmd')):
                                 runner = algorithms[setup['algorithms'][name]['alg']]
                                 sol, div, t_alg = runner(gen, name, kimap, alg_args)
+                                t = t + t_alg
                             else:
                                 print("***MMD instance - solution is coreset***")
-                                sol = np.array([i for i in range(0, len(alg_args['features']))])
-                                div = dmin
-                                t_alg = 0
-                            t = t + t_alg
+                                t = coreset_k.coreset_compute_time
+                                sol = np.array([i for i in range(0, len(core_k_features))])
+                                div = dmin_k
                             print(f'\t\t***solution size = {len(sol)}***')
                             print(f'\t\tdiv = {div}')
                             print(f'\t\tt = {t}')
@@ -347,14 +359,14 @@ for dataset_name in setup["datasets"]:
                     import gurobipy
                     runner = algorithms[setup['algorithms'][name]['alg']]
                     try:
-                            if not len(kimap) == 1:
+                            if not (check_flag(setup['datasets'][dataset_name],'mmd')):
                                 runner = algorithms[setup['algorithms'][name]['alg']]
                                 sol, div, t_alg = runner(gen, name, kimap, alg_args)
                             else:
                                 print("***MMD instance - solution is coreset***")
-                                sol = np.array([i for i in range(0, len(alg_args['features']))])
-                                div = dmin
-                                t_alg = 0
+                                t = coreset_k.coreset_compute_time
+                                sol = np.array([i for i in range(0, len(core_k_features))])
+                                div = dmin_k
                     except gurobipy.GurobiError as gbe:
                         print(f'Gurobi Error - {gbe.message}')
                         alg_status.append([f'{name} gurobi errored at k = {adj_k}', e.message])
@@ -377,7 +389,10 @@ for dataset_name in setup["datasets"]:
                     color_results.append([dataset_name, name, adj_k, kis_delta, kimap])
                     sol_features = alg_args['features'][sol]
                     sol_colors = alg_args['colors'][sol]
-                    plot(sol_features, sol_colors, f'{result_file_dir}/{dataset_name}_{k}_{obs}_{name}.png', s = 30)
+                    if check_flag(setup['datasets'][dataset_name],'mmd'):
+                        plot(core_k_features, core_k_colors, f'{result_file_dir}/{dataset_name}_{k}_{obs}_{name}.png', s = 30)
+                    else:
+                        plot(sol_features, sol_colors, f'{result_file_dir}/{dataset_name}_{k}_{obs}_{name}.png', s = 30)
                 # End of algorithms loop
 
             observations.append(result_per_alg)
