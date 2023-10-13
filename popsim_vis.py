@@ -286,13 +286,13 @@ for dataset_name in setup["datasets"]:
                     alg_args['features'] = copy.deepcopy(core_features)
                     alg_args['colors'] = copy.deepcopy(core_colors)
 
-                if (check_flag(setup['algorithms'][name],'use_dmax')):
+                if (check_flag(setup['algorithms'][name],'use_dmax')) and not len(kimap) == 1:
                     print(f'\t\tcomputed dmax = {dmax}')
                     t = t + coreset.gamma_upper_bound_compute_time
                     print(f'\t\tcompute time  = {coreset.gamma_upper_bound_compute_time}')
                     alg_args['dmax'] = dmax
 
-                if (check_flag(setup['algorithms'][name],'use_dmin')):
+                if (check_flag(setup['algorithms'][name],'use_dmin')) and not len(kimap) == 1:
                     print(f'\t\tcomputed dmin = {dmin}')
                     print(f'\t\tcompute time  = {coreset.closest_pair_compute_time}')
                     t = t + coreset.closest_pair_compute_time
