@@ -180,7 +180,7 @@ for color_result in color_results:
 def plot_color_results(algorithm):
     plt.clf()
     width = 0.4
-    only_odds = False
+    only_odds = True
     for dataset in  data:
         fig, ax = plt.subplots()
         if algorithm not in data[dataset]:
@@ -230,6 +230,27 @@ def plot_color_results(algorithm):
         plt.savefig(f'{plot_dir}/{dataset}_{algorithm}.png', dpi=300, bbox_inches='tight')
         plt.close()
 
+
+
+def generate_colors(n):
+    import matplotlib.colors as mcolors
+    cmap = mcolors.LinearSegmentedColormap.from_list(
+    "custom_cmap", [(1, 1, 1), (1, 0 ,0)]
+    )
+    color= iter(cmap(np.linspace(0, 1, n)))
+    l = []
+    for i in range (n):
+        l.append(next(color))
+    return l
+
+
+
+color_mappings = {
+    dataset_name : {
+        color_d : color_m for color_d, color_m in zip(setup['datasets'][dataset_name]['points_per_color'], generate_colors(len(setup['datasets'][dataset_name]['points_per_color'])))
+    } for dataset_name in setup['datasets']
+
+}
 for alg in setup['algorithms']:
     plt.close()
     plot_color_results(alg)

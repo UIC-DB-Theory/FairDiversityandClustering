@@ -79,61 +79,63 @@
 		}
 	},
 	"algorithms" : {
-		"MWUS-0.1" : {
-			"alg": "FMMD-MWUS",
-			"color": "#FF3636",
+		"MWU 0.1" : {
+			"alg": "FMMD-MWU",
+			"color": "#ffc105",
+			"marker": "*",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : false,
 			"mwu_epsilon": 0.75,
 			"falloff_epsilon" : 0.15,
-			"sample_percentage" : 0.1,
 			"percent_theoretical_limit": 0.1,
 			"timeout" : 1800
 		},
-		"MWUS-0.3" : {
-			"alg": "FMMD-MWUS",
+		"MWU 0.3" : {
+			"alg": "FMMD-MWU",
 			"color": "#fc0303",
-			"use_coreset" : true,
-			"use_dmax" : true,
-			"use_dmin" : false,
-			"mwu_epsilon": 0.75,
-			"falloff_epsilon" : 0.15,
-			"sample_percentage" : 0.1,
-			"percent_theoretical_limit": 0.3,
-			"timeout" : 1800
-		},
-		"MWU-0.1" : {
-			"alg": "FMMD-MWU",
-			"color": "#ffdf00",
-			"use_coreset" : true,
-			"use_dmax" : true,
-			"use_dmin" : false,
-			"mwu_epsilon": 0.75,
-			"falloff_epsilon" : 0.15,
-			"percent_theoretical_limit": 0.1,
-			"timeout" : 1800
-		},
-		"MWU-0.3" : {
-			"alg": "FMMD-MWU",
-			"color": "#FF9F00",
+			"marker": "o",
 			"use_coreset" : true,
 			"use_dmax" : true,
 			"use_dmin" : false,
 			"mwu_epsilon": 0.75,
 			"falloff_epsilon" : 0.15,
 			"percent_theoretical_limit": 0.3,
+			"timeout" : 1800
+		},
+		"MWU 0.5" : {
+			"alg": "FMMD-MWU",
+			"color": "#05c1ff",
+			"marker": "s",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : false,
+			"mwu_epsilon": 0.75,
+			"falloff_epsilon" : 0.15,
+			"percent_theoretical_limit": 0.5,
+			"timeout" : 1800
+		},
+		"MWU 0.7" : {
+			"alg": "FMMD-MWU",
+			"color": "#050dff",
+			"marker": "x",
+			"use_coreset" : true,
+			"use_dmax" : true,
+			"use_dmin" : false,
+			"mwu_epsilon": 0.75,
+			"falloff_epsilon" : 0.15,
+			"percent_theoretical_limit": 0.7,
 			"timeout" : 1800
 		}
 	},
 	"parameters": {
 		"k": [
-			10,
+			20,
 			101,
-			10
+			20
 		],
 		"observations": 5,
 		"buildkis_alpha" : 0.0,
-		"buildkis_equal_k_js": true
+		"buildkis_equal_k_js": false
 	}
 }
