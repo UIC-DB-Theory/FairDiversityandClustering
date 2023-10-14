@@ -1,0 +1,6156 @@
+{
+    "setup": {
+        "datasets": {
+            "Popsim_1M": {
+                "data_dir": "./datasets/popsim_1M",
+                "color_fields": [
+                    "race"
+                ],
+                "feature_fields": [
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "normalize": true,
+                "filter_unique": false,
+                "points_per_color": {
+                    "White": 614099,
+                    "Black/African American": 141083,
+                    "Asian": 58671,
+                    "Native Hawaiian/Other Pacific Islander": 335,
+                    "American Indian/Alaska Native": 7616
+                },
+                "size": 821804
+            },
+            "Adult": {
+                "data_dir": "./datasets/adult",
+                "color_fields": [
+                    "race",
+                    "sex"
+                ],
+                "feature_fields": [
+                    "age",
+                    "capital-gain",
+                    "capital-loss",
+                    "hours-per-week",
+                    "fnlwgt",
+                    "education-num"
+                ],
+                "normalize": true,
+                "filter_unique": false,
+                "points_per_color": {
+                    "White_Male": 19174,
+                    "Black_Male": 1569,
+                    "Black_Female": 1555,
+                    "White_Female": 8642,
+                    "Asian-Pac-Islander_Male": 693,
+                    "Amer-Indian-Eskimo_Male": 192,
+                    "Other_Female": 109,
+                    "Asian-Pac-Islander_Female": 346,
+                    "Amer-Indian-Eskimo_Female": 119,
+                    "Other_Male": 162
+                },
+                "size": 32561
+            },
+            "Diabetes": {
+                "data_dir": "./datasets/diabetes",
+                "color_fields": [
+                    "gender",
+                    "diabetesMed"
+                ],
+                "feature_fields": [
+                    "num_procedures",
+                    "num_lab_procedures",
+                    "number_outpatient",
+                    "number_inpatient",
+                    "number_diagnoses",
+                    "time_in_hospital",
+                    "num_medications"
+                ],
+                "normalize": true,
+                "filter_unique": false,
+                "points_per_color": {
+                    "Female_No": 12921,
+                    "Female_Yes": 41787,
+                    "Male_Yes": 36574,
+                    "Male_No": 10481
+                },
+                "size": 101763
+            },
+            "Popsim": {
+                "data_dir": "./datasets/popsim",
+                "color_fields": [
+                    "race"
+                ],
+                "feature_fields": [
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "normalize": true,
+                "filter_unique": false
+            },
+            "Census": {
+                "data_dir": "./datasets/census",
+                "color_fields": [
+                    "age-sex-color"
+                ],
+                "feature_fields": [
+                    "attr1",
+                    "attr2",
+                    "attr3",
+                    "attr4",
+                    "attr5",
+                    "attr6"
+                ],
+                "normalize": false,
+                "filter_unique": false
+            }
+        },
+        "algorithms": {
+            "MWU 0.1": {
+                "alg": "FMMD-MWU",
+                "color": "#ffc105",
+                "marker": "*",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": false,
+                "mwu_epsilon": 0.75,
+                "falloff_epsilon": 0.15,
+                "percent_theoretical_limit": 0.1,
+                "timeout": 1800
+            },
+            "MWU 0.3": {
+                "alg": "FMMD-MWU",
+                "color": "#fc0303",
+                "marker": "o",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": false,
+                "mwu_epsilon": 0.75,
+                "falloff_epsilon": 0.15,
+                "percent_theoretical_limit": 0.3,
+                "timeout": 1800
+            },
+            "MWU 0.5": {
+                "alg": "FMMD-MWU",
+                "color": "#05c1ff",
+                "marker": "s",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": false,
+                "mwu_epsilon": 0.75,
+                "falloff_epsilon": 0.15,
+                "percent_theoretical_limit": 0.5,
+                "timeout": 1800
+            },
+            "MWU 0.7": {
+                "alg": "FMMD-MWU",
+                "color": "#050dff",
+                "marker": "x",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": false,
+                "mwu_epsilon": 0.75,
+                "falloff_epsilon": 0.15,
+                "percent_theoretical_limit": 0.7,
+                "timeout": 1800
+            }
+        },
+        "parameters": {
+            "k": [
+                20,
+                101,
+                20
+            ],
+            "observations": 5,
+            "buildkis_alpha": 0.0,
+            "buildkis_equal_k_js": true
+        }
+    },
+    "results": {
+        "Popsim_1M": {
+            "MWU 0.1": {
+                "xs": {
+                    "k": [
+                        20,
+                        40,
+                        60,
+                        80,
+                        100
+                    ]
+                },
+                "ys": {
+                    "data_size": [
+                        100.0,
+                        200.0,
+                        300.0,
+                        400.0,
+                        500.0
+                    ],
+                    "dmax": [
+                        2.068620257599625,
+                        1.3724176132617205,
+                        1.0550065681927958,
+                        0.9245496844876163,
+                        0.808053263409637
+                    ],
+                    "dmin": [
+                        0.00668468080363213,
+                        0.0020682543394862874,
+                        0.0019325506162617093,
+                        0.0016034060179675,
+                        0.0010213633160345626
+                    ],
+                    "solution_size": [
+                        17.8,
+                        37.6,
+                        57.4,
+                        78.6,
+                        96.4
+                    ],
+                    "diversity": [
+                        0.7671021372220203,
+                        0.5093260334916424,
+                        0.38845934709489827,
+                        0.32531002277366067,
+                        0.2974269285799219
+                    ],
+                    "runtime": [
+                        2.6587551986332985,
+                        4.708727114298381,
+                        7.26231533633545,
+                        10.739260459877551,
+                        14.045166458142921
+                    ],
+                    "div-runtime": [
+                        0.2885192806078348,
+                        0.10816639425653657,
+                        0.05348973834161738,
+                        0.030291659652825837,
+                        0.021176461629437197
+                    ]
+                }
+            },
+            "MWU 0.3": {
+                "xs": {
+                    "k": [
+                        20,
+                        40,
+                        60,
+                        80,
+                        100
+                    ]
+                },
+                "ys": {
+                    "data_size": [
+                        100.0,
+                        200.0,
+                        300.0,
+                        400.0,
+                        500.0
+                    ],
+                    "dmax": [
+                        2.068620257599625,
+                        1.3724176132617205,
+                        1.0550065681927958,
+                        0.9245496844876163,
+                        0.808053263409637
+                    ],
+                    "dmin": [
+                        0.00668468080363213,
+                        0.0020682543394862874,
+                        0.0019325506162617093,
+                        0.0016034060179675,
+                        0.0010213633160345626
+                    ],
+                    "solution_size": [
+                        18.4,
+                        37.6,
+                        58.0,
+                        79.0,
+                        97.2
+                    ],
+                    "diversity": [
+                        0.7008680792644464,
+                        0.4803370496416911,
+                        0.3849889329264538,
+                        0.2958363243020251,
+                        0.27610391262277806
+                    ],
+                    "runtime": [
+                        3.1671523210592567,
+                        6.45864031931851,
+                        10.14419144031126,
+                        19.399768968019636,
+                        28.122252264991403
+                    ],
+                    "div-runtime": [
+                        0.2212928233998043,
+                        0.07437123386557844,
+                        0.03795166280050418,
+                        0.015249476671073193,
+                        0.009817987194663353
+                    ]
+                }
+            },
+            "MWU 0.5": {
+                "xs": {
+                    "k": [
+                        20,
+                        40,
+                        60,
+                        80,
+                        100
+                    ]
+                },
+                "ys": {
+                    "data_size": [
+                        100.0,
+                        200.0,
+                        300.0,
+                        400.0,
+                        500.0
+                    ],
+                    "dmax": [
+                        2.068620257599625,
+                        1.3724176132617205,
+                        1.0550065681927958,
+                        0.9245496844876163,
+                        0.808053263409637
+                    ],
+                    "dmin": [
+                        0.00668468080363213,
+                        0.0020682543394862874,
+                        0.0019325506162617093,
+                        0.0016034060179675,
+                        0.0010213633160345626
+                    ],
+                    "solution_size": [
+                        17.0,
+                        38.0,
+                        58.0,
+                        78.8,
+                        97.4
+                    ],
+                    "diversity": [
+                        0.7280551479811507,
+                        0.46344878888071717,
+                        0.37710200602071786,
+                        0.28553377379313016,
+                        0.2699574007804193
+                    ],
+                    "runtime": [
+                        3.579011816997081,
+                        8.093403744953685,
+                        14.091914789262228,
+                        27.19448077476118,
+                        40.863904780568554
+                    ],
+                    "div-runtime": [
+                        0.20342351051302618,
+                        0.05726253174626089,
+                        0.0267601679161488,
+                        0.010499695734515738,
+                        0.006606255624126953
+                    ]
+                }
+            },
+            "MWU 0.7": {
+                "xs": {
+                    "k": [
+                        20,
+                        40,
+                        60,
+                        80,
+                        100
+                    ]
+                },
+                "ys": {
+                    "data_size": [
+                        100.0,
+                        200.0,
+                        300.0,
+                        400.0,
+                        500.0
+                    ],
+                    "dmax": [
+                        2.068620257599625,
+                        1.3724176132617205,
+                        1.0550065681927958,
+                        0.9245496844876163,
+                        0.808053263409637
+                    ],
+                    "dmin": [
+                        0.00668468080363213,
+                        0.0020682543394862874,
+                        0.0019325506162617093,
+                        0.0016034060179675,
+                        0.0010213633160345626
+                    ],
+                    "solution_size": [
+                        18.8,
+                        38.0,
+                        58.2,
+                        78.0,
+                        97.2
+                    ],
+                    "diversity": [
+                        0.7031397532098158,
+                        0.4627713739473648,
+                        0.37501055876697614,
+                        0.28914675881918617,
+                        0.26762762003912277
+                    ],
+                    "runtime": [
+                        3.973609277326614,
+                        9.343296548421495,
+                        16.933922124444507,
+                        32.845784389134494,
+                        50.447547692386436
+                    ],
+                    "div-runtime": [
+                        0.17695241382234692,
+                        0.04952977480154451,
+                        0.022145522815747436,
+                        0.008803161933768188,
+                        0.005305066990987021
+                    ]
+                }
+            }
+        },
+        "Adult": {
+            "MWU 0.1": {
+                "xs": {
+                    "k": [
+                        20,
+                        40,
+                        60,
+                        80,
+                        100
+                    ]
+                },
+                "ys": {
+                    "data_size": [
+                        200.0,
+                        400.0,
+                        600.0,
+                        800.0,
+                        1000.0
+                    ],
+                    "dmax": [
+                        9.963892841636802,
+                        7.618452689688951,
+                        6.468250741507449,
+                        5.828729924165638,
+                        5.339559026897279
+                    ],
+                    "dmin": [
+                        0.2488278280325263,
+                        0.0780767952289055,
+                        0.04764640728301539,
+                        0.032824764898137834,
+                        0.018340408673386616
+                    ],
+                    "solution_size": [
+                        18.4,
+                        39.8,
+                        59.4,
+                        80.0,
+                        100.0
+                    ],
+                    "diversity": [
+                        3.1802649824029023,
+                        2.0838592560888656,
+                        1.8949369652412975,
+                        1.5334533026730075,
+                        1.4118104616124785
+                    ],
+                    "runtime": [
+                        0.6759251933544874,
+                        3.3627039354294537,
+                        4.695526348240674,
+                        12.16959472883027,
+                        18.632657077000477
+                    ],
+                    "div-runtime": [
+                        4.705054662365602,
+                        0.6196975101296672,
+                        0.4035622046826114,
+                        0.12600693259243823,
+                        0.07577075324137048
+                    ]
+                }
+            },
+            "MWU 0.3": {
+                "xs": {
+                    "k": [
+                        20,
+                        40,
+                        60,
+                        80,
+                        100
+                    ]
+                },
+                "ys": {
+                    "data_size": [
+                        200.0,
+                        400.0,
+                        600.0,
+                        800.0,
+                        1000.0
+                    ],
+                    "dmax": [
+                        9.963892841636802,
+                        7.618452689688951,
+                        6.468250741507449,
+                        5.828729924165638,
+                        5.339559026897279
+                    ],
+                    "dmin": [
+                        0.2488278280325263,
+                        0.0780767952289055,
+                        0.04764640728301539,
+                        0.032824764898137834,
+                        0.018340408673386616
+                    ],
+                    "solution_size": [
+                        20.0,
+                        39.8,
+                        60.0,
+                        80.0,
+                        100.0
+                    ],
+                    "diversity": [
+                        2.70841352513343,
+                        2.0376448550155426,
+                        1.71347808544146,
+                        1.5333221519466855,
+                        1.41360925510376
+                    ],
+                    "runtime": [
+                        2.2977866142755374,
+                        7.232621771842242,
+                        14.538229567115195,
+                        25.476328475028275,
+                        39.11390738026239
+                    ],
+                    "div-runtime": [
+                        1.1787054151620417,
+                        0.2817297681662853,
+                        0.11786016155070686,
+                        0.06018615097735286,
+                        0.03614083454666801
+                    ]
+                }
+            },
+            "MWU 0.5": {
+                "xs": {
+                    "k": [
+                        20,
+                        40,
+                        60,
+                        80,
+                        100
+                    ]
+                },
+                "ys": {
+                    "data_size": [
+                        200.0,
+                        400.0,
+                        600.0,
+                        800.0,
+                        1000.0
+                    ],
+                    "dmax": [
+                        9.963892841636802,
+                        7.618452689688951,
+                        6.468250741507449,
+                        5.828729924165638,
+                        5.339559026897279
+                    ],
+                    "dmin": [
+                        0.2488278280325263,
+                        0.0780767952289055,
+                        0.04764640728301539,
+                        0.032824764898137834,
+                        0.018340408673386616
+                    ],
+                    "solution_size": [
+                        19.8,
+                        39.4,
+                        60.0,
+                        80.0,
+                        100.0
+                    ],
+                    "diversity": [
+                        2.704669772286626,
+                        2.0153050605534846,
+                        1.69941019629325,
+                        1.5521716973076163,
+                        1.4032564071121976
+                    ],
+                    "runtime": [
+                        3.167429425474256,
+                        10.74296816776041,
+                        21.059274920611642,
+                        38.83493139697239,
+                        60.016282108449374
+                    ],
+                    "div-runtime": [
+                        0.8539005638244517,
+                        0.18759294722676406,
+                        0.08069651983269197,
+                        0.039968441850488895,
+                        0.023381261847851793
+                    ]
+                }
+            },
+            "MWU 0.7": {
+                "xs": {
+                    "k": [
+                        20,
+                        40,
+                        60,
+                        80,
+                        100
+                    ]
+                },
+                "ys": {
+                    "data_size": [
+                        200.0,
+                        400.0,
+                        600.0,
+                        800.0,
+                        1000.0
+                    ],
+                    "dmax": [
+                        9.963892841636802,
+                        7.618452689688951,
+                        6.468250741507449,
+                        5.828729924165638,
+                        5.339559026897279
+                    ],
+                    "dmin": [
+                        0.2488278280325263,
+                        0.0780767952289055,
+                        0.04764640728301539,
+                        0.032824764898137834,
+                        0.018340408673386616
+                    ],
+                    "solution_size": [
+                        19.6,
+                        40.0,
+                        60.0,
+                        79.8,
+                        100.0
+                    ],
+                    "diversity": [
+                        2.729758392047512,
+                        2.043117821846746,
+                        1.710700806011787,
+                        1.5365050823905804,
+                        1.4059323377894528
+                    ],
+                    "runtime": [
+                        4.025240746908821,
+                        14.049570702807978,
+                        27.688382587116212,
+                        52.30886648432352,
+                        81.27417447483167
+                    ],
+                    "div-runtime": [
+                        0.6781602800140157,
+                        0.14542208193154285,
+                        0.06178406415143222,
+                        0.029373702503208643,
+                        0.01729863572129952
+                    ]
+                }
+            }
+        }
+    },
+    "alg_status": [],
+    "color_results": [
+        [
+            "Popsim_1M",
+            "MWU 0.1",
+            20,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": -1,
+                "Black/African American": -2,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 4,
+                "Asian": 4,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 4,
+                "White": 4
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.3",
+            20,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": -1,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 4,
+                "Asian": 4,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 4,
+                "White": 4
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.5",
+            20,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": -1,
+                "Black/African American": -1,
+                "Native Hawaiian/Other Pacific Islander": -2,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 4,
+                "Asian": 4,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 4,
+                "White": 4
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.7",
+            20,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": -1,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 4,
+                "Asian": 4,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 4,
+                "White": 4
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.1",
+            20,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": -3
+            },
+            {
+                "American Indian/Alaska Native": 4,
+                "Asian": 4,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 4,
+                "White": 4
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.3",
+            20,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 4,
+                "Asian": 4,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 4,
+                "White": 4
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.5",
+            20,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": -2
+            },
+            {
+                "American Indian/Alaska Native": 4,
+                "Asian": 4,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 4,
+                "White": 4
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.7",
+            20,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 4,
+                "Asian": 4,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 4,
+                "White": 4
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.1",
+            20,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": -2,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 4,
+                "Asian": 4,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 4,
+                "White": 4
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.3",
+            20,
+            {
+                "American Indian/Alaska Native": -2,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 4,
+                "Asian": 4,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 4,
+                "White": 4
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.5",
+            20,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": -2,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 4,
+                "Asian": 4,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 4,
+                "White": 4
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.7",
+            20,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": -1,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 4,
+                "Asian": 4,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 4,
+                "White": 4
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.1",
+            20,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": -2,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 4,
+                "Asian": 4,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 4,
+                "White": 4
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.3",
+            20,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": -3,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": -2,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 4,
+                "Asian": 4,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 4,
+                "White": 4
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.5",
+            20,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": -1,
+                "Black/African American": -1,
+                "Native Hawaiian/Other Pacific Islander": -2,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 4,
+                "Asian": 4,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 4,
+                "White": 4
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.7",
+            20,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": -1,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 4,
+                "Asian": 4,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 4,
+                "White": 4
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.1",
+            20,
+            {
+                "American Indian/Alaska Native": -1,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 4,
+                "Asian": 4,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 4,
+                "White": 4
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.3",
+            20,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 4,
+                "Asian": 4,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 4,
+                "White": 4
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.5",
+            20,
+            {
+                "American Indian/Alaska Native": -3,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 4,
+                "Asian": 4,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 4,
+                "White": 4
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.7",
+            20,
+            {
+                "American Indian/Alaska Native": -2,
+                "Asian": -1,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 4,
+                "Asian": 4,
+                "Black/African American": 4,
+                "Native Hawaiian/Other Pacific Islander": 4,
+                "White": 4
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.1",
+            40,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": -2,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 8,
+                "Asian": 8,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 8,
+                "White": 8
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.3",
+            40,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": -3,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": -4,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 8,
+                "Asian": 8,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 8,
+                "White": 8
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.5",
+            40,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 8,
+                "Asian": 8,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 8,
+                "White": 8
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.7",
+            40,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 8,
+                "Asian": 8,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 8,
+                "White": 8
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.1",
+            40,
+            {
+                "American Indian/Alaska Native": -3,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 8,
+                "Asian": 8,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 8,
+                "White": 8
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.3",
+            40,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 8,
+                "Asian": 8,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 8,
+                "White": 8
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.5",
+            40,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": -2,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 8,
+                "Asian": 8,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 8,
+                "White": 8
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.7",
+            40,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 8,
+                "Asian": 8,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 8,
+                "White": 8
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.1",
+            40,
+            {
+                "American Indian/Alaska Native": -1,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": -4,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 8,
+                "Asian": 8,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 8,
+                "White": 8
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.3",
+            40,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": -2,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 8,
+                "Asian": 8,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 8,
+                "White": 8
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.5",
+            40,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 8,
+                "Asian": 8,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 8,
+                "White": 8
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.7",
+            40,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": -3,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 8,
+                "Asian": 8,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 8,
+                "White": 8
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.1",
+            40,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": -2,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 8,
+                "Asian": 8,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 8,
+                "White": 8
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.3",
+            40,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": -3,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 8,
+                "Asian": 8,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 8,
+                "White": 8
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.5",
+            40,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": -1,
+                "White": -5
+            },
+            {
+                "American Indian/Alaska Native": 8,
+                "Asian": 8,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 8,
+                "White": 8
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.7",
+            40,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": -2,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 8,
+                "Asian": 8,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 8,
+                "White": 8
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.1",
+            40,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 8,
+                "Asian": 8,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 8,
+                "White": 8
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.3",
+            40,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 8,
+                "Asian": 8,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 8,
+                "White": 8
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.5",
+            40,
+            {
+                "American Indian/Alaska Native": -2,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 8,
+                "Asian": 8,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 8,
+                "White": 8
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.7",
+            40,
+            {
+                "American Indian/Alaska Native": -2,
+                "Asian": 0,
+                "Black/African American": -3,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 8,
+                "Asian": 8,
+                "Black/African American": 8,
+                "Native Hawaiian/Other Pacific Islander": 8,
+                "White": 8
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.1",
+            60,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": -2,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": -3,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 12,
+                "Asian": 12,
+                "Black/African American": 12,
+                "Native Hawaiian/Other Pacific Islander": 12,
+                "White": 12
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.3",
+            60,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": -1,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": -3,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 12,
+                "Asian": 12,
+                "Black/African American": 12,
+                "Native Hawaiian/Other Pacific Islander": 12,
+                "White": 12
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.5",
+            60,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 12,
+                "Asian": 12,
+                "Black/African American": 12,
+                "Native Hawaiian/Other Pacific Islander": 12,
+                "White": 12
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.7",
+            60,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 12,
+                "Asian": 12,
+                "Black/African American": 12,
+                "Native Hawaiian/Other Pacific Islander": 12,
+                "White": 12
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.1",
+            60,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": -2,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 12,
+                "Asian": 12,
+                "Black/African American": 12,
+                "Native Hawaiian/Other Pacific Islander": 12,
+                "White": 12
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.3",
+            60,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": -1,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 12,
+                "Asian": 12,
+                "Black/African American": 12,
+                "Native Hawaiian/Other Pacific Islander": 12,
+                "White": 12
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.5",
+            60,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": -3,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 12,
+                "Asian": 12,
+                "Black/African American": 12,
+                "Native Hawaiian/Other Pacific Islander": 12,
+                "White": 12
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.7",
+            60,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": -1,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 12,
+                "Asian": 12,
+                "Black/African American": 12,
+                "Native Hawaiian/Other Pacific Islander": 12,
+                "White": 12
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.1",
+            60,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": -3,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 12,
+                "Asian": 12,
+                "Black/African American": 12,
+                "Native Hawaiian/Other Pacific Islander": 12,
+                "White": 12
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.3",
+            60,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": -3,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 12,
+                "Asian": 12,
+                "Black/African American": 12,
+                "Native Hawaiian/Other Pacific Islander": 12,
+                "White": 12
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.5",
+            60,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": -3,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 12,
+                "Asian": 12,
+                "Black/African American": 12,
+                "Native Hawaiian/Other Pacific Islander": 12,
+                "White": 12
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.7",
+            60,
+            {
+                "American Indian/Alaska Native": -4,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 12,
+                "Asian": 12,
+                "Black/African American": 12,
+                "Native Hawaiian/Other Pacific Islander": 12,
+                "White": 12
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.1",
+            60,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": -1,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 12,
+                "Asian": 12,
+                "Black/African American": 12,
+                "Native Hawaiian/Other Pacific Islander": 12,
+                "White": 12
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.3",
+            60,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 12,
+                "Asian": 12,
+                "Black/African American": 12,
+                "Native Hawaiian/Other Pacific Islander": 12,
+                "White": 12
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.5",
+            60,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": -1
+            },
+            {
+                "American Indian/Alaska Native": 12,
+                "Asian": 12,
+                "Black/African American": 12,
+                "Native Hawaiian/Other Pacific Islander": 12,
+                "White": 12
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.7",
+            60,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": -1,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 12,
+                "Asian": 12,
+                "Black/African American": 12,
+                "Native Hawaiian/Other Pacific Islander": 12,
+                "White": 12
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.1",
+            60,
+            {
+                "American Indian/Alaska Native": -1,
+                "Asian": 0,
+                "Black/African American": -1,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 12,
+                "Asian": 12,
+                "Black/African American": 12,
+                "Native Hawaiian/Other Pacific Islander": 12,
+                "White": 12
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.3",
+            60,
+            {
+                "American Indian/Alaska Native": -1,
+                "Asian": 0,
+                "Black/African American": -1,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 12,
+                "Asian": 12,
+                "Black/African American": 12,
+                "Native Hawaiian/Other Pacific Islander": 12,
+                "White": 12
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.5",
+            60,
+            {
+                "American Indian/Alaska Native": -1,
+                "Asian": 0,
+                "Black/African American": -2,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 12,
+                "Asian": 12,
+                "Black/African American": 12,
+                "Native Hawaiian/Other Pacific Islander": 12,
+                "White": 12
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.7",
+            60,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": -3,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 12,
+                "Asian": 12,
+                "Black/African American": 12,
+                "Native Hawaiian/Other Pacific Islander": 12,
+                "White": 12
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.1",
+            80,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": -3,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 16,
+                "Asian": 16,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 16,
+                "White": 16
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.3",
+            80,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": -2,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 16,
+                "Asian": 16,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 16,
+                "White": 16
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.5",
+            80,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": -3,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 16,
+                "Asian": 16,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 16,
+                "White": 16
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.7",
+            80,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": -5,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 16,
+                "Asian": 16,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 16,
+                "White": 16
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.1",
+            80,
+            {
+                "American Indian/Alaska Native": -1,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 16,
+                "Asian": 16,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 16,
+                "White": 16
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.3",
+            80,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 16,
+                "Asian": 16,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 16,
+                "White": 16
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.5",
+            80,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": -1,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 16,
+                "Asian": 16,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 16,
+                "White": 16
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.7",
+            80,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 16,
+                "Asian": 16,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 16,
+                "White": 16
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.1",
+            80,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": -1
+            },
+            {
+                "American Indian/Alaska Native": 16,
+                "Asian": 16,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 16,
+                "White": 16
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.3",
+            80,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": -3,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 16,
+                "Asian": 16,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 16,
+                "White": 16
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.5",
+            80,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 16,
+                "Asian": 16,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 16,
+                "White": 16
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.7",
+            80,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 16,
+                "Asian": 16,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 16,
+                "White": 16
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.1",
+            80,
+            {
+                "American Indian/Alaska Native": -2,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 16,
+                "Asian": 16,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 16,
+                "White": 16
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.3",
+            80,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 16,
+                "Asian": 16,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 16,
+                "White": 16
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.5",
+            80,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 16,
+                "Asian": 16,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 16,
+                "White": 16
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.7",
+            80,
+            {
+                "American Indian/Alaska Native": -3,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 16,
+                "Asian": 16,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 16,
+                "White": 16
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.1",
+            80,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 16,
+                "Asian": 16,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 16,
+                "White": 16
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.3",
+            80,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 16,
+                "Asian": 16,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 16,
+                "White": 16
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.5",
+            80,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": -2
+            },
+            {
+                "American Indian/Alaska Native": 16,
+                "Asian": 16,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 16,
+                "White": 16
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.7",
+            80,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": -2
+            },
+            {
+                "American Indian/Alaska Native": 16,
+                "Asian": 16,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 16,
+                "White": 16
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.1",
+            100,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": -3,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 20,
+                "Asian": 20,
+                "Black/African American": 20,
+                "Native Hawaiian/Other Pacific Islander": 20,
+                "White": 20
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.3",
+            100,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 20,
+                "Asian": 20,
+                "Black/African American": 20,
+                "Native Hawaiian/Other Pacific Islander": 20,
+                "White": 20
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.5",
+            100,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 20,
+                "Asian": 20,
+                "Black/African American": 20,
+                "Native Hawaiian/Other Pacific Islander": 20,
+                "White": 20
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.7",
+            100,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 20,
+                "Asian": 20,
+                "Black/African American": 20,
+                "Native Hawaiian/Other Pacific Islander": 20,
+                "White": 20
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.1",
+            100,
+            {
+                "American Indian/Alaska Native": -8,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 20,
+                "Asian": 20,
+                "Black/African American": 20,
+                "Native Hawaiian/Other Pacific Islander": 20,
+                "White": 20
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.3",
+            100,
+            {
+                "American Indian/Alaska Native": -5,
+                "Asian": -2,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 20,
+                "Asian": 20,
+                "Black/African American": 20,
+                "Native Hawaiian/Other Pacific Islander": 20,
+                "White": 20
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.5",
+            100,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": -2,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 20,
+                "Asian": 20,
+                "Black/African American": 20,
+                "Native Hawaiian/Other Pacific Islander": 20,
+                "White": 20
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.7",
+            100,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": -4,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 20,
+                "Asian": 20,
+                "Black/African American": 20,
+                "Native Hawaiian/Other Pacific Islander": 20,
+                "White": 20
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.1",
+            100,
+            {
+                "American Indian/Alaska Native": -7,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 20,
+                "Asian": 20,
+                "Black/African American": 20,
+                "Native Hawaiian/Other Pacific Islander": 20,
+                "White": 20
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.3",
+            100,
+            {
+                "American Indian/Alaska Native": -5,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 20,
+                "Asian": 20,
+                "Black/African American": 20,
+                "Native Hawaiian/Other Pacific Islander": 20,
+                "White": 20
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.5",
+            100,
+            {
+                "American Indian/Alaska Native": -4,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 20,
+                "Asian": 20,
+                "Black/African American": 20,
+                "Native Hawaiian/Other Pacific Islander": 20,
+                "White": 20
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.7",
+            100,
+            {
+                "American Indian/Alaska Native": -6,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 20,
+                "Asian": 20,
+                "Black/African American": 20,
+                "Native Hawaiian/Other Pacific Islander": 20,
+                "White": 20
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.1",
+            100,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 20,
+                "Asian": 20,
+                "Black/African American": 20,
+                "Native Hawaiian/Other Pacific Islander": 20,
+                "White": 20
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.3",
+            100,
+            {
+                "American Indian/Alaska Native": -1,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 20,
+                "Asian": 20,
+                "Black/African American": 20,
+                "Native Hawaiian/Other Pacific Islander": 20,
+                "White": 20
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.5",
+            100,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": -6,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 20,
+                "Asian": 20,
+                "Black/African American": 20,
+                "Native Hawaiian/Other Pacific Islander": 20,
+                "White": 20
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.7",
+            100,
+            {
+                "American Indian/Alaska Native": -4,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 20,
+                "Asian": 20,
+                "Black/African American": 20,
+                "Native Hawaiian/Other Pacific Islander": 20,
+                "White": 20
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.1",
+            100,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 20,
+                "Asian": 20,
+                "Black/African American": 20,
+                "Native Hawaiian/Other Pacific Islander": 20,
+                "White": 20
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.3",
+            100,
+            {
+                "American Indian/Alaska Native": -1,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 20,
+                "Asian": 20,
+                "Black/African American": 20,
+                "Native Hawaiian/Other Pacific Islander": 20,
+                "White": 20
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.5",
+            100,
+            {
+                "American Indian/Alaska Native": -1,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 20,
+                "Asian": 20,
+                "Black/African American": 20,
+                "Native Hawaiian/Other Pacific Islander": 20,
+                "White": 20
+            }
+        ],
+        [
+            "Popsim_1M",
+            "MWU 0.7",
+            100,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 20,
+                "Asian": 20,
+                "Black/African American": 20,
+                "Native Hawaiian/Other Pacific Islander": 20,
+                "White": 20
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.1",
+            20,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": -1,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": -1,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 2,
+                "Amer-Indian-Eskimo_Male": 2,
+                "Asian-Pac-Islander_Female": 2,
+                "Asian-Pac-Islander_Male": 2,
+                "Black_Female": 2,
+                "Black_Male": 2,
+                "Other_Female": 2,
+                "Other_Male": 2,
+                "White_Female": 2,
+                "White_Male": 2
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.3",
+            20,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 2,
+                "Amer-Indian-Eskimo_Male": 2,
+                "Asian-Pac-Islander_Female": 2,
+                "Asian-Pac-Islander_Male": 2,
+                "Black_Female": 2,
+                "Black_Male": 2,
+                "Other_Female": 2,
+                "Other_Male": 2,
+                "White_Female": 2,
+                "White_Male": 2
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.5",
+            20,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 2,
+                "Amer-Indian-Eskimo_Male": 2,
+                "Asian-Pac-Islander_Female": 2,
+                "Asian-Pac-Islander_Male": 2,
+                "Black_Female": 2,
+                "Black_Male": 2,
+                "Other_Female": 2,
+                "Other_Male": 2,
+                "White_Female": 2,
+                "White_Male": 2
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.7",
+            20,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 2,
+                "Amer-Indian-Eskimo_Male": 2,
+                "Asian-Pac-Islander_Female": 2,
+                "Asian-Pac-Islander_Male": 2,
+                "Black_Female": 2,
+                "Black_Male": 2,
+                "Other_Female": 2,
+                "Other_Male": 2,
+                "White_Female": 2,
+                "White_Male": 2
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.1",
+            20,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": -2,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 2,
+                "Amer-Indian-Eskimo_Male": 2,
+                "Asian-Pac-Islander_Female": 2,
+                "Asian-Pac-Islander_Male": 2,
+                "Black_Female": 2,
+                "Black_Male": 2,
+                "Other_Female": 2,
+                "Other_Male": 2,
+                "White_Female": 2,
+                "White_Male": 2
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.3",
+            20,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 2,
+                "Amer-Indian-Eskimo_Male": 2,
+                "Asian-Pac-Islander_Female": 2,
+                "Asian-Pac-Islander_Male": 2,
+                "Black_Female": 2,
+                "Black_Male": 2,
+                "Other_Female": 2,
+                "Other_Male": 2,
+                "White_Female": 2,
+                "White_Male": 2
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.5",
+            20,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 2,
+                "Amer-Indian-Eskimo_Male": 2,
+                "Asian-Pac-Islander_Female": 2,
+                "Asian-Pac-Islander_Male": 2,
+                "Black_Female": 2,
+                "Black_Male": 2,
+                "Other_Female": 2,
+                "Other_Male": 2,
+                "White_Female": 2,
+                "White_Male": 2
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.7",
+            20,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 2,
+                "Amer-Indian-Eskimo_Male": 2,
+                "Asian-Pac-Islander_Female": 2,
+                "Asian-Pac-Islander_Male": 2,
+                "Black_Female": 2,
+                "Black_Male": 2,
+                "Other_Female": 2,
+                "Other_Male": 2,
+                "White_Female": 2,
+                "White_Male": 2
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.1",
+            20,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": -1,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 2,
+                "Amer-Indian-Eskimo_Male": 2,
+                "Asian-Pac-Islander_Female": 2,
+                "Asian-Pac-Islander_Male": 2,
+                "Black_Female": 2,
+                "Black_Male": 2,
+                "Other_Female": 2,
+                "Other_Male": 2,
+                "White_Female": 2,
+                "White_Male": 2
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.3",
+            20,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 2,
+                "Amer-Indian-Eskimo_Male": 2,
+                "Asian-Pac-Islander_Female": 2,
+                "Asian-Pac-Islander_Male": 2,
+                "Black_Female": 2,
+                "Black_Male": 2,
+                "Other_Female": 2,
+                "Other_Male": 2,
+                "White_Female": 2,
+                "White_Male": 2
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.5",
+            20,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 2,
+                "Amer-Indian-Eskimo_Male": 2,
+                "Asian-Pac-Islander_Female": 2,
+                "Asian-Pac-Islander_Male": 2,
+                "Black_Female": 2,
+                "Black_Male": 2,
+                "Other_Female": 2,
+                "Other_Male": 2,
+                "White_Female": 2,
+                "White_Male": 2
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.7",
+            20,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": -1,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 2,
+                "Amer-Indian-Eskimo_Male": 2,
+                "Asian-Pac-Islander_Female": 2,
+                "Asian-Pac-Islander_Male": 2,
+                "Black_Female": 2,
+                "Black_Male": 2,
+                "Other_Female": 2,
+                "Other_Male": 2,
+                "White_Female": 2,
+                "White_Male": 2
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.1",
+            20,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": -2,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 2,
+                "Amer-Indian-Eskimo_Male": 2,
+                "Asian-Pac-Islander_Female": 2,
+                "Asian-Pac-Islander_Male": 2,
+                "Black_Female": 2,
+                "Black_Male": 2,
+                "Other_Female": 2,
+                "Other_Male": 2,
+                "White_Female": 2,
+                "White_Male": 2
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.3",
+            20,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 2,
+                "Amer-Indian-Eskimo_Male": 2,
+                "Asian-Pac-Islander_Female": 2,
+                "Asian-Pac-Islander_Male": 2,
+                "Black_Female": 2,
+                "Black_Male": 2,
+                "Other_Female": 2,
+                "Other_Male": 2,
+                "White_Female": 2,
+                "White_Male": 2
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.5",
+            20,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 2,
+                "Amer-Indian-Eskimo_Male": 2,
+                "Asian-Pac-Islander_Female": 2,
+                "Asian-Pac-Islander_Male": 2,
+                "Black_Female": 2,
+                "Black_Male": 2,
+                "Other_Female": 2,
+                "Other_Male": 2,
+                "White_Female": 2,
+                "White_Male": 2
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.7",
+            20,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 2,
+                "Amer-Indian-Eskimo_Male": 2,
+                "Asian-Pac-Islander_Female": 2,
+                "Asian-Pac-Islander_Male": 2,
+                "Black_Female": 2,
+                "Black_Male": 2,
+                "Other_Female": 2,
+                "Other_Male": 2,
+                "White_Female": 2,
+                "White_Male": 2
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.1",
+            20,
+            {
+                "Amer-Indian-Eskimo_Female": -1,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 2,
+                "Amer-Indian-Eskimo_Male": 2,
+                "Asian-Pac-Islander_Female": 2,
+                "Asian-Pac-Islander_Male": 2,
+                "Black_Female": 2,
+                "Black_Male": 2,
+                "Other_Female": 2,
+                "Other_Male": 2,
+                "White_Female": 2,
+                "White_Male": 2
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.3",
+            20,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 2,
+                "Amer-Indian-Eskimo_Male": 2,
+                "Asian-Pac-Islander_Female": 2,
+                "Asian-Pac-Islander_Male": 2,
+                "Black_Female": 2,
+                "Black_Male": 2,
+                "Other_Female": 2,
+                "Other_Male": 2,
+                "White_Female": 2,
+                "White_Male": 2
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.5",
+            20,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": -1,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 2,
+                "Amer-Indian-Eskimo_Male": 2,
+                "Asian-Pac-Islander_Female": 2,
+                "Asian-Pac-Islander_Male": 2,
+                "Black_Female": 2,
+                "Black_Male": 2,
+                "Other_Female": 2,
+                "Other_Male": 2,
+                "White_Female": 2,
+                "White_Male": 2
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.7",
+            20,
+            {
+                "Amer-Indian-Eskimo_Female": -1,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 2,
+                "Amer-Indian-Eskimo_Male": 2,
+                "Asian-Pac-Islander_Female": 2,
+                "Asian-Pac-Islander_Male": 2,
+                "Black_Female": 2,
+                "Black_Male": 2,
+                "Other_Female": 2,
+                "Other_Male": 2,
+                "White_Female": 2,
+                "White_Male": 2
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.1",
+            40,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 4,
+                "Amer-Indian-Eskimo_Male": 4,
+                "Asian-Pac-Islander_Female": 4,
+                "Asian-Pac-Islander_Male": 4,
+                "Black_Female": 4,
+                "Black_Male": 4,
+                "Other_Female": 4,
+                "Other_Male": 4,
+                "White_Female": 4,
+                "White_Male": 4
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.3",
+            40,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 4,
+                "Amer-Indian-Eskimo_Male": 4,
+                "Asian-Pac-Islander_Female": 4,
+                "Asian-Pac-Islander_Male": 4,
+                "Black_Female": 4,
+                "Black_Male": 4,
+                "Other_Female": 4,
+                "Other_Male": 4,
+                "White_Female": 4,
+                "White_Male": 4
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.5",
+            40,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 4,
+                "Amer-Indian-Eskimo_Male": 4,
+                "Asian-Pac-Islander_Female": 4,
+                "Asian-Pac-Islander_Male": 4,
+                "Black_Female": 4,
+                "Black_Male": 4,
+                "Other_Female": 4,
+                "Other_Male": 4,
+                "White_Female": 4,
+                "White_Male": 4
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.7",
+            40,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 4,
+                "Amer-Indian-Eskimo_Male": 4,
+                "Asian-Pac-Islander_Female": 4,
+                "Asian-Pac-Islander_Male": 4,
+                "Black_Female": 4,
+                "Black_Male": 4,
+                "Other_Female": 4,
+                "Other_Male": 4,
+                "White_Female": 4,
+                "White_Male": 4
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.1",
+            40,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 4,
+                "Amer-Indian-Eskimo_Male": 4,
+                "Asian-Pac-Islander_Female": 4,
+                "Asian-Pac-Islander_Male": 4,
+                "Black_Female": 4,
+                "Black_Male": 4,
+                "Other_Female": 4,
+                "Other_Male": 4,
+                "White_Female": 4,
+                "White_Male": 4
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.3",
+            40,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 4,
+                "Amer-Indian-Eskimo_Male": 4,
+                "Asian-Pac-Islander_Female": 4,
+                "Asian-Pac-Islander_Male": 4,
+                "Black_Female": 4,
+                "Black_Male": 4,
+                "Other_Female": 4,
+                "Other_Male": 4,
+                "White_Female": 4,
+                "White_Male": 4
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.5",
+            40,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 4,
+                "Amer-Indian-Eskimo_Male": 4,
+                "Asian-Pac-Islander_Female": 4,
+                "Asian-Pac-Islander_Male": 4,
+                "Black_Female": 4,
+                "Black_Male": 4,
+                "Other_Female": 4,
+                "Other_Male": 4,
+                "White_Female": 4,
+                "White_Male": 4
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.7",
+            40,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 4,
+                "Amer-Indian-Eskimo_Male": 4,
+                "Asian-Pac-Islander_Female": 4,
+                "Asian-Pac-Islander_Male": 4,
+                "Black_Female": 4,
+                "Black_Male": 4,
+                "Other_Female": 4,
+                "Other_Male": 4,
+                "White_Female": 4,
+                "White_Male": 4
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.1",
+            40,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 4,
+                "Amer-Indian-Eskimo_Male": 4,
+                "Asian-Pac-Islander_Female": 4,
+                "Asian-Pac-Islander_Male": 4,
+                "Black_Female": 4,
+                "Black_Male": 4,
+                "Other_Female": 4,
+                "Other_Male": 4,
+                "White_Female": 4,
+                "White_Male": 4
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.3",
+            40,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": -1,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 4,
+                "Amer-Indian-Eskimo_Male": 4,
+                "Asian-Pac-Islander_Female": 4,
+                "Asian-Pac-Islander_Male": 4,
+                "Black_Female": 4,
+                "Black_Male": 4,
+                "Other_Female": 4,
+                "Other_Male": 4,
+                "White_Female": 4,
+                "White_Male": 4
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.5",
+            40,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": -3,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 4,
+                "Amer-Indian-Eskimo_Male": 4,
+                "Asian-Pac-Islander_Female": 4,
+                "Asian-Pac-Islander_Male": 4,
+                "Black_Female": 4,
+                "Black_Male": 4,
+                "Other_Female": 4,
+                "Other_Male": 4,
+                "White_Female": 4,
+                "White_Male": 4
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.7",
+            40,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 4,
+                "Amer-Indian-Eskimo_Male": 4,
+                "Asian-Pac-Islander_Female": 4,
+                "Asian-Pac-Islander_Male": 4,
+                "Black_Female": 4,
+                "Black_Male": 4,
+                "Other_Female": 4,
+                "Other_Male": 4,
+                "White_Female": 4,
+                "White_Male": 4
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.1",
+            40,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 4,
+                "Amer-Indian-Eskimo_Male": 4,
+                "Asian-Pac-Islander_Female": 4,
+                "Asian-Pac-Islander_Male": 4,
+                "Black_Female": 4,
+                "Black_Male": 4,
+                "Other_Female": 4,
+                "Other_Male": 4,
+                "White_Female": 4,
+                "White_Male": 4
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.3",
+            40,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 4,
+                "Amer-Indian-Eskimo_Male": 4,
+                "Asian-Pac-Islander_Female": 4,
+                "Asian-Pac-Islander_Male": 4,
+                "Black_Female": 4,
+                "Black_Male": 4,
+                "Other_Female": 4,
+                "Other_Male": 4,
+                "White_Female": 4,
+                "White_Male": 4
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.5",
+            40,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 4,
+                "Amer-Indian-Eskimo_Male": 4,
+                "Asian-Pac-Islander_Female": 4,
+                "Asian-Pac-Islander_Male": 4,
+                "Black_Female": 4,
+                "Black_Male": 4,
+                "Other_Female": 4,
+                "Other_Male": 4,
+                "White_Female": 4,
+                "White_Male": 4
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.7",
+            40,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 4,
+                "Amer-Indian-Eskimo_Male": 4,
+                "Asian-Pac-Islander_Female": 4,
+                "Asian-Pac-Islander_Male": 4,
+                "Black_Female": 4,
+                "Black_Male": 4,
+                "Other_Female": 4,
+                "Other_Male": 4,
+                "White_Female": 4,
+                "White_Male": 4
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.1",
+            40,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": -1,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 4,
+                "Amer-Indian-Eskimo_Male": 4,
+                "Asian-Pac-Islander_Female": 4,
+                "Asian-Pac-Islander_Male": 4,
+                "Black_Female": 4,
+                "Black_Male": 4,
+                "Other_Female": 4,
+                "Other_Male": 4,
+                "White_Female": 4,
+                "White_Male": 4
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.3",
+            40,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 4,
+                "Amer-Indian-Eskimo_Male": 4,
+                "Asian-Pac-Islander_Female": 4,
+                "Asian-Pac-Islander_Male": 4,
+                "Black_Female": 4,
+                "Black_Male": 4,
+                "Other_Female": 4,
+                "Other_Male": 4,
+                "White_Female": 4,
+                "White_Male": 4
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.5",
+            40,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 4,
+                "Amer-Indian-Eskimo_Male": 4,
+                "Asian-Pac-Islander_Female": 4,
+                "Asian-Pac-Islander_Male": 4,
+                "Black_Female": 4,
+                "Black_Male": 4,
+                "Other_Female": 4,
+                "Other_Male": 4,
+                "White_Female": 4,
+                "White_Male": 4
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.7",
+            40,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 4,
+                "Amer-Indian-Eskimo_Male": 4,
+                "Asian-Pac-Islander_Female": 4,
+                "Asian-Pac-Islander_Male": 4,
+                "Black_Female": 4,
+                "Black_Male": 4,
+                "Other_Female": 4,
+                "Other_Male": 4,
+                "White_Female": 4,
+                "White_Male": 4
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.1",
+            60,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": -1,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 6,
+                "Amer-Indian-Eskimo_Male": 6,
+                "Asian-Pac-Islander_Female": 6,
+                "Asian-Pac-Islander_Male": 6,
+                "Black_Female": 6,
+                "Black_Male": 6,
+                "Other_Female": 6,
+                "Other_Male": 6,
+                "White_Female": 6,
+                "White_Male": 6
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.3",
+            60,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 6,
+                "Amer-Indian-Eskimo_Male": 6,
+                "Asian-Pac-Islander_Female": 6,
+                "Asian-Pac-Islander_Male": 6,
+                "Black_Female": 6,
+                "Black_Male": 6,
+                "Other_Female": 6,
+                "Other_Male": 6,
+                "White_Female": 6,
+                "White_Male": 6
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.5",
+            60,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 6,
+                "Amer-Indian-Eskimo_Male": 6,
+                "Asian-Pac-Islander_Female": 6,
+                "Asian-Pac-Islander_Male": 6,
+                "Black_Female": 6,
+                "Black_Male": 6,
+                "Other_Female": 6,
+                "Other_Male": 6,
+                "White_Female": 6,
+                "White_Male": 6
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.7",
+            60,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 6,
+                "Amer-Indian-Eskimo_Male": 6,
+                "Asian-Pac-Islander_Female": 6,
+                "Asian-Pac-Islander_Male": 6,
+                "Black_Female": 6,
+                "Black_Male": 6,
+                "Other_Female": 6,
+                "Other_Male": 6,
+                "White_Female": 6,
+                "White_Male": 6
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.1",
+            60,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 6,
+                "Amer-Indian-Eskimo_Male": 6,
+                "Asian-Pac-Islander_Female": 6,
+                "Asian-Pac-Islander_Male": 6,
+                "Black_Female": 6,
+                "Black_Male": 6,
+                "Other_Female": 6,
+                "Other_Male": 6,
+                "White_Female": 6,
+                "White_Male": 6
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.3",
+            60,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 6,
+                "Amer-Indian-Eskimo_Male": 6,
+                "Asian-Pac-Islander_Female": 6,
+                "Asian-Pac-Islander_Male": 6,
+                "Black_Female": 6,
+                "Black_Male": 6,
+                "Other_Female": 6,
+                "Other_Male": 6,
+                "White_Female": 6,
+                "White_Male": 6
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.5",
+            60,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 6,
+                "Amer-Indian-Eskimo_Male": 6,
+                "Asian-Pac-Islander_Female": 6,
+                "Asian-Pac-Islander_Male": 6,
+                "Black_Female": 6,
+                "Black_Male": 6,
+                "Other_Female": 6,
+                "Other_Male": 6,
+                "White_Female": 6,
+                "White_Male": 6
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.7",
+            60,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 6,
+                "Amer-Indian-Eskimo_Male": 6,
+                "Asian-Pac-Islander_Female": 6,
+                "Asian-Pac-Islander_Male": 6,
+                "Black_Female": 6,
+                "Black_Male": 6,
+                "Other_Female": 6,
+                "Other_Male": 6,
+                "White_Female": 6,
+                "White_Male": 6
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.1",
+            60,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 6,
+                "Amer-Indian-Eskimo_Male": 6,
+                "Asian-Pac-Islander_Female": 6,
+                "Asian-Pac-Islander_Male": 6,
+                "Black_Female": 6,
+                "Black_Male": 6,
+                "Other_Female": 6,
+                "Other_Male": 6,
+                "White_Female": 6,
+                "White_Male": 6
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.3",
+            60,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 6,
+                "Amer-Indian-Eskimo_Male": 6,
+                "Asian-Pac-Islander_Female": 6,
+                "Asian-Pac-Islander_Male": 6,
+                "Black_Female": 6,
+                "Black_Male": 6,
+                "Other_Female": 6,
+                "Other_Male": 6,
+                "White_Female": 6,
+                "White_Male": 6
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.5",
+            60,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 6,
+                "Amer-Indian-Eskimo_Male": 6,
+                "Asian-Pac-Islander_Female": 6,
+                "Asian-Pac-Islander_Male": 6,
+                "Black_Female": 6,
+                "Black_Male": 6,
+                "Other_Female": 6,
+                "Other_Male": 6,
+                "White_Female": 6,
+                "White_Male": 6
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.7",
+            60,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 6,
+                "Amer-Indian-Eskimo_Male": 6,
+                "Asian-Pac-Islander_Female": 6,
+                "Asian-Pac-Islander_Male": 6,
+                "Black_Female": 6,
+                "Black_Male": 6,
+                "Other_Female": 6,
+                "Other_Male": 6,
+                "White_Female": 6,
+                "White_Male": 6
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.1",
+            60,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 6,
+                "Amer-Indian-Eskimo_Male": 6,
+                "Asian-Pac-Islander_Female": 6,
+                "Asian-Pac-Islander_Male": 6,
+                "Black_Female": 6,
+                "Black_Male": 6,
+                "Other_Female": 6,
+                "Other_Male": 6,
+                "White_Female": 6,
+                "White_Male": 6
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.3",
+            60,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 6,
+                "Amer-Indian-Eskimo_Male": 6,
+                "Asian-Pac-Islander_Female": 6,
+                "Asian-Pac-Islander_Male": 6,
+                "Black_Female": 6,
+                "Black_Male": 6,
+                "Other_Female": 6,
+                "Other_Male": 6,
+                "White_Female": 6,
+                "White_Male": 6
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.5",
+            60,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 6,
+                "Amer-Indian-Eskimo_Male": 6,
+                "Asian-Pac-Islander_Female": 6,
+                "Asian-Pac-Islander_Male": 6,
+                "Black_Female": 6,
+                "Black_Male": 6,
+                "Other_Female": 6,
+                "Other_Male": 6,
+                "White_Female": 6,
+                "White_Male": 6
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.7",
+            60,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 6,
+                "Amer-Indian-Eskimo_Male": 6,
+                "Asian-Pac-Islander_Female": 6,
+                "Asian-Pac-Islander_Male": 6,
+                "Black_Female": 6,
+                "Black_Male": 6,
+                "Other_Female": 6,
+                "Other_Male": 6,
+                "White_Female": 6,
+                "White_Male": 6
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.1",
+            60,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": -2,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 6,
+                "Amer-Indian-Eskimo_Male": 6,
+                "Asian-Pac-Islander_Female": 6,
+                "Asian-Pac-Islander_Male": 6,
+                "Black_Female": 6,
+                "Black_Male": 6,
+                "Other_Female": 6,
+                "Other_Male": 6,
+                "White_Female": 6,
+                "White_Male": 6
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.3",
+            60,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 6,
+                "Amer-Indian-Eskimo_Male": 6,
+                "Asian-Pac-Islander_Female": 6,
+                "Asian-Pac-Islander_Male": 6,
+                "Black_Female": 6,
+                "Black_Male": 6,
+                "Other_Female": 6,
+                "Other_Male": 6,
+                "White_Female": 6,
+                "White_Male": 6
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.5",
+            60,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 6,
+                "Amer-Indian-Eskimo_Male": 6,
+                "Asian-Pac-Islander_Female": 6,
+                "Asian-Pac-Islander_Male": 6,
+                "Black_Female": 6,
+                "Black_Male": 6,
+                "Other_Female": 6,
+                "Other_Male": 6,
+                "White_Female": 6,
+                "White_Male": 6
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.7",
+            60,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 6,
+                "Amer-Indian-Eskimo_Male": 6,
+                "Asian-Pac-Islander_Female": 6,
+                "Asian-Pac-Islander_Male": 6,
+                "Black_Female": 6,
+                "Black_Male": 6,
+                "Other_Female": 6,
+                "Other_Male": 6,
+                "White_Female": 6,
+                "White_Male": 6
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.1",
+            80,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 8,
+                "Amer-Indian-Eskimo_Male": 8,
+                "Asian-Pac-Islander_Female": 8,
+                "Asian-Pac-Islander_Male": 8,
+                "Black_Female": 8,
+                "Black_Male": 8,
+                "Other_Female": 8,
+                "Other_Male": 8,
+                "White_Female": 8,
+                "White_Male": 8
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.3",
+            80,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 8,
+                "Amer-Indian-Eskimo_Male": 8,
+                "Asian-Pac-Islander_Female": 8,
+                "Asian-Pac-Islander_Male": 8,
+                "Black_Female": 8,
+                "Black_Male": 8,
+                "Other_Female": 8,
+                "Other_Male": 8,
+                "White_Female": 8,
+                "White_Male": 8
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.5",
+            80,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 8,
+                "Amer-Indian-Eskimo_Male": 8,
+                "Asian-Pac-Islander_Female": 8,
+                "Asian-Pac-Islander_Male": 8,
+                "Black_Female": 8,
+                "Black_Male": 8,
+                "Other_Female": 8,
+                "Other_Male": 8,
+                "White_Female": 8,
+                "White_Male": 8
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.7",
+            80,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": -1,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 8,
+                "Amer-Indian-Eskimo_Male": 8,
+                "Asian-Pac-Islander_Female": 8,
+                "Asian-Pac-Islander_Male": 8,
+                "Black_Female": 8,
+                "Black_Male": 8,
+                "Other_Female": 8,
+                "Other_Male": 8,
+                "White_Female": 8,
+                "White_Male": 8
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.1",
+            80,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 8,
+                "Amer-Indian-Eskimo_Male": 8,
+                "Asian-Pac-Islander_Female": 8,
+                "Asian-Pac-Islander_Male": 8,
+                "Black_Female": 8,
+                "Black_Male": 8,
+                "Other_Female": 8,
+                "Other_Male": 8,
+                "White_Female": 8,
+                "White_Male": 8
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.3",
+            80,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 8,
+                "Amer-Indian-Eskimo_Male": 8,
+                "Asian-Pac-Islander_Female": 8,
+                "Asian-Pac-Islander_Male": 8,
+                "Black_Female": 8,
+                "Black_Male": 8,
+                "Other_Female": 8,
+                "Other_Male": 8,
+                "White_Female": 8,
+                "White_Male": 8
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.5",
+            80,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 8,
+                "Amer-Indian-Eskimo_Male": 8,
+                "Asian-Pac-Islander_Female": 8,
+                "Asian-Pac-Islander_Male": 8,
+                "Black_Female": 8,
+                "Black_Male": 8,
+                "Other_Female": 8,
+                "Other_Male": 8,
+                "White_Female": 8,
+                "White_Male": 8
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.7",
+            80,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 8,
+                "Amer-Indian-Eskimo_Male": 8,
+                "Asian-Pac-Islander_Female": 8,
+                "Asian-Pac-Islander_Male": 8,
+                "Black_Female": 8,
+                "Black_Male": 8,
+                "Other_Female": 8,
+                "Other_Male": 8,
+                "White_Female": 8,
+                "White_Male": 8
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.1",
+            80,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 8,
+                "Amer-Indian-Eskimo_Male": 8,
+                "Asian-Pac-Islander_Female": 8,
+                "Asian-Pac-Islander_Male": 8,
+                "Black_Female": 8,
+                "Black_Male": 8,
+                "Other_Female": 8,
+                "Other_Male": 8,
+                "White_Female": 8,
+                "White_Male": 8
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.3",
+            80,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 8,
+                "Amer-Indian-Eskimo_Male": 8,
+                "Asian-Pac-Islander_Female": 8,
+                "Asian-Pac-Islander_Male": 8,
+                "Black_Female": 8,
+                "Black_Male": 8,
+                "Other_Female": 8,
+                "Other_Male": 8,
+                "White_Female": 8,
+                "White_Male": 8
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.5",
+            80,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 8,
+                "Amer-Indian-Eskimo_Male": 8,
+                "Asian-Pac-Islander_Female": 8,
+                "Asian-Pac-Islander_Male": 8,
+                "Black_Female": 8,
+                "Black_Male": 8,
+                "Other_Female": 8,
+                "Other_Male": 8,
+                "White_Female": 8,
+                "White_Male": 8
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.7",
+            80,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 8,
+                "Amer-Indian-Eskimo_Male": 8,
+                "Asian-Pac-Islander_Female": 8,
+                "Asian-Pac-Islander_Male": 8,
+                "Black_Female": 8,
+                "Black_Male": 8,
+                "Other_Female": 8,
+                "Other_Male": 8,
+                "White_Female": 8,
+                "White_Male": 8
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.1",
+            80,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 8,
+                "Amer-Indian-Eskimo_Male": 8,
+                "Asian-Pac-Islander_Female": 8,
+                "Asian-Pac-Islander_Male": 8,
+                "Black_Female": 8,
+                "Black_Male": 8,
+                "Other_Female": 8,
+                "Other_Male": 8,
+                "White_Female": 8,
+                "White_Male": 8
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.3",
+            80,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 8,
+                "Amer-Indian-Eskimo_Male": 8,
+                "Asian-Pac-Islander_Female": 8,
+                "Asian-Pac-Islander_Male": 8,
+                "Black_Female": 8,
+                "Black_Male": 8,
+                "Other_Female": 8,
+                "Other_Male": 8,
+                "White_Female": 8,
+                "White_Male": 8
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.5",
+            80,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 8,
+                "Amer-Indian-Eskimo_Male": 8,
+                "Asian-Pac-Islander_Female": 8,
+                "Asian-Pac-Islander_Male": 8,
+                "Black_Female": 8,
+                "Black_Male": 8,
+                "Other_Female": 8,
+                "Other_Male": 8,
+                "White_Female": 8,
+                "White_Male": 8
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.7",
+            80,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 8,
+                "Amer-Indian-Eskimo_Male": 8,
+                "Asian-Pac-Islander_Female": 8,
+                "Asian-Pac-Islander_Male": 8,
+                "Black_Female": 8,
+                "Black_Male": 8,
+                "Other_Female": 8,
+                "Other_Male": 8,
+                "White_Female": 8,
+                "White_Male": 8
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.1",
+            80,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 8,
+                "Amer-Indian-Eskimo_Male": 8,
+                "Asian-Pac-Islander_Female": 8,
+                "Asian-Pac-Islander_Male": 8,
+                "Black_Female": 8,
+                "Black_Male": 8,
+                "Other_Female": 8,
+                "Other_Male": 8,
+                "White_Female": 8,
+                "White_Male": 8
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.3",
+            80,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 8,
+                "Amer-Indian-Eskimo_Male": 8,
+                "Asian-Pac-Islander_Female": 8,
+                "Asian-Pac-Islander_Male": 8,
+                "Black_Female": 8,
+                "Black_Male": 8,
+                "Other_Female": 8,
+                "Other_Male": 8,
+                "White_Female": 8,
+                "White_Male": 8
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.5",
+            80,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 8,
+                "Amer-Indian-Eskimo_Male": 8,
+                "Asian-Pac-Islander_Female": 8,
+                "Asian-Pac-Islander_Male": 8,
+                "Black_Female": 8,
+                "Black_Male": 8,
+                "Other_Female": 8,
+                "Other_Male": 8,
+                "White_Female": 8,
+                "White_Male": 8
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.7",
+            80,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 8,
+                "Amer-Indian-Eskimo_Male": 8,
+                "Asian-Pac-Islander_Female": 8,
+                "Asian-Pac-Islander_Male": 8,
+                "Black_Female": 8,
+                "Black_Male": 8,
+                "Other_Female": 8,
+                "Other_Male": 8,
+                "White_Female": 8,
+                "White_Male": 8
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.1",
+            100,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 10,
+                "Amer-Indian-Eskimo_Male": 10,
+                "Asian-Pac-Islander_Female": 10,
+                "Asian-Pac-Islander_Male": 10,
+                "Black_Female": 10,
+                "Black_Male": 10,
+                "Other_Female": 10,
+                "Other_Male": 10,
+                "White_Female": 10,
+                "White_Male": 10
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.3",
+            100,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 10,
+                "Amer-Indian-Eskimo_Male": 10,
+                "Asian-Pac-Islander_Female": 10,
+                "Asian-Pac-Islander_Male": 10,
+                "Black_Female": 10,
+                "Black_Male": 10,
+                "Other_Female": 10,
+                "Other_Male": 10,
+                "White_Female": 10,
+                "White_Male": 10
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.5",
+            100,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 10,
+                "Amer-Indian-Eskimo_Male": 10,
+                "Asian-Pac-Islander_Female": 10,
+                "Asian-Pac-Islander_Male": 10,
+                "Black_Female": 10,
+                "Black_Male": 10,
+                "Other_Female": 10,
+                "Other_Male": 10,
+                "White_Female": 10,
+                "White_Male": 10
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.7",
+            100,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 10,
+                "Amer-Indian-Eskimo_Male": 10,
+                "Asian-Pac-Islander_Female": 10,
+                "Asian-Pac-Islander_Male": 10,
+                "Black_Female": 10,
+                "Black_Male": 10,
+                "Other_Female": 10,
+                "Other_Male": 10,
+                "White_Female": 10,
+                "White_Male": 10
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.1",
+            100,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 10,
+                "Amer-Indian-Eskimo_Male": 10,
+                "Asian-Pac-Islander_Female": 10,
+                "Asian-Pac-Islander_Male": 10,
+                "Black_Female": 10,
+                "Black_Male": 10,
+                "Other_Female": 10,
+                "Other_Male": 10,
+                "White_Female": 10,
+                "White_Male": 10
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.3",
+            100,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 10,
+                "Amer-Indian-Eskimo_Male": 10,
+                "Asian-Pac-Islander_Female": 10,
+                "Asian-Pac-Islander_Male": 10,
+                "Black_Female": 10,
+                "Black_Male": 10,
+                "Other_Female": 10,
+                "Other_Male": 10,
+                "White_Female": 10,
+                "White_Male": 10
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.5",
+            100,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 10,
+                "Amer-Indian-Eskimo_Male": 10,
+                "Asian-Pac-Islander_Female": 10,
+                "Asian-Pac-Islander_Male": 10,
+                "Black_Female": 10,
+                "Black_Male": 10,
+                "Other_Female": 10,
+                "Other_Male": 10,
+                "White_Female": 10,
+                "White_Male": 10
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.7",
+            100,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 10,
+                "Amer-Indian-Eskimo_Male": 10,
+                "Asian-Pac-Islander_Female": 10,
+                "Asian-Pac-Islander_Male": 10,
+                "Black_Female": 10,
+                "Black_Male": 10,
+                "Other_Female": 10,
+                "Other_Male": 10,
+                "White_Female": 10,
+                "White_Male": 10
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.1",
+            100,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 10,
+                "Amer-Indian-Eskimo_Male": 10,
+                "Asian-Pac-Islander_Female": 10,
+                "Asian-Pac-Islander_Male": 10,
+                "Black_Female": 10,
+                "Black_Male": 10,
+                "Other_Female": 10,
+                "Other_Male": 10,
+                "White_Female": 10,
+                "White_Male": 10
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.3",
+            100,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 10,
+                "Amer-Indian-Eskimo_Male": 10,
+                "Asian-Pac-Islander_Female": 10,
+                "Asian-Pac-Islander_Male": 10,
+                "Black_Female": 10,
+                "Black_Male": 10,
+                "Other_Female": 10,
+                "Other_Male": 10,
+                "White_Female": 10,
+                "White_Male": 10
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.5",
+            100,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 10,
+                "Amer-Indian-Eskimo_Male": 10,
+                "Asian-Pac-Islander_Female": 10,
+                "Asian-Pac-Islander_Male": 10,
+                "Black_Female": 10,
+                "Black_Male": 10,
+                "Other_Female": 10,
+                "Other_Male": 10,
+                "White_Female": 10,
+                "White_Male": 10
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.7",
+            100,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 10,
+                "Amer-Indian-Eskimo_Male": 10,
+                "Asian-Pac-Islander_Female": 10,
+                "Asian-Pac-Islander_Male": 10,
+                "Black_Female": 10,
+                "Black_Male": 10,
+                "Other_Female": 10,
+                "Other_Male": 10,
+                "White_Female": 10,
+                "White_Male": 10
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.1",
+            100,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 10,
+                "Amer-Indian-Eskimo_Male": 10,
+                "Asian-Pac-Islander_Female": 10,
+                "Asian-Pac-Islander_Male": 10,
+                "Black_Female": 10,
+                "Black_Male": 10,
+                "Other_Female": 10,
+                "Other_Male": 10,
+                "White_Female": 10,
+                "White_Male": 10
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.3",
+            100,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 10,
+                "Amer-Indian-Eskimo_Male": 10,
+                "Asian-Pac-Islander_Female": 10,
+                "Asian-Pac-Islander_Male": 10,
+                "Black_Female": 10,
+                "Black_Male": 10,
+                "Other_Female": 10,
+                "Other_Male": 10,
+                "White_Female": 10,
+                "White_Male": 10
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.5",
+            100,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 10,
+                "Amer-Indian-Eskimo_Male": 10,
+                "Asian-Pac-Islander_Female": 10,
+                "Asian-Pac-Islander_Male": 10,
+                "Black_Female": 10,
+                "Black_Male": 10,
+                "Other_Female": 10,
+                "Other_Male": 10,
+                "White_Female": 10,
+                "White_Male": 10
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.7",
+            100,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 10,
+                "Amer-Indian-Eskimo_Male": 10,
+                "Asian-Pac-Islander_Female": 10,
+                "Asian-Pac-Islander_Male": 10,
+                "Black_Female": 10,
+                "Black_Male": 10,
+                "Other_Female": 10,
+                "Other_Male": 10,
+                "White_Female": 10,
+                "White_Male": 10
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.1",
+            100,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 10,
+                "Amer-Indian-Eskimo_Male": 10,
+                "Asian-Pac-Islander_Female": 10,
+                "Asian-Pac-Islander_Male": 10,
+                "Black_Female": 10,
+                "Black_Male": 10,
+                "Other_Female": 10,
+                "Other_Male": 10,
+                "White_Female": 10,
+                "White_Male": 10
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.3",
+            100,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 10,
+                "Amer-Indian-Eskimo_Male": 10,
+                "Asian-Pac-Islander_Female": 10,
+                "Asian-Pac-Islander_Male": 10,
+                "Black_Female": 10,
+                "Black_Male": 10,
+                "Other_Female": 10,
+                "Other_Male": 10,
+                "White_Female": 10,
+                "White_Male": 10
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.5",
+            100,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 10,
+                "Amer-Indian-Eskimo_Male": 10,
+                "Asian-Pac-Islander_Female": 10,
+                "Asian-Pac-Islander_Male": 10,
+                "Black_Female": 10,
+                "Black_Male": 10,
+                "Other_Female": 10,
+                "Other_Male": 10,
+                "White_Female": 10,
+                "White_Male": 10
+            }
+        ],
+        [
+            "Adult",
+            "MWU 0.7",
+            100,
+            {
+                "Amer-Indian-Eskimo_Female": 0,
+                "Amer-Indian-Eskimo_Male": 0,
+                "Asian-Pac-Islander_Female": 0,
+                "Asian-Pac-Islander_Male": 0,
+                "Black_Female": 0,
+                "Black_Male": 0,
+                "Other_Female": 0,
+                "Other_Male": 0,
+                "White_Female": 0,
+                "White_Male": 0
+            },
+            {
+                "Amer-Indian-Eskimo_Female": 10,
+                "Amer-Indian-Eskimo_Male": 10,
+                "Asian-Pac-Islander_Female": 10,
+                "Asian-Pac-Islander_Male": 10,
+                "Black_Female": 10,
+                "Black_Male": 10,
+                "Other_Female": 10,
+                "Other_Male": 10,
+                "White_Female": 10,
+                "White_Male": 10
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.1",
+            20,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 5,
+                "Female_Yes": 5,
+                "Male_No": 5,
+                "Male_Yes": 5
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.3",
+            20,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 5,
+                "Female_Yes": 5,
+                "Male_No": 5,
+                "Male_Yes": 5
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.5",
+            20,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 5,
+                "Female_Yes": 5,
+                "Male_No": 5,
+                "Male_Yes": 5
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.7",
+            20,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 5,
+                "Female_Yes": 5,
+                "Male_No": 5,
+                "Male_Yes": 5
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.1",
+            20,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 5,
+                "Female_Yes": 5,
+                "Male_No": 5,
+                "Male_Yes": 5
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.3",
+            20,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 5,
+                "Female_Yes": 5,
+                "Male_No": 5,
+                "Male_Yes": 5
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.5",
+            20,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 5,
+                "Female_Yes": 5,
+                "Male_No": 5,
+                "Male_Yes": 5
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.7",
+            20,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 5,
+                "Female_Yes": 5,
+                "Male_No": 5,
+                "Male_Yes": 5
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.1",
+            20,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 5,
+                "Female_Yes": 5,
+                "Male_No": 5,
+                "Male_Yes": 5
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.3",
+            20,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 5,
+                "Female_Yes": 5,
+                "Male_No": 5,
+                "Male_Yes": 5
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.5",
+            20,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 5,
+                "Female_Yes": 5,
+                "Male_No": 5,
+                "Male_Yes": 5
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.7",
+            20,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 5,
+                "Female_Yes": 5,
+                "Male_No": 5,
+                "Male_Yes": 5
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.1",
+            20,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 5,
+                "Female_Yes": 5,
+                "Male_No": 5,
+                "Male_Yes": 5
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.3",
+            20,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 5,
+                "Female_Yes": 5,
+                "Male_No": 5,
+                "Male_Yes": 5
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.5",
+            20,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 5,
+                "Female_Yes": 5,
+                "Male_No": 5,
+                "Male_Yes": 5
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.7",
+            20,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 5,
+                "Female_Yes": 5,
+                "Male_No": 5,
+                "Male_Yes": 5
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.1",
+            20,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 5,
+                "Female_Yes": 5,
+                "Male_No": 5,
+                "Male_Yes": 5
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.3",
+            20,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 5,
+                "Female_Yes": 5,
+                "Male_No": 5,
+                "Male_Yes": 5
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.5",
+            20,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 5,
+                "Female_Yes": 5,
+                "Male_No": 5,
+                "Male_Yes": 5
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.7",
+            20,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 5,
+                "Female_Yes": 5,
+                "Male_No": 5,
+                "Male_Yes": 5
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.1",
+            40,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": -3,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 10,
+                "Male_No": 10,
+                "Male_Yes": 10
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.3",
+            40,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 10,
+                "Male_No": 10,
+                "Male_Yes": 10
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.5",
+            40,
+            {
+                "Female_No": -1,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 10,
+                "Male_No": 10,
+                "Male_Yes": 10
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.7",
+            40,
+            {
+                "Female_No": -1,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 10,
+                "Male_No": 10,
+                "Male_Yes": 10
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.1",
+            40,
+            {
+                "Female_No": -1,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 10,
+                "Male_No": 10,
+                "Male_Yes": 10
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.3",
+            40,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 10,
+                "Male_No": 10,
+                "Male_Yes": 10
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.5",
+            40,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 10,
+                "Male_No": 10,
+                "Male_Yes": 10
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.7",
+            40,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 10,
+                "Male_No": 10,
+                "Male_Yes": 10
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.1",
+            40,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 10,
+                "Male_No": 10,
+                "Male_Yes": 10
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.3",
+            40,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 10,
+                "Male_No": 10,
+                "Male_Yes": 10
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.5",
+            40,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 10,
+                "Male_No": 10,
+                "Male_Yes": 10
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.7",
+            40,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 10,
+                "Male_No": 10,
+                "Male_Yes": 10
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.1",
+            40,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": -3,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 10,
+                "Male_No": 10,
+                "Male_Yes": 10
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.3",
+            40,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 10,
+                "Male_No": 10,
+                "Male_Yes": 10
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.5",
+            40,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 10,
+                "Male_No": 10,
+                "Male_Yes": 10
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.7",
+            40,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 10,
+                "Male_No": 10,
+                "Male_Yes": 10
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.1",
+            40,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 10,
+                "Male_No": 10,
+                "Male_Yes": 10
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.3",
+            40,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 10,
+                "Male_No": 10,
+                "Male_Yes": 10
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.5",
+            40,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 10,
+                "Male_No": 10,
+                "Male_Yes": 10
+            }
+        ],
+        [
+            "Diabetes",
+            "MWU 0.7",
+            40,
+            {
+                "Female_No": 0,
+                "Female_Yes": 0,
+                "Male_No": 0,
+                "Male_Yes": 0
+            },
+            {
+                "Female_No": 10,
+                "Female_Yes": 10,
+                "Male_No": 10,
+                "Male_Yes": 10
+            }
+        ]
+    ]
+}
