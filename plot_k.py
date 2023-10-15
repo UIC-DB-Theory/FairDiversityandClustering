@@ -54,7 +54,8 @@ def plot(y_key, x_key, ylogscale = False):
     grid_specs = gridspec.GridSpec(1, 5, width_ratios=[1, 1, 1, 1, 1], height_ratios=[1])
     legend_handles = []
 
-
+    alp = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+    i = 0 
     for gs, dataset_name in zip(grid_specs, results):
         ax = plt.subplot(gs)
         for alg,result in results[dataset_name].items():
@@ -69,18 +70,18 @@ def plot(y_key, x_key, ylogscale = False):
                 ax.set_yscale('log')
             ax.set_xlabel(x_key)
             ax.set_ylabel(y_key)
-            ax.set_title(f'{dataset_name}')
+            ax.set_title(f'({alp[i]}) {dataset_name}', y = -0.3)
+        i += 1
 
     
     ax_legend = plt.subplot(grid_specs[0])
     ax_legend.legend(
-        title = f't vs k',  
         handles=legend_handles[:len(setup["algorithms"])],
         ncol=len(setup["algorithms"]),
         loc='lower left', 
         bbox_to_anchor=(1.5, 1.1),borderaxespad=0
     )
-    plt.savefig(f'{plot_dir}/{y_key}_vs_{x_key}', dpi=300)
+    plt.savefig(f'{plot_dir}/{y_key}_vs_{x_key}', dpi=300, bbox_inches='tight')
 
 plot( "runtime", "k", ylogscale = True)
 plot( "diversity", "k", ylogscale = False)
