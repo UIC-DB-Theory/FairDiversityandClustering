@@ -78,7 +78,7 @@ def plot(y_key, x_key, ylogscale = False):
         handles=legend_handles[:len(setup["algorithms"])],
         ncol=len(setup["algorithms"]),
         loc='lower left', 
-        bbox_to_anchor=(0.9, 1.1),borderaxespad=0
+        bbox_to_anchor=(1.5, 1.1),borderaxespad=0
     )
     plt.savefig(f'{plot_dir}/{y_key}_vs_{x_key}', dpi=300)
 
@@ -104,21 +104,17 @@ data = {}
 for color_result in color_results:
     dataset = color_result[0]
     algorithm = color_result[1]
+    # if algorithm == 'MWU 0.3':
+    #     print('added mwu')
     k = color_result[2]
     kis_delta = color_result[3]
     kis = color_result[4]
     kis_returned_ratio = {}
     kis_ratio = {}
 
-    if dataset not in color_mappings:
-        color_mappings[dataset] = {}
-        color_mappings2[dataset] = {}
-
     # Sanity check & color map
     k_calculated = 0
     for color, ki in kis.items():
-        color_mappings[dataset][color] = (np.random.random(), np.random.random(), np.random.random())
-        color_mappings2[dataset][color] = (np.random.random(), np.random.random(), np.random.random())
         k_calculated = k_calculated + int(ki)
     assert k == k_calculated
 
@@ -162,6 +158,7 @@ for color_result in color_results:
             }
         }
     if algorithm not in data[dataset]:
+        print('init: ', algorithm)
         data[dataset][algorithm] = {
             'ks' : [],
             'returned_counts' : {c : [] for c in kis},
@@ -180,10 +177,12 @@ for color_result in color_results:
 def plot_color_results(algorithm):
     plt.clf()
     width = 0.4
-    only_odds = True
+    only_odds = False
     for dataset in  data:
+        print(data[dataset].keys())
         fig, ax = plt.subplots()
         if algorithm not in data[dataset]:
+            print('not found:', algorithm)
             return
         ks = data[dataset][algorithm]['ks']
         returned_counts = data[dataset][algorithm]['returned_counts']
@@ -210,7 +209,7 @@ def plot_color_results(algorithm):
         bottom = np.zeros(len(ks))
         ind = np.arange(len(ks))
         for color in required_counts:
-            ax.bar(ind, required_counts[color], width, label=color, bottom=bottom, color = color_mappings[dataset][color], edgecolor='black', linewidth = 1)
+            ax.bar(ind, required_counts[color], width, label=color, bottom=bottom, color = color_mappings[dataset][color], edgecolor='black', linewidth = 2)
             bottom += required_counts[color]
         
         bottom = np.zeros(len(ks))
@@ -220,6 +219,8 @@ def plot_color_results(algorithm):
             bottom += returned_counts[color]
         ax.set_xticks(ind + width/2 + 0.025, ks)
         ax.set_title(f'{dataset}')
+        ax.set_xlabel('k')
+        ax.set_ylabel('color ratios')
         handles, labels = ax.get_legend_handles_labels()
         ax.legend(
             handles[::-1], labels[::-1],
@@ -233,15 +234,24 @@ def plot_color_results(algorithm):
 
 
 def generate_colors(n):
-    import matplotlib.colors as mcolors
-    cmap = mcolors.LinearSegmentedColormap.from_list(
-    "custom_cmap", [(1, 1, 1), (1, 0 ,0)]
-    )
-    color= iter(cmap(np.linspace(0, 1, n)))
-    l = []
-    for i in range (n):
-        l.append(next(color))
-    return l
+    if n > 14:
+        return []
+    return [
+        '#2f4f4f',
+        '#228b22',
+        '#7f0000',
+        '#4b0082',
+        '#ff8c00',
+        '#ffff00',
+        '#deb887',
+        '#00ff00',
+        '#00bfff',
+        '#0000ff',
+        '#ff00ff',
+        '#dda0dd',
+        '#ff1493',
+        '#7fffd4'
+    ]
 
 
 
@@ -251,6 +261,7 @@ color_mappings = {
     } for dataset_name in setup['datasets']
 
 }
+
 for alg in setup['algorithms']:
     plt.close()
     plot_color_results(alg)

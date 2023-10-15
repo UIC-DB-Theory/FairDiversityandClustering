@@ -47,22 +47,39 @@ with open(result_file_path, 'r') as json_file:
 ######################################################################################
 def change_ks_20():
     alg = 'CHANGE'
+    global results
+    global color_results
     # Change in the vs k result section
     for dataset_name in results:
-        for xs in results[dataset_name][alg]["xs"]:
+        print(dataset_name)
+        for k, l in results[dataset_name][alg]["xs"].items():
+            c = 0
             temp = []
-            for i in range(0, len(results[dataset_name][alg]["xs"][xs])):
-                if (i+1)%2 == 0:
-                    print('appending:', results[dataset_name][alg]["xs"][xs][i+1])
-                    temp.append(results[dataset_name][alg]["xs"][xs][i+1])
-                results[dataset_name][alg]["xs"][xs] = temp
-        for ys in results[dataset_name][alg]["ys"]:
-            temp = []
-            for i in range(0, len(results[dataset_name][alg]["ys"][ys])):
-                if (i+1)%2 == 0:
-                    temp.append(results[dataset_name][alg]["ys"][ys][i+1])
-                results[dataset_name][alg]["ys"][ys] = temp
+            for i in l:
+                if (c+1)%2 == 0:
+                    temp.append(i)
+                c = c + 1
+            print(temp)
+            results[dataset_name][alg]["xs"][k] = temp
 
+        for k, l in results[dataset_name][alg]["ys"].items():
+            c = 0
+            temp = []
+            for i in l:
+                if (c+1)%2 == 0:
+                    temp.append(i)
+                c = c + 1
+            print(temp)
+            results[dataset_name][alg]["ys"][k] = temp
+    temp = []
+    for dataset_name in results:
+        ks = results[dataset_name][alg]["xs"]['k']
+        print(ks)
+        # Change in the color results
+        for color_result in color_results:
+            if color_result[0] == dataset_name and color_result[2] in ks:
+                temp.append(color_result)
+    color_results = temp
 
 
 
