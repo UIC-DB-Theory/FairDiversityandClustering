@@ -50,7 +50,7 @@ def plot(y_key, x_key, ylogscale = False):
     plt.clf()
 
     # Each dataset gets 1 subplot
-    fig = plt.figure(figsize=(30, 5))
+    fig = plt.figure(figsize=(25, 4))
     grid_specs = gridspec.GridSpec(1, 5, width_ratios=[1, 1, 1, 1, 1], height_ratios=[1])
     legend_handles = []
 
@@ -228,12 +228,12 @@ def plot_color_results(algorithm):
         ax.set_xlabel('k')
         ax.set_ylabel('color ratios')
         handles, labels = ax.get_legend_handles_labels()
-        ax.legend(
-            handles[::-1], labels[::-1],
-            title = f'Colors in {dataset}',
-            loc='center left',
-            bbox_to_anchor=(1, 0.5)
-        )
+        # ax.legend(
+        #     handles[::-1], labels[::-1],
+        #     title = f'Colors in {dataset}',
+        #     loc='center left',
+        #     bbox_to_anchor=(1, 0.5)
+        # )
         plt.savefig(f'{plot_dir}/{dataset}_{algorithm}.png', dpi=300, bbox_inches='tight')
         plt.close()
 
