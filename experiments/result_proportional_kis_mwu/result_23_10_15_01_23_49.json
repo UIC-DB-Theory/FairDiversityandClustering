@@ -112,7 +112,24 @@
                     "attr6"
                 ],
                 "normalize": false,
-                "filter_unique": false
+                "filter_unique": false,
+                "points_per_color": {
+                    "11": 159836,
+                    "12": 173735,
+                    "9": 185709,
+                    "10": 205969,
+                    "13": 192077,
+                    "7": 215441,
+                    "0": 225807,
+                    "2": 185246,
+                    "4": 152989,
+                    "3": 198566,
+                    "5": 157523,
+                    "6": 130707,
+                    "8": 118167,
+                    "1": 124344
+                },
+                "size": 2426116
             }
         },
         "algorithms": {
@@ -923,6 +940,506 @@
                         0.3366507212005814,
                         0.15633813469212868,
                         0.08042353542249187
+                    ]
+                }
+            }
+        },
+        "Popsim": {
+            "MWU 0.1": {
+                "xs": {
+                    "k": [
+                        22,
+                        39,
+                        57,
+                        75,
+                        93
+                    ]
+                },
+                "ys": {
+                    "data_size": [
+                        110.0,
+                        195.0,
+                        285.0,
+                        375.0,
+                        465.0
+                    ],
+                    "dmax": [
+                        1.8694350666395778,
+                        1.4252038503990125,
+                        1.087363056009728,
+                        0.9534229923118772,
+                        0.8614922985282842
+                    ],
+                    "dmin": [
+                        0.0055505919136493035,
+                        0.002455218851973805,
+                        0.002095324474910439,
+                        0.0019053957547907514,
+                        0.001712132449917437
+                    ],
+                    "solution_size": [
+                        20.2,
+                        38.8,
+                        53.2,
+                        72.8,
+                        93.0
+                    ],
+                    "diversity": [
+                        0.693492802392722,
+                        0.45318343465075606,
+                        0.37085069056959885,
+                        0.3087738085365842,
+                        0.2660243228999876
+                    ],
+                    "runtime": [
+                        13.442424863413908,
+                        20.77302340287715,
+                        28.766200333461164,
+                        38.13435148529243,
+                        47.25807488739956
+                    ],
+                    "div-runtime": [
+                        0.0515898589308982,
+                        0.02181595937488754,
+                        0.012891890005306722,
+                        0.008096999070658679,
+                        0.005629182389122622
+                    ]
+                }
+            },
+            "MWU 0.3": {
+                "xs": {
+                    "k": [
+                        22,
+                        39,
+                        57,
+                        75,
+                        93
+                    ]
+                },
+                "ys": {
+                    "data_size": [
+                        110.0,
+                        195.0,
+                        285.0,
+                        375.0,
+                        465.0
+                    ],
+                    "dmax": [
+                        1.8694350666395778,
+                        1.4252038503990125,
+                        1.087363056009728,
+                        0.9534229923118772,
+                        0.8614922985282842
+                    ],
+                    "dmin": [
+                        0.0055505919136493035,
+                        0.002455218851973805,
+                        0.002095324474910439,
+                        0.0019053957547907514,
+                        0.001712132449917437
+                    ],
+                    "solution_size": [
+                        19.2,
+                        37.4,
+                        56.0,
+                        74.6,
+                        91.0
+                    ],
+                    "diversity": [
+                        0.6454973036958859,
+                        0.45344364228055356,
+                        0.35372676654352025,
+                        0.3007601555604168,
+                        0.2671461864481726
+                    ],
+                    "runtime": [
+                        14.076285373466089,
+                        21.983539241575635,
+                        32.0935067437822,
+                        43.80985390115529,
+                        55.31786488478538
+                    ],
+                    "div-runtime": [
+                        0.045857077103072484,
+                        0.02062650773825324,
+                        0.01102175494150546,
+                        0.006865125737214238,
+                        0.004829293158811856
+                    ]
+                }
+            },
+            "MWU 0.5": {
+                "xs": {
+                    "k": [
+                        22,
+                        39,
+                        57,
+                        75,
+                        93
+                    ]
+                },
+                "ys": {
+                    "data_size": [
+                        110.0,
+                        195.0,
+                        285.0,
+                        375.0,
+                        465.0
+                    ],
+                    "dmax": [
+                        1.8694350666395778,
+                        1.4252038503990125,
+                        1.087363056009728,
+                        0.9534229923118772,
+                        0.8614922985282842
+                    ],
+                    "dmin": [
+                        0.0055505919136493035,
+                        0.002455218851973805,
+                        0.002095324474910439,
+                        0.0019053957547907514,
+                        0.001712132449917437
+                    ],
+                    "solution_size": [
+                        19.4,
+                        37.2,
+                        55.2,
+                        74.6,
+                        91.0
+                    ],
+                    "diversity": [
+                        0.6380582497603096,
+                        0.45035646787342937,
+                        0.3542859125498989,
+                        0.30027583848408085,
+                        0.2701675117561961
+                    ],
+                    "runtime": [
+                        14.53062791810371,
+                        23.15018682873342,
+                        34.73135946423281,
+                        48.80604658897501,
+                        118.81195355362725
+                    ],
+                    "div-runtime": [
+                        0.043911264768217814,
+                        0.019453686106518087,
+                        0.01020074992787861,
+                        0.00615243109143594,
+                        0.0022739085056307285
+                    ]
+                }
+            },
+            "MWU 0.7": {
+                "xs": {
+                    "k": [
+                        22,
+                        39,
+                        57,
+                        75,
+                        93
+                    ]
+                },
+                "ys": {
+                    "data_size": [
+                        110.0,
+                        195.0,
+                        285.0,
+                        375.0,
+                        465.0
+                    ],
+                    "dmax": [
+                        1.8694350666395778,
+                        1.4252038503990125,
+                        1.087363056009728,
+                        0.9534229923118772,
+                        0.8614922985282842
+                    ],
+                    "dmin": [
+                        0.0055505919136493035,
+                        0.002455218851973805,
+                        0.002095324474910439,
+                        0.0019053957547907514,
+                        0.001712132449917437
+                    ],
+                    "solution_size": [
+                        20.2,
+                        36.6,
+                        55.4,
+                        74.4,
+                        87.6
+                    ],
+                    "diversity": [
+                        0.6361187653754451,
+                        0.4459103777882659,
+                        0.35369871776296363,
+                        0.29672324951721035,
+                        0.27462300578276827
+                    ],
+                    "runtime": [
+                        14.97885299064219,
+                        24.36348605256062,
+                        37.33709045695141,
+                        92.71326657230966,
+                        71.3441741135437
+                    ],
+                    "div-runtime": [
+                        0.04246778880684993,
+                        0.01830240454203804,
+                        0.00947311944862892,
+                        0.0032004400285668678,
+                        0.003849270233974646
+                    ]
+                }
+            }
+        },
+        "Census": {
+            "MWU 0.1": {
+                "xs": {
+                    "k": [
+                        25,
+                        42,
+                        61,
+                        78,
+                        95
+                    ]
+                },
+                "ys": {
+                    "data_size": [
+                        350.0,
+                        588.0,
+                        854.0,
+                        1092.0,
+                        1330.0
+                    ],
+                    "dmax": [
+                        13.941970257016811,
+                        12.130160630042464,
+                        10.843978228602733,
+                        10.079215610874227,
+                        9.38083151964686
+                    ],
+                    "dmin": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0
+                    ],
+                    "solution_size": [
+                        24.8,
+                        39.0,
+                        58.8,
+                        75.6,
+                        90.8
+                    ],
+                    "diversity": [
+                        4.642447877662292,
+                        4.471017046398521,
+                        4.024621125123533,
+                        3.7416573867739418,
+                        3.4641016151377544
+                    ],
+                    "runtime": [
+                        8.485159624600783,
+                        13.665295631578193,
+                        21.841538939625025,
+                        29.467875330289825,
+                        41.15645655507687
+                    ],
+                    "div-runtime": [
+                        0.5471255796063723,
+                        0.3271804113821552,
+                        0.18426453997808945,
+                        0.1269741148567952,
+                        0.084169092898024
+                    ]
+                }
+            },
+            "MWU 0.3": {
+                "xs": {
+                    "k": [
+                        25,
+                        42,
+                        61,
+                        78,
+                        95
+                    ]
+                },
+                "ys": {
+                    "data_size": [
+                        350.0,
+                        588.0,
+                        854.0,
+                        1092.0,
+                        1330.0
+                    ],
+                    "dmax": [
+                        13.941970257016811,
+                        12.130160630042464,
+                        10.843978228602733,
+                        10.079215610874227,
+                        9.38083151964686
+                    ],
+                    "dmin": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0
+                    ],
+                    "solution_size": [
+                        24.4,
+                        38.2,
+                        54.2,
+                        76.6,
+                        92.8
+                    ],
+                    "diversity": [
+                        4.662697121373713,
+                        4.5146730073632915,
+                        4.024621125123533,
+                        3.2781536054894915,
+                        3.2784609690826527
+                    ],
+                    "runtime": [
+                        10.205001764651389,
+                        18.044528767978772,
+                        32.26741342341993,
+                        62.481164709920996,
+                        84.39415278518572
+                    ],
+                    "div-runtime": [
+                        0.45690311759911734,
+                        0.2501962265357066,
+                        0.1247271069518833,
+                        0.052466269166217605,
+                        0.03884701559156055
+                    ]
+                }
+            },
+            "MWU 0.5": {
+                "xs": {
+                    "k": [
+                        25,
+                        42,
+                        61,
+                        78,
+                        95
+                    ]
+                },
+                "ys": {
+                    "data_size": [
+                        350.0,
+                        588.0,
+                        854.0,
+                        1092.0,
+                        1330.0
+                    ],
+                    "dmax": [
+                        13.941970257016811,
+                        12.130160630042464,
+                        10.843978228602733,
+                        10.079215610874227,
+                        9.38083151964686
+                    ],
+                    "dmin": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0
+                    ],
+                    "solution_size": [
+                        24.0,
+                        38.6,
+                        57.2,
+                        77.0,
+                        95.0
+                    ],
+                    "diversity": [
+                        4.598717322672653,
+                        4.536241020336809,
+                        4.073863375370597,
+                        3.1622776601683795,
+                        3.0
+                    ],
+                    "runtime": [
+                        11.875825207610614,
+                        22.306971611641348,
+                        42.828036996209995,
+                        84.87382208718918,
+                        139.461787485471
+                    ],
+                    "div-runtime": [
+                        0.3872334968121262,
+                        0.2033553052073406,
+                        0.09512141253943317,
+                        0.037258574933974754,
+                        0.02151126881485394
+                    ]
+                }
+            },
+            "MWU 0.7": {
+                "xs": {
+                    "k": [
+                        25,
+                        42,
+                        61,
+                        78,
+                        95
+                    ]
+                },
+                "ys": {
+                    "data_size": [
+                        350.0,
+                        588.0,
+                        854.0,
+                        1092.0,
+                        1330.0
+                    ],
+                    "dmax": [
+                        13.941970257016811,
+                        12.130160630042464,
+                        10.843978228602733,
+                        10.079215610874227,
+                        9.38083151964686
+                    ],
+                    "dmin": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0
+                    ],
+                    "solution_size": [
+                        23.8,
+                        38.4,
+                        57.4,
+                        77.4,
+                        95.0
+                    ],
+                    "diversity": [
+                        4.554501907407354,
+                        4.493104994389773,
+                        3.7807664062221624,
+                        3.1622776601683795,
+                        3.0
+                    ],
+                    "runtime": [
+                        13.564806851721368,
+                        26.715432374132796,
+                        64.62487589241937,
+                        102.76294393143617,
+                        163.47065159068444
+                    ],
+                    "div-runtime": [
+                        0.3357586994929743,
+                        0.16818387707399488,
+                        0.05850326757324813,
+                        0.030772548344647106,
+                        0.018351918040381495
                     ]
                 }
             }
@@ -8568,6 +9085,4466 @@
                 "Black/African American": 10,
                 "Native Hawaiian/Other Pacific Islander": 1,
                 "White": 41
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.1",
+            75,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 6,
+                "Black/African American": 13,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 54
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.3",
+            75,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 6,
+                "Black/African American": 13,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 54
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.5",
+            75,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 6,
+                "Black/African American": 13,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 54
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.7",
+            75,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 6,
+                "Black/African American": 13,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 54
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.1",
+            75,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 6,
+                "Black/African American": 13,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 54
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.3",
+            75,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 6,
+                "Black/African American": 13,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 54
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.5",
+            75,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": -2
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 6,
+                "Black/African American": 13,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 54
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.7",
+            75,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 6,
+                "Black/African American": 13,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 54
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.1",
+            75,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": -11
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 6,
+                "Black/African American": 13,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 54
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.3",
+            75,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 6,
+                "Black/African American": 13,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 54
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.5",
+            75,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 6,
+                "Black/African American": 13,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 54
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.7",
+            75,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 6,
+                "Black/African American": 13,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 54
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.1",
+            75,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 6,
+                "Black/African American": 13,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 54
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.3",
+            75,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": -2
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 6,
+                "Black/African American": 13,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 54
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.5",
+            75,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 6,
+                "Black/African American": 13,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 54
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.7",
+            75,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": -3
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 6,
+                "Black/African American": 13,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 54
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.1",
+            75,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 6,
+                "Black/African American": 13,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 54
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.3",
+            75,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 6,
+                "Black/African American": 13,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 54
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.5",
+            75,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 6,
+                "Black/African American": 13,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 54
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.7",
+            75,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 6,
+                "Black/African American": 13,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 54
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.1",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.3",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.5",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.7",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": -3
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.1",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.3",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.5",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": -4
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.7",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": -4
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.1",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.3",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": -1
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.5",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.7",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.1",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.3",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": -6
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.5",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": -3
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.7",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": -10
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.1",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": 0
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.3",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": -3
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.5",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": -3
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Popsim",
+            "MWU 0.7",
+            93,
+            {
+                "American Indian/Alaska Native": 0,
+                "Asian": 0,
+                "Black/African American": 0,
+                "Native Hawaiian/Other Pacific Islander": 0,
+                "White": -10
+            },
+            {
+                "American Indian/Alaska Native": 1,
+                "Asian": 7,
+                "Black/African American": 16,
+                "Native Hawaiian/Other Pacific Islander": 1,
+                "White": 68
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.1",
+            25,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 2,
+                "1": 1,
+                "10": 2,
+                "11": 2,
+                "12": 2,
+                "13": 2,
+                "2": 2,
+                "3": 2,
+                "4": 2,
+                "5": 2,
+                "6": 1,
+                "7": 2,
+                "8": 1,
+                "9": 2
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.3",
+            25,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": -1,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 2,
+                "1": 1,
+                "10": 2,
+                "11": 2,
+                "12": 2,
+                "13": 2,
+                "2": 2,
+                "3": 2,
+                "4": 2,
+                "5": 2,
+                "6": 1,
+                "7": 2,
+                "8": 1,
+                "9": 2
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.5",
+            25,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 2,
+                "1": 1,
+                "10": 2,
+                "11": 2,
+                "12": 2,
+                "13": 2,
+                "2": 2,
+                "3": 2,
+                "4": 2,
+                "5": 2,
+                "6": 1,
+                "7": 2,
+                "8": 1,
+                "9": 2
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.7",
+            25,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 2,
+                "1": 1,
+                "10": 2,
+                "11": 2,
+                "12": 2,
+                "13": 2,
+                "2": 2,
+                "3": 2,
+                "4": 2,
+                "5": 2,
+                "6": 1,
+                "7": 2,
+                "8": 1,
+                "9": 2
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.1",
+            25,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 2,
+                "1": 1,
+                "10": 2,
+                "11": 2,
+                "12": 2,
+                "13": 2,
+                "2": 2,
+                "3": 2,
+                "4": 2,
+                "5": 2,
+                "6": 1,
+                "7": 2,
+                "8": 1,
+                "9": 2
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.3",
+            25,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 2,
+                "1": 1,
+                "10": 2,
+                "11": 2,
+                "12": 2,
+                "13": 2,
+                "2": 2,
+                "3": 2,
+                "4": 2,
+                "5": 2,
+                "6": 1,
+                "7": 2,
+                "8": 1,
+                "9": 2
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.5",
+            25,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 2,
+                "1": 1,
+                "10": 2,
+                "11": 2,
+                "12": 2,
+                "13": 2,
+                "2": 2,
+                "3": 2,
+                "4": 2,
+                "5": 2,
+                "6": 1,
+                "7": 2,
+                "8": 1,
+                "9": 2
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.7",
+            25,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 2,
+                "1": 1,
+                "10": 2,
+                "11": 2,
+                "12": 2,
+                "13": 2,
+                "2": 2,
+                "3": 2,
+                "4": 2,
+                "5": 2,
+                "6": 1,
+                "7": 2,
+                "8": 1,
+                "9": 2
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.1",
+            25,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": -1,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 2,
+                "1": 1,
+                "10": 2,
+                "11": 2,
+                "12": 2,
+                "13": 2,
+                "2": 2,
+                "3": 2,
+                "4": 2,
+                "5": 2,
+                "6": 1,
+                "7": 2,
+                "8": 1,
+                "9": 2
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.3",
+            25,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": -1,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 2,
+                "1": 1,
+                "10": 2,
+                "11": 2,
+                "12": 2,
+                "13": 2,
+                "2": 2,
+                "3": 2,
+                "4": 2,
+                "5": 2,
+                "6": 1,
+                "7": 2,
+                "8": 1,
+                "9": 2
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.5",
+            25,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": -2,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": -1
+            },
+            {
+                "0": 2,
+                "1": 1,
+                "10": 2,
+                "11": 2,
+                "12": 2,
+                "13": 2,
+                "2": 2,
+                "3": 2,
+                "4": 2,
+                "5": 2,
+                "6": 1,
+                "7": 2,
+                "8": 1,
+                "9": 2
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.7",
+            25,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": -2,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": -1
+            },
+            {
+                "0": 2,
+                "1": 1,
+                "10": 2,
+                "11": 2,
+                "12": 2,
+                "13": 2,
+                "2": 2,
+                "3": 2,
+                "4": 2,
+                "5": 2,
+                "6": 1,
+                "7": 2,
+                "8": 1,
+                "9": 2
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.1",
+            25,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 2,
+                "1": 1,
+                "10": 2,
+                "11": 2,
+                "12": 2,
+                "13": 2,
+                "2": 2,
+                "3": 2,
+                "4": 2,
+                "5": 2,
+                "6": 1,
+                "7": 2,
+                "8": 1,
+                "9": 2
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.3",
+            25,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 2,
+                "1": 1,
+                "10": 2,
+                "11": 2,
+                "12": 2,
+                "13": 2,
+                "2": 2,
+                "3": 2,
+                "4": 2,
+                "5": 2,
+                "6": 1,
+                "7": 2,
+                "8": 1,
+                "9": 2
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.5",
+            25,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": -1,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 2,
+                "1": 1,
+                "10": 2,
+                "11": 2,
+                "12": 2,
+                "13": 2,
+                "2": 2,
+                "3": 2,
+                "4": 2,
+                "5": 2,
+                "6": 1,
+                "7": 2,
+                "8": 1,
+                "9": 2
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.7",
+            25,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": -1,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 2,
+                "1": 1,
+                "10": 2,
+                "11": 2,
+                "12": 2,
+                "13": 2,
+                "2": 2,
+                "3": 2,
+                "4": 2,
+                "5": 2,
+                "6": 1,
+                "7": 2,
+                "8": 1,
+                "9": 2
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.1",
+            25,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 2,
+                "1": 1,
+                "10": 2,
+                "11": 2,
+                "12": 2,
+                "13": 2,
+                "2": 2,
+                "3": 2,
+                "4": 2,
+                "5": 2,
+                "6": 1,
+                "7": 2,
+                "8": 1,
+                "9": 2
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.3",
+            25,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": -1,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 2,
+                "1": 1,
+                "10": 2,
+                "11": 2,
+                "12": 2,
+                "13": 2,
+                "2": 2,
+                "3": 2,
+                "4": 2,
+                "5": 2,
+                "6": 1,
+                "7": 2,
+                "8": 1,
+                "9": 2
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.5",
+            25,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": -1,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 2,
+                "1": 1,
+                "10": 2,
+                "11": 2,
+                "12": 2,
+                "13": 2,
+                "2": 2,
+                "3": 2,
+                "4": 2,
+                "5": 2,
+                "6": 1,
+                "7": 2,
+                "8": 1,
+                "9": 2
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.7",
+            25,
+            {
+                "0": 0,
+                "1": 0,
+                "10": -1,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": -1,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 2,
+                "1": 1,
+                "10": 2,
+                "11": 2,
+                "12": 2,
+                "13": 2,
+                "2": 2,
+                "3": 2,
+                "4": 2,
+                "5": 2,
+                "6": 1,
+                "7": 2,
+                "8": 1,
+                "9": 2
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.1",
+            42,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": -2,
+                "4": 0,
+                "5": 0,
+                "6": -1,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 4,
+                "1": 2,
+                "10": 4,
+                "11": 3,
+                "12": 3,
+                "13": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 2,
+                "7": 4,
+                "8": 2,
+                "9": 3
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.3",
+            42,
+            {
+                "0": 0,
+                "1": 0,
+                "10": -2,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": -2,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 4,
+                "1": 2,
+                "10": 4,
+                "11": 3,
+                "12": 3,
+                "13": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 2,
+                "7": 4,
+                "8": 2,
+                "9": 3
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.5",
+            42,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": -2,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 4,
+                "1": 2,
+                "10": 4,
+                "11": 3,
+                "12": 3,
+                "13": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 2,
+                "7": 4,
+                "8": 2,
+                "9": 3
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.7",
+            42,
+            {
+                "0": -1,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": -1,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 4,
+                "1": 2,
+                "10": 4,
+                "11": 3,
+                "12": 3,
+                "13": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 2,
+                "7": 4,
+                "8": 2,
+                "9": 3
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.1",
+            42,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": -2,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": -2
+            },
+            {
+                "0": 4,
+                "1": 2,
+                "10": 4,
+                "11": 3,
+                "12": 3,
+                "13": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 2,
+                "7": 4,
+                "8": 2,
+                "9": 3
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.3",
+            42,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": -2,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": -1
+            },
+            {
+                "0": 4,
+                "1": 2,
+                "10": 4,
+                "11": 3,
+                "12": 3,
+                "13": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 2,
+                "7": 4,
+                "8": 2,
+                "9": 3
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.5",
+            42,
+            {
+                "0": 0,
+                "1": -1,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": -2,
+                "5": -1,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": -1
+            },
+            {
+                "0": 4,
+                "1": 2,
+                "10": 4,
+                "11": 3,
+                "12": 3,
+                "13": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 2,
+                "7": 4,
+                "8": 2,
+                "9": 3
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.7",
+            42,
+            {
+                "0": -1,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": -3,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": -2
+            },
+            {
+                "0": 4,
+                "1": 2,
+                "10": 4,
+                "11": 3,
+                "12": 3,
+                "13": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 2,
+                "7": 4,
+                "8": 2,
+                "9": 3
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.1",
+            42,
+            {
+                "0": 0,
+                "1": 0,
+                "10": -1,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": -1,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": -1,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 4,
+                "1": 2,
+                "10": 4,
+                "11": 3,
+                "12": 3,
+                "13": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 2,
+                "7": 4,
+                "8": 2,
+                "9": 3
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.3",
+            42,
+            {
+                "0": 0,
+                "1": 0,
+                "10": -3,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": -1,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 4,
+                "1": 2,
+                "10": 4,
+                "11": 3,
+                "12": 3,
+                "13": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 2,
+                "7": 4,
+                "8": 2,
+                "9": 3
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.5",
+            42,
+            {
+                "0": 0,
+                "1": 0,
+                "10": -1,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": -1,
+                "8": 0,
+                "9": -1
+            },
+            {
+                "0": 4,
+                "1": 2,
+                "10": 4,
+                "11": 3,
+                "12": 3,
+                "13": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 2,
+                "7": 4,
+                "8": 2,
+                "9": 3
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.7",
+            42,
+            {
+                "0": 0,
+                "1": -2,
+                "10": -2,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 4,
+                "1": 2,
+                "10": 4,
+                "11": 3,
+                "12": 3,
+                "13": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 2,
+                "7": 4,
+                "8": 2,
+                "9": 3
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.1",
+            42,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": -3,
+                "3": 0,
+                "4": 0,
+                "5": -1,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 4,
+                "1": 2,
+                "10": 4,
+                "11": 3,
+                "12": 3,
+                "13": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 2,
+                "7": 4,
+                "8": 2,
+                "9": 3
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.3",
+            42,
+            {
+                "0": 0,
+                "1": 0,
+                "10": -2,
+                "11": 0,
+                "12": -1,
+                "13": 0,
+                "2": -3,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 4,
+                "1": 2,
+                "10": 4,
+                "11": 3,
+                "12": 3,
+                "13": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 2,
+                "7": 4,
+                "8": 2,
+                "9": 3
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.5",
+            42,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": -1,
+                "12": 0,
+                "13": 0,
+                "2": -3,
+                "3": -1,
+                "4": 0,
+                "5": -1,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 4,
+                "1": 2,
+                "10": 4,
+                "11": 3,
+                "12": 3,
+                "13": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 2,
+                "7": 4,
+                "8": 2,
+                "9": 3
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.7",
+            42,
+            {
+                "0": 0,
+                "1": 0,
+                "10": -1,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": -3,
+                "3": -1,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 4,
+                "1": 2,
+                "10": 4,
+                "11": 3,
+                "12": 3,
+                "13": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 2,
+                "7": 4,
+                "8": 2,
+                "9": 3
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.1",
+            42,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": -1,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 4,
+                "1": 2,
+                "10": 4,
+                "11": 3,
+                "12": 3,
+                "13": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 2,
+                "7": 4,
+                "8": 2,
+                "9": 3
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.3",
+            42,
+            {
+                "0": 0,
+                "1": 0,
+                "10": -2,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 4,
+                "1": 2,
+                "10": 4,
+                "11": 3,
+                "12": 3,
+                "13": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 2,
+                "7": 4,
+                "8": 2,
+                "9": 3
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.5",
+            42,
+            {
+                "0": 0,
+                "1": 0,
+                "10": -1,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 4,
+                "1": 2,
+                "10": 4,
+                "11": 3,
+                "12": 3,
+                "13": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 2,
+                "7": 4,
+                "8": 2,
+                "9": 3
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.7",
+            42,
+            {
+                "0": -1,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 4,
+                "1": 2,
+                "10": 4,
+                "11": 3,
+                "12": 3,
+                "13": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 2,
+                "7": 4,
+                "8": 2,
+                "9": 3
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.1",
+            61,
+            {
+                "0": -3,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": -3,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 6,
+                "1": 3,
+                "10": 5,
+                "11": 4,
+                "12": 4,
+                "13": 5,
+                "2": 5,
+                "3": 5,
+                "4": 4,
+                "5": 4,
+                "6": 3,
+                "7": 5,
+                "8": 3,
+                "9": 5
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.3",
+            61,
+            {
+                "0": -3,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": -2,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 6,
+                "1": 3,
+                "10": 5,
+                "11": 4,
+                "12": 4,
+                "13": 5,
+                "2": 5,
+                "3": 5,
+                "4": 4,
+                "5": 4,
+                "6": 3,
+                "7": 5,
+                "8": 3,
+                "9": 5
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.5",
+            61,
+            {
+                "0": -2,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 6,
+                "1": 3,
+                "10": 5,
+                "11": 4,
+                "12": 4,
+                "13": 5,
+                "2": 5,
+                "3": 5,
+                "4": 4,
+                "5": 4,
+                "6": 3,
+                "7": 5,
+                "8": 3,
+                "9": 5
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.7",
+            61,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": -3,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 6,
+                "1": 3,
+                "10": 5,
+                "11": 4,
+                "12": 4,
+                "13": 5,
+                "2": 5,
+                "3": 5,
+                "4": 4,
+                "5": 4,
+                "6": 3,
+                "7": 5,
+                "8": 3,
+                "9": 5
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.1",
+            61,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": -2
+            },
+            {
+                "0": 6,
+                "1": 3,
+                "10": 5,
+                "11": 4,
+                "12": 4,
+                "13": 5,
+                "2": 5,
+                "3": 5,
+                "4": 4,
+                "5": 4,
+                "6": 3,
+                "7": 5,
+                "8": 3,
+                "9": 5
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.3",
+            61,
+            {
+                "0": 0,
+                "1": 0,
+                "10": -2,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": -2,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": -3
+            },
+            {
+                "0": 6,
+                "1": 3,
+                "10": 5,
+                "11": 4,
+                "12": 4,
+                "13": 5,
+                "2": 5,
+                "3": 5,
+                "4": 4,
+                "5": 4,
+                "6": 3,
+                "7": 5,
+                "8": 3,
+                "9": 5
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.5",
+            61,
+            {
+                "0": -1,
+                "1": 0,
+                "10": 0,
+                "11": -2,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": -2
+            },
+            {
+                "0": 6,
+                "1": 3,
+                "10": 5,
+                "11": 4,
+                "12": 4,
+                "13": 5,
+                "2": 5,
+                "3": 5,
+                "4": 4,
+                "5": 4,
+                "6": 3,
+                "7": 5,
+                "8": 3,
+                "9": 5
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.7",
+            61,
+            {
+                "0": -3,
+                "1": 0,
+                "10": 0,
+                "11": -1,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": -1
+            },
+            {
+                "0": 6,
+                "1": 3,
+                "10": 5,
+                "11": 4,
+                "12": 4,
+                "13": 5,
+                "2": 5,
+                "3": 5,
+                "4": 4,
+                "5": 4,
+                "6": 3,
+                "7": 5,
+                "8": 3,
+                "9": 5
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.1",
+            61,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": -1,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": -1,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 6,
+                "1": 3,
+                "10": 5,
+                "11": 4,
+                "12": 4,
+                "13": 5,
+                "2": 5,
+                "3": 5,
+                "4": 4,
+                "5": 4,
+                "6": 3,
+                "7": 5,
+                "8": 3,
+                "9": 5
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.3",
+            61,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": -4,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": -1,
+                "4": 0,
+                "5": -1,
+                "6": 0,
+                "7": -3,
+                "8": -1,
+                "9": 0
+            },
+            {
+                "0": 6,
+                "1": 3,
+                "10": 5,
+                "11": 4,
+                "12": 4,
+                "13": 5,
+                "2": 5,
+                "3": 5,
+                "4": 4,
+                "5": 4,
+                "6": 3,
+                "7": 5,
+                "8": 3,
+                "9": 5
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.5",
+            61,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": -3,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 6,
+                "1": 3,
+                "10": 5,
+                "11": 4,
+                "12": 4,
+                "13": 5,
+                "2": 5,
+                "3": 5,
+                "4": 4,
+                "5": 4,
+                "6": 3,
+                "7": 5,
+                "8": 3,
+                "9": 5
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.7",
+            61,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": -2,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": -1,
+                "4": 0,
+                "5": -1,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 6,
+                "1": 3,
+                "10": 5,
+                "11": 4,
+                "12": 4,
+                "13": 5,
+                "2": 5,
+                "3": 5,
+                "4": 4,
+                "5": 4,
+                "6": 3,
+                "7": 5,
+                "8": 3,
+                "9": 5
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.1",
+            61,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 6,
+                "1": 3,
+                "10": 5,
+                "11": 4,
+                "12": 4,
+                "13": 5,
+                "2": 5,
+                "3": 5,
+                "4": 4,
+                "5": 4,
+                "6": 3,
+                "7": 5,
+                "8": 3,
+                "9": 5
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.3",
+            61,
+            {
+                "0": 0,
+                "1": 0,
+                "10": -1,
+                "11": -2,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": -2
+            },
+            {
+                "0": 6,
+                "1": 3,
+                "10": 5,
+                "11": 4,
+                "12": 4,
+                "13": 5,
+                "2": 5,
+                "3": 5,
+                "4": 4,
+                "5": 4,
+                "6": 3,
+                "7": 5,
+                "8": 3,
+                "9": 5
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.5",
+            61,
+            {
+                "0": 0,
+                "1": 0,
+                "10": -2,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": -2
+            },
+            {
+                "0": 6,
+                "1": 3,
+                "10": 5,
+                "11": 4,
+                "12": 4,
+                "13": 5,
+                "2": 5,
+                "3": 5,
+                "4": 4,
+                "5": 4,
+                "6": 3,
+                "7": 5,
+                "8": 3,
+                "9": 5
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.7",
+            61,
+            {
+                "0": -1,
+                "1": 0,
+                "10": 0,
+                "11": -1,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": -2,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": -2
+            },
+            {
+                "0": 6,
+                "1": 3,
+                "10": 5,
+                "11": 4,
+                "12": 4,
+                "13": 5,
+                "2": 5,
+                "3": 5,
+                "4": 4,
+                "5": 4,
+                "6": 3,
+                "7": 5,
+                "8": 3,
+                "9": 5
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.1",
+            61,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": -1,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 6,
+                "1": 3,
+                "10": 5,
+                "11": 4,
+                "12": 4,
+                "13": 5,
+                "2": 5,
+                "3": 5,
+                "4": 4,
+                "5": 4,
+                "6": 3,
+                "7": 5,
+                "8": 3,
+                "9": 5
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.3",
+            61,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": -3,
+                "13": 0,
+                "2": 0,
+                "3": -4,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 6,
+                "1": 3,
+                "10": 5,
+                "11": 4,
+                "12": 4,
+                "13": 5,
+                "2": 5,
+                "3": 5,
+                "4": 4,
+                "5": 4,
+                "6": 3,
+                "7": 5,
+                "8": 3,
+                "9": 5
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.5",
+            61,
+            {
+                "0": 0,
+                "1": -1,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": -1,
+                "2": 0,
+                "3": -1,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": -2,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 6,
+                "1": 3,
+                "10": 5,
+                "11": 4,
+                "12": 4,
+                "13": 5,
+                "2": 5,
+                "3": 5,
+                "4": 4,
+                "5": 4,
+                "6": 3,
+                "7": 5,
+                "8": 3,
+                "9": 5
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.7",
+            61,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 6,
+                "1": 3,
+                "10": 5,
+                "11": 4,
+                "12": 4,
+                "13": 5,
+                "2": 5,
+                "3": 5,
+                "4": 4,
+                "5": 4,
+                "6": 3,
+                "7": 5,
+                "8": 3,
+                "9": 5
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.1",
+            78,
+            {
+                "0": -3,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 7,
+                "1": 4,
+                "10": 7,
+                "11": 5,
+                "12": 6,
+                "13": 6,
+                "2": 6,
+                "3": 6,
+                "4": 5,
+                "5": 5,
+                "6": 4,
+                "7": 7,
+                "8": 4,
+                "9": 6
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.3",
+            78,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 7,
+                "1": 4,
+                "10": 7,
+                "11": 5,
+                "12": 6,
+                "13": 6,
+                "2": 6,
+                "3": 6,
+                "4": 5,
+                "5": 5,
+                "6": 4,
+                "7": 7,
+                "8": 4,
+                "9": 6
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.5",
+            78,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 7,
+                "1": 4,
+                "10": 7,
+                "11": 5,
+                "12": 6,
+                "13": 6,
+                "2": 6,
+                "3": 6,
+                "4": 5,
+                "5": 5,
+                "6": 4,
+                "7": 7,
+                "8": 4,
+                "9": 6
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.7",
+            78,
+            {
+                "0": -2,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 7,
+                "1": 4,
+                "10": 7,
+                "11": 5,
+                "12": 6,
+                "13": 6,
+                "2": 6,
+                "3": 6,
+                "4": 5,
+                "5": 5,
+                "6": 4,
+                "7": 7,
+                "8": 4,
+                "9": 6
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.1",
+            78,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 7,
+                "1": 4,
+                "10": 7,
+                "11": 5,
+                "12": 6,
+                "13": 6,
+                "2": 6,
+                "3": 6,
+                "4": 5,
+                "5": 5,
+                "6": 4,
+                "7": 7,
+                "8": 4,
+                "9": 6
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.3",
+            78,
+            {
+                "0": -1,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 7,
+                "1": 4,
+                "10": 7,
+                "11": 5,
+                "12": 6,
+                "13": 6,
+                "2": 6,
+                "3": 6,
+                "4": 5,
+                "5": 5,
+                "6": 4,
+                "7": 7,
+                "8": 4,
+                "9": 6
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.5",
+            78,
+            {
+                "0": -5,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 7,
+                "1": 4,
+                "10": 7,
+                "11": 5,
+                "12": 6,
+                "13": 6,
+                "2": 6,
+                "3": 6,
+                "4": 5,
+                "5": 5,
+                "6": 4,
+                "7": 7,
+                "8": 4,
+                "9": 6
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.7",
+            78,
+            {
+                "0": -1,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 7,
+                "1": 4,
+                "10": 7,
+                "11": 5,
+                "12": 6,
+                "13": 6,
+                "2": 6,
+                "3": 6,
+                "4": 5,
+                "5": 5,
+                "6": 4,
+                "7": 7,
+                "8": 4,
+                "9": 6
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.1",
+            78,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": -1,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 7,
+                "1": 4,
+                "10": 7,
+                "11": 5,
+                "12": 6,
+                "13": 6,
+                "2": 6,
+                "3": 6,
+                "4": 5,
+                "5": 5,
+                "6": 4,
+                "7": 7,
+                "8": 4,
+                "9": 6
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.3",
+            78,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 7,
+                "1": 4,
+                "10": 7,
+                "11": 5,
+                "12": 6,
+                "13": 6,
+                "2": 6,
+                "3": 6,
+                "4": 5,
+                "5": 5,
+                "6": 4,
+                "7": 7,
+                "8": 4,
+                "9": 6
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.5",
+            78,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 7,
+                "1": 4,
+                "10": 7,
+                "11": 5,
+                "12": 6,
+                "13": 6,
+                "2": 6,
+                "3": 6,
+                "4": 5,
+                "5": 5,
+                "6": 4,
+                "7": 7,
+                "8": 4,
+                "9": 6
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.7",
+            78,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 7,
+                "1": 4,
+                "10": 7,
+                "11": 5,
+                "12": 6,
+                "13": 6,
+                "2": 6,
+                "3": 6,
+                "4": 5,
+                "5": 5,
+                "6": 4,
+                "7": 7,
+                "8": 4,
+                "9": 6
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.1",
+            78,
+            {
+                "0": -2,
+                "1": 0,
+                "10": -1,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": -1,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 7,
+                "1": 4,
+                "10": 7,
+                "11": 5,
+                "12": 6,
+                "13": 6,
+                "2": 6,
+                "3": 6,
+                "4": 5,
+                "5": 5,
+                "6": 4,
+                "7": 7,
+                "8": 4,
+                "9": 6
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.3",
+            78,
+            {
+                "0": -3,
+                "1": 0,
+                "10": -1,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": -1,
+                "3": 0,
+                "4": -1,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 7,
+                "1": 4,
+                "10": 7,
+                "11": 5,
+                "12": 6,
+                "13": 6,
+                "2": 6,
+                "3": 6,
+                "4": 5,
+                "5": 5,
+                "6": 4,
+                "7": 7,
+                "8": 4,
+                "9": 6
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.5",
+            78,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 7,
+                "1": 4,
+                "10": 7,
+                "11": 5,
+                "12": 6,
+                "13": 6,
+                "2": 6,
+                "3": 6,
+                "4": 5,
+                "5": 5,
+                "6": 4,
+                "7": 7,
+                "8": 4,
+                "9": 6
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.7",
+            78,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 7,
+                "1": 4,
+                "10": 7,
+                "11": 5,
+                "12": 6,
+                "13": 6,
+                "2": 6,
+                "3": 6,
+                "4": 5,
+                "5": 5,
+                "6": 4,
+                "7": 7,
+                "8": 4,
+                "9": 6
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.1",
+            78,
+            {
+                "0": -2,
+                "1": 0,
+                "10": -2,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 7,
+                "1": 4,
+                "10": 7,
+                "11": 5,
+                "12": 6,
+                "13": 6,
+                "2": 6,
+                "3": 6,
+                "4": 5,
+                "5": 5,
+                "6": 4,
+                "7": 7,
+                "8": 4,
+                "9": 6
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.3",
+            78,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 7,
+                "1": 4,
+                "10": 7,
+                "11": 5,
+                "12": 6,
+                "13": 6,
+                "2": 6,
+                "3": 6,
+                "4": 5,
+                "5": 5,
+                "6": 4,
+                "7": 7,
+                "8": 4,
+                "9": 6
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.5",
+            78,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 7,
+                "1": 4,
+                "10": 7,
+                "11": 5,
+                "12": 6,
+                "13": 6,
+                "2": 6,
+                "3": 6,
+                "4": 5,
+                "5": 5,
+                "6": 4,
+                "7": 7,
+                "8": 4,
+                "9": 6
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.7",
+            78,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 7,
+                "1": 4,
+                "10": 7,
+                "11": 5,
+                "12": 6,
+                "13": 6,
+                "2": 6,
+                "3": 6,
+                "4": 5,
+                "5": 5,
+                "6": 4,
+                "7": 7,
+                "8": 4,
+                "9": 6
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.1",
+            95,
+            {
+                "0": -5,
+                "1": 0,
+                "10": -3,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 9,
+                "1": 5,
+                "10": 8,
+                "11": 6,
+                "12": 7,
+                "13": 8,
+                "2": 7,
+                "3": 8,
+                "4": 6,
+                "5": 6,
+                "6": 5,
+                "7": 8,
+                "8": 5,
+                "9": 7
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.3",
+            95,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 9,
+                "1": 5,
+                "10": 8,
+                "11": 6,
+                "12": 7,
+                "13": 8,
+                "2": 7,
+                "3": 8,
+                "4": 6,
+                "5": 6,
+                "6": 5,
+                "7": 8,
+                "8": 5,
+                "9": 7
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.5",
+            95,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 9,
+                "1": 5,
+                "10": 8,
+                "11": 6,
+                "12": 7,
+                "13": 8,
+                "2": 7,
+                "3": 8,
+                "4": 6,
+                "5": 6,
+                "6": 5,
+                "7": 8,
+                "8": 5,
+                "9": 7
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.7",
+            95,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 9,
+                "1": 5,
+                "10": 8,
+                "11": 6,
+                "12": 7,
+                "13": 8,
+                "2": 7,
+                "3": 8,
+                "4": 6,
+                "5": 6,
+                "6": 5,
+                "7": 8,
+                "8": 5,
+                "9": 7
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.1",
+            95,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 9,
+                "1": 5,
+                "10": 8,
+                "11": 6,
+                "12": 7,
+                "13": 8,
+                "2": 7,
+                "3": 8,
+                "4": 6,
+                "5": 6,
+                "6": 5,
+                "7": 8,
+                "8": 5,
+                "9": 7
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.3",
+            95,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 9,
+                "1": 5,
+                "10": 8,
+                "11": 6,
+                "12": 7,
+                "13": 8,
+                "2": 7,
+                "3": 8,
+                "4": 6,
+                "5": 6,
+                "6": 5,
+                "7": 8,
+                "8": 5,
+                "9": 7
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.5",
+            95,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 9,
+                "1": 5,
+                "10": 8,
+                "11": 6,
+                "12": 7,
+                "13": 8,
+                "2": 7,
+                "3": 8,
+                "4": 6,
+                "5": 6,
+                "6": 5,
+                "7": 8,
+                "8": 5,
+                "9": 7
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.7",
+            95,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 9,
+                "1": 5,
+                "10": 8,
+                "11": 6,
+                "12": 7,
+                "13": 8,
+                "2": 7,
+                "3": 8,
+                "4": 6,
+                "5": 6,
+                "6": 5,
+                "7": 8,
+                "8": 5,
+                "9": 7
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.1",
+            95,
+            {
+                "0": -4,
+                "1": 0,
+                "10": -3,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 9,
+                "1": 5,
+                "10": 8,
+                "11": 6,
+                "12": 7,
+                "13": 8,
+                "2": 7,
+                "3": 8,
+                "4": 6,
+                "5": 6,
+                "6": 5,
+                "7": 8,
+                "8": 5,
+                "9": 7
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.3",
+            95,
+            {
+                "0": 0,
+                "1": 0,
+                "10": -3,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 9,
+                "1": 5,
+                "10": 8,
+                "11": 6,
+                "12": 7,
+                "13": 8,
+                "2": 7,
+                "3": 8,
+                "4": 6,
+                "5": 6,
+                "6": 5,
+                "7": 8,
+                "8": 5,
+                "9": 7
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.5",
+            95,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 9,
+                "1": 5,
+                "10": 8,
+                "11": 6,
+                "12": 7,
+                "13": 8,
+                "2": 7,
+                "3": 8,
+                "4": 6,
+                "5": 6,
+                "6": 5,
+                "7": 8,
+                "8": 5,
+                "9": 7
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.7",
+            95,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 9,
+                "1": 5,
+                "10": 8,
+                "11": 6,
+                "12": 7,
+                "13": 8,
+                "2": 7,
+                "3": 8,
+                "4": 6,
+                "5": 6,
+                "6": 5,
+                "7": 8,
+                "8": 5,
+                "9": 7
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.1",
+            95,
+            {
+                "0": -4,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 9,
+                "1": 5,
+                "10": 8,
+                "11": 6,
+                "12": 7,
+                "13": 8,
+                "2": 7,
+                "3": 8,
+                "4": 6,
+                "5": 6,
+                "6": 5,
+                "7": 8,
+                "8": 5,
+                "9": 7
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.3",
+            95,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 9,
+                "1": 5,
+                "10": 8,
+                "11": 6,
+                "12": 7,
+                "13": 8,
+                "2": 7,
+                "3": 8,
+                "4": 6,
+                "5": 6,
+                "6": 5,
+                "7": 8,
+                "8": 5,
+                "9": 7
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.5",
+            95,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 9,
+                "1": 5,
+                "10": 8,
+                "11": 6,
+                "12": 7,
+                "13": 8,
+                "2": 7,
+                "3": 8,
+                "4": 6,
+                "5": 6,
+                "6": 5,
+                "7": 8,
+                "8": 5,
+                "9": 7
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.7",
+            95,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 9,
+                "1": 5,
+                "10": 8,
+                "11": 6,
+                "12": 7,
+                "13": 8,
+                "2": 7,
+                "3": 8,
+                "4": 6,
+                "5": 6,
+                "6": 5,
+                "7": 8,
+                "8": 5,
+                "9": 7
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.1",
+            95,
+            {
+                "0": -1,
+                "1": 0,
+                "10": -1,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 9,
+                "1": 5,
+                "10": 8,
+                "11": 6,
+                "12": 7,
+                "13": 8,
+                "2": 7,
+                "3": 8,
+                "4": 6,
+                "5": 6,
+                "6": 5,
+                "7": 8,
+                "8": 5,
+                "9": 7
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.3",
+            95,
+            {
+                "0": -4,
+                "1": 0,
+                "10": -3,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": -1,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 9,
+                "1": 5,
+                "10": 8,
+                "11": 6,
+                "12": 7,
+                "13": 8,
+                "2": 7,
+                "3": 8,
+                "4": 6,
+                "5": 6,
+                "6": 5,
+                "7": 8,
+                "8": 5,
+                "9": 7
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.5",
+            95,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 9,
+                "1": 5,
+                "10": 8,
+                "11": 6,
+                "12": 7,
+                "13": 8,
+                "2": 7,
+                "3": 8,
+                "4": 6,
+                "5": 6,
+                "6": 5,
+                "7": 8,
+                "8": 5,
+                "9": 7
+            }
+        ],
+        [
+            "Census",
+            "MWU 0.7",
+            95,
+            {
+                "0": 0,
+                "1": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+            },
+            {
+                "0": 9,
+                "1": 5,
+                "10": 8,
+                "11": 6,
+                "12": 7,
+                "13": 8,
+                "2": 7,
+                "3": 8,
+                "4": 6,
+                "5": 6,
+                "6": 5,
+                "7": 8,
+                "8": 5,
+                "9": 7
             }
         ]
     ]

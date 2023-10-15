@@ -1,0 +1,91 @@
+{
+    "setup": {
+        "datasets": {
+            "Popsim_1M": {
+                "data_dir": "./datasets/popsim_1M",
+                "color_fields": [
+                    "race"
+                ],
+                "feature_fields": [
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "normalize": true,
+                "filter_unique": false,
+                "points_per_color": {
+                    "White": 614099,
+                    "Black/African American": 141083,
+                    "Asian": 58671,
+                    "Native Hawaiian/Other Pacific Islander": 335,
+                    "American Indian/Alaska Native": 7616
+                },
+                "size": 821804
+            }
+        },
+        "algorithms": {
+            "FMMD-S": {
+                "alg": "FMMD-S",
+                "color": "#05faee",
+                "marker": "s",
+                "use_coreset": false,
+                "use_dmax": false,
+                "use_dmin": false,
+                "epsilon": 0.15,
+                "timeout": 1800
+            },
+            "FairFlow": {
+                "alg": "FairFlow",
+                "color": "#052efa",
+                "marker": "p",
+                "use_coreset": true,
+                "use_dmax": false,
+                "use_dmin": false,
+                "timeout": 1800
+            },
+            "FairGreedyFlow": {
+                "alg": "FairGreedyFlow",
+                "color": "#faac05",
+                "marker": "v",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": true,
+                "epsilon": 0.15,
+                "timeout": 1800
+            },
+            "SFDM-2 (e=.15)": {
+                "alg": "SFDM-2",
+                "color": "#4afc03",
+                "marker": "+",
+                "use_coreset": false,
+                "use_dmax": true,
+                "use_dmin": true,
+                "epsilon": 0.15,
+                "timeout": 1800
+            },
+            "SFDM-2 (e=.75)": {
+                "alg": "SFDM-2",
+                "color": "#1b5902",
+                "marker": "x",
+                "use_coreset": false,
+                "use_dmax": true,
+                "use_dmin": true,
+                "epsilon": 0.75,
+                "timeout": 1800
+            }
+        },
+        "parameters": {
+            "k": [
+                20,
+                101,
+                20
+            ],
+            "observations": 5,
+            "buildkis_alpha": 0.1,
+            "buildkis_equal_k_js": false
+        }
+    },
+    "results": {},
+    "alg_status": [],
+    "color_results": []
+}
