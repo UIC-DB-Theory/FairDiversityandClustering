@@ -78,22 +78,22 @@ def plot(y_key, x_key, ylogscale = False):
     
     ax_legend = plt.subplot(grid_specs[0])
     ax_legend.set_ylabel(y_key, fontsize="16")
-    # ax_legend.legend(
-    #     handles=legend_handles[:len(setup["algorithms"])],
-    #     ncol=len(setup["algorithms"]),
-    #     loc='lower left', 
-    #     bbox_to_anchor=(0.3, 1.1),
-    #     borderaxespad=0,
-    #     fontsize="20"
-    # )
     ax_legend.legend(
         handles=legend_handles[:len(setup["algorithms"])],
         ncol=len(setup["algorithms"]),
         loc='lower left', 
-        bbox_to_anchor=(1.4, 1.1),
+        bbox_to_anchor=(0.3, 1.1),
         borderaxespad=0,
         fontsize="20"
     )
+    # ax_legend.legend(
+    #     handles=legend_handles[:len(setup["algorithms"])],
+    #     ncol=len(setup["algorithms"]),
+    #     loc='lower left', 
+    #     bbox_to_anchor=(1.4, 1.1),
+    #     borderaxespad=0,
+    #     fontsize="20"
+    # )
     plt.tight_layout(pad=2.0)
     plt.savefig(f'{plot_dir}/{y_key}_vs_{x_key}', dpi=300, bbox_inches='tight')
 
@@ -234,8 +234,9 @@ def plot_color_results(algorithm):
             bottom += returned_counts[color]
         ax.set_xticks(ind + width/2 + 0.025, ks)
         ax.set_title(f'{dataset}')
-        ax.set_xlabel('k')
-        ax.set_ylabel('color ratios')
+        ax.set_xlabel('k', fontsize="14")
+        ax.set_ylabel('color ratios', fontsize="14")
+        ax.tick_params(axis='both', which='major', labelsize=18)
         handles, labels = ax.get_legend_handles_labels()
         # ax.legend(
         #     handles[::-1], labels[::-1],
