@@ -26,6 +26,10 @@ gen = np.random.default_rng(seed=0)
 # Parse setup file path
 setup_file_path = sys.argv[1]
 result = re.search(r'^(.+)\/([^\/]+)$', setup_file_path)
+if result is None:
+    print('Could not find setup file!')
+    exit(1)
+
 setup_file_dir = result.group(1)
 setup_file_name = result.group(2)
 print(result.group(1))
@@ -144,7 +148,6 @@ def plot(features, colors, filename, s = 10):
     if len(color_names) == 1:
         race_color = {'None' : 'black'}
 
-
     import matplotlib.patches as mpatches
     label_handles = [mpatches.Patch(color=c, label=r) for r, c in race_color.items()]
 
@@ -164,15 +167,31 @@ def plot(features, colors, filename, s = 10):
         zs.append(z)
         cs.append(color)
 
+    plt.axis('off')
+    plt.grid(visible=False, which='both', axis='both')
+
     fig = plt.figure(figsize=(10, 10))
 
     ax = fig.add_subplot(projection='3d')
-    ax.scatter(xs, ys, zs, c = cs, s = s)
-    ax.legend(title = f'Race (k = {len(features)})',
-    handles = label_handles,
-    loc='center left',
-    bbox_to_anchor=(1, 0.5)
-        )
+    ax.grid(False)
+    ax.axis('off')
+    ax.set_axis_off()
+    ax.set_xticks([])
+    ax.set_yticks([])
+    ax.set_zticks([])
+
+    ax.view_init(elev=55, azim=-87, roll=0)
+    
+    ax.scatter(xs, ys, zs, c = cs, s = s, depthshade = False)
+    ax.legend(ncol=5, loc='center left')
+    #ax.legend(title = f'Race (k = {len(features)})',
+    #handles = label_handles,
+    #loc='center left',
+    #bbox_to_anchor=(1, 0.5)
+    #    )
+
+    plt.axis('off')
+    #plt.show()
     plt.savefig(filename, dpi=300, bbox_inches='tight')
 
 
