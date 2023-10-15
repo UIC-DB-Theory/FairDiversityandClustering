@@ -50,7 +50,7 @@ def plot(y_key, x_key, ylogscale = False):
     plt.clf()
 
     # Each dataset gets 1 subplot
-    fig = plt.figure(figsize=(25, 5))
+    fig = plt.figure(figsize=(30, 5))
     grid_specs = gridspec.GridSpec(1, 5, width_ratios=[1, 1, 1, 1, 1], height_ratios=[1])
     legend_handles = []
 
@@ -69,19 +69,23 @@ def plot(y_key, x_key, ylogscale = False):
             ax.plot(x,y, color=color, marker=marker)
             if ylogscale:
                 ax.set_yscale('log')
-            ax.set_xlabel(x_key)
-            ax.set_ylabel(y_key)
-            ax.set_title(f'({alp[i]}) {dataset_name}', y = -0.3)
+            ax.set_xlabel(x_key, fontsize="16")
+            ax.set_title(f'({alp[i]}) {dataset_name}', y = -0.3, fontsize="20")
+            ax.tick_params(axis='both', which='major', labelsize=18)
         i += 1
 
     
     ax_legend = plt.subplot(grid_specs[0])
+    ax_legend.set_ylabel(y_key, fontsize="16")
     ax_legend.legend(
         handles=legend_handles[:len(setup["algorithms"])],
         ncol=len(setup["algorithms"]),
         loc='lower left', 
-        bbox_to_anchor=(1.5, 1.1),borderaxespad=0
+        bbox_to_anchor=(0.1, 1.1),
+        borderaxespad=0,
+        fontsize="20"
     )
+    plt.tight_layout(pad=2.0)
     plt.savefig(f'{plot_dir}/{y_key}_vs_{x_key}', dpi=300, bbox_inches='tight')
 
 plot( "runtime", "k", ylogscale = True)
