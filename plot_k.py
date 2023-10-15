@@ -59,6 +59,7 @@ def plot(y_key, x_key, ylogscale = False):
     for gs, dataset_name in zip(grid_specs, results):
         ax = plt.subplot(gs)
         for alg,result in results[dataset_name].items():
+            print('Plotting alg: ', alg)
             x = result["xs"][x_key]
             y = result["ys"][y_key]
             color = setup["algorithms"][alg]["color"]

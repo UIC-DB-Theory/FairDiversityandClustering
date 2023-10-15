@@ -135,7 +135,7 @@
 			20
 		],
 		"observations": 5,
-		"buildkis_alpha" : 0.0,
+		"buildkis_alpha" : 0.1,
 		"buildkis_equal_k_js": false
 	}
 }
