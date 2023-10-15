@@ -71,12 +71,21 @@ def plot(y_key, x_key, ylogscale = False):
                 ax.set_yscale('log')
             ax.set_xlabel(x_key, fontsize="16")
             ax.set_title(f'({alp[i]}) {dataset_name}', y = -0.4, fontsize="20")
+            ax.set_xticks([20, 40, 60, 80, 100])
             ax.tick_params(axis='both', which='major', labelsize=18)
         i += 1
 
     
     ax_legend = plt.subplot(grid_specs[0])
     ax_legend.set_ylabel(y_key, fontsize="16")
+    # ax_legend.legend(
+    #     handles=legend_handles[:len(setup["algorithms"])],
+    #     ncol=len(setup["algorithms"]),
+    #     loc='lower left', 
+    #     bbox_to_anchor=(0.3, 1.1),
+    #     borderaxespad=0,
+    #     fontsize="20"
+    # )
     ax_legend.legend(
         handles=legend_handles[:len(setup["algorithms"])],
         ncol=len(setup["algorithms"]),
