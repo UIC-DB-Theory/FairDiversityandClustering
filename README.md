@@ -1,5 +1,16 @@
 # FairDiversity
 
+## Downloading datasets
+
+### Google Drive
+
+Download the ziped file at: https://drive.google.com/file/d/1d79JBIssbDwIMWV3v_h154ouITwGp4eu/view?usp=share_link
+
+Extract and opy its contents into the `./datasets` for all the imports in the code to work.
+
+### Script
+
+Run `./datasets/init_datasets.sh` to download and initialize all datasets.
 
 ## Running algorithm tests
 
@@ -7,7 +18,7 @@
 ### Install and run the virtual env.
 Note: License for gurobi is required to run a few algorithms
 ```
-pipenv isntall
+pipenv install
 pipenv shell
 ```
 
