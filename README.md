@@ -6,7 +6,7 @@
 
 Download the ziped file at: https://drive.google.com/file/d/1d79JBIssbDwIMWV3v_h154ouITwGp4eu/view?usp=share_link
 
-Extract and opy its contents into the `./datasets` for all the imports in the code to work.
+Extract and copy its contents into the `./datasets` for all the imports in the code to work.
 
 ### Script
 
