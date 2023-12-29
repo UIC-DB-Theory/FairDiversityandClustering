@@ -103,6 +103,72 @@ plot( "div-runtime", "k", ylogscale = True)
 plt.close()
 ######################################################################################
 
+
+
+######################################################################################
+# Plots of diversity vs time
+######################################################################################
+print('Plotting diversity vs time...')
+def plot_diversity_time(xkey, ykey ,ylogscale = False, xlogscale = False):
+
+    plt.clf()
+
+    # Each dataset gets 1 subplot
+    fig = plt.figure(figsize=(25, 3))
+    grid_specs = gridspec.GridSpec(1, 5, width_ratios=[1, 1, 1, 1, 1], height_ratios=[1])
+    legend_handles = []
+
+    alp = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+    i = 0 
+    for gs, dataset_name in zip(grid_specs, results):
+        ax = plt.subplot(gs)
+        for alg,result in results[dataset_name].items():
+            print('Plotting alg: ', alg)
+            x = result["ys"][xkey]
+            y = result["ys"][ykey]
+            ks =result["xs"]["k"]
+            color = setup["algorithms"][alg]["color"]
+            marker = setup["algorithms"][alg]["marker"]
+            legend_handles.append(mlines.Line2D([], [], color=color, marker=marker, linestyle='-',
+                            markersize=10, label=alg))
+            ax.plot(x,y, color=color, marker=marker)
+            if ylogscale:
+                ax.set_yscale('log')
+            if xlogscale:
+                ax.set_xscale('log')
+            ax.set_xlabel(xkey, fontsize="16")
+            ax.set_title(f'({alp[i]}) {dataset_name}', y = -0.4, fontsize="20")
+            # ax.set_xticks([20, 40, 60, 80, 100])
+            # ax.tick_params(axis='both', which='major', labelsize=18)
+        i += 1
+
+    
+    ax_legend = plt.subplot(grid_specs[0])
+    ax_legend.set_ylabel(ykey, fontsize="16")
+    ax_legend.legend(
+        handles=legend_handles[:len(setup["algorithms"])],
+        ncol=len(setup["algorithms"]),
+        loc='lower left', 
+        bbox_to_anchor=(0.3, 1.1),
+        borderaxespad=0,
+        fontsize="20"
+    )
+    # ax_legend.legend(
+    #     handles=legend_handles[:len(setup["algorithms"])],
+    #     ncol=len(setup["algorithms"]),
+    #     loc='lower left', 
+    #     bbox_to_anchor=(1.4, 1.1),
+    #     borderaxespad=0,
+    #     fontsize="20"
+    # )
+    plt.tight_layout(pad=2.0)
+    plt.savefig(f'{plot_dir}/{ykey}_vs_{xkey}', dpi=300, bbox_inches='tight')
+
+plot_diversity_time("diversity", "runtime", ylogscale = True)
+plot_diversity_time("runtime", "diversity", xlogscale = True)
+plt.close()
+######################################################################################
+
 ######################################################################################
 # Plots of color results
 ######################################################################################
