@@ -109,7 +109,7 @@ plt.close()
 # Plots of diversity vs time
 ######################################################################################
 print('Plotting diversity vs time...')
-def plot_diversity_time(xkey, ykey ,ylogscale = False, xlogscale = False):
+def plot_diversity_time(index, ykey, xkey ,ylogscale = False, xlogscale = False):
 
     plt.clf()
 
@@ -119,14 +119,20 @@ def plot_diversity_time(xkey, ykey ,ylogscale = False, xlogscale = False):
     legend_handles = []
 
     alp = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
-    i = 0 
+    i = 0
+    
     for gs, dataset_name in zip(grid_specs, results):
+        points = [] 
         ax = plt.subplot(gs)
         for alg,result in results[dataset_name].items():
             print('Plotting alg: ', alg)
-            x = result["ys"][xkey]
-            y = result["ys"][ykey]
-            ks =result["xs"]["k"]
+            try: 
+                x = [result["ys"][xkey][index]]
+                y = [result["ys"][ykey][index]]
+                kval =result["xs"]["k"][index]
+                points.append((result["ys"][xkey][index],result["ys"][ykey][index]))
+            except:
+                continue
             color = setup["algorithms"][alg]["color"]
             marker = setup["algorithms"][alg]["marker"]
             legend_handles.append(mlines.Line2D([], [], color=color, marker=marker, linestyle='-',
@@ -140,6 +146,37 @@ def plot_diversity_time(xkey, ykey ,ylogscale = False, xlogscale = False):
             ax.set_title(f'({alp[i]}) {dataset_name}', y = -0.4, fontsize="20")
             # ax.set_xticks([20, 40, 60, 80, 100])
             # ax.tick_params(axis='both', which='major', labelsize=18)
+        # plot the skyline dotted line
+        points.sort(key=lambda point: point[0])
+        max_y = 0
+        skyline_points = [(0,0)]
+        suboptimal_points = []
+        for point in points:
+            x = point[0]
+            y = point[1]
+            if y > max_y:
+                max_y = y
+                skyline_points.append(point)
+            else:
+                suboptimal_points.append(points)
+        
+
+        # Initialize variables to keep track of the current maximum y-coordinate
+        for i in range(len(skyline_points) - 1):
+            x_start, y_start = skyline_points[i]
+            x_end, y_end = skyline_points[i + 1]
+
+            # Plot a line going right from the first point
+            ax.plot([x_start, x_end], [y_start, y_start], linestyle='dotted', color='blue')
+
+            # Plot a dotted line going up along the y-axis 
+            ax.plot([x_end, x_end], [y_start, y_end], linestyle='dotted', color='blue')
+        last_point = skyline_points[-1]
+        _, x_max = ax.get_xlim()
+        ax.plot([last_point[0], x_max], [last_point[1], last_point[1]], color='blue', linestyle='dotted')
+
+        for point in skyline_points:
+            ax.plot(point[0], point[1], marker='o', markersize=15, fillstyle='none', markeredgecolor='black', linestyle='None')
         i += 1
 
     
@@ -153,6 +190,7 @@ def plot_diversity_time(xkey, ykey ,ylogscale = False, xlogscale = False):
         borderaxespad=0,
         fontsize="20"
     )
+
     # ax_legend.legend(
     #     handles=legend_handles[:len(setup["algorithms"])],
     #     ncol=len(setup["algorithms"]),
@@ -162,10 +200,13 @@ def plot_diversity_time(xkey, ykey ,ylogscale = False, xlogscale = False):
     #     fontsize="20"
     # )
     plt.tight_layout(pad=2.0)
-    plt.savefig(f'{plot_dir}/{ykey}_vs_{xkey}', dpi=300, bbox_inches='tight')
+    plt.savefig(f'{plot_dir}/{ykey}_vs_{xkey}_{kval}', dpi=300, bbox_inches='tight')
 
-plot_diversity_time("diversity", "runtime", ylogscale = True)
-plot_diversity_time("runtime", "diversity", xlogscale = True)
+plot_diversity_time(0, "diversity", "runtime", xlogscale = True)
+plot_diversity_time(1, "diversity", "runtime", xlogscale = True)
+plot_diversity_time(2, "diversity", "runtime", xlogscale = True)
+plot_diversity_time(3, "diversity", "runtime", xlogscale = True)
+plot_diversity_time(4, "diversity", "runtime", xlogscale = True)
 plt.close()
 ######################################################################################
 
