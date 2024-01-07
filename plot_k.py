@@ -5,6 +5,7 @@ import json
 import sys
 import os
 import re
+import csv
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -217,7 +218,7 @@ print('Plotting color ratios...')
 plot_dir = result_file_dir + '/' + result_file_name + '/color_results'
 if not os.path.exists(plot_dir):
    os.mkdir(plot_dir)
-use_ratio = True
+use_ratio = False
 use_deltas = False
 color_mappings = {}
 color_mappings2 = {}
@@ -354,6 +355,41 @@ def plot_color_results(algorithm):
         plt.savefig(f'{plot_dir}/{dataset}_{algorithm}.png', dpi=300, bbox_inches='tight')
         plt.close()
 
+def save_color_stats(algorithm):
+    '''
+    saves csv of format:
+    k,color,required_points,returned points,miss%
+
+    '''
+    for dataset in data:
+        filepath = f'{plot_dir}/{dataset}_{algorithm}.csv'
+        header = ['k','required_points','returned points','miss%','color']
+        csv_rows = [header]
+        print(data[dataset].keys())
+        if algorithm not in data[dataset]:
+            print('not found:', algorithm)
+            return
+        ks = data[dataset][algorithm]['ks']
+        returned_counts = data[dataset][algorithm]['returned_counts']
+        required_counts = data[dataset][algorithm]['required_counts']
+        for i in range(0, len(ks)):
+            k = ks[i]
+            for color in required_counts:
+                required_count = required_counts[color][i]
+                returned_count = returned_counts[color][i]
+                miss_perc = 100 * (required_count - returned_count)/required_count
+                csv_rows.append([k,required_count,returned_count,miss_perc,color])
+    
+        # clear file first
+        open(filepath, 'w').close()
+
+        with open(filepath, 'w+') as csvfile:  
+
+            # creating a csv writer object  
+            csvwriter = csv.writer(csvfile)  
+                
+            # writing the fields  
+            csvwriter.writerows(csv_rows)  
 
 
 def generate_colors(n):
@@ -387,4 +423,5 @@ color_mappings = {
 
 for alg in setup['algorithms']:
     plt.close()
-    plot_color_results(alg)
+    # plot_color_results(alg)
+    save_color_stats(alg)

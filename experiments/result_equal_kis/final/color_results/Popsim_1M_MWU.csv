@@ -1,0 +1,26 @@
+k,required_points,returned points,miss%,color
+20,4,4,0.0,American Indian/Alaska Native
+20,4,2,50.0,Asian
+20,4,4,0.0,Black/African American
+20,4,4,0.0,Native Hawaiian/Other Pacific Islander
+20,4,4,0.0,White
+40,8,8,0.0,American Indian/Alaska Native
+40,8,8,0.0,Asian
+40,8,8,0.0,Black/African American
+40,8,5,37.5,Native Hawaiian/Other Pacific Islander
+40,8,8,0.0,White
+60,12,12,0.0,American Indian/Alaska Native
+60,12,12,0.0,Asian
+60,12,12,0.0,Black/African American
+60,12,12,0.0,Native Hawaiian/Other Pacific Islander
+60,12,12,0.0,White
+80,16,15,6.25,American Indian/Alaska Native
+80,16,16,0.0,Asian
+80,16,16,0.0,Black/African American
+80,16,16,0.0,Native Hawaiian/Other Pacific Islander
+80,16,16,0.0,White
+100,20,20,0.0,American Indian/Alaska Native
+100,20,20,0.0,Asian
+100,20,20,0.0,Black/African American
+100,20,20,0.0,Native Hawaiian/Other Pacific Islander
+100,20,20,0.0,White
