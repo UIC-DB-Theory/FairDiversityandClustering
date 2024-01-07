@@ -1,21 +1,6 @@
-k,required_points,returned points,miss%,color
-20,5,5,0.0,Female_No
-20,5,5,0.0,Female_Yes
-20,5,5,0.0,Male_No
-20,5,5,0.0,Male_Yes
-40,10,10,0.0,Female_No
-40,10,10,0.0,Female_Yes
-40,10,7,30.0,Male_No
-40,10,10,0.0,Male_Yes
-60,15,15,0.0,Female_No
-60,15,15,0.0,Female_Yes
-60,15,15,0.0,Male_No
-60,15,15,0.0,Male_Yes
-80,20,20,0.0,Female_No
-80,20,20,0.0,Female_Yes
-80,20,20,0.0,Male_No
-80,20,20,0.0,Male_Yes
-100,25,25,0.0,Female_No
-100,25,25,0.0,Female_Yes
-100,25,25,0.0,Male_No
-100,25,25,0.0,Male_Yes
+k,Female_No,Female_Yes,Male_No,Male_Yes
+20,0.0,0.0,0.0,0.0
+40,0.0,0.0,30.0,0.0
+60,0.0,0.0,0.0,0.0
+80,0.0,0.0,0.0,0.0
+100,0.0,0.0,0.0,0.0

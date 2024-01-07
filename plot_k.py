@@ -363,8 +363,8 @@ def save_color_stats(algorithm):
     '''
     for dataset in data:
         filepath = f'{plot_dir}/{dataset}_{algorithm}.csv'
-        header = ['k','required_points','returned points','miss%','color']
-        csv_rows = [header]
+        header = ['k']
+        csv_rows = []
         print(data[dataset].keys())
         if algorithm not in data[dataset]:
             print('not found:', algorithm)
@@ -374,11 +374,15 @@ def save_color_stats(algorithm):
         required_counts = data[dataset][algorithm]['required_counts']
         for i in range(0, len(ks)):
             k = ks[i]
+            csv_row = [k]
+            header = ['k']
             for color in required_counts:
+                header.append(color)
                 required_count = required_counts[color][i]
                 returned_count = returned_counts[color][i]
                 miss_perc = 100 * (required_count - returned_count)/required_count
-                csv_rows.append([k,required_count,returned_count,miss_perc,color])
+                csv_row.append(miss_perc)
+            csv_rows.append(csv_row)
     
         # clear file first
         open(filepath, 'w').close()
@@ -387,6 +391,8 @@ def save_color_stats(algorithm):
 
             # creating a csv writer object  
             csvwriter = csv.writer(csvfile)  
+
+            csvwriter.writerow(header)  
                 
             # writing the fields  
             csvwriter.writerows(csv_rows)  
