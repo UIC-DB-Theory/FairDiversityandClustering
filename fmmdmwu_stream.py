@@ -37,9 +37,10 @@ def fmmdmwu_stream(gen, features, colors, kis, gamma_upper, mwu_epsilon, falloff
     # make streamed coreset of size k*m
     centerer = color_centerer(k, dim)
     core_features, core_colors = centerer.add(features, colors)
+    avg_point_t, last_finalize_time = centerer.get_times()
     
     # Run MWU on the calculated coreset
-    FMMDMWU(
+    sol, div, t_alg = FMMDMWU(
         gen=gen,
         features = core_features, 
         colors = core_colors, 
@@ -51,6 +52,5 @@ def fmmdmwu_stream(gen, features, colors, kis, gamma_upper, mwu_epsilon, falloff
         return_unadjusted = False
     )
 
-    # update, post-processing, average
+    return sol, div, # TODO get times
 
-    pass
