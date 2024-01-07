@@ -19,7 +19,7 @@ class Stopwatch:
         self.names = [name]
         self.times = [time.perf_counter()]
 
-    def split(self, name: t.AnyStr) -> ():
+    def split(self, name) -> None:
         """
         Stop the previous split and start another one with the given name
         :param name: the name of the new split
@@ -28,17 +28,17 @@ class Stopwatch:
         self.names.append(name)
         self.times.append(time.perf_counter())
 
-    def get_splits(self) -> [t.AnyStr]:
+    def get_splits(self):
         """
         Provides all existing splits, including the currently running split
         :return: a list of strings, one per split
         """
         return self.names
 
-    def _calc_deltas(self) -> [float]:
+    def _calc_deltas(self) -> t.List[float]:
         return [b - a for a, b in zip(self.times, self.times[1:])]
 
-    def stop(self) -> [(t.AnyStr, float)]:
+    def stop(self):
         """
         Stops the clock
         :return: a list of (split-name, delta-time) pairs for every segment created via "split" and creation
