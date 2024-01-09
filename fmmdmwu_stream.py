@@ -39,6 +39,19 @@ def fmmdmwu_stream(gen, features, colors, kis, gamma_upper, mwu_epsilon, falloff
     centerer = color_centerer(k, dim)
     core_features, core_colors = centerer.add(features, colors)
     avg_point_t, last_finalize_time = centerer.get_times()
+
+    # Calculate dmax using coreset size k
+    from algorithms.coreset import Coreset_FMM
+    coreset = Coreset_FMM(
+                gen,
+                features, 
+                colors, 
+                k, 
+                0, 
+                dim, 
+                k)
+    dmax = coreset.compute_gamma_upper_bound()
+    dmax_compute_time = coreset.gamma_upper_bound_compute_time
     
     # Run MWU on the calculated coreset
     sol, div, t_alg = FMMDMWU(
@@ -46,7 +59,7 @@ def fmmdmwu_stream(gen, features, colors, kis, gamma_upper, mwu_epsilon, falloff
         features = core_features, 
         colors = core_colors, 
         kis = kis,
-        gamma_upper = gamma_upper,
+        gamma_upper = dmax,
         mwu_epsilon = mwu_epsilon,
         falloff_epsilon = falloff_epsilon,
         percent_theoretical_limit = percent_theoretical_limit,
@@ -56,7 +69,7 @@ def fmmdmwu_stream(gen, features, colors, kis, gamma_upper, mwu_epsilon, falloff
     total_time = t1-t0
 
     if streamtimes:
-        return sol, div, [avg_point_t, t_alg + last_finalize_time, total_time]
+        return sol, div, [avg_point_t, t_alg + last_finalize_time + dmax_compute_time, total_time]
     else:
         return sol, div, total_time
 
