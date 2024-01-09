@@ -2,7 +2,7 @@ from algorithms.online_kcenter import color_centerer
 import time
 from fmmdmwu_nyoom import epsilon_falloff as FMMDMWU
 
-def fmmdmwu_stream(gen, features, colors, kis, gamma_upper, mwu_epsilon, falloff_epsilon, sample_percentage, return_unadjusted, percent_theoretical_limit=1.0, streamtimes = False):
+def fmmdmwu_stream(gen, features, colors, kis, gamma_upper, mwu_epsilon, falloff_epsilon, return_unadjusted, percent_theoretical_limit=1.0, streamtimes = False):
     
     # compute final k value
     k = sum(kis.values())
@@ -63,7 +63,7 @@ def fmmdmwu_stream(gen, features, colors, kis, gamma_upper, mwu_epsilon, falloff
         mwu_epsilon = mwu_epsilon,
         falloff_epsilon = falloff_epsilon,
         percent_theoretical_limit = percent_theoretical_limit,
-        return_unadjusted = False
+        return_unadjusted = return_unadjusted
     )
     t1 = time.perf_counter()
     total_time = t1-t0
