@@ -172,7 +172,7 @@ class color_centerer:
             all_colors.append(colors)
 
         # return the solutions all combined
-        return np.concatenate(all_features), np.concatenate((all_colors))
+        return np.concatenate(all_features), np.concatenate(all_colors)
     
     def get_times(self):
         """

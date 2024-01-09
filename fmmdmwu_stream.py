@@ -44,13 +44,14 @@ def fmmdmwu_stream(gen, features, colors, kis, gamma_upper, mwu_epsilon, falloff
     from algorithms.coreset import Coreset_FMM
     coreset = Coreset_FMM(
                 gen,
-                features, 
-                colors, 
+                core_features, 
+                core_colors, 
                 k, 
                 1,
                 dim, 
                 k)
     dmax = coreset.compute_gamma_upper_bound()
+    print('\t\tdmax(stream) = {dmax}')
     dmax_compute_time = coreset.gamma_upper_bound_compute_time
     
     # Run MWU on the calculated coreset
