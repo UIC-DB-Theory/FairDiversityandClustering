@@ -47,7 +47,7 @@ def fmmdmwu_stream(gen, features, colors, kis, gamma_upper, mwu_epsilon, falloff
                 features, 
                 colors, 
                 k, 
-                0, 
+                1,
                 dim, 
                 k)
     dmax = coreset.compute_gamma_upper_bound()

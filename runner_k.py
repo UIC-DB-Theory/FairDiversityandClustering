@@ -111,7 +111,7 @@ algorithms = {
     'FMMD-MWUS' : lambda gen, name, kis, kwargs : FMMDMWUS(
         gen=gen,
         features = kwargs['features'], 
-        colors = kwargs['colors'], 
+        colors = kwargs['colors'],
         kis = kis,
         gamma_upper=kwargs['dmax'],
         mwu_epsilon=setup['algorithms'][name]['mwu_epsilon'],
