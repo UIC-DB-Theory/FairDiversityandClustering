@@ -380,8 +380,8 @@ def save_color_stats(algorithm):
                 header.append(color)
                 required_count = required_counts[color][i]
                 returned_count = returned_counts[color][i]
-                miss_perc = 100 * (required_count - returned_count)/required_count
-                csv_row.append(miss_perc)
+                delta = required_count - returned_count
+                csv_row.append(f'{delta}/{required_count}')
             csv_rows.append(csv_row)
     
         # clear file first

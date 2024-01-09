@@ -1,8 +1,8 @@
 from algorithms.online_kcenter import color_centerer
-
+import time
 from fmmdmwu_nyoom import epsilon_falloff as FMMDMWU
 
-def fmmdmwu_stream(gen, features, colors, kis, gamma_upper, mwu_epsilon, falloff_epsilon, sample_percentage, return_unadjusted, percent_theoretical_limit=1.0):
+def fmmdmwu_stream(gen, features, colors, kis, gamma_upper, mwu_epsilon, falloff_epsilon, sample_percentage, return_unadjusted, percent_theoretical_limit=1.0, streamtimes = False):
     
     # compute final k value
     k = sum(kis.values())
@@ -35,6 +35,7 @@ def fmmdmwu_stream(gen, features, colors, kis, gamma_upper, mwu_epsilon, falloff
             core_colors.append(color)
     """
     # make streamed coreset of size k*m
+    t0 = time.perf_counter()
     centerer = color_centerer(k, dim)
     core_features, core_colors = centerer.add(features, colors)
     avg_point_t, last_finalize_time = centerer.get_times()
@@ -51,6 +52,12 @@ def fmmdmwu_stream(gen, features, colors, kis, gamma_upper, mwu_epsilon, falloff
         percent_theoretical_limit = percent_theoretical_limit,
         return_unadjusted = False
     )
+    t1 = time.perf_counter()
+    total_time = t1-t0
 
-    return sol, div, # TODO get times
+    if streamtimes:
+        return sol, div, [avg_point_t, t_alg + last_finalize_time, total_time]
+    else:
+        return sol, div, total_time
+
 

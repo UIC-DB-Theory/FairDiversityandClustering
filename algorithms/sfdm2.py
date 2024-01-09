@@ -14,7 +14,7 @@ import algorithms.fdmalgs_original as FDMO
 
 ElemList = Union[List[utilsfdm.Elem], List[utilsfdm.ElemSparse]]
 
-def StreamFairDivMax2(features, colors, kis, epsilon, gammahigh, gammalow, normalize=False, breakdowntimes = False):
+def StreamFairDivMax2(features, colors, kis, epsilon, gammahigh, gammalow, normalize=False, streamtimes = False):
     '''
     A wrapper for StreamFairDivMax2
     Adjust the problem instance for a different set of parameters
@@ -50,7 +50,7 @@ def StreamFairDivMax2(features, colors, kis, epsilon, gammahigh, gammalow, norma
         kis_list.append(kis[color])
     
     if normalize:
-        sol, sol_div, stream_time_per_elem, post_time, t = FDMO.StreamFairDivMax2(
+        sol, sol_div, stream_time, post_time, total_time = FDMO.StreamFairDivMax2(
                                 X=elements_normalized, 
                                 k=kis_list, 
                                 m=c,
@@ -60,7 +60,7 @@ def StreamFairDivMax2(features, colors, kis, epsilon, gammahigh, gammalow, norma
                                 dmin=gammalow,
                             )
     else:
-        sol, sol_div, stream_time_per_elem, post_time, t = FDMO.StreamFairDivMax2(
+        sol, sol_div, stream_time, post_time, total_time = FDMO.StreamFairDivMax2(
                                 X=elements, 
                                 k=kis_list, 
                                 m=c,
@@ -70,7 +70,7 @@ def StreamFairDivMax2(features, colors, kis, epsilon, gammahigh, gammalow, norma
                                 dmin=gammalow,
                             )
         
-    if breakdowntimes:
-        return np.array(list(sol)), sol_div, []
+    if streamtimes:
+        return np.array(list(sol)), sol_div, [stream_time, post_time, total_time]
     else:
-        return np.array(list(sol)), sol_div, t
+        return np.array(list(sol)), sol_div, total_time

@@ -49,12 +49,7 @@ with open(setup_file_path, 'r') as json_file:
 
 
 from algorithms.sfdm2 import StreamFairDivMax2
-from algorithms.fmmds import FMMDS
-from algorithms.fairflow import FairFlow
-from fmmdmwu_nyoom import epsilon_falloff as FMMDMWU
-from algorithms.fairgreedyflow import FairGreedyFlow
-from fmmd_lp import epsilon_falloff as FMMDLP
-from fmmdmwu_sampled import epsilon_falloff as FMMDMWUS
+from fmmdmwu_stream import fmmdmwu_stream as SMWUFD
 from algorithms.utils import buildKisMap
 # Lambdas for running experiments
 algorithms = {
@@ -65,31 +60,10 @@ algorithms = {
         epsilon = setup['algorithms'][name]['epsilon'], 
         gammahigh = kwargs['dmax'], 
         gammalow = kwargs['dmin'], 
-        normalize = False
+        normalize = False,
+        streamtimes=True
     ),
-    'FMMD-S' : lambda gen, name, kis, kwargs: FMMDS(
-        features = kwargs['features'],
-        colors = kwargs['colors'],
-        kis = kis,
-        epsilon = setup['algorithms'][name]['epsilon'],
-        normalize = False
-    ),
-    'FairFlow' : lambda gen, name, kis, kwargs : FairFlow(
-        features = kwargs['features'], 
-        colors = kwargs['colors'], 
-        kis = kis, 
-        normalize = False
-    ),
-    'FairGreedyFlow' : lambda gen, name, kis, kwargs : FairGreedyFlow(
-        features = kwargs['features'], 
-        colors = kwargs['colors'], 
-        kis = kis, 
-        epsilon= setup['algorithms'][name]['epsilon'], 
-        gammahigh=kwargs['dmax'], 
-        gammalow = kwargs['dmin'], 
-        normalize=False
-    ),
-    'FMMD-MWU' : lambda gen, name, kis, kwargs : FMMDMWU(
+    'SMWUFD' : lambda gen, name, kis, kwargs: SMWUFD(
         gen=gen,
         features = kwargs['features'], 
         colors = kwargs['colors'], 
@@ -98,28 +72,10 @@ algorithms = {
         mwu_epsilon = setup['algorithms'][name]['mwu_epsilon'],
         falloff_epsilon = setup['algorithms'][name]['falloff_epsilon'],
         percent_theoretical_limit = setup['algorithms'][name]['percent_theoretical_limit'],
-        return_unadjusted = False
-    ),
-    'FMMD-LP' : lambda gen, name, kis, kwargs : FMMDLP(
-        gen=gen,
-        features = kwargs['features'], 
-        colors = kwargs['colors'],
-        kis = kis, 
-        upper_gamma = kwargs['dmax'],
-        epsilon = setup['algorithms'][name]['epsilon'], 
-    ),
-    'FMMD-MWUS' : lambda gen, name, kis, kwargs : FMMDMWUS(
-        gen=gen,
-        features = kwargs['features'], 
-        colors = kwargs['colors'], 
-        kis = kis,
-        gamma_upper=kwargs['dmax'],
-        mwu_epsilon=setup['algorithms'][name]['mwu_epsilon'],
-        falloff_epsilon=setup['algorithms'][name]['falloff_epsilon'],
-        return_unadjusted=False,
-        sample_percentage=setup['algorithms'][name]['sample_percentage'],
-        percent_theoretical_limit=setup['algorithms'][name]['percent_theoretical_limit'],
-    ),
+        return_unadjusted = False,
+        streamtimes=True
+    )
+    
 }
 
 def check_flag(struct, flag):
@@ -284,12 +240,25 @@ for dataset_name in setup["datasets"]:
                     try:
                         with time_limit(timeout):
                             runner = algorithms[setup['algorithms'][name]['alg']]
-                            sol, div, t_alg = runner(gen, name, kimap, alg_args)
-                            t = t + t_alg
+
+                            # NOTE: For streaming setting additional time states are returned
+                            # sol, div, t_alg = runner(gen, name, kimap, alg_args)
+                            sol, div, times = runner(gen, name, kimap, alg_args)
+
+                            stream_time = times[0]
+                            post_time = times[1]
+                            total_time = times[2]
+
+                            # We ignore dmin & dmax calculation times
+                            # t = t + t_alg
+
                             print(f'\t\t***solution size = {len(sol)}***')
                             print(f'\t\tdiv = {div}')
-                            print(f'\t\tt = {t}')
-                            result_per_alg[name] = [len(alg_args['features']), dmax, dmin, len(sol), div, t]
+                            print(f'\t\tstream time = {stream_time}')
+                            print(f'\t\tpost time = {post_time}')
+                            print(f'\t\ttotal time = {total_time}')
+                            # print(f'\t\tt = {t}')
+                            result_per_alg[name] = [len(alg_args['features']), dmax, dmin, len(sol), div, stream_time, post_time, total_time]
                     except TimeoutException as e:
                         print("Timed out!")
                         timeout_dict[name] = True
@@ -305,7 +274,7 @@ for dataset_name in setup["datasets"]:
                         timeout_dict[name] = True
                         alg_status.append([f'{name} exception occured at k = {adj_k}', e.message])
                         continue
-                    result_per_alg[name] = [len(alg_args['features']), dmax, dmin, len(sol), div, t]
+                    result_per_alg[name] = [len(alg_args['features']), dmax, dmin, len(sol), div, stream_time, post_time, total_time]
 
                 # Else run without timeout
                 else:
@@ -315,7 +284,12 @@ for dataset_name in setup["datasets"]:
                     import gurobipy
                     runner = algorithms[setup['algorithms'][name]['alg']]
                     try:
-                            sol, div, t_alg = runner(gen, name, kimap, alg_args)
+                            #sol, div, t_alg = runner(gen, name, kimap, alg_args)
+                            sol, div, times = runner(gen, name, kimap, alg_args)
+                            stream_time = times[0]
+                            post_time = times[1]
+                            total_time = times[2]
+
                     except gurobipy.GurobiError as gbe:
                         print(f'Gurobi Error - {gbe.message}')
                         alg_status.append([f'{name} gurobi errored at k = {adj_k}', e.message])
@@ -326,11 +300,13 @@ for dataset_name in setup["datasets"]:
                         alg_status.append([f'{name} exception occured at k = {adj_k}', e.message])
                         timeout_dict[name] = True
                         continue
-                    t = t + t_alg
+                    # t = t + t_alg
                     print(f'\t\t***solution size = {len(sol)}***')
                     print(f'\t\tdiv = {div}')
-                    print(f'\t\tt = {t}')
-                    result_per_alg[name] = [len(alg_args['features']), dmax, dmin, len(sol), div, t]
+                    print(f'\t\tstream time = {stream_time}')
+                    print(f'\t\tpost time = {post_time}')
+                    print(f'\t\ttotal time = {total_time}')
+                    result_per_alg[name] = [len(alg_args['features']), dmax, dmin, len(sol), div, stream_time, post_time, total_time]
                 
                 if not timeout_dict[name]:
                     from algorithms.utils import check_returned_kis
@@ -380,8 +356,9 @@ for dataset_name in setup["datasets"]:
                         'dmin' : [results_per_k_per_alg[k][alg][2]],
                         'solution_size' : [results_per_k_per_alg[k][alg][3]],
                         'diversity' : [results_per_k_per_alg[k][alg][4]],
-                        'runtime' : [results_per_k_per_alg[k][alg][5]],
-                        'div-runtime' : [results_per_k_per_alg[k][alg][4]/results_per_k_per_alg[k][alg][5]]
+                        'streamtime' : [results_per_k_per_alg[k][alg][5]],
+                        'posttime' : [results_per_k_per_alg[k][alg][6]],
+                        'totaltime' : [results_per_k_per_alg[k][alg][7]]
                     }
                 }
             else:
@@ -391,8 +368,9 @@ for dataset_name in setup["datasets"]:
                 results[dataset_name][alg]['ys']['dmin'].append(results_per_k_per_alg[k][alg][2])
                 results[dataset_name][alg]['ys']['solution_size'].append(results_per_k_per_alg[k][alg][3])
                 results[dataset_name][alg]['ys']['diversity'].append(results_per_k_per_alg[k][alg][4])
-                results[dataset_name][alg]['ys']['runtime'].append(results_per_k_per_alg[k][alg][5])
-                results[dataset_name][alg]['ys']['div-runtime'].append(results_per_k_per_alg[k][alg][4]/results_per_k_per_alg[k][alg][5])
+                results[dataset_name][alg]['ys']['streamtime'].append(results_per_k_per_alg[k][alg][5])
+                results[dataset_name][alg]['ys']['posttime'].append(results_per_k_per_alg[k][alg][6])
+                results[dataset_name][alg]['ys']['totaltime'].append(results_per_k_per_alg[k][alg][7])
 # End of dataset loop
 write_results(setup, results, color_results, alg_status)
 print(alg_status)
