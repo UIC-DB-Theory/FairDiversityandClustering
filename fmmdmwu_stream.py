@@ -1,5 +1,5 @@
 from algorithms.online_kcenter import color_centerer
-import time
+from algorithms.utils import Stopwatch
 from fmmdmwu_nyoom import epsilon_falloff as FMMDMWU
 
 def fmmdmwu_stream(gen, features, colors, kis, gamma_upper, mwu_epsilon, falloff_epsilon, return_unadjusted, percent_theoretical_limit=1.0, streamtimes = False):
@@ -35,7 +35,7 @@ def fmmdmwu_stream(gen, features, colors, kis, gamma_upper, mwu_epsilon, falloff
             core_colors.append(color)
     """
     # make streamed coreset of size k*m
-    t0 = time.perf_counter()
+    timer = Stopwatch("Finalize centers")
     centerer = color_centerer(k, dim)
     core_features, core_colors = centerer.add(features, colors)
     size = len(core_features)
@@ -69,8 +69,7 @@ def fmmdmwu_stream(gen, features, colors, kis, gamma_upper, mwu_epsilon, falloff
         percent_theoretical_limit = percent_theoretical_limit,
         return_unadjusted = return_unadjusted
     )
-    t1 = time.perf_counter()
-    total_time = t1-t0
+    _, total_time = timer.stop()
 
     if streamtimes:
         return sol, div, [avg_point_t, t_alg + last_finalize_time + dmax_compute_time, total_time]
