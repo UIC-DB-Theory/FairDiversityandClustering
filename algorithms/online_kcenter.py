@@ -8,7 +8,7 @@ from scipy.spatial import KDTree
 
 from collections import defaultdict
 
-from utils import Stopwatch
+from algorithms.utils import Stopwatch
 
 class centerer:
     def __init__(self, size : int, point_dim : int) -> None:
