@@ -146,3 +146,5 @@ Pipfile.lock
 
 # yash
 notes/*
+
+.DS_Store
