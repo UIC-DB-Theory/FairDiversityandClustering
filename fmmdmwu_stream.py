@@ -39,8 +39,8 @@ def fmmdmwu_stream(gen, features, colors, kis, gamma_upper, mwu_epsilon, falloff
     centerer = color_centerer(k, dim)
     core_features, core_colors = centerer.add(features, colors)
     size = len(core_features)
-    print('\t\tfirst point = {core_features[0]}, {core_colors[0]}')
-    print('\t\tcoreset size (after stream) = {size}')
+    print(f'\t\tfirst point = {core_features[0]}, {core_colors[0]}')
+    print(f'\t\tcoreset size (after stream) = {size}')
     avg_point_t, last_finalize_time = centerer.get_times()
 
     # Calculate dmax using coreset size k
