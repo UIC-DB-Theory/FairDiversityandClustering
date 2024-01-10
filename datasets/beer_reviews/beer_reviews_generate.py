@@ -40,9 +40,9 @@ fields = [
 data = []
 
 # ---------------Read original dataset file--------------
-with open('beeradvocate.txt', 'r') as file:
+with open('Beeradvocate.txt', 'r') as file:
     lines = file.readlines()
-    counter = 0
+    invalid = 0
     for i in range(0, len(lines)):
         try:
             if "beer/name" in lines[i]:
@@ -75,10 +75,12 @@ with open('beeradvocate.txt', 'r') as file:
                     profileName,
                     text]
                 )
+            
         except:
-            counter += 1
+            invalid += 1
             continue
-    print('Invalid points: ', counter)
+    print('Invalid points: ', invalid)
+    print('Valid points read: ', len(data))
         
 
 # ---------------Create file beer_reviews.metadata--------------
