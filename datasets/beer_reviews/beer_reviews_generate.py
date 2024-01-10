@@ -25,6 +25,7 @@ metadata = {
 # fields can be found in beeradvocate.txt
 fields = [
                 "beer/name",
+                "beer/beerId"
                 "beer/brewerId",
                 "beer/ABV",
                 "beer/style",
