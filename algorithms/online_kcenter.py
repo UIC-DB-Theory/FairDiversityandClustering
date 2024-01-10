@@ -115,9 +115,10 @@ class centerer:
         # if not, grab all the points in self.prev_centers not already in self.centers
         # for now, do this the slow way and convert back since these are small
         # TODO? faster?
-        addables = np.array(set(map(tuple, self.prev_centers)).difference(map(tuple, self.centers)))
+        center_set = set(map(tuple, self.centers))
+        addables = np.array([x for x in self.prev_centers if tuple(x) not in center_set])
         # adds points to the until we have K points
-        output = np.append(self.centers, addables)[:self.k]
+        output = np.concatenate([self.centers, addables])[:self.k]
 
         # stops the time
         _, time = timer.stop()
@@ -200,7 +201,7 @@ if __name__ == '__main__':
 
     c = color_centerer(500, 2)
 
-    num_points_per_round = 100000
+    num_points_per_round = 10000
     num_rounds = 10
 
     for r in range(num_rounds):
@@ -212,6 +213,7 @@ if __name__ == '__main__':
         c.add(points, colors)
         timer.split('returning')
         features, colors = c.get_centers()
+        print(features.shape)
         [(_, insertion_times), (_, other_times)], _ = timer.stop()
         insert_time += insertion_times
         return_time += other_times
