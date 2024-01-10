@@ -1,4 +1,5 @@
 #!/bin/bash
+cd beer_reviews && wget https://snap.stanford.edu/data/Beeradvocate.txt.gz && python3 beer_reviews_generate.py && cd ..
 
 cd adult && wget https://archive.ics.uci.edu/static/public/2/adult.zip && unzip \*.zip && python3 adult_generate.py && cd ..
 
