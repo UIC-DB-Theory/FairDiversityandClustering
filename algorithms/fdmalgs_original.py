@@ -12,6 +12,8 @@ import gurobipy as gp
 import numpy as np
 from gurobipy import GRB
 
+from algorithms.utils import Stopwatch
+
 ElemList = Union[List[utilsfdm.Elem], List[utilsfdm.ElemSparse]]
 TIME_LIMIT_ILP = 300
 
@@ -27,7 +29,12 @@ class Instance:
                 self.group_idxs.append(set())
 
 def StreamFairDivMax2(X: ElemList, k: List[int], m: int, dist: Callable[[Any, Any], float], eps: float, dmax: float, dmin: float):
-    t_stream_start = time.perf_counter()
+
+    stream_size = len(X)
+
+    timer = Stopwatch("Stream time")
+
+    # Start of streaming
     # Initialization
     sum_k = sum(k)
     # print(zmin, zmax)
@@ -75,8 +82,12 @@ def StreamFairDivMax2(X: ElemList, k: List[int], m: int, dist: Callable[[Any, An
                 if flag_x:
                     gins.idxs.add(x.idx)
                     gins.div = min(gins.div, div_x)
-    t_stream_end = time.perf_counter()
-    stream_time_per_elem = (t_stream_start - t_stream_end) / len(X)
+    # End of Streaming
+                    
+    _, stream_time = timer.stop()
+
+    timer = Stopwatch("Post Time")
+    # Start post processing
     stored_elements = set()
     for ins_id in range(len(all_ins)):
         stored_elements.update(all_ins[ins_id].idxs)
@@ -210,9 +221,14 @@ def StreamFairDivMax2(X: ElemList, k: List[int], m: int, dist: Callable[[Any, An
             if div_s > sol_div:
                 sol = S_prime
                 sol_div = div_s
-    t_post_end = time.perf_counter()
-    post_time = t_post_end - t_stream_end
-    total_time = t_stream_start - t_post_end
+    # End post processing    
+    _, post_time = timer.stop()
+
+    stream_time_per_elem = stream_time/stream_size
+
+    total_time = stream_time + post_time
+
+
     return sol, sol_div, stream_time_per_elem, post_time, total_time
 
 def scalable_fmmd_ILP(V: ElemList, EPS: float, k: int, C: int, constr: List[List[int]], dist: Callable[[Any, Any], float]) -> (List[int], float, float):
