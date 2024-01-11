@@ -31,6 +31,7 @@ class Instance:
 def StreamFairDivMax2(X: ElemList, k: List[int], m: int, dist: Callable[[Any, Any], float], eps: float, dmax: float, dmin: float):
 
     stream_size = len(X)
+    print(f'[SFDM2] Stream size = {stream_size}')
 
     timer = Stopwatch("Stream time")
 
@@ -83,8 +84,9 @@ def StreamFairDivMax2(X: ElemList, k: List[int], m: int, dist: Callable[[Any, An
                     gins.idxs.add(x.idx)
                     gins.div = min(gins.div, div_x)
     # End of Streaming
-                    
+             
     _, stream_time = timer.stop()
+    print(f'Streaming in time ', stream_time, " of size ",stream_size)  
 
     timer = Stopwatch("Post Time")
     # Start post processing
