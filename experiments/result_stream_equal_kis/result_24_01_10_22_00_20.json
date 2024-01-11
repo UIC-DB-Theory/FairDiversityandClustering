@@ -1,0 +1,289 @@
+{
+    "setup": {
+        "datasets": {
+            "Beer_reviews": {
+                "data_dir": "./datasets/beer_reviews",
+                "color_fields": [
+                    "beer/style"
+                ],
+                "feature_fields": [
+                    "beer/ABV",
+                    "review/appearance",
+                    "review/aroma",
+                    "review/palate",
+                    "review/taste",
+                    "review/overall"
+                ],
+                "normalize": true,
+                "filter_unique": false,
+                "points_per_color": {
+                    "Hefeweizen": 25928,
+                    "English Strong Ale": 4745,
+                    "Foreign / Export Stout": 5828,
+                    "German Pilsener": 20938,
+                    "American Double / Imperial IPA": 85124,
+                    "Herbed / Spiced Beer": 9944,
+                    "Oatmeal Stout": 17076,
+                    "American Pale Lager": 8367,
+                    "Rauchbier": 3764,
+                    "American Pale Ale (APA)": 58081,
+                    "American Porter": 46650,
+                    "Belgian Strong Dark Ale": 37510,
+                    "Russian Imperial Stout": 53432,
+                    "American Amber / Red Ale": 41740,
+                    "American Strong Ale": 31357,
+                    "M\u00e4rzen / Oktoberfest": 21663,
+                    "American Adjunct Lager": 28979,
+                    "American Blonde Ale": 10801,
+                    "American IPA": 113164,
+                    "Fruit / Vegetable Beer": 31985,
+                    "English Bitter": 8372,
+                    "English Porter": 10969,
+                    "Irish Dry Stout": 11774,
+                    "American Barleywine": 26274,
+                    "American Double / Imperial Stout": 50146,
+                    "Doppelbock": 21020,
+                    "American Stout": 22608,
+                    "Maibock / Helles Bock": 10131,
+                    "Dortmunder / Export Lager": 4233,
+                    "Euro Strong Lager": 2715,
+                    "Low Alcohol Beer": 1020,
+                    "Light Lager": 13261,
+                    "Euro Pale Lager": 17559,
+                    "Bock": 10919,
+                    "English India Pale Ale (IPA)": 15341,
+                    "Altbier": 7223,
+                    "K\u00f6lsch": 7759,
+                    "Pumpkin Ale": 14882,
+                    "Rye Beer": 9640,
+                    "American Pale Wheat Ale": 22891,
+                    "Milk / Sweet Stout": 12611,
+                    "Schwarzbier": 9413,
+                    "Munich Dunkel Lager": 7244,
+                    "Vienna Lager": 8339,
+                    "American Amber / Red Lager": 8610,
+                    "Scottish Ale": 8529,
+                    "Witbier": 28663,
+                    "Saison / Farmhouse Ale": 30625,
+                    "American Black Ale": 11160,
+                    "English Brown Ale": 17993,
+                    "English Barleywine": 13440,
+                    "Extra Special / Strong Bitter (ESB)": 16170,
+                    "California Common / Steam Beer": 3822,
+                    "Euro Dark Lager": 4406,
+                    "Scotch Ale / Wee Heavy": 16673,
+                    "English Pale Ale": 22843,
+                    "Belgian Strong Pale Ale": 31327,
+                    "Belgian Pale Ale": 18908,
+                    "Tripel": 29980,
+                    "Flanders Oud Bruin": 4904,
+                    "American Brown Ale": 24137,
+                    "Smoked Beer": 2831,
+                    "Dunkelweizen": 6739,
+                    "Dubbel": 19414,
+                    "Keller Bier / Zwickel Bier": 2438,
+                    "Winter Warmer": 19994,
+                    "Bi\u00e8re de Garde": 6645,
+                    "Belgian Dark Ale": 6286,
+                    "Irish Red Ale": 7318,
+                    "Chile Beer": 2095,
+                    "English Stout": 2863,
+                    "Czech Pilsener": 12033,
+                    "Belgian IPA": 12243,
+                    "Black & Tan": 2197,
+                    "Cream Ale": 4722,
+                    "English Dark Mild Ale": 2121,
+                    "American Wild Ale": 16886,
+                    "Weizenbock": 9251,
+                    "American Double / Imperial Pilsner": 5396,
+                    "Scottish Gruit / Ancient Herbed Ale": 2729,
+                    "Wheatwine": 3598,
+                    "American Dark Wheat Ale": 1195,
+                    "American Malt Liquor": 3830,
+                    "Munich Helles Lager": 7453,
+                    "Kristalweizen": 2122,
+                    "English Pale Mild Ale": 649,
+                    "Baltic Porter": 11427,
+                    "Old Ale": 14518,
+                    "Quadrupel (Quad)": 17943,
+                    "Braggot": 1013,
+                    "Lambic - Fruit": 10218,
+                    "Lambic - Unblended": 1039,
+                    "Eisbock": 2647,
+                    "Flanders Red Ale": 6563,
+                    "Berliner Weissbier": 3172,
+                    "Kvass": 229,
+                    "Roggenbier": 395,
+                    "Faro": 609,
+                    "Gueuze": 5929,
+                    "Gose": 654,
+                    "Japanese Rice Lager": 1533,
+                    "Happoshu": 237,
+                    "Sahti": 1004,
+                    "Bi\u00e8re de Champagne / Bi\u00e8re Brut": 1041
+                },
+                "size": 1518829
+            },
+            "Popsim_1M": {
+                "data_dir": "./datasets/popsim_1M",
+                "color_fields": [
+                    "race"
+                ],
+                "feature_fields": [
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "normalize": true,
+                "filter_unique": false
+            },
+            "Adult": {
+                "data_dir": "./datasets/adult",
+                "color_fields": [
+                    "race",
+                    "sex"
+                ],
+                "feature_fields": [
+                    "age",
+                    "capital-gain",
+                    "capital-loss",
+                    "hours-per-week",
+                    "fnlwgt",
+                    "education-num"
+                ],
+                "normalize": true,
+                "filter_unique": false
+            },
+            "Diabetes": {
+                "data_dir": "./datasets/diabetes",
+                "color_fields": [
+                    "gender",
+                    "diabetesMed"
+                ],
+                "feature_fields": [
+                    "num_procedures",
+                    "num_lab_procedures",
+                    "number_outpatient",
+                    "number_inpatient",
+                    "number_diagnoses",
+                    "time_in_hospital",
+                    "num_medications"
+                ],
+                "normalize": true,
+                "filter_unique": false
+            },
+            "Popsim": {
+                "data_dir": "./datasets/popsim",
+                "color_fields": [
+                    "race"
+                ],
+                "feature_fields": [
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "normalize": true,
+                "filter_unique": false
+            },
+            "Census": {
+                "data_dir": "./datasets/census",
+                "color_fields": [
+                    "age-sex-color"
+                ],
+                "feature_fields": [
+                    "attr1",
+                    "attr2",
+                    "attr3",
+                    "attr4",
+                    "attr5",
+                    "attr6"
+                ],
+                "normalize": false,
+                "filter_unique": false
+            },
+            "Census25": {
+                "data_dir": "./datasets/census",
+                "color_fields": [
+                    "age-sex-color"
+                ],
+                "feature_fields": [
+                    "attr1",
+                    "attr2",
+                    "attr3",
+                    "attr4",
+                    "attr5",
+                    "attr6",
+                    "attr7",
+                    "attr8",
+                    "attr9",
+                    "attr10",
+                    "attr11",
+                    "attr12",
+                    "attr13",
+                    "attr14",
+                    "attr15",
+                    "attr16",
+                    "attr17",
+                    "attr18",
+                    "attr19",
+                    "attr20",
+                    "attr21",
+                    "attr22",
+                    "attr23",
+                    "attr24",
+                    "attr25"
+                ],
+                "normalize": false,
+                "filter_unique": false
+            }
+        },
+        "algorithms": {
+            "SMWUFD-0.3-15": {
+                "alg": "SMWUFD",
+                "color": "#fc0303",
+                "marker": "o",
+                "use_coreset": false,
+                "use_dmax": false,
+                "use_dmin": false,
+                "mwu_epsilon": 0.75,
+                "falloff_epsilon": 0.15,
+                "sample_percentage": 0.1,
+                "percent_theoretical_limit": 0.3,
+                "timeout": 1800
+            },
+            "SFDM-2-15": {
+                "alg": "SFDM-2",
+                "color": "#4afc03",
+                "marker": "+",
+                "use_coreset": false,
+                "use_dmax": true,
+                "use_dmin": true,
+                "epsilon": 0.15,
+                "timeout": 1800
+            },
+            "SFDM-2-75": {
+                "alg": "SFDM-2",
+                "color": "#1b5902",
+                "marker": "x",
+                "use_coreset": false,
+                "use_dmax": true,
+                "use_dmin": true,
+                "epsilon": 0.75,
+                "timeout": 1800
+            }
+        },
+        "parameters": {
+            "k": [
+                20,
+                101,
+                20
+            ],
+            "observations": 5,
+            "buildkis_alpha": 0.1,
+            "buildkis_equal_k_js": true
+        }
+    },
+    "results": {},
+    "alg_status": [],
+    "color_results": []
+}

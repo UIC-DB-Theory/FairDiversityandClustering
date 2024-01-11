@@ -1,5 +1,21 @@
 {
 	"datasets": {
+		"Beer_reviews": {
+			"data_dir": "./datasets/beer_reviews",
+			"color_fields": [
+				"beer/style"
+			],
+			"feature_fields": [
+				"beer/ABV",
+				"review/appearance",
+				"review/aroma",
+				"review/palate",
+				"review/taste",
+				"review/overall"
+			],
+			"normalize": true,
+			"filter_unique": false
+		},
 		"Popsim_1M": {
 			"data_dir": "./datasets/popsim_1M",
 			"color_fields": [
