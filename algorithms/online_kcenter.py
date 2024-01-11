@@ -8,7 +8,7 @@ from scipy.spatial import KDTree
 
 from collections import defaultdict
 
-from algorithms.utils import Stopwatch
+from utils import Stopwatch
 
 class centerer:
     def __init__(self, size : int, point_dim : int) -> None:
@@ -149,10 +149,10 @@ class color_centerer:
         all_colors, inverse = np.unique(colors, return_inverse=True)
 
         # add to the correct centerer
-        for color in range(len(all_colors)):
+        for color_index in range(len(all_colors)):
             # The fetures for current color
-            color_features = features[inverse == color]
-            self.centerers[color].add(color_features)
+            color_features = features[inverse == color_index]
+            self.centerers[all_colors[color_index]].add(color_features)
 
         # TODO: this is technically a waste since the previous add call
         # already computes this for each individually, but this is nicer for now
@@ -207,12 +207,14 @@ if __name__ == '__main__':
     for r in range(num_rounds):
         print(f'round: {r}')
         points = np.random.rand(num_points_per_round, 2)
-        colors = np.random.choice(['Red', 'Blue', 'Green', 'fat', 'skinny', 'twitter user'], len(points))
+        color_choices = np.array(['Red', 'Blue', 'Green'])
+        colors = np.random.choice(color_choices, len(points))
         timer = Stopwatch('Centering')
 
         c.add(points, colors)
         timer.split('returning')
         features, colors = c.get_centers()
+        print(colors)
         print(features.shape)
         [(_, insertion_times), (_, other_times)], _ = timer.stop()
         insert_time += insertion_times
