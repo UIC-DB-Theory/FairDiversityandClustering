@@ -27,8 +27,7 @@ class Instance:
                 self.group_idxs.append(set())
 
 def StreamFairDivMax2(X: ElemList, k: List[int], m: int, dist: Callable[[Any, Any], float], eps: float, dmax: float, dmin: float):
-    t0 = time.perf_counter()
-    tstart = t0
+    t_stream_start = time.perf_counter()
     # Initialization
     sum_k = sum(k)
     # print(zmin, zmax)
@@ -76,8 +75,8 @@ def StreamFairDivMax2(X: ElemList, k: List[int], m: int, dist: Callable[[Any, An
                 if flag_x:
                     gins.idxs.add(x.idx)
                     gins.div = min(gins.div, div_x)
-    t1 = time.perf_counter()
-    stream_time_per_elem = (t1 - t0) / len(X)
+    t_stream_end = time.perf_counter()
+    stream_time_per_elem = (t_stream_start - t_stream_end) / len(X)
     stored_elements = set()
     for ins_id in range(len(all_ins)):
         stored_elements.update(all_ins[ins_id].idxs)
@@ -211,9 +210,9 @@ def StreamFairDivMax2(X: ElemList, k: List[int], m: int, dist: Callable[[Any, An
             if div_s > sol_div:
                 sol = S_prime
                 sol_div = div_s
-    t1 = time.perf_counter()
-    post_time = t1 - t0
-    total_time = t1 - tstart
+    t_post_end = time.perf_counter()
+    post_time = t_post_end - t_stream_end
+    total_time = t_stream_start - t_post_end
     return sol, sol_div, stream_time_per_elem, post_time, total_time
 
 def scalable_fmmd_ILP(V: ElemList, EPS: float, k: int, C: int, constr: List[List[int]], dist: Callable[[Any, Any], float]) -> (List[int], float, float):
