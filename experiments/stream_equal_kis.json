@@ -1,21 +1,5 @@
 {
 	"datasets": {
-		"Beer_reviews": {
-			"data_dir": "./datasets/beer_reviews",
-			"color_fields": [
-				"beer/style"
-			],
-			"feature_fields": [
-				"beer/ABV",
-				"review/appearance",
-				"review/aroma",
-				"review/palate",
-				"review/taste",
-				"review/overall"
-			],
-			"normalize": true,
-			"filter_unique": false
-		},
 		"Popsim_1M": {
 			"data_dir": "./datasets/popsim_1M",
 			"color_fields": [
@@ -93,41 +77,21 @@
 			"normalize": false,
 			"filter_unique" : false
 		},
-		"Census25": {
-			"data_dir": "./datasets/census",
+		"Beer_reviews": {
+			"data_dir": "./datasets/beer_reviews",
 			"color_fields": [
-				"age-sex-color"
+				"beer/style"
 			],
 			"feature_fields": [
-				"attr1",
-				"attr2",
-				"attr3",
-				"attr4",
-				"attr5",
-				"attr6",
-				"attr7",
-				"attr8",
-				"attr9",
-				"attr10",
-				"attr11",
-				"attr12",
-				"attr13",
-				"attr14",
-				"attr15",
-				"attr16",
-				"attr17",
-				"attr18",
-				"attr19",
-				"attr20",
-				"attr21",
-				"attr22",
-				"attr23",
-				"attr24",
-				"attr25"
-				
+				"beer/ABV",
+				"review/appearance",
+				"review/aroma",
+				"review/palate",
+				"review/taste",
+				"review/overall"
 			],
-			"normalize": false,
-			"filter_unique" : false
+			"normalize": true,
+			"filter_unique": false
 		}
 	},
 	"algorithms" : {
