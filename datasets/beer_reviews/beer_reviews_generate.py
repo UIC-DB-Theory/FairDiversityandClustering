@@ -36,7 +36,8 @@ fields = [
                 "review/overall",
                 "review/time",
                 "review/profileName",
-                "review/text"
+                "review/text",
+                "beer/category"
         ]
 data = []
 
@@ -61,6 +62,14 @@ with open('Beeradvocate.txt', 'r') as file:
                 time = int(lines[i+10].split(':')[1].strip())
                 profileName = lines[i+11].split(':')[1].strip()
                 text = lines[i+12].split(':')[1].strip()
+                
+                if 'Ale' in name:
+                    category = 'Ale'
+                elif 'Lager' in name:
+                    category = 'Lager'
+                else:
+                    category = 'Other'
+
                 data.append(
                     [name,
                     beerId,
@@ -74,7 +83,8 @@ with open('Beeradvocate.txt', 'r') as file:
                     overall,
                     time,
                     profileName,
-                    text]
+                    text,
+                    category]
                 )
             
         except:
