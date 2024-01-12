@@ -52,7 +52,7 @@ def dataset_dmin(points):
     dmin = sys.float_info.max
     for i in range(len(points)):
         for j in range(i + 1, len(points)):
-            dmin = min(div, distance.euclidean(points[i], points[j]))
+            dmin = min(dmin, distance.euclidean(points[i], points[j]))
     return dmin
 
 def dataset_dmax(points):
@@ -60,7 +60,7 @@ def dataset_dmax(points):
     dmax = sys.float_info.min
     for i in range(len(points)):
         for j in range(i + 1, len(points)):
-            dmax = max(div, distance.euclidean(points[i], points[j]))
+            dmax = max(dmax, distance.euclidean(points[i], points[j]))
     return dmax
 
 
