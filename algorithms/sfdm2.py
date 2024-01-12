@@ -74,9 +74,9 @@ def StreamFairDivMax2(features, colors, kis, epsilon, gammahigh, gammalow, norma
                             )
         
     if streamtimes:
-        print(f'[SFDM2-Wrap] total stream time = {stream_time}')
-        print(f'[SFDM2-Wrap] post time = {post_time}')
-        print(f'[SFDM2-Wrap] total time = {total_time}')
+        # print(f'[SFDM2-Wrap] total stream time = {stream_time}')
+        # print(f'[SFDM2-Wrap] post time = {post_time}')
+        # print(f'[SFDM2-Wrap] total time = {total_time}')
         return np.array(list(sol)), sol_div, [stream_time, post_time, total_time]
     else:
         return np.array(list(sol)), sol_div, total_time

@@ -1,5 +1,34 @@
 {
 	"datasets": {
+		"Yelp_business": {
+			"data_dir": "./datasets/yelp_business",
+			"color_fields": [
+				"state_category"
+			],
+			"feature_fields": [
+				"x",
+				"y",
+				"z"
+			],
+			"normalize": true,
+			"filter_unique": false
+		},
+		"Beer_reviews": {
+			"data_dir": "./datasets/beer_reviews",
+			"color_fields": [
+				"beer/style"
+			],
+			"feature_fields": [
+				"beer/ABV",
+				"review/appearance",
+				"review/aroma",
+				"review/palate",
+				"review/taste",
+				"review/overall"
+			],
+			"normalize": true,
+			"filter_unique": false
+		},
 		"Popsim_1M": {
 			"data_dir": "./datasets/popsim_1M",
 			"color_fields": [
@@ -76,45 +105,9 @@
 			],
 			"normalize": false,
 			"filter_unique" : false
-		},
-		"Beer_reviews": {
-			"data_dir": "./datasets/beer_reviews",
-			"color_fields": [
-				"beer/style"
-			],
-			"feature_fields": [
-				"beer/ABV",
-				"review/appearance",
-				"review/aroma",
-				"review/palate",
-				"review/taste",
-				"review/overall"
-			],
-			"normalize": true,
-			"filter_unique": false
 		}
 	},
 	"algorithms" : {
-		"SFDM-2-15" : {
-			"alg" : "SFDM-2",
-			"color": "#4afc03",
-			"marker": "+",
-			"use_coreset" : false,
-			"use_dmax" : true,
-			"use_dmin" : true,
-			"epsilon" : 0.15,
-			"timeout" : 1800
-		},
-		"SFDM-2-75" : {
-			"alg" : "SFDM-2",
-			"color": "#1b5902",
-			"marker": "x",
-			"use_coreset" : false,
-			"use_dmax" : true,
-			"use_dmin" : true,
-			"epsilon" : 0.75,
-			"timeout" : 1800
-		},
 		"SMWUFD-0.3-15" : {
 			"alg": "SMWUFD",
 			"color": "#fc0303",
@@ -126,7 +119,27 @@
 			"falloff_epsilon" : 0.15,
 			"sample_percentage" : 0.1,
 			"percent_theoretical_limit": 0.3,
-			"timeout" : 1800
+			"timeout" : 3600
+		},
+		"SFDM-2-15" : {
+			"alg" : "SFDM-2",
+			"color": "#4afc03",
+			"marker": "+",
+			"use_coreset" : false,
+			"use_dmax" : true,
+			"use_dmin" : true,
+			"epsilon" : 0.15,
+			"timeout" : 3600
+		},
+		"SFDM-2-75" : {
+			"alg" : "SFDM-2",
+			"color": "#1b5902",
+			"marker": "x",
+			"use_coreset" : false,
+			"use_dmax" : true,
+			"use_dmin" : true,
+			"epsilon" : 0.75,
+			"timeout" : 3600
 		}
 	},
 	"parameters": {

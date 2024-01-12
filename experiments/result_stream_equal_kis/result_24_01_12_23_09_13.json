@@ -1,0 +1,190 @@
+{
+    "setup": {
+        "datasets": {
+            "Yelp_business": {
+                "data_dir": "./datasets/yelp_business",
+                "color_fields": [
+                    "state"
+                ],
+                "feature_fields": [
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "normalize": true,
+                "filter_unique": false,
+                "points_per_color": {
+                    "CA": 5203,
+                    "MO": 10913,
+                    "AZ": 9912,
+                    "PA": 34039,
+                    "TN": 12056,
+                    "FL": 26330,
+                    "IN": 11247,
+                    "LA": 9924,
+                    "AB": 5573,
+                    "NV": 7715,
+                    "ID": 4467,
+                    "DE": 2265,
+                    "IL": 2145,
+                    "NJ": 8536,
+                    "NC": 1,
+                    "CO": 3,
+                    "WA": 2,
+                    "HI": 2,
+                    "UT": 1,
+                    "TX": 4,
+                    "MT": 1,
+                    "MI": 1,
+                    "SD": 1,
+                    "XMS": 1,
+                    "MA": 2,
+                    "VI": 1,
+                    "VT": 1
+                },
+                "size": 150346
+            },
+            "Beer_reviews": {
+                "data_dir": "./datasets/beer_reviews",
+                "color_fields": [
+                    "beer/style"
+                ],
+                "feature_fields": [
+                    "beer/ABV",
+                    "review/appearance",
+                    "review/aroma",
+                    "review/palate",
+                    "review/taste",
+                    "review/overall"
+                ],
+                "normalize": true,
+                "filter_unique": false
+            },
+            "Popsim_1M": {
+                "data_dir": "./datasets/popsim_1M",
+                "color_fields": [
+                    "race"
+                ],
+                "feature_fields": [
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "normalize": true,
+                "filter_unique": false
+            },
+            "Adult": {
+                "data_dir": "./datasets/adult",
+                "color_fields": [
+                    "race",
+                    "sex"
+                ],
+                "feature_fields": [
+                    "age",
+                    "capital-gain",
+                    "capital-loss",
+                    "hours-per-week",
+                    "fnlwgt",
+                    "education-num"
+                ],
+                "normalize": true,
+                "filter_unique": false
+            },
+            "Diabetes": {
+                "data_dir": "./datasets/diabetes",
+                "color_fields": [
+                    "gender",
+                    "diabetesMed"
+                ],
+                "feature_fields": [
+                    "num_procedures",
+                    "num_lab_procedures",
+                    "number_outpatient",
+                    "number_inpatient",
+                    "number_diagnoses",
+                    "time_in_hospital",
+                    "num_medications"
+                ],
+                "normalize": true,
+                "filter_unique": false
+            },
+            "Popsim": {
+                "data_dir": "./datasets/popsim",
+                "color_fields": [
+                    "race"
+                ],
+                "feature_fields": [
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "normalize": true,
+                "filter_unique": false
+            },
+            "Census": {
+                "data_dir": "./datasets/census",
+                "color_fields": [
+                    "age-sex-color"
+                ],
+                "feature_fields": [
+                    "attr1",
+                    "attr2",
+                    "attr3",
+                    "attr4",
+                    "attr5",
+                    "attr6"
+                ],
+                "normalize": false,
+                "filter_unique": false
+            }
+        },
+        "algorithms": {
+            "SFDM-2-15": {
+                "alg": "SFDM-2",
+                "color": "#4afc03",
+                "marker": "+",
+                "use_coreset": false,
+                "use_dmax": true,
+                "use_dmin": true,
+                "epsilon": 0.15,
+                "timeout": 3600
+            },
+            "SFDM-2-75": {
+                "alg": "SFDM-2",
+                "color": "#1b5902",
+                "marker": "x",
+                "use_coreset": false,
+                "use_dmax": true,
+                "use_dmin": true,
+                "epsilon": 0.75,
+                "timeout": 3600
+            },
+            "SMWUFD-0.3-15": {
+                "alg": "SMWUFD",
+                "color": "#fc0303",
+                "marker": "o",
+                "use_coreset": false,
+                "use_dmax": false,
+                "use_dmin": false,
+                "mwu_epsilon": 0.75,
+                "falloff_epsilon": 0.15,
+                "sample_percentage": 0.1,
+                "percent_theoretical_limit": 0.3,
+                "timeout": 3600
+            }
+        },
+        "parameters": {
+            "k": [
+                20,
+                101,
+                20
+            ],
+            "observations": 5,
+            "buildkis_alpha": 0.1,
+            "buildkis_equal_k_js": true
+        }
+    },
+    "results": {},
+    "alg_status": [],
+    "color_results": []
+}
