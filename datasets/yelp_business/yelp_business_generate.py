@@ -10,7 +10,7 @@ metadata = {
 
 
 fields = [
-                "state",
+                "state_category",
                 "x",
                 "y",
                 "z"
@@ -22,13 +22,29 @@ with open('yelp_academic_dataset_business.json', 'r') as file:
     lines = file.readlines()
     for i in range(0, len(lines)):
         business = json.loads(lines[i])
-        state = business['state']
+        state_abbreviation = business['state']
+        state_category
+        if state_abbreviation.upper() in ["MI", "OH", "PA", "IN", "IL"]:
+            state_category = "Industrial/Manufacturing"
+        elif state_abbreviation.upper() in ["CA", "WA", "MA", "TX"]:
+            state_category = "Technology/Innovation"
+        elif state_abbreviation.upper() in ["IA", "KS", "NE", "SD", "ND"]:
+            state_category = "Agriculture"
+        elif state_abbreviation.upper() in ["TX", "AK", "WY", "ND"]:
+            state_category = "Energy/Natural Resources"
+        elif state_abbreviation.upper() in ["NY", "DE", "CT", "IL"]:
+            state_category = "Finance/Services"
+        elif state_abbreviation.upper() in ["FL", "NV", "HI", "CA"]:
+            state_category = "Tourism/Service Industries"
+        else:
+            state_category = "Other"
+        
         lat = business['latitude']
         lon = business['longitude']
         x = 6371*math.cos(lat)*math.cos(lon)
         y = 6371*math.cos(lat)*math.sin(lon)
         z = 6371*math.sin(lat)
-        data.append([state, x, y, z])
+        data.append([state_category, x, y, z])
         
         
 
