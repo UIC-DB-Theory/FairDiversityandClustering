@@ -47,24 +47,24 @@ class centerer:
         (_, dims) = points.shape
         assert(self.point_dim == dims)
 
+        # start timer
+        timer = Stopwatch("Compute all points")
+
         # gets a generator to loop
         pgen = self._to_generator(points)
 
-        # if we're yet to see the first k points, just add it
-        while self.points_seen < self.k and pgen:
-            cur_index = self.points_seen
-            self.centers[cur_index] = next(pgen)
-
-        # if we have seen k points, compute the first R radius
-        # and fall through to the rest
-        if self.points_seen == self.k:
-            self._calc_initial_R()
-
-        # start timer
-        timer = Stopwatch("Compute all points")
-        
         # at this point we do the main algorithm
         try:
+            # if we're yet to see the first k points, just add it
+            while self.points_seen < self.k and pgen:
+                cur_index = self.points_seen
+                self.centers[cur_index] = next(pgen)
+
+            # if we have seen k points, compute the first R radius
+            # and fall through to the rest
+            if self.points_seen == self.k:
+                self._calc_initial_R()
+
             while True:
                 # pre-compute a tree of centers
                 tree = KDTree(self.centers)
@@ -107,10 +107,17 @@ class centerer:
         """
 
         timer = Stopwatch("Finalize centers")
+
+        # if we saw less than k points, return that many points
+        if self.points_seen < self.k:
+            out = self.centers[:self.points_seen]
+            # sets the time (essentially 0 here)
+            _, time = timer.stop()
+            self.last_finalize_time = time
+            return out
         
         # if we have no other points, just return
         if self.prev_centers is None:
-            # sets the time (essentially 0 here)
             _, time = timer.stop()
             self.last_finalize_time = time
             return self.centers
