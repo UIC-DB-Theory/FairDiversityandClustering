@@ -66,24 +66,27 @@ class centerer:
         # at this point we do the main algorithm
         try:
             while True:
+                # pre-compute a tree of centers
+                tree = KDTree(self.centers)
                 # while |T| <= k
                 while len(self.centers) <= self.k:
                     cur_p = next(pgen)
-                    tree = KDTree(self.centers)
                     nearest_dist, _ = tree.query(cur_p)
                     if nearest_dist > 2 * self.R:
                         self.centers = np.append(self.centers, cur_p, axis=0)
+                        # we added a point so we rebuild the tree
+                        tree = KDTree(self.centers)
 
                 # store this set of centers as the old centers before the next loop
                 self.prev_centers = np.copy(self.centers)
 
                 # while there exists z in T such that p(z,T') > 2R
                 # compute the tree and update all at once
-                tree = KDTree(self.centers)
+                # tree = KDTree(self.centers) # we re-use the existing KD tree since it is up-to-date
                 too_close_pairs = tree.query_pairs(2.0 * self.R)
                 # remove any point in centers (T) from centers (T)
-                indecies_to_delete = [i for (i, _) in too_close_pairs]
-                self.centers = np.delete(self.centers, indecies_to_delete, axis=0)
+                indices_to_delete = [i for (i, _) in too_close_pairs]
+                self.centers = np.delete(self.centers, indices_to_delete, axis=0)
                 # update R
                 self.R *= 2
         # we're out of points, so whatever we had is what we had
