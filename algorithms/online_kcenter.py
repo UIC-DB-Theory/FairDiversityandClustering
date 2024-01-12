@@ -73,9 +73,7 @@ class centerer:
                     cur_p = next(pgen)
                     nearest_dist, _ = tree.query(cur_p)
                     if nearest_dist > 2 * self.R:
-                        self.centers = np.append(self.centers, cur_p, axis=0)
-                        # we added a point so we rebuild the tree
-                        tree = KDTree(self.centers)
+                        self.centers = np.append(self.centers, cur_p, axis=0) # we added a point so we rebuild the tree tree = KDTree(self.centers)
 
                 # store this set of centers as the old centers before the next loop
                 self.prev_centers = np.copy(self.centers)
