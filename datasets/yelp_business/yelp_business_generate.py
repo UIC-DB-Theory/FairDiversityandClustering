@@ -1,5 +1,6 @@
 import json
 import csv
+import math
 
 metadata_file = "yelp_business.metadata"
 metadata = {
@@ -8,9 +9,8 @@ metadata = {
 }
 
 
-# fields can be found in beeradvocate.txt
 fields = [
-                "beer/name",
+                "state",
                 "x",
                 "y",
                 "z"
@@ -18,59 +18,21 @@ fields = [
 data = []
 
 # ---------------Read original dataset file--------------
-with open('Beeradvocate.txt', 'r') as file:
+with open('yelp_academic_dataset_business.json', 'r') as file:
     lines = file.readlines()
-    invalid = 0
     for i in range(0, len(lines)):
-        try:
-            if "beer/name" in lines[i]:
-                # The next 12 lines are part of the same review
-                name = lines[i].split(':')[1].strip()
-                beerId = int(lines[i+1].split(':')[1].strip())
-                brewerId = int(lines[i+2].split(':')[1].strip())
-                abv = float(lines[i+3].split(':')[1].strip())
-                style = lines[i+4].split(':')[1].strip()
-                appearance = float(lines[i+5].split(':')[1].strip())
-                aroma = float(lines[i+6].split(':')[1].strip())
-                palate = float(lines[i+7].split(':')[1].strip())
-                taste = float(lines[i+8].split(':')[1].strip())
-                overall = float(lines[i+9].split(':')[1].strip())
-                time = int(lines[i+10].split(':')[1].strip())
-                profileName = lines[i+11].split(':')[1].strip()
-                text = lines[i+12].split(':')[1].strip()
-                
-                if 'Ale' in name:
-                    category = 'Ale'
-                elif 'Lager' in name:
-                    category = 'Lager'
-                else:
-                    category = 'Other'
-
-                data.append(
-                    [name,
-                    beerId,
-                    brewerId,
-                    abv,
-                    style,
-                    appearance,
-                    aroma,
-                    palate,
-                    taste,
-                    overall,
-                    time,
-                    profileName,
-                    text,
-                    category]
-                )
-            
-        except:
-            invalid += 1
-            continue
-    print('Invalid points: ', invalid)
-    print('Valid points read: ', len(data))
+        business = json.loads(lines[i])
+        state = business['state']
+        lat = business['latitude']
+        lon = business['longitude']
+        x = 6371*math.cos(lat)*math.cos(lon)
+        y = 6371*math.cos(lat)*math.sin(lon)
+        z = 6371*math.sin(lat)
+        data.append([state, x, y, z])
+        
         
 
-# ---------------Create file beer_reviews.metadata--------------
+# ---------------Create file yelp_business.metadata--------------
 metadata["fields"] = fields
 
 # Write to metadata file
@@ -79,24 +41,11 @@ with open(metadata_file, "w") as outfile:
     outfile.write(json_object)
 
 
-# ---------------Create file beer_reviews.metadata---------------
+# ---------------Create file yelp_business.data---------------
 with open(metadata["filename"], "w", newline="") as f:
     writer = csv.writer(f)
     writer.writerows(data)
 
-
-
-
-
-
-
-
-
-import json
-
-with open("test.json") as json_file:
-    json_data = json.load(json_file)
-    print(json_data)
 
 
 '''

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+## TODO: Yelp reviews dataset host
+
 cd beer_reviews && wget https://snap.stanford.edu/data/Beeradvocate.txt.gz && gzip -d Beeradvocate.txt.gz && python3 beer_reviews_generate.py && cd ..
 
 cd adult && wget https://archive.ics.uci.edu/static/public/2/adult.zip && unzip \*.zip && python3 adult_generate.py && cd ..
@@ -11,5 +13,3 @@ cd census && wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?ex
 cd popsim && wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1wWQ_yFuOXdk3sx-zaFGDCKT0cFFg9snH' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1wWQ_yFuOXdk3sx-zaFGDCKT0cFFg9snH" -O popsim_5m.csv.zip && rm -rf /tmp/cookies.txt && unzip \*.zip && python3 popsim_generate.py && cd ..
 
 cd popsim_1M && wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&1u3qcXLkjdKbQvrULEdEZKzTDNvi0MoaP&export' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1u3qcXLkjdKbQvrULEdEZKzTDNvi0MoaP&export" -O popsim_1M.csv && rm -rf /tmp/cookies.txt &&  python3 popsim_generate.py && cd ..
-
-https://drive.google.com/file/d/1LsV3yaA8rEN2X2X-2UAbyB7-8aMm0Z1s/view?usp=share_link
