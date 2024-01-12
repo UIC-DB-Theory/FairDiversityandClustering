@@ -23,7 +23,6 @@ with open('yelp_academic_dataset_business.json', 'r') as file:
     for i in range(0, len(lines)):
         business = json.loads(lines[i])
         state_abbreviation = business['state']
-        state_category
         if state_abbreviation.upper() in ["MI", "OH", "PA", "IN", "IL"]:
             state_category = "Industrial/Manufacturing"
         elif state_abbreviation.upper() in ["CA", "WA", "MA", "TX"]:
