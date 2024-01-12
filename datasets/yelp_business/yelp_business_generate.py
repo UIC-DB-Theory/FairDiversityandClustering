@@ -18,25 +18,27 @@ fields = [
 data = []
 
 # ---------------Read original dataset file--------------
+
+northeast_states = ["CT", "DE", "ME", "MD", "MA", "NH", "NJ", "NY", "PA", "RI", "VT"]
+midwest_states = ["IL", "IN", "IA", "KS", "MI", "MN", "MO", "NE", "ND", "OH", "SD", "WI"]
+south_states = ["AL", "AR", "FL", "GA", "KY", "LA", "MS", "NC", "SC", "TN", "VA", "WV"]
+west_states = ["AK", "AZ", "CA", "CO", "HI", "ID", "MT", "NV", "NM", "OR", "UT", "WA", "WY"]
+
 with open('yelp_academic_dataset_business.json', 'r') as file:
     lines = file.readlines()
     for i in range(0, len(lines)):
         business = json.loads(lines[i])
         state_abbreviation = business['state']
-        if state_abbreviation.upper() in ["MI", "OH", "PA", "IN", "IL"]:
-            state_category = "Industrial/Manufacturing"
-        elif state_abbreviation.upper() in ["CA", "WA", "MA", "TX"]:
-            state_category = "Technology/Innovation"
-        elif state_abbreviation.upper() in ["IA", "KS", "NE", "SD", "ND"]:
-            state_category = "Agriculture"
-        elif state_abbreviation.upper() in ["TX", "AK", "WY", "ND"]:
-            state_category = "Energy/Natural Resources"
-        elif state_abbreviation.upper() in ["NY", "DE", "CT", "IL"]:
-            state_category = "Finance/Services"
-        elif state_abbreviation.upper() in ["FL", "NV", "HI", "CA"]:
-            state_category = "Tourism/Service Industries"
+        if state_abbreviation in northeast_states:
+            state_category = "Northeast"
+        elif state_abbreviation in midwest_states:
+            state_category = "Midwest"
+        elif state_abbreviation in south_states:
+            state_category = "South"
+        elif state_abbreviation in west_states:
+            state_category = "West"
         else:
-            state_category = "Other"
+            state_category =  "Other"
         
         lat = business['latitude']
         lon = business['longitude']
