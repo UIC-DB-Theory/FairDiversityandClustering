@@ -171,14 +171,14 @@ for dataset_name in setup["datasets"]:
         features = dataset['features']
         colors = dataset['colors']
 
-        if dataset_name not in dataset_dmin_dmax:
+        if dataset_name not in dmin_dmax:
             print('Calculating dataset dmin & dmax for', dataset_name)
             _, unique_features_indices = np.unique(features, return_index=True, axis=0)
             ufeatures = features[unique_features_indices]
             dmin_full, dmax_full = calculate_dmin_dmax(ufeatures)
             print('\t\tdmin', dmin_full)
             print('\t\tdmax', dmax_full)
-            dataset_dmin_dmax[dataset_name] = [dmin_full, dmax_full]
+            dmin_dmax[dataset_name] = [dmin_full, dmax_full]
 
         # one kis' map to ask for
         kimap = buildKisMap(dataset['colors'], k, setup['parameters']['buildkis_alpha'], equal_k_js=check_flag(setup['parameters'],'buildkis_equal_k_js'))
@@ -211,8 +211,8 @@ for dataset_name in setup["datasets"]:
             # dmin = coreset.compute_closest_pair()
 
             # Use dmin and dmax of full dataset instead
-            dmin = dataset_dmin_dmax[dataset_name][0]
-            dmin = dataset_dmin_dmax[dataset_name][1]
+            dmin = dmin_dmax[dataset_name][0]
+            dmax = dmin_dmax[dataset_name][1]
 
             result_per_alg = {}
             for name in setup['algorithms']:
