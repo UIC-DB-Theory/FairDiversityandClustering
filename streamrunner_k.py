@@ -51,10 +51,9 @@ with open(setup_file_path, 'r') as json_file:
 from algorithms.sfdm2 import StreamFairDivMax2
 from fmmdmwu_stream import fmmdmwu_stream as SMWUFD
 from algorithms.utils import buildKisMap
-from algorithms.utils import dataset_dmin
-from algorithms.utils import dataset_dmax
+from algorithms.utils import calculate_dmin_dmax
 
-dataset_dmin_dmax = {}
+dmin_dmax = {}
 
 # Lambdas for running experiments
 algorithms = {
@@ -176,11 +175,10 @@ for dataset_name in setup["datasets"]:
             print('Calculating dataset dmin & dmax for', dataset_name)
             _, unique_features_indices = np.unique(features, return_index=True, axis=0)
             ufeatures = features[unique_features_indices]
-            dmin_full_dataset = dataset_dmin(ufeatures)
-            dmax_full_dataset = dataset_dmax(ufeatures)
-            print('\t\tdmin', dmin_full_dataset)
-            print('\t\tdmax', dmax_full_dataset)
-            dataset_dmin_dmax[dataset_name] = [dmin_full_dataset, dmax_full_dataset]
+            dmin_full, dmax_full = calculate_dmin_dmax(ufeatures)
+            print('\t\tdmin', dmin_full)
+            print('\t\tdmax', dmax_full)
+            dataset_dmin_dmax[dataset_name] = [dmin_full, dmax_full]
 
         # one kis' map to ask for
         kimap = buildKisMap(dataset['colors'], k, setup['parameters']['buildkis_alpha'], equal_k_js=check_flag(setup['parameters'],'buildkis_equal_k_js'))
