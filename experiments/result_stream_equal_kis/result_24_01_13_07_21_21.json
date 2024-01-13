@@ -1,0 +1,1925 @@
+{
+    "setup": {
+        "datasets": {
+            "Beer_reviews": {
+                "data_dir": "./datasets/beer_reviews",
+                "color_fields": [
+                    "beer/category"
+                ],
+                "feature_fields": [
+                    "beer/ABV",
+                    "review/appearance",
+                    "review/aroma",
+                    "review/palate",
+                    "review/taste",
+                    "review/overall"
+                ],
+                "normalize": true,
+                "filter_unique": false,
+                "points_per_color": {
+                    "Other": 1097316,
+                    "Ale": 372015,
+                    "Lager": 49498
+                },
+                "size": 1518829
+            },
+            "Yelp_business": {
+                "data_dir": "./datasets/yelp_business",
+                "color_fields": [
+                    "state_category"
+                ],
+                "feature_fields": [
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "normalize": true,
+                "filter_unique": false,
+                "points_per_color": {
+                    "West": 27306,
+                    "Midwest": 24307,
+                    "Northeast": 44843,
+                    "South": 48311,
+                    "Other": 5579
+                },
+                "size": 150346
+            },
+            "Popsim_1M": {
+                "data_dir": "./datasets/popsim_1M",
+                "color_fields": [
+                    "race"
+                ],
+                "feature_fields": [
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "normalize": true,
+                "filter_unique": false
+            },
+            "Adult": {
+                "data_dir": "./datasets/adult",
+                "color_fields": [
+                    "race",
+                    "sex"
+                ],
+                "feature_fields": [
+                    "age",
+                    "capital-gain",
+                    "capital-loss",
+                    "hours-per-week",
+                    "fnlwgt",
+                    "education-num"
+                ],
+                "normalize": true,
+                "filter_unique": false
+            },
+            "Diabetes": {
+                "data_dir": "./datasets/diabetes",
+                "color_fields": [
+                    "gender",
+                    "diabetesMed"
+                ],
+                "feature_fields": [
+                    "num_procedures",
+                    "num_lab_procedures",
+                    "number_outpatient",
+                    "number_inpatient",
+                    "number_diagnoses",
+                    "time_in_hospital",
+                    "num_medications"
+                ],
+                "normalize": true,
+                "filter_unique": false
+            },
+            "Popsim": {
+                "data_dir": "./datasets/popsim",
+                "color_fields": [
+                    "race"
+                ],
+                "feature_fields": [
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "normalize": true,
+                "filter_unique": false
+            },
+            "Census": {
+                "data_dir": "./datasets/census",
+                "color_fields": [
+                    "age-sex-color"
+                ],
+                "feature_fields": [
+                    "attr1",
+                    "attr2",
+                    "attr3",
+                    "attr4",
+                    "attr5",
+                    "attr6"
+                ],
+                "normalize": false,
+                "filter_unique": false
+            }
+        },
+        "algorithms": {
+            "SMWUFD": {
+                "alg": "SMWUFD",
+                "color": "#fc0303",
+                "marker": "o",
+                "use_coreset": false,
+                "use_dmax": false,
+                "use_dmin": false,
+                "mwu_epsilon": 0.75,
+                "falloff_epsilon": 0.15,
+                "sample_percentage": 0.1,
+                "percent_theoretical_limit": 0.3,
+                "timeout": 7200
+            },
+            "SFDM-2 (e=.15)": {
+                "alg": "SFDM-2",
+                "color": "#4afc03",
+                "marker": "+",
+                "use_coreset": false,
+                "use_dmax": true,
+                "use_dmin": true,
+                "epsilon": 0.15,
+                "timeout": 7200
+            },
+            "SFDM-2 (e=.75)": {
+                "alg": "SFDM-2",
+                "color": "#1b5902",
+                "marker": "x",
+                "use_coreset": false,
+                "use_dmax": true,
+                "use_dmin": true,
+                "epsilon": 0.75,
+                "timeout": 7200
+            }
+        },
+        "parameters": {
+            "k": [
+                20,
+                101,
+                20
+            ],
+            "observations": 5,
+            "buildkis_alpha": 0.1,
+            "buildkis_equal_k_js": true
+        }
+    },
+    "results": {
+        "Beer_reviews": {
+            "SFDM-2 (e=.15)": {
+                "xs": {
+                    "k": [
+                        21,
+                        42,
+                        60,
+                        81,
+                        102
+                    ]
+                },
+                "ys": {
+                    "data_size": [
+                        1518829.0,
+                        1518829.0,
+                        1518829.0,
+                        1518829.0,
+                        1518829.0
+                    ],
+                    "dmax": [
+                        22.163923014688812,
+                        22.163923014688812,
+                        22.163923014688812,
+                        22.163923014688812,
+                        22.163923014688812
+                    ],
+                    "dmin": [
+                        0.004305658288972891,
+                        0.004305658288972891,
+                        0.004305658288972891,
+                        0.004305658288972891,
+                        0.004305658288972891
+                    ],
+                    "solution_size": [
+                        21.0,
+                        42.0,
+                        60.0,
+                        81.0,
+                        102.0
+                    ],
+                    "diversity": [
+                        3.4695922804411516,
+                        2.949740681629454,
+                        2.520590927305,
+                        2.520590927305,
+                        2.385730901321456
+                    ],
+                    "streamtime": [
+                        0.00022769666747781385,
+                        0.0002893457340939747,
+                        0.00031998172554976567,
+                        0.00036759373537609535,
+                        0.0003945178542077604
+                    ],
+                    "posttime": [
+                        2.3864126812666653,
+                        14.820644360035658,
+                        39.013505439460275,
+                        52.311566061526534,
+                        101.19602855667472
+                    ],
+                    "totaltime": [
+                        348.21871444992723,
+                        454.28733632825316,
+                        525.0110296744854,
+                        610.6235915690661,
+                        700.4011865451932
+                    ]
+                }
+            },
+            "SFDM-2 (e=.75)": {
+                "xs": {
+                    "k": [
+                        21,
+                        42,
+                        60,
+                        81,
+                        102
+                    ]
+                },
+                "ys": {
+                    "data_size": [
+                        1518829.0,
+                        1518829.0,
+                        1518829.0,
+                        1518829.0,
+                        1518829.0
+                    ],
+                    "dmax": [
+                        22.163923014688812,
+                        22.163923014688812,
+                        22.163923014688812,
+                        22.163923014688812,
+                        22.163923014688812
+                    ],
+                    "dmin": [
+                        0.004305658288972891,
+                        0.004305658288972891,
+                        0.004305658288972891,
+                        0.004305658288972891,
+                        0.004305658288972891
+                    ],
+                    "solution_size": [
+                        21.0,
+                        42.0,
+                        60.0,
+                        81.0,
+                        102.0
+                    ],
+                    "diversity": [
+                        1.8859250933550225,
+                        1.4099532906866692,
+                        1.4099532906866692,
+                        1.4099532906866692,
+                        1.3919175307827447
+                    ],
+                    "streamtime": [
+                        6.52208167258246e-05,
+                        6.555150490361302e-05,
+                        6.554435457180579e-05,
+                        6.612281369450642e-05,
+                        6.638254858670822e-05
+                    ],
+                    "posttime": [
+                        0.3080095436424017,
+                        1.6998741373419761,
+                        4.475754772871733,
+                        6.0515812009572985,
+                        12.086772949248552
+                    ],
+                    "totaltime": [
+                        99.36727739050984,
+                        101.26140077859164,
+                        104.02642128281295,
+                        106.48082820177078,
+                        112.91051283665001
+                    ]
+                }
+            }
+        }
+    },
+    "alg_status": [
+        [
+            "SMWUFD timed out at k = 21"
+        ]
+    ],
+    "color_results": [
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.15)",
+            21,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 7,
+                "Lager": 7,
+                "Other": 7
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.75)",
+            21,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 7,
+                "Lager": 7,
+                "Other": 7
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.15)",
+            21,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 7,
+                "Lager": 7,
+                "Other": 7
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.75)",
+            21,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 7,
+                "Lager": 7,
+                "Other": 7
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.15)",
+            21,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 7,
+                "Lager": 7,
+                "Other": 7
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.75)",
+            21,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 7,
+                "Lager": 7,
+                "Other": 7
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.15)",
+            21,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 7,
+                "Lager": 7,
+                "Other": 7
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.75)",
+            21,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 7,
+                "Lager": 7,
+                "Other": 7
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.15)",
+            21,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 7,
+                "Lager": 7,
+                "Other": 7
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.75)",
+            21,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 7,
+                "Lager": 7,
+                "Other": 7
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.15)",
+            42,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 14,
+                "Lager": 14,
+                "Other": 14
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.75)",
+            42,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 14,
+                "Lager": 14,
+                "Other": 14
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.15)",
+            42,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 14,
+                "Lager": 14,
+                "Other": 14
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.75)",
+            42,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 14,
+                "Lager": 14,
+                "Other": 14
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.15)",
+            42,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 14,
+                "Lager": 14,
+                "Other": 14
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.75)",
+            42,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 14,
+                "Lager": 14,
+                "Other": 14
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.15)",
+            42,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 14,
+                "Lager": 14,
+                "Other": 14
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.75)",
+            42,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 14,
+                "Lager": 14,
+                "Other": 14
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.15)",
+            42,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 14,
+                "Lager": 14,
+                "Other": 14
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.75)",
+            42,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 14,
+                "Lager": 14,
+                "Other": 14
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.15)",
+            60,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 20,
+                "Lager": 20,
+                "Other": 20
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.75)",
+            60,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 20,
+                "Lager": 20,
+                "Other": 20
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.15)",
+            60,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 20,
+                "Lager": 20,
+                "Other": 20
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.75)",
+            60,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 20,
+                "Lager": 20,
+                "Other": 20
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.15)",
+            60,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 20,
+                "Lager": 20,
+                "Other": 20
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.75)",
+            60,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 20,
+                "Lager": 20,
+                "Other": 20
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.15)",
+            60,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 20,
+                "Lager": 20,
+                "Other": 20
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.75)",
+            60,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 20,
+                "Lager": 20,
+                "Other": 20
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.15)",
+            60,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 20,
+                "Lager": 20,
+                "Other": 20
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.75)",
+            60,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 20,
+                "Lager": 20,
+                "Other": 20
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.15)",
+            81,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 27,
+                "Lager": 27,
+                "Other": 27
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.75)",
+            81,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 27,
+                "Lager": 27,
+                "Other": 27
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.15)",
+            81,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 27,
+                "Lager": 27,
+                "Other": 27
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.75)",
+            81,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 27,
+                "Lager": 27,
+                "Other": 27
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.15)",
+            81,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 27,
+                "Lager": 27,
+                "Other": 27
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.75)",
+            81,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 27,
+                "Lager": 27,
+                "Other": 27
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.15)",
+            81,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 27,
+                "Lager": 27,
+                "Other": 27
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.75)",
+            81,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 27,
+                "Lager": 27,
+                "Other": 27
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.15)",
+            81,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 27,
+                "Lager": 27,
+                "Other": 27
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.75)",
+            81,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 27,
+                "Lager": 27,
+                "Other": 27
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.15)",
+            102,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 34,
+                "Lager": 34,
+                "Other": 34
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.75)",
+            102,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 34,
+                "Lager": 34,
+                "Other": 34
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.15)",
+            102,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 34,
+                "Lager": 34,
+                "Other": 34
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.75)",
+            102,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 34,
+                "Lager": 34,
+                "Other": 34
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.15)",
+            102,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 34,
+                "Lager": 34,
+                "Other": 34
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.75)",
+            102,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 34,
+                "Lager": 34,
+                "Other": 34
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.15)",
+            102,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 34,
+                "Lager": 34,
+                "Other": 34
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.75)",
+            102,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 34,
+                "Lager": 34,
+                "Other": 34
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.15)",
+            102,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 34,
+                "Lager": 34,
+                "Other": 34
+            }
+        ],
+        [
+            "Beer_reviews",
+            "SFDM-2 (e=.75)",
+            102,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 34,
+                "Lager": 34,
+                "Other": 34
+            }
+        ],
+        [
+            "Yelp_business",
+            "SMWUFD",
+            20,
+            {
+                "Midwest": -2,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 4,
+                "West": -2
+            },
+            {
+                "Midwest": 4,
+                "Northeast": 4,
+                "Other": 4,
+                "South": 4,
+                "West": 4
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2 (e=.15)",
+            20,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 4,
+                "Northeast": 4,
+                "Other": 4,
+                "South": 4,
+                "West": 4
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2 (e=.75)",
+            20,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 4,
+                "Northeast": 4,
+                "Other": 4,
+                "South": 4,
+                "West": 4
+            }
+        ],
+        [
+            "Yelp_business",
+            "SMWUFD",
+            20,
+            {
+                "Midwest": -1,
+                "Northeast": 1,
+                "Other": -2,
+                "South": 3,
+                "West": -2
+            },
+            {
+                "Midwest": 4,
+                "Northeast": 4,
+                "Other": 4,
+                "South": 4,
+                "West": 4
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2 (e=.15)",
+            20,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 4,
+                "Northeast": 4,
+                "Other": 4,
+                "South": 4,
+                "West": 4
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2 (e=.75)",
+            20,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 4,
+                "Northeast": 4,
+                "Other": 4,
+                "South": 4,
+                "West": 4
+            }
+        ],
+        [
+            "Yelp_business",
+            "SMWUFD",
+            20,
+            {
+                "Midwest": -1,
+                "Northeast": -3,
+                "Other": -1,
+                "South": 5,
+                "West": -1
+            },
+            {
+                "Midwest": 4,
+                "Northeast": 4,
+                "Other": 4,
+                "South": 4,
+                "West": 4
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2 (e=.15)",
+            20,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 4,
+                "Northeast": 4,
+                "Other": 4,
+                "South": 4,
+                "West": 4
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2 (e=.75)",
+            20,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 4,
+                "Northeast": 4,
+                "Other": 4,
+                "South": 4,
+                "West": 4
+            }
+        ],
+        [
+            "Yelp_business",
+            "SMWUFD",
+            20,
+            {
+                "Midwest": 2,
+                "Northeast": -2,
+                "Other": -1,
+                "South": 3,
+                "West": -2
+            },
+            {
+                "Midwest": 4,
+                "Northeast": 4,
+                "Other": 4,
+                "South": 4,
+                "West": 4
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2 (e=.15)",
+            20,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 4,
+                "Northeast": 4,
+                "Other": 4,
+                "South": 4,
+                "West": 4
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2 (e=.75)",
+            20,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 4,
+                "Northeast": 4,
+                "Other": 4,
+                "South": 4,
+                "West": 4
+            }
+        ],
+        [
+            "Yelp_business",
+            "SMWUFD",
+            20,
+            {
+                "Midwest": -1,
+                "Northeast": -2,
+                "Other": 0,
+                "South": 4,
+                "West": -1
+            },
+            {
+                "Midwest": 4,
+                "Northeast": 4,
+                "Other": 4,
+                "South": 4,
+                "West": 4
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2 (e=.15)",
+            20,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 4,
+                "Northeast": 4,
+                "Other": 4,
+                "South": 4,
+                "West": 4
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2 (e=.75)",
+            20,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 4,
+                "Northeast": 4,
+                "Other": 4,
+                "South": 4,
+                "West": 4
+            }
+        ],
+        [
+            "Yelp_business",
+            "SMWUFD",
+            40,
+            {
+                "Midwest": -4,
+                "Northeast": 2,
+                "Other": -7,
+                "South": 8,
+                "West": 1
+            },
+            {
+                "Midwest": 8,
+                "Northeast": 8,
+                "Other": 8,
+                "South": 8,
+                "West": 8
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2 (e=.15)",
+            40,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 8,
+                "Northeast": 8,
+                "Other": 8,
+                "South": 8,
+                "West": 8
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2 (e=.75)",
+            40,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 8,
+                "Northeast": 8,
+                "Other": 8,
+                "South": 8,
+                "West": 8
+            }
+        ],
+        [
+            "Yelp_business",
+            "SMWUFD",
+            40,
+            {
+                "Midwest": -1,
+                "Northeast": 1,
+                "Other": -6,
+                "South": 4,
+                "West": 2
+            },
+            {
+                "Midwest": 8,
+                "Northeast": 8,
+                "Other": 8,
+                "South": 8,
+                "West": 8
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2 (e=.15)",
+            40,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 8,
+                "Northeast": 8,
+                "Other": 8,
+                "South": 8,
+                "West": 8
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2 (e=.75)",
+            40,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 8,
+                "Northeast": 8,
+                "Other": 8,
+                "South": 8,
+                "West": 8
+            }
+        ],
+        [
+            "Yelp_business",
+            "SMWUFD",
+            40,
+            {
+                "Midwest": -3,
+                "Northeast": 5,
+                "Other": -7,
+                "South": 2,
+                "West": 3
+            },
+            {
+                "Midwest": 8,
+                "Northeast": 8,
+                "Other": 8,
+                "South": 8,
+                "West": 8
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2 (e=.15)",
+            40,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 8,
+                "Northeast": 8,
+                "Other": 8,
+                "South": 8,
+                "West": 8
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2 (e=.75)",
+            40,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 8,
+                "Northeast": 8,
+                "Other": 8,
+                "South": 8,
+                "West": 8
+            }
+        ],
+        [
+            "Yelp_business",
+            "SMWUFD",
+            40,
+            {
+                "Midwest": 6,
+                "Northeast": 2,
+                "Other": -5,
+                "South": -1,
+                "West": -2
+            },
+            {
+                "Midwest": 8,
+                "Northeast": 8,
+                "Other": 8,
+                "South": 8,
+                "West": 8
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2 (e=.15)",
+            40,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 8,
+                "Northeast": 8,
+                "Other": 8,
+                "South": 8,
+                "West": 8
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2 (e=.75)",
+            40,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 8,
+                "Northeast": 8,
+                "Other": 8,
+                "South": 8,
+                "West": 8
+            }
+        ],
+        [
+            "Yelp_business",
+            "SMWUFD",
+            40,
+            {
+                "Midwest": 0,
+                "Northeast": 4,
+                "Other": -6,
+                "South": 3,
+                "West": -1
+            },
+            {
+                "Midwest": 8,
+                "Northeast": 8,
+                "Other": 8,
+                "South": 8,
+                "West": 8
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2 (e=.15)",
+            40,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 8,
+                "Northeast": 8,
+                "Other": 8,
+                "South": 8,
+                "West": 8
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2 (e=.75)",
+            40,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 8,
+                "Northeast": 8,
+                "Other": 8,
+                "South": 8,
+                "West": 8
+            }
+        ],
+        [
+            "Yelp_business",
+            "SMWUFD",
+            60,
+            {
+                "Midwest": -2,
+                "Northeast": 4,
+                "Other": -11,
+                "South": 14,
+                "West": -5
+            },
+            {
+                "Midwest": 12,
+                "Northeast": 12,
+                "Other": 12,
+                "South": 12,
+                "West": 12
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2 (e=.15)",
+            60,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 12,
+                "Northeast": 12,
+                "Other": 12,
+                "South": 12,
+                "West": 12
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2 (e=.75)",
+            60,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 12,
+                "Northeast": 12,
+                "Other": 12,
+                "South": 12,
+                "West": 12
+            }
+        ],
+        [
+            "Yelp_business",
+            "SMWUFD",
+            60,
+            {
+                "Midwest": -3,
+                "Northeast": 4,
+                "Other": -10,
+                "South": 10,
+                "West": -1
+            },
+            {
+                "Midwest": 12,
+                "Northeast": 12,
+                "Other": 12,
+                "South": 12,
+                "West": 12
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2 (e=.15)",
+            60,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 12,
+                "Northeast": 12,
+                "Other": 12,
+                "South": 12,
+                "West": 12
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2 (e=.75)",
+            60,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 12,
+                "Northeast": 12,
+                "Other": 12,
+                "South": 12,
+                "West": 12
+            }
+        ],
+        [
+            "Yelp_business",
+            "SMWUFD",
+            60,
+            {
+                "Midwest": 6,
+                "Northeast": 2,
+                "Other": -10,
+                "South": 7,
+                "West": -5
+            },
+            {
+                "Midwest": 12,
+                "Northeast": 12,
+                "Other": 12,
+                "South": 12,
+                "West": 12
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2 (e=.15)",
+            60,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 12,
+                "Northeast": 12,
+                "Other": 12,
+                "South": 12,
+                "West": 12
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2 (e=.75)",
+            60,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 12,
+                "Northeast": 12,
+                "Other": 12,
+                "South": 12,
+                "West": 12
+            }
+        ],
+        [
+            "Yelp_business",
+            "SMWUFD",
+            60,
+            {
+                "Midwest": -4,
+                "Northeast": 5,
+                "Other": -9,
+                "South": 5,
+                "West": 3
+            },
+            {
+                "Midwest": 12,
+                "Northeast": 12,
+                "Other": 12,
+                "South": 12,
+                "West": 12
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2 (e=.15)",
+            60,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 12,
+                "Northeast": 12,
+                "Other": 12,
+                "South": 12,
+                "West": 12
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2 (e=.75)",
+            60,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 12,
+                "Northeast": 12,
+                "Other": 12,
+                "South": 12,
+                "West": 12
+            }
+        ],
+        [
+            "Yelp_business",
+            "SMWUFD",
+            60,
+            {
+                "Midwest": -5,
+                "Northeast": 10,
+                "Other": -11,
+                "South": 4,
+                "West": 2
+            },
+            {
+                "Midwest": 12,
+                "Northeast": 12,
+                "Other": 12,
+                "South": 12,
+                "West": 12
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2 (e=.15)",
+            60,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 12,
+                "Northeast": 12,
+                "Other": 12,
+                "South": 12,
+                "West": 12
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2 (e=.75)",
+            60,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 12,
+                "Northeast": 12,
+                "Other": 12,
+                "South": 12,
+                "West": 12
+            }
+        ]
+    ]
+}
