@@ -47,7 +47,7 @@ class Stopwatch:
         self.times.append(time.perf_counter())
         return zip(self.names, self._calc_deltas()), self.times[-1] - self.times[0]
 
-def calculate_dmin_dmax(arr):
+def calculate_dmin_dmax(points):
     '''
     Estimates dmin and dmax for a set of points.
 
@@ -55,11 +55,19 @@ def calculate_dmin_dmax(arr):
     dmax - l2-norm(largest co-ordinate in each dimension)
 
     '''
-    dmin = np.min(np.abs(arr[:, None, :] - arr[None, :, :]), axis=0)
-    
-    column_max_values = np.max(arr, axis=0)
-    root_square_mean = np.sqrt(np.mean(column_max_values**2))
-    dmax = root_square_mean * arr.shape[1]**2
+
+    print('[dmin dmax]')
+    arr = np.array(points)
+    max_values = np.max(arr, axis=0)
+    print(max_values)
+    sum_of_squares = np.sum(max_values ** 2)
+    dmax = np.sqrt(sum_of_squares)
+    print('[done calulating dmax]', dmax)
+
+    sorted_arr = np.sort(arr, axis=0)
+    pairwise_diff = np.diff(sorted_arr, axis=0)
+    dmin = np.min(pairwise_diff, axis=0)
+    print('[done calulating dmin]', dmin)
 
     return dmin, dmax
 
