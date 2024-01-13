@@ -133,7 +133,7 @@
             }
         },
         "algorithms": {
-            "MWU 0.1": {
+            "MWUFD 0.1": {
                 "alg": "FMMD-MWU",
                 "color": "#ffc105",
                 "marker": "*",
@@ -145,7 +145,7 @@
                 "percent_theoretical_limit": 0.1,
                 "timeout": 1800
             },
-            "MWU 0.3": {
+            "MWUFD 0.3": {
                 "alg": "FMMD-MWU",
                 "color": "#fc0303",
                 "marker": "o",
@@ -157,7 +157,7 @@
                 "percent_theoretical_limit": 0.3,
                 "timeout": 1800
             },
-            "MWU 0.5": {
+            "MWUFD 0.5": {
                 "alg": "FMMD-MWU",
                 "color": "#05c1ff",
                 "marker": "s",
@@ -169,7 +169,7 @@
                 "percent_theoretical_limit": 0.5,
                 "timeout": 1800
             },
-            "MWU 0.7": {
+            "MWUFD 0.7": {
                 "alg": "FMMD-MWU",
                 "color": "#050dff",
                 "marker": "x",
@@ -195,7 +195,7 @@
     },
     "results": {
         "Adult": {
-            "MWU 0.1": {
+            "MWUFD 0.1": {
                 "xs": {
                     "k": [
                         20,
@@ -257,7 +257,7 @@
                     ]
                 }
             },
-            "MWU 0.3": {
+            "MWUFD 0.3": {
                 "xs": {
                     "k": [
                         20,
@@ -319,7 +319,7 @@
                     ]
                 }
             },
-            "MWU 0.5": {
+            "MWUFD 0.5": {
                 "xs": {
                     "k": [
                         20,
@@ -381,7 +381,7 @@
                     ]
                 }
             },
-            "MWU 0.7": {
+            "MWUFD 0.7": {
                 "xs": {
                     "k": [
                         20,
@@ -445,7 +445,7 @@
             }
         },
         "Diabetes": {
-            "MWU 0.1": {
+            "MWUFD 0.1": {
                 "xs": {
                     "k": [
                         20,
@@ -507,7 +507,7 @@
                     ]
                 }
             },
-            "MWU 0.3": {
+            "MWUFD 0.3": {
                 "xs": {
                     "k": [
                         20,
@@ -569,7 +569,7 @@
                     ]
                 }
             },
-            "MWU 0.5": {
+            "MWUFD 0.5": {
                 "xs": {
                     "k": [
                         20,
@@ -631,7 +631,7 @@
                     ]
                 }
             },
-            "MWU 0.7": {
+            "MWUFD 0.7": {
                 "xs": {
                     "k": [
                         20,
@@ -695,7 +695,7 @@
             }
         },
         "Census": {
-            "MWU 0.1": {
+            "MWUFD 0.1": {
                 "xs": {
                     "k": [
                         28,
@@ -757,7 +757,7 @@
                     ]
                 }
             },
-            "MWU 0.3": {
+            "MWUFD 0.3": {
                 "xs": {
                     "k": [
                         28,
@@ -819,7 +819,7 @@
                     ]
                 }
             },
-            "MWU 0.5": {
+            "MWUFD 0.5": {
                 "xs": {
                     "k": [
                         28,
@@ -881,7 +881,7 @@
                     ]
                 }
             },
-            "MWU 0.7": {
+            "MWUFD 0.7": {
                 "xs": {
                     "k": [
                         28,
@@ -945,7 +945,7 @@
             }
         },
         "Popsim": {
-            "MWU 0.1": {
+            "MWUFD 0.1": {
                 "xs": {
                     "k": [
                         20,
@@ -1007,7 +1007,7 @@
                     ]
                 }
             },
-            "MWU 0.3": {
+            "MWUFD 0.3": {
                 "xs": {
                     "k": [
                         20,
@@ -1069,7 +1069,7 @@
                     ]
                 }
             },
-            "MWU 0.5": {
+            "MWUFD 0.5": {
                 "xs": {
                     "k": [
                         20,
@@ -1131,7 +1131,7 @@
                     ]
                 }
             },
-            "MWU 0.7": {
+            "MWUFD 0.7": {
                 "xs": {
                     "k": [
                         20,
@@ -1195,7 +1195,7 @@
             }
         },
         "Popsim_1M": {
-            "MWU 0.1": {
+            "MWUFD 0.1": {
                 "xs": {
                     "k": [
                         20,
@@ -1257,7 +1257,7 @@
                     ]
                 }
             },
-            "MWU 0.3": {
+            "MWUFD 0.3": {
                 "xs": {
                     "k": [
                         20,
@@ -1319,7 +1319,7 @@
                     ]
                 }
             },
-            "MWU 0.5": {
+            "MWUFD 0.5": {
                 "xs": {
                     "k": [
                         20,
@@ -1381,7 +1381,7 @@
                     ]
                 }
             },
-            "MWU 0.7": {
+            "MWUFD 0.7": {
                 "xs": {
                     "k": [
                         20,
@@ -1449,7 +1449,7 @@
     "color_results": [
         [
             "Popsim_1M",
-            "MWU 0.1",
+            "MWUFD 0.1",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -1468,7 +1468,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.3",
+            "MWUFD 0.3",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -1487,7 +1487,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.5",
+            "MWUFD 0.5",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -1506,7 +1506,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.7",
+            "MWUFD 0.7",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -1525,7 +1525,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.1",
+            "MWUFD 0.1",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -1544,7 +1544,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.3",
+            "MWUFD 0.3",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -1563,7 +1563,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.5",
+            "MWUFD 0.5",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -1582,7 +1582,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.7",
+            "MWUFD 0.7",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -1601,7 +1601,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.1",
+            "MWUFD 0.1",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -1620,7 +1620,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.3",
+            "MWUFD 0.3",
             20,
             {
                 "American Indian/Alaska Native": -2,
@@ -1639,7 +1639,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.5",
+            "MWUFD 0.5",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -1658,7 +1658,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.7",
+            "MWUFD 0.7",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -1677,7 +1677,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.1",
+            "MWUFD 0.1",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -1696,7 +1696,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.3",
+            "MWUFD 0.3",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -1715,7 +1715,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.5",
+            "MWUFD 0.5",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -1734,7 +1734,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.7",
+            "MWUFD 0.7",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -1753,7 +1753,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.1",
+            "MWUFD 0.1",
             20,
             {
                 "American Indian/Alaska Native": -1,
@@ -1772,7 +1772,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.3",
+            "MWUFD 0.3",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -1791,7 +1791,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.5",
+            "MWUFD 0.5",
             20,
             {
                 "American Indian/Alaska Native": -3,
@@ -1810,7 +1810,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.7",
+            "MWUFD 0.7",
             20,
             {
                 "American Indian/Alaska Native": -2,
@@ -1829,7 +1829,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.1",
+            "MWUFD 0.1",
             40,
             {
                 "American Indian/Alaska Native": 0,
@@ -1848,7 +1848,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.3",
+            "MWUFD 0.3",
             40,
             {
                 "American Indian/Alaska Native": 0,
@@ -1867,7 +1867,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.5",
+            "MWUFD 0.5",
             40,
             {
                 "American Indian/Alaska Native": 0,
@@ -1886,7 +1886,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.7",
+            "MWUFD 0.7",
             40,
             {
                 "American Indian/Alaska Native": 0,
@@ -1905,7 +1905,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.1",
+            "MWUFD 0.1",
             40,
             {
                 "American Indian/Alaska Native": -3,
@@ -1924,7 +1924,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.3",
+            "MWUFD 0.3",
             40,
             {
                 "American Indian/Alaska Native": 0,
@@ -1943,7 +1943,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.5",
+            "MWUFD 0.5",
             40,
             {
                 "American Indian/Alaska Native": 0,
@@ -1962,7 +1962,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.7",
+            "MWUFD 0.7",
             40,
             {
                 "American Indian/Alaska Native": 0,
@@ -1981,7 +1981,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.1",
+            "MWUFD 0.1",
             40,
             {
                 "American Indian/Alaska Native": -1,
@@ -2000,7 +2000,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.3",
+            "MWUFD 0.3",
             40,
             {
                 "American Indian/Alaska Native": 0,
@@ -2019,7 +2019,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.5",
+            "MWUFD 0.5",
             40,
             {
                 "American Indian/Alaska Native": 0,
@@ -2038,7 +2038,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.7",
+            "MWUFD 0.7",
             40,
             {
                 "American Indian/Alaska Native": 0,
@@ -2057,7 +2057,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.1",
+            "MWUFD 0.1",
             40,
             {
                 "American Indian/Alaska Native": 0,
@@ -2076,7 +2076,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.3",
+            "MWUFD 0.3",
             40,
             {
                 "American Indian/Alaska Native": 0,
@@ -2095,7 +2095,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.5",
+            "MWUFD 0.5",
             40,
             {
                 "American Indian/Alaska Native": 0,
@@ -2114,7 +2114,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.7",
+            "MWUFD 0.7",
             40,
             {
                 "American Indian/Alaska Native": 0,
@@ -2133,7 +2133,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.1",
+            "MWUFD 0.1",
             40,
             {
                 "American Indian/Alaska Native": 0,
@@ -2152,7 +2152,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.3",
+            "MWUFD 0.3",
             40,
             {
                 "American Indian/Alaska Native": 0,
@@ -2171,7 +2171,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.5",
+            "MWUFD 0.5",
             40,
             {
                 "American Indian/Alaska Native": -2,
@@ -2190,7 +2190,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.7",
+            "MWUFD 0.7",
             40,
             {
                 "American Indian/Alaska Native": -2,
@@ -2209,7 +2209,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.1",
+            "MWUFD 0.1",
             60,
             {
                 "American Indian/Alaska Native": 0,
@@ -2228,7 +2228,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.3",
+            "MWUFD 0.3",
             60,
             {
                 "American Indian/Alaska Native": 0,
@@ -2247,7 +2247,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.5",
+            "MWUFD 0.5",
             60,
             {
                 "American Indian/Alaska Native": 0,
@@ -2266,7 +2266,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.7",
+            "MWUFD 0.7",
             60,
             {
                 "American Indian/Alaska Native": 0,
@@ -2285,7 +2285,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.1",
+            "MWUFD 0.1",
             60,
             {
                 "American Indian/Alaska Native": 0,
@@ -2304,7 +2304,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.3",
+            "MWUFD 0.3",
             60,
             {
                 "American Indian/Alaska Native": 0,
@@ -2323,7 +2323,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.5",
+            "MWUFD 0.5",
             60,
             {
                 "American Indian/Alaska Native": 0,
@@ -2342,7 +2342,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.7",
+            "MWUFD 0.7",
             60,
             {
                 "American Indian/Alaska Native": 0,
@@ -2361,7 +2361,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.1",
+            "MWUFD 0.1",
             60,
             {
                 "American Indian/Alaska Native": 0,
@@ -2380,7 +2380,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.3",
+            "MWUFD 0.3",
             60,
             {
                 "American Indian/Alaska Native": 0,
@@ -2399,7 +2399,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.5",
+            "MWUFD 0.5",
             60,
             {
                 "American Indian/Alaska Native": 0,
@@ -2418,7 +2418,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.7",
+            "MWUFD 0.7",
             60,
             {
                 "American Indian/Alaska Native": -4,
@@ -2437,7 +2437,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.1",
+            "MWUFD 0.1",
             60,
             {
                 "American Indian/Alaska Native": 0,
@@ -2456,7 +2456,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.3",
+            "MWUFD 0.3",
             60,
             {
                 "American Indian/Alaska Native": 0,
@@ -2475,7 +2475,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.5",
+            "MWUFD 0.5",
             60,
             {
                 "American Indian/Alaska Native": 0,
@@ -2494,7 +2494,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.7",
+            "MWUFD 0.7",
             60,
             {
                 "American Indian/Alaska Native": 0,
@@ -2513,7 +2513,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.1",
+            "MWUFD 0.1",
             60,
             {
                 "American Indian/Alaska Native": -1,
@@ -2532,7 +2532,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.3",
+            "MWUFD 0.3",
             60,
             {
                 "American Indian/Alaska Native": -1,
@@ -2551,7 +2551,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.5",
+            "MWUFD 0.5",
             60,
             {
                 "American Indian/Alaska Native": -1,
@@ -2570,7 +2570,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.7",
+            "MWUFD 0.7",
             60,
             {
                 "American Indian/Alaska Native": 0,
@@ -2589,7 +2589,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.1",
+            "MWUFD 0.1",
             80,
             {
                 "American Indian/Alaska Native": 0,
@@ -2608,7 +2608,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.3",
+            "MWUFD 0.3",
             80,
             {
                 "American Indian/Alaska Native": 0,
@@ -2627,7 +2627,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.5",
+            "MWUFD 0.5",
             80,
             {
                 "American Indian/Alaska Native": 0,
@@ -2646,7 +2646,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.7",
+            "MWUFD 0.7",
             80,
             {
                 "American Indian/Alaska Native": 0,
@@ -2665,7 +2665,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.1",
+            "MWUFD 0.1",
             80,
             {
                 "American Indian/Alaska Native": -1,
@@ -2684,7 +2684,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.3",
+            "MWUFD 0.3",
             80,
             {
                 "American Indian/Alaska Native": 0,
@@ -2703,7 +2703,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.5",
+            "MWUFD 0.5",
             80,
             {
                 "American Indian/Alaska Native": 0,
@@ -2722,7 +2722,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.7",
+            "MWUFD 0.7",
             80,
             {
                 "American Indian/Alaska Native": 0,
@@ -2741,7 +2741,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.1",
+            "MWUFD 0.1",
             80,
             {
                 "American Indian/Alaska Native": 0,
@@ -2760,7 +2760,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.3",
+            "MWUFD 0.3",
             80,
             {
                 "American Indian/Alaska Native": 0,
@@ -2779,7 +2779,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.5",
+            "MWUFD 0.5",
             80,
             {
                 "American Indian/Alaska Native": 0,
@@ -2798,7 +2798,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.7",
+            "MWUFD 0.7",
             80,
             {
                 "American Indian/Alaska Native": 0,
@@ -2817,7 +2817,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.1",
+            "MWUFD 0.1",
             80,
             {
                 "American Indian/Alaska Native": -2,
@@ -2836,7 +2836,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.3",
+            "MWUFD 0.3",
             80,
             {
                 "American Indian/Alaska Native": 0,
@@ -2855,7 +2855,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.5",
+            "MWUFD 0.5",
             80,
             {
                 "American Indian/Alaska Native": 0,
@@ -2874,7 +2874,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.7",
+            "MWUFD 0.7",
             80,
             {
                 "American Indian/Alaska Native": -3,
@@ -2893,7 +2893,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.1",
+            "MWUFD 0.1",
             80,
             {
                 "American Indian/Alaska Native": 0,
@@ -2912,7 +2912,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.3",
+            "MWUFD 0.3",
             80,
             {
                 "American Indian/Alaska Native": 0,
@@ -2931,7 +2931,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.5",
+            "MWUFD 0.5",
             80,
             {
                 "American Indian/Alaska Native": 0,
@@ -2950,7 +2950,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.7",
+            "MWUFD 0.7",
             80,
             {
                 "American Indian/Alaska Native": 0,
@@ -2969,7 +2969,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.1",
+            "MWUFD 0.1",
             100,
             {
                 "American Indian/Alaska Native": 0,
@@ -2988,7 +2988,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.3",
+            "MWUFD 0.3",
             100,
             {
                 "American Indian/Alaska Native": 0,
@@ -3007,7 +3007,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.5",
+            "MWUFD 0.5",
             100,
             {
                 "American Indian/Alaska Native": 0,
@@ -3026,7 +3026,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.7",
+            "MWUFD 0.7",
             100,
             {
                 "American Indian/Alaska Native": 0,
@@ -3045,7 +3045,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.1",
+            "MWUFD 0.1",
             100,
             {
                 "American Indian/Alaska Native": -8,
@@ -3064,7 +3064,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.3",
+            "MWUFD 0.3",
             100,
             {
                 "American Indian/Alaska Native": -5,
@@ -3083,7 +3083,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.5",
+            "MWUFD 0.5",
             100,
             {
                 "American Indian/Alaska Native": 0,
@@ -3102,7 +3102,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.7",
+            "MWUFD 0.7",
             100,
             {
                 "American Indian/Alaska Native": 0,
@@ -3121,7 +3121,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.1",
+            "MWUFD 0.1",
             100,
             {
                 "American Indian/Alaska Native": -7,
@@ -3140,7 +3140,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.3",
+            "MWUFD 0.3",
             100,
             {
                 "American Indian/Alaska Native": -5,
@@ -3159,7 +3159,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.5",
+            "MWUFD 0.5",
             100,
             {
                 "American Indian/Alaska Native": -4,
@@ -3178,7 +3178,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.7",
+            "MWUFD 0.7",
             100,
             {
                 "American Indian/Alaska Native": -6,
@@ -3197,7 +3197,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.1",
+            "MWUFD 0.1",
             100,
             {
                 "American Indian/Alaska Native": 0,
@@ -3216,7 +3216,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.3",
+            "MWUFD 0.3",
             100,
             {
                 "American Indian/Alaska Native": -1,
@@ -3235,7 +3235,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.5",
+            "MWUFD 0.5",
             100,
             {
                 "American Indian/Alaska Native": 0,
@@ -3254,7 +3254,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.7",
+            "MWUFD 0.7",
             100,
             {
                 "American Indian/Alaska Native": -4,
@@ -3273,7 +3273,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.1",
+            "MWUFD 0.1",
             100,
             {
                 "American Indian/Alaska Native": 0,
@@ -3292,7 +3292,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.3",
+            "MWUFD 0.3",
             100,
             {
                 "American Indian/Alaska Native": -1,
@@ -3311,7 +3311,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.5",
+            "MWUFD 0.5",
             100,
             {
                 "American Indian/Alaska Native": -1,
@@ -3330,7 +3330,7 @@
         ],
         [
             "Popsim_1M",
-            "MWU 0.7",
+            "MWUFD 0.7",
             100,
             {
                 "American Indian/Alaska Native": 0,
@@ -3349,7 +3349,7 @@
         ],
         [
             "Adult",
-            "MWU 0.1",
+            "MWUFD 0.1",
             20,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -3378,7 +3378,7 @@
         ],
         [
             "Adult",
-            "MWU 0.3",
+            "MWUFD 0.3",
             20,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -3407,7 +3407,7 @@
         ],
         [
             "Adult",
-            "MWU 0.5",
+            "MWUFD 0.5",
             20,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -3436,7 +3436,7 @@
         ],
         [
             "Adult",
-            "MWU 0.7",
+            "MWUFD 0.7",
             20,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -3465,7 +3465,7 @@
         ],
         [
             "Adult",
-            "MWU 0.1",
+            "MWUFD 0.1",
             20,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -3494,7 +3494,7 @@
         ],
         [
             "Adult",
-            "MWU 0.3",
+            "MWUFD 0.3",
             20,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -3523,7 +3523,7 @@
         ],
         [
             "Adult",
-            "MWU 0.5",
+            "MWUFD 0.5",
             20,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -3552,7 +3552,7 @@
         ],
         [
             "Adult",
-            "MWU 0.7",
+            "MWUFD 0.7",
             20,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -3581,7 +3581,7 @@
         ],
         [
             "Adult",
-            "MWU 0.1",
+            "MWUFD 0.1",
             20,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -3610,7 +3610,7 @@
         ],
         [
             "Adult",
-            "MWU 0.3",
+            "MWUFD 0.3",
             20,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -3639,7 +3639,7 @@
         ],
         [
             "Adult",
-            "MWU 0.5",
+            "MWUFD 0.5",
             20,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -3668,7 +3668,7 @@
         ],
         [
             "Adult",
-            "MWU 0.7",
+            "MWUFD 0.7",
             20,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -3697,7 +3697,7 @@
         ],
         [
             "Adult",
-            "MWU 0.1",
+            "MWUFD 0.1",
             20,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -3726,7 +3726,7 @@
         ],
         [
             "Adult",
-            "MWU 0.3",
+            "MWUFD 0.3",
             20,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -3755,7 +3755,7 @@
         ],
         [
             "Adult",
-            "MWU 0.5",
+            "MWUFD 0.5",
             20,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -3784,7 +3784,7 @@
         ],
         [
             "Adult",
-            "MWU 0.7",
+            "MWUFD 0.7",
             20,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -3813,7 +3813,7 @@
         ],
         [
             "Adult",
-            "MWU 0.1",
+            "MWUFD 0.1",
             20,
             {
                 "Amer-Indian-Eskimo_Female": -1,
@@ -3842,7 +3842,7 @@
         ],
         [
             "Adult",
-            "MWU 0.3",
+            "MWUFD 0.3",
             20,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -3871,7 +3871,7 @@
         ],
         [
             "Adult",
-            "MWU 0.5",
+            "MWUFD 0.5",
             20,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -3900,7 +3900,7 @@
         ],
         [
             "Adult",
-            "MWU 0.7",
+            "MWUFD 0.7",
             20,
             {
                 "Amer-Indian-Eskimo_Female": -1,
@@ -3929,7 +3929,7 @@
         ],
         [
             "Adult",
-            "MWU 0.1",
+            "MWUFD 0.1",
             40,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -3958,7 +3958,7 @@
         ],
         [
             "Adult",
-            "MWU 0.3",
+            "MWUFD 0.3",
             40,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -3987,7 +3987,7 @@
         ],
         [
             "Adult",
-            "MWU 0.5",
+            "MWUFD 0.5",
             40,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4016,7 +4016,7 @@
         ],
         [
             "Adult",
-            "MWU 0.7",
+            "MWUFD 0.7",
             40,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4045,7 +4045,7 @@
         ],
         [
             "Adult",
-            "MWU 0.1",
+            "MWUFD 0.1",
             40,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4074,7 +4074,7 @@
         ],
         [
             "Adult",
-            "MWU 0.3",
+            "MWUFD 0.3",
             40,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4103,7 +4103,7 @@
         ],
         [
             "Adult",
-            "MWU 0.5",
+            "MWUFD 0.5",
             40,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4132,7 +4132,7 @@
         ],
         [
             "Adult",
-            "MWU 0.7",
+            "MWUFD 0.7",
             40,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4161,7 +4161,7 @@
         ],
         [
             "Adult",
-            "MWU 0.1",
+            "MWUFD 0.1",
             40,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4190,7 +4190,7 @@
         ],
         [
             "Adult",
-            "MWU 0.3",
+            "MWUFD 0.3",
             40,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4219,7 +4219,7 @@
         ],
         [
             "Adult",
-            "MWU 0.5",
+            "MWUFD 0.5",
             40,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4248,7 +4248,7 @@
         ],
         [
             "Adult",
-            "MWU 0.7",
+            "MWUFD 0.7",
             40,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4277,7 +4277,7 @@
         ],
         [
             "Adult",
-            "MWU 0.1",
+            "MWUFD 0.1",
             40,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4306,7 +4306,7 @@
         ],
         [
             "Adult",
-            "MWU 0.3",
+            "MWUFD 0.3",
             40,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4335,7 +4335,7 @@
         ],
         [
             "Adult",
-            "MWU 0.5",
+            "MWUFD 0.5",
             40,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4364,7 +4364,7 @@
         ],
         [
             "Adult",
-            "MWU 0.7",
+            "MWUFD 0.7",
             40,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4393,7 +4393,7 @@
         ],
         [
             "Adult",
-            "MWU 0.1",
+            "MWUFD 0.1",
             40,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4422,7 +4422,7 @@
         ],
         [
             "Adult",
-            "MWU 0.3",
+            "MWUFD 0.3",
             40,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4451,7 +4451,7 @@
         ],
         [
             "Adult",
-            "MWU 0.5",
+            "MWUFD 0.5",
             40,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4480,7 +4480,7 @@
         ],
         [
             "Adult",
-            "MWU 0.7",
+            "MWUFD 0.7",
             40,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4509,7 +4509,7 @@
         ],
         [
             "Adult",
-            "MWU 0.1",
+            "MWUFD 0.1",
             60,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4538,7 +4538,7 @@
         ],
         [
             "Adult",
-            "MWU 0.3",
+            "MWUFD 0.3",
             60,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4567,7 +4567,7 @@
         ],
         [
             "Adult",
-            "MWU 0.5",
+            "MWUFD 0.5",
             60,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4596,7 +4596,7 @@
         ],
         [
             "Adult",
-            "MWU 0.7",
+            "MWUFD 0.7",
             60,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4625,7 +4625,7 @@
         ],
         [
             "Adult",
-            "MWU 0.1",
+            "MWUFD 0.1",
             60,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4654,7 +4654,7 @@
         ],
         [
             "Adult",
-            "MWU 0.3",
+            "MWUFD 0.3",
             60,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4683,7 +4683,7 @@
         ],
         [
             "Adult",
-            "MWU 0.5",
+            "MWUFD 0.5",
             60,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4712,7 +4712,7 @@
         ],
         [
             "Adult",
-            "MWU 0.7",
+            "MWUFD 0.7",
             60,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4741,7 +4741,7 @@
         ],
         [
             "Adult",
-            "MWU 0.1",
+            "MWUFD 0.1",
             60,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4770,7 +4770,7 @@
         ],
         [
             "Adult",
-            "MWU 0.3",
+            "MWUFD 0.3",
             60,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4799,7 +4799,7 @@
         ],
         [
             "Adult",
-            "MWU 0.5",
+            "MWUFD 0.5",
             60,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4828,7 +4828,7 @@
         ],
         [
             "Adult",
-            "MWU 0.7",
+            "MWUFD 0.7",
             60,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4857,7 +4857,7 @@
         ],
         [
             "Adult",
-            "MWU 0.1",
+            "MWUFD 0.1",
             60,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4886,7 +4886,7 @@
         ],
         [
             "Adult",
-            "MWU 0.3",
+            "MWUFD 0.3",
             60,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4915,7 +4915,7 @@
         ],
         [
             "Adult",
-            "MWU 0.5",
+            "MWUFD 0.5",
             60,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4944,7 +4944,7 @@
         ],
         [
             "Adult",
-            "MWU 0.7",
+            "MWUFD 0.7",
             60,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -4973,7 +4973,7 @@
         ],
         [
             "Adult",
-            "MWU 0.1",
+            "MWUFD 0.1",
             60,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5002,7 +5002,7 @@
         ],
         [
             "Adult",
-            "MWU 0.3",
+            "MWUFD 0.3",
             60,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5031,7 +5031,7 @@
         ],
         [
             "Adult",
-            "MWU 0.5",
+            "MWUFD 0.5",
             60,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5060,7 +5060,7 @@
         ],
         [
             "Adult",
-            "MWU 0.7",
+            "MWUFD 0.7",
             60,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5089,7 +5089,7 @@
         ],
         [
             "Adult",
-            "MWU 0.1",
+            "MWUFD 0.1",
             80,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5118,7 +5118,7 @@
         ],
         [
             "Adult",
-            "MWU 0.3",
+            "MWUFD 0.3",
             80,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5147,7 +5147,7 @@
         ],
         [
             "Adult",
-            "MWU 0.5",
+            "MWUFD 0.5",
             80,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5176,7 +5176,7 @@
         ],
         [
             "Adult",
-            "MWU 0.7",
+            "MWUFD 0.7",
             80,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5205,7 +5205,7 @@
         ],
         [
             "Adult",
-            "MWU 0.1",
+            "MWUFD 0.1",
             80,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5234,7 +5234,7 @@
         ],
         [
             "Adult",
-            "MWU 0.3",
+            "MWUFD 0.3",
             80,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5263,7 +5263,7 @@
         ],
         [
             "Adult",
-            "MWU 0.5",
+            "MWUFD 0.5",
             80,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5292,7 +5292,7 @@
         ],
         [
             "Adult",
-            "MWU 0.7",
+            "MWUFD 0.7",
             80,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5321,7 +5321,7 @@
         ],
         [
             "Adult",
-            "MWU 0.1",
+            "MWUFD 0.1",
             80,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5350,7 +5350,7 @@
         ],
         [
             "Adult",
-            "MWU 0.3",
+            "MWUFD 0.3",
             80,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5379,7 +5379,7 @@
         ],
         [
             "Adult",
-            "MWU 0.5",
+            "MWUFD 0.5",
             80,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5408,7 +5408,7 @@
         ],
         [
             "Adult",
-            "MWU 0.7",
+            "MWUFD 0.7",
             80,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5437,7 +5437,7 @@
         ],
         [
             "Adult",
-            "MWU 0.1",
+            "MWUFD 0.1",
             80,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5466,7 +5466,7 @@
         ],
         [
             "Adult",
-            "MWU 0.3",
+            "MWUFD 0.3",
             80,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5495,7 +5495,7 @@
         ],
         [
             "Adult",
-            "MWU 0.5",
+            "MWUFD 0.5",
             80,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5524,7 +5524,7 @@
         ],
         [
             "Adult",
-            "MWU 0.7",
+            "MWUFD 0.7",
             80,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5553,7 +5553,7 @@
         ],
         [
             "Adult",
-            "MWU 0.1",
+            "MWUFD 0.1",
             80,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5582,7 +5582,7 @@
         ],
         [
             "Adult",
-            "MWU 0.3",
+            "MWUFD 0.3",
             80,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5611,7 +5611,7 @@
         ],
         [
             "Adult",
-            "MWU 0.5",
+            "MWUFD 0.5",
             80,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5640,7 +5640,7 @@
         ],
         [
             "Adult",
-            "MWU 0.7",
+            "MWUFD 0.7",
             80,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5669,7 +5669,7 @@
         ],
         [
             "Adult",
-            "MWU 0.1",
+            "MWUFD 0.1",
             100,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5698,7 +5698,7 @@
         ],
         [
             "Adult",
-            "MWU 0.3",
+            "MWUFD 0.3",
             100,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5727,7 +5727,7 @@
         ],
         [
             "Adult",
-            "MWU 0.5",
+            "MWUFD 0.5",
             100,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5756,7 +5756,7 @@
         ],
         [
             "Adult",
-            "MWU 0.7",
+            "MWUFD 0.7",
             100,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5785,7 +5785,7 @@
         ],
         [
             "Adult",
-            "MWU 0.1",
+            "MWUFD 0.1",
             100,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5814,7 +5814,7 @@
         ],
         [
             "Adult",
-            "MWU 0.3",
+            "MWUFD 0.3",
             100,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5843,7 +5843,7 @@
         ],
         [
             "Adult",
-            "MWU 0.5",
+            "MWUFD 0.5",
             100,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5872,7 +5872,7 @@
         ],
         [
             "Adult",
-            "MWU 0.7",
+            "MWUFD 0.7",
             100,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5901,7 +5901,7 @@
         ],
         [
             "Adult",
-            "MWU 0.1",
+            "MWUFD 0.1",
             100,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5930,7 +5930,7 @@
         ],
         [
             "Adult",
-            "MWU 0.3",
+            "MWUFD 0.3",
             100,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5959,7 +5959,7 @@
         ],
         [
             "Adult",
-            "MWU 0.5",
+            "MWUFD 0.5",
             100,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -5988,7 +5988,7 @@
         ],
         [
             "Adult",
-            "MWU 0.7",
+            "MWUFD 0.7",
             100,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -6017,7 +6017,7 @@
         ],
         [
             "Adult",
-            "MWU 0.1",
+            "MWUFD 0.1",
             100,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -6046,7 +6046,7 @@
         ],
         [
             "Adult",
-            "MWU 0.3",
+            "MWUFD 0.3",
             100,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -6075,7 +6075,7 @@
         ],
         [
             "Adult",
-            "MWU 0.5",
+            "MWUFD 0.5",
             100,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -6104,7 +6104,7 @@
         ],
         [
             "Adult",
-            "MWU 0.7",
+            "MWUFD 0.7",
             100,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -6133,7 +6133,7 @@
         ],
         [
             "Adult",
-            "MWU 0.1",
+            "MWUFD 0.1",
             100,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -6162,7 +6162,7 @@
         ],
         [
             "Adult",
-            "MWU 0.3",
+            "MWUFD 0.3",
             100,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -6191,7 +6191,7 @@
         ],
         [
             "Adult",
-            "MWU 0.5",
+            "MWUFD 0.5",
             100,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -6220,7 +6220,7 @@
         ],
         [
             "Adult",
-            "MWU 0.7",
+            "MWUFD 0.7",
             100,
             {
                 "Amer-Indian-Eskimo_Female": 0,
@@ -6249,7 +6249,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.1",
+            "MWUFD 0.1",
             20,
             {
                 "Female_No": 0,
@@ -6266,7 +6266,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.3",
+            "MWUFD 0.3",
             20,
             {
                 "Female_No": 0,
@@ -6283,7 +6283,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.5",
+            "MWUFD 0.5",
             20,
             {
                 "Female_No": 0,
@@ -6300,7 +6300,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.7",
+            "MWUFD 0.7",
             20,
             {
                 "Female_No": 0,
@@ -6317,7 +6317,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.1",
+            "MWUFD 0.1",
             20,
             {
                 "Female_No": 0,
@@ -6334,7 +6334,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.3",
+            "MWUFD 0.3",
             20,
             {
                 "Female_No": 0,
@@ -6351,7 +6351,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.5",
+            "MWUFD 0.5",
             20,
             {
                 "Female_No": 0,
@@ -6368,7 +6368,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.7",
+            "MWUFD 0.7",
             20,
             {
                 "Female_No": 0,
@@ -6385,7 +6385,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.1",
+            "MWUFD 0.1",
             20,
             {
                 "Female_No": 0,
@@ -6402,7 +6402,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.3",
+            "MWUFD 0.3",
             20,
             {
                 "Female_No": 0,
@@ -6419,7 +6419,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.5",
+            "MWUFD 0.5",
             20,
             {
                 "Female_No": 0,
@@ -6436,7 +6436,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.7",
+            "MWUFD 0.7",
             20,
             {
                 "Female_No": 0,
@@ -6453,7 +6453,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.1",
+            "MWUFD 0.1",
             20,
             {
                 "Female_No": 0,
@@ -6470,7 +6470,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.3",
+            "MWUFD 0.3",
             20,
             {
                 "Female_No": 0,
@@ -6487,7 +6487,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.5",
+            "MWUFD 0.5",
             20,
             {
                 "Female_No": 0,
@@ -6504,7 +6504,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.7",
+            "MWUFD 0.7",
             20,
             {
                 "Female_No": 0,
@@ -6521,7 +6521,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.1",
+            "MWUFD 0.1",
             20,
             {
                 "Female_No": 0,
@@ -6538,7 +6538,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.3",
+            "MWUFD 0.3",
             20,
             {
                 "Female_No": 0,
@@ -6555,7 +6555,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.5",
+            "MWUFD 0.5",
             20,
             {
                 "Female_No": 0,
@@ -6572,7 +6572,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.7",
+            "MWUFD 0.7",
             20,
             {
                 "Female_No": 0,
@@ -6589,7 +6589,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.1",
+            "MWUFD 0.1",
             40,
             {
                 "Female_No": 0,
@@ -6606,7 +6606,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.3",
+            "MWUFD 0.3",
             40,
             {
                 "Female_No": 0,
@@ -6623,7 +6623,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.5",
+            "MWUFD 0.5",
             40,
             {
                 "Female_No": -1,
@@ -6640,7 +6640,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.7",
+            "MWUFD 0.7",
             40,
             {
                 "Female_No": -1,
@@ -6657,7 +6657,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.1",
+            "MWUFD 0.1",
             40,
             {
                 "Female_No": -1,
@@ -6674,7 +6674,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.3",
+            "MWUFD 0.3",
             40,
             {
                 "Female_No": 0,
@@ -6691,7 +6691,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.5",
+            "MWUFD 0.5",
             40,
             {
                 "Female_No": 0,
@@ -6708,7 +6708,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.7",
+            "MWUFD 0.7",
             40,
             {
                 "Female_No": 0,
@@ -6725,7 +6725,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.1",
+            "MWUFD 0.1",
             40,
             {
                 "Female_No": 0,
@@ -6742,7 +6742,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.3",
+            "MWUFD 0.3",
             40,
             {
                 "Female_No": 0,
@@ -6759,7 +6759,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.5",
+            "MWUFD 0.5",
             40,
             {
                 "Female_No": 0,
@@ -6776,7 +6776,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.7",
+            "MWUFD 0.7",
             40,
             {
                 "Female_No": 0,
@@ -6793,7 +6793,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.1",
+            "MWUFD 0.1",
             40,
             {
                 "Female_No": 0,
@@ -6810,7 +6810,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.3",
+            "MWUFD 0.3",
             40,
             {
                 "Female_No": 0,
@@ -6827,7 +6827,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.5",
+            "MWUFD 0.5",
             40,
             {
                 "Female_No": 0,
@@ -6844,7 +6844,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.7",
+            "MWUFD 0.7",
             40,
             {
                 "Female_No": 0,
@@ -6861,7 +6861,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.1",
+            "MWUFD 0.1",
             40,
             {
                 "Female_No": 0,
@@ -6878,7 +6878,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.3",
+            "MWUFD 0.3",
             40,
             {
                 "Female_No": 0,
@@ -6895,7 +6895,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.5",
+            "MWUFD 0.5",
             40,
             {
                 "Female_No": 0,
@@ -6912,7 +6912,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.7",
+            "MWUFD 0.7",
             40,
             {
                 "Female_No": 0,
@@ -6929,7 +6929,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.1",
+            "MWUFD 0.1",
             60,
             {
                 "Female_No": 0,
@@ -6946,7 +6946,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.3",
+            "MWUFD 0.3",
             60,
             {
                 "Female_No": 0,
@@ -6963,7 +6963,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.5",
+            "MWUFD 0.5",
             60,
             {
                 "Female_No": 0,
@@ -6980,7 +6980,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.7",
+            "MWUFD 0.7",
             60,
             {
                 "Female_No": 0,
@@ -6997,7 +6997,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.1",
+            "MWUFD 0.1",
             60,
             {
                 "Female_No": 0,
@@ -7014,7 +7014,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.3",
+            "MWUFD 0.3",
             60,
             {
                 "Female_No": 0,
@@ -7031,7 +7031,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.5",
+            "MWUFD 0.5",
             60,
             {
                 "Female_No": 0,
@@ -7048,7 +7048,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.7",
+            "MWUFD 0.7",
             60,
             {
                 "Female_No": 0,
@@ -7065,7 +7065,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.1",
+            "MWUFD 0.1",
             60,
             {
                 "Female_No": 0,
@@ -7082,7 +7082,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.3",
+            "MWUFD 0.3",
             60,
             {
                 "Female_No": 0,
@@ -7099,7 +7099,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.5",
+            "MWUFD 0.5",
             60,
             {
                 "Female_No": 0,
@@ -7116,7 +7116,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.7",
+            "MWUFD 0.7",
             60,
             {
                 "Female_No": 0,
@@ -7133,7 +7133,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.1",
+            "MWUFD 0.1",
             60,
             {
                 "Female_No": 0,
@@ -7150,7 +7150,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.3",
+            "MWUFD 0.3",
             60,
             {
                 "Female_No": 0,
@@ -7167,7 +7167,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.5",
+            "MWUFD 0.5",
             60,
             {
                 "Female_No": 0,
@@ -7184,7 +7184,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.7",
+            "MWUFD 0.7",
             60,
             {
                 "Female_No": 0,
@@ -7201,7 +7201,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.1",
+            "MWUFD 0.1",
             60,
             {
                 "Female_No": 0,
@@ -7218,7 +7218,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.3",
+            "MWUFD 0.3",
             60,
             {
                 "Female_No": 0,
@@ -7235,7 +7235,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.5",
+            "MWUFD 0.5",
             60,
             {
                 "Female_No": 0,
@@ -7252,7 +7252,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.7",
+            "MWUFD 0.7",
             60,
             {
                 "Female_No": 0,
@@ -7269,7 +7269,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.1",
+            "MWUFD 0.1",
             80,
             {
                 "Female_No": 0,
@@ -7286,7 +7286,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.3",
+            "MWUFD 0.3",
             80,
             {
                 "Female_No": 0,
@@ -7303,7 +7303,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.5",
+            "MWUFD 0.5",
             80,
             {
                 "Female_No": 0,
@@ -7320,7 +7320,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.7",
+            "MWUFD 0.7",
             80,
             {
                 "Female_No": 0,
@@ -7337,7 +7337,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.1",
+            "MWUFD 0.1",
             80,
             {
                 "Female_No": 0,
@@ -7354,7 +7354,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.3",
+            "MWUFD 0.3",
             80,
             {
                 "Female_No": 0,
@@ -7371,7 +7371,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.5",
+            "MWUFD 0.5",
             80,
             {
                 "Female_No": 0,
@@ -7388,7 +7388,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.7",
+            "MWUFD 0.7",
             80,
             {
                 "Female_No": 0,
@@ -7405,7 +7405,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.1",
+            "MWUFD 0.1",
             80,
             {
                 "Female_No": 0,
@@ -7422,7 +7422,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.3",
+            "MWUFD 0.3",
             80,
             {
                 "Female_No": 0,
@@ -7439,7 +7439,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.5",
+            "MWUFD 0.5",
             80,
             {
                 "Female_No": 0,
@@ -7456,7 +7456,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.7",
+            "MWUFD 0.7",
             80,
             {
                 "Female_No": 0,
@@ -7473,7 +7473,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.1",
+            "MWUFD 0.1",
             80,
             {
                 "Female_No": 0,
@@ -7490,7 +7490,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.3",
+            "MWUFD 0.3",
             80,
             {
                 "Female_No": 0,
@@ -7507,7 +7507,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.5",
+            "MWUFD 0.5",
             80,
             {
                 "Female_No": 0,
@@ -7524,7 +7524,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.7",
+            "MWUFD 0.7",
             80,
             {
                 "Female_No": 0,
@@ -7541,7 +7541,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.1",
+            "MWUFD 0.1",
             80,
             {
                 "Female_No": 0,
@@ -7558,7 +7558,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.3",
+            "MWUFD 0.3",
             80,
             {
                 "Female_No": 0,
@@ -7575,7 +7575,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.5",
+            "MWUFD 0.5",
             80,
             {
                 "Female_No": 0,
@@ -7592,7 +7592,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.7",
+            "MWUFD 0.7",
             80,
             {
                 "Female_No": 0,
@@ -7609,7 +7609,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.1",
+            "MWUFD 0.1",
             100,
             {
                 "Female_No": 0,
@@ -7626,7 +7626,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.3",
+            "MWUFD 0.3",
             100,
             {
                 "Female_No": 0,
@@ -7643,7 +7643,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.5",
+            "MWUFD 0.5",
             100,
             {
                 "Female_No": 0,
@@ -7660,7 +7660,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.7",
+            "MWUFD 0.7",
             100,
             {
                 "Female_No": 0,
@@ -7677,7 +7677,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.1",
+            "MWUFD 0.1",
             100,
             {
                 "Female_No": 0,
@@ -7694,7 +7694,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.3",
+            "MWUFD 0.3",
             100,
             {
                 "Female_No": 0,
@@ -7711,7 +7711,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.5",
+            "MWUFD 0.5",
             100,
             {
                 "Female_No": 0,
@@ -7728,7 +7728,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.7",
+            "MWUFD 0.7",
             100,
             {
                 "Female_No": 0,
@@ -7745,7 +7745,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.1",
+            "MWUFD 0.1",
             100,
             {
                 "Female_No": 0,
@@ -7762,7 +7762,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.3",
+            "MWUFD 0.3",
             100,
             {
                 "Female_No": 0,
@@ -7779,7 +7779,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.5",
+            "MWUFD 0.5",
             100,
             {
                 "Female_No": 0,
@@ -7796,7 +7796,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.7",
+            "MWUFD 0.7",
             100,
             {
                 "Female_No": 0,
@@ -7813,7 +7813,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.1",
+            "MWUFD 0.1",
             100,
             {
                 "Female_No": 0,
@@ -7830,7 +7830,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.3",
+            "MWUFD 0.3",
             100,
             {
                 "Female_No": 0,
@@ -7847,7 +7847,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.5",
+            "MWUFD 0.5",
             100,
             {
                 "Female_No": 0,
@@ -7864,7 +7864,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.7",
+            "MWUFD 0.7",
             100,
             {
                 "Female_No": 0,
@@ -7881,7 +7881,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.1",
+            "MWUFD 0.1",
             100,
             {
                 "Female_No": 0,
@@ -7898,7 +7898,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.3",
+            "MWUFD 0.3",
             100,
             {
                 "Female_No": 0,
@@ -7915,7 +7915,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.5",
+            "MWUFD 0.5",
             100,
             {
                 "Female_No": 0,
@@ -7932,7 +7932,7 @@
         ],
         [
             "Diabetes",
-            "MWU 0.7",
+            "MWUFD 0.7",
             100,
             {
                 "Female_No": 0,
@@ -7949,7 +7949,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.1",
+            "MWUFD 0.1",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -7968,7 +7968,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.3",
+            "MWUFD 0.3",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -7987,7 +7987,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.5",
+            "MWUFD 0.5",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -8006,7 +8006,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.7",
+            "MWUFD 0.7",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -8025,7 +8025,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.1",
+            "MWUFD 0.1",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -8044,7 +8044,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.3",
+            "MWUFD 0.3",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -8063,7 +8063,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.5",
+            "MWUFD 0.5",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -8082,7 +8082,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.7",
+            "MWUFD 0.7",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -8101,7 +8101,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.1",
+            "MWUFD 0.1",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -8120,7 +8120,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.3",
+            "MWUFD 0.3",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -8139,7 +8139,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.5",
+            "MWUFD 0.5",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -8158,7 +8158,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.7",
+            "MWUFD 0.7",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -8177,7 +8177,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.1",
+            "MWUFD 0.1",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -8196,7 +8196,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.3",
+            "MWUFD 0.3",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -8215,7 +8215,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.5",
+            "MWUFD 0.5",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -8234,7 +8234,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.7",
+            "MWUFD 0.7",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -8253,7 +8253,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.1",
+            "MWUFD 0.1",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -8272,7 +8272,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.3",
+            "MWUFD 0.3",
             20,
             {
                 "American Indian/Alaska Native": -2,
@@ -8291,7 +8291,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.5",
+            "MWUFD 0.5",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -8310,7 +8310,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.7",
+            "MWUFD 0.7",
             20,
             {
                 "American Indian/Alaska Native": 0,
@@ -8329,7 +8329,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.1",
+            "MWUFD 0.1",
             40,
             {
                 "American Indian/Alaska Native": 0,
@@ -8348,7 +8348,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.3",
+            "MWUFD 0.3",
             40,
             {
                 "American Indian/Alaska Native": 0,
@@ -8367,7 +8367,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.5",
+            "MWUFD 0.5",
             40,
             {
                 "American Indian/Alaska Native": 0,
@@ -8386,7 +8386,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.7",
+            "MWUFD 0.7",
             40,
             {
                 "American Indian/Alaska Native": 0,
@@ -8405,7 +8405,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.1",
+            "MWUFD 0.1",
             40,
             {
                 "American Indian/Alaska Native": 0,
@@ -8424,7 +8424,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.3",
+            "MWUFD 0.3",
             40,
             {
                 "American Indian/Alaska Native": 0,
@@ -8443,7 +8443,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.5",
+            "MWUFD 0.5",
             40,
             {
                 "American Indian/Alaska Native": 0,
@@ -8462,7 +8462,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.7",
+            "MWUFD 0.7",
             40,
             {
                 "American Indian/Alaska Native": 0,
@@ -8481,7 +8481,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.1",
+            "MWUFD 0.1",
             40,
             {
                 "American Indian/Alaska Native": -3,
@@ -8500,7 +8500,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.3",
+            "MWUFD 0.3",
             40,
             {
                 "American Indian/Alaska Native": 0,
@@ -8519,7 +8519,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.5",
+            "MWUFD 0.5",
             40,
             {
                 "American Indian/Alaska Native": 0,
@@ -8538,7 +8538,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.7",
+            "MWUFD 0.7",
             40,
             {
                 "American Indian/Alaska Native": 0,
@@ -8557,7 +8557,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.1",
+            "MWUFD 0.1",
             40,
             {
                 "American Indian/Alaska Native": 0,
@@ -8576,7 +8576,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.3",
+            "MWUFD 0.3",
             40,
             {
                 "American Indian/Alaska Native": 0,
@@ -8595,7 +8595,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.5",
+            "MWUFD 0.5",
             40,
             {
                 "American Indian/Alaska Native": 0,
@@ -8614,7 +8614,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.7",
+            "MWUFD 0.7",
             40,
             {
                 "American Indian/Alaska Native": 0,
@@ -8633,7 +8633,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.1",
+            "MWUFD 0.1",
             40,
             {
                 "American Indian/Alaska Native": 0,
@@ -8652,7 +8652,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.3",
+            "MWUFD 0.3",
             40,
             {
                 "American Indian/Alaska Native": -1,
@@ -8671,7 +8671,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.5",
+            "MWUFD 0.5",
             40,
             {
                 "American Indian/Alaska Native": 0,
@@ -8690,7 +8690,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.7",
+            "MWUFD 0.7",
             40,
             {
                 "American Indian/Alaska Native": -1,
@@ -8709,7 +8709,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.1",
+            "MWUFD 0.1",
             60,
             {
                 "American Indian/Alaska Native": -2,
@@ -8728,7 +8728,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.3",
+            "MWUFD 0.3",
             60,
             {
                 "American Indian/Alaska Native": 0,
@@ -8747,7 +8747,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.5",
+            "MWUFD 0.5",
             60,
             {
                 "American Indian/Alaska Native": -4,
@@ -8766,7 +8766,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.7",
+            "MWUFD 0.7",
             60,
             {
                 "American Indian/Alaska Native": -1,
@@ -8785,7 +8785,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.1",
+            "MWUFD 0.1",
             60,
             {
                 "American Indian/Alaska Native": 0,
@@ -8804,7 +8804,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.3",
+            "MWUFD 0.3",
             60,
             {
                 "American Indian/Alaska Native": 0,
@@ -8823,7 +8823,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.5",
+            "MWUFD 0.5",
             60,
             {
                 "American Indian/Alaska Native": 0,
@@ -8842,7 +8842,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.7",
+            "MWUFD 0.7",
             60,
             {
                 "American Indian/Alaska Native": 0,
@@ -8861,7 +8861,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.1",
+            "MWUFD 0.1",
             60,
             {
                 "American Indian/Alaska Native": 0,
@@ -8880,7 +8880,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.3",
+            "MWUFD 0.3",
             60,
             {
                 "American Indian/Alaska Native": 0,
@@ -8899,7 +8899,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.5",
+            "MWUFD 0.5",
             60,
             {
                 "American Indian/Alaska Native": 0,
@@ -8918,7 +8918,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.7",
+            "MWUFD 0.7",
             60,
             {
                 "American Indian/Alaska Native": -7,
@@ -8937,7 +8937,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.1",
+            "MWUFD 0.1",
             60,
             {
                 "American Indian/Alaska Native": 0,
@@ -8956,7 +8956,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.3",
+            "MWUFD 0.3",
             60,
             {
                 "American Indian/Alaska Native": 0,
@@ -8975,7 +8975,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.5",
+            "MWUFD 0.5",
             60,
             {
                 "American Indian/Alaska Native": 0,
@@ -8994,7 +8994,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.7",
+            "MWUFD 0.7",
             60,
             {
                 "American Indian/Alaska Native": -5,
@@ -9013,7 +9013,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.1",
+            "MWUFD 0.1",
             60,
             {
                 "American Indian/Alaska Native": 0,
@@ -9032,7 +9032,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.3",
+            "MWUFD 0.3",
             60,
             {
                 "American Indian/Alaska Native": 0,
@@ -9051,7 +9051,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.5",
+            "MWUFD 0.5",
             60,
             {
                 "American Indian/Alaska Native": 0,
@@ -9070,7 +9070,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.7",
+            "MWUFD 0.7",
             60,
             {
                 "American Indian/Alaska Native": 0,
@@ -9089,7 +9089,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.1",
+            "MWUFD 0.1",
             80,
             {
                 "American Indian/Alaska Native": -3,
@@ -9108,7 +9108,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.3",
+            "MWUFD 0.3",
             80,
             {
                 "American Indian/Alaska Native": -3,
@@ -9127,7 +9127,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.5",
+            "MWUFD 0.5",
             80,
             {
                 "American Indian/Alaska Native": -1,
@@ -9146,7 +9146,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.7",
+            "MWUFD 0.7",
             80,
             {
                 "American Indian/Alaska Native": 0,
@@ -9165,7 +9165,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.1",
+            "MWUFD 0.1",
             80,
             {
                 "American Indian/Alaska Native": -4,
@@ -9184,7 +9184,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.3",
+            "MWUFD 0.3",
             80,
             {
                 "American Indian/Alaska Native": 0,
@@ -9203,7 +9203,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.5",
+            "MWUFD 0.5",
             80,
             {
                 "American Indian/Alaska Native": 0,
@@ -9222,7 +9222,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.7",
+            "MWUFD 0.7",
             80,
             {
                 "American Indian/Alaska Native": 0,
@@ -9241,7 +9241,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.1",
+            "MWUFD 0.1",
             80,
             {
                 "American Indian/Alaska Native": 0,
@@ -9260,7 +9260,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.3",
+            "MWUFD 0.3",
             80,
             {
                 "American Indian/Alaska Native": 0,
@@ -9279,7 +9279,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.5",
+            "MWUFD 0.5",
             80,
             {
                 "American Indian/Alaska Native": 0,
@@ -9298,7 +9298,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.7",
+            "MWUFD 0.7",
             80,
             {
                 "American Indian/Alaska Native": 0,
@@ -9317,7 +9317,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.1",
+            "MWUFD 0.1",
             80,
             {
                 "American Indian/Alaska Native": 0,
@@ -9336,7 +9336,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.3",
+            "MWUFD 0.3",
             80,
             {
                 "American Indian/Alaska Native": 0,
@@ -9355,7 +9355,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.5",
+            "MWUFD 0.5",
             80,
             {
                 "American Indian/Alaska Native": 0,
@@ -9374,7 +9374,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.7",
+            "MWUFD 0.7",
             80,
             {
                 "American Indian/Alaska Native": 0,
@@ -9393,7 +9393,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.1",
+            "MWUFD 0.1",
             80,
             {
                 "American Indian/Alaska Native": 0,
@@ -9412,7 +9412,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.3",
+            "MWUFD 0.3",
             80,
             {
                 "American Indian/Alaska Native": 0,
@@ -9431,7 +9431,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.5",
+            "MWUFD 0.5",
             80,
             {
                 "American Indian/Alaska Native": -3,
@@ -9450,7 +9450,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.7",
+            "MWUFD 0.7",
             80,
             {
                 "American Indian/Alaska Native": -1,
@@ -9469,7 +9469,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.1",
+            "MWUFD 0.1",
             100,
             {
                 "American Indian/Alaska Native": 0,
@@ -9488,7 +9488,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.3",
+            "MWUFD 0.3",
             100,
             {
                 "American Indian/Alaska Native": 0,
@@ -9507,7 +9507,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.5",
+            "MWUFD 0.5",
             100,
             {
                 "American Indian/Alaska Native": 0,
@@ -9526,7 +9526,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.7",
+            "MWUFD 0.7",
             100,
             {
                 "American Indian/Alaska Native": 0,
@@ -9545,7 +9545,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.1",
+            "MWUFD 0.1",
             100,
             {
                 "American Indian/Alaska Native": 0,
@@ -9564,7 +9564,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.3",
+            "MWUFD 0.3",
             100,
             {
                 "American Indian/Alaska Native": 0,
@@ -9583,7 +9583,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.5",
+            "MWUFD 0.5",
             100,
             {
                 "American Indian/Alaska Native": 0,
@@ -9602,7 +9602,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.7",
+            "MWUFD 0.7",
             100,
             {
                 "American Indian/Alaska Native": 0,
@@ -9621,7 +9621,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.1",
+            "MWUFD 0.1",
             100,
             {
                 "American Indian/Alaska Native": 0,
@@ -9640,7 +9640,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.3",
+            "MWUFD 0.3",
             100,
             {
                 "American Indian/Alaska Native": 0,
@@ -9659,7 +9659,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.5",
+            "MWUFD 0.5",
             100,
             {
                 "American Indian/Alaska Native": 0,
@@ -9678,7 +9678,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.7",
+            "MWUFD 0.7",
             100,
             {
                 "American Indian/Alaska Native": 0,
@@ -9697,7 +9697,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.1",
+            "MWUFD 0.1",
             100,
             {
                 "American Indian/Alaska Native": 0,
@@ -9716,7 +9716,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.3",
+            "MWUFD 0.3",
             100,
             {
                 "American Indian/Alaska Native": 0,
@@ -9735,7 +9735,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.5",
+            "MWUFD 0.5",
             100,
             {
                 "American Indian/Alaska Native": 0,
@@ -9754,7 +9754,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.7",
+            "MWUFD 0.7",
             100,
             {
                 "American Indian/Alaska Native": 0,
@@ -9773,7 +9773,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.1",
+            "MWUFD 0.1",
             100,
             {
                 "American Indian/Alaska Native": 0,
@@ -9792,7 +9792,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.3",
+            "MWUFD 0.3",
             100,
             {
                 "American Indian/Alaska Native": 0,
@@ -9811,7 +9811,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.5",
+            "MWUFD 0.5",
             100,
             {
                 "American Indian/Alaska Native": -2,
@@ -9830,7 +9830,7 @@
         ],
         [
             "Popsim",
-            "MWU 0.7",
+            "MWUFD 0.7",
             100,
             {
                 "American Indian/Alaska Native": -1,
@@ -9849,7 +9849,7 @@
         ],
         [
             "Census",
-            "MWU 0.1",
+            "MWUFD 0.1",
             28,
             {
                 "0": 0,
@@ -9886,7 +9886,7 @@
         ],
         [
             "Census",
-            "MWU 0.3",
+            "MWUFD 0.3",
             28,
             {
                 "0": 0,
@@ -9923,7 +9923,7 @@
         ],
         [
             "Census",
-            "MWU 0.5",
+            "MWUFD 0.5",
             28,
             {
                 "0": -1,
@@ -9960,7 +9960,7 @@
         ],
         [
             "Census",
-            "MWU 0.7",
+            "MWUFD 0.7",
             28,
             {
                 "0": 0,
@@ -9997,7 +9997,7 @@
         ],
         [
             "Census",
-            "MWU 0.1",
+            "MWUFD 0.1",
             28,
             {
                 "0": 0,
@@ -10034,7 +10034,7 @@
         ],
         [
             "Census",
-            "MWU 0.3",
+            "MWUFD 0.3",
             28,
             {
                 "0": 0,
@@ -10071,7 +10071,7 @@
         ],
         [
             "Census",
-            "MWU 0.5",
+            "MWUFD 0.5",
             28,
             {
                 "0": 0,
@@ -10108,7 +10108,7 @@
         ],
         [
             "Census",
-            "MWU 0.7",
+            "MWUFD 0.7",
             28,
             {
                 "0": 0,
@@ -10145,7 +10145,7 @@
         ],
         [
             "Census",
-            "MWU 0.1",
+            "MWUFD 0.1",
             28,
             {
                 "0": 0,
@@ -10182,7 +10182,7 @@
         ],
         [
             "Census",
-            "MWU 0.3",
+            "MWUFD 0.3",
             28,
             {
                 "0": 0,
@@ -10219,7 +10219,7 @@
         ],
         [
             "Census",
-            "MWU 0.5",
+            "MWUFD 0.5",
             28,
             {
                 "0": 0,
@@ -10256,7 +10256,7 @@
         ],
         [
             "Census",
-            "MWU 0.7",
+            "MWUFD 0.7",
             28,
             {
                 "0": 0,
@@ -10293,7 +10293,7 @@
         ],
         [
             "Census",
-            "MWU 0.1",
+            "MWUFD 0.1",
             28,
             {
                 "0": 0,
@@ -10330,7 +10330,7 @@
         ],
         [
             "Census",
-            "MWU 0.3",
+            "MWUFD 0.3",
             28,
             {
                 "0": 0,
@@ -10367,7 +10367,7 @@
         ],
         [
             "Census",
-            "MWU 0.5",
+            "MWUFD 0.5",
             28,
             {
                 "0": 0,
@@ -10404,7 +10404,7 @@
         ],
         [
             "Census",
-            "MWU 0.7",
+            "MWUFD 0.7",
             28,
             {
                 "0": 0,
@@ -10441,7 +10441,7 @@
         ],
         [
             "Census",
-            "MWU 0.1",
+            "MWUFD 0.1",
             28,
             {
                 "0": 0,
@@ -10478,7 +10478,7 @@
         ],
         [
             "Census",
-            "MWU 0.3",
+            "MWUFD 0.3",
             28,
             {
                 "0": 0,
@@ -10515,7 +10515,7 @@
         ],
         [
             "Census",
-            "MWU 0.5",
+            "MWUFD 0.5",
             28,
             {
                 "0": 0,
@@ -10552,7 +10552,7 @@
         ],
         [
             "Census",
-            "MWU 0.7",
+            "MWUFD 0.7",
             28,
             {
                 "0": 0,
@@ -10589,7 +10589,7 @@
         ],
         [
             "Census",
-            "MWU 0.1",
+            "MWUFD 0.1",
             42,
             {
                 "0": 0,
@@ -10626,7 +10626,7 @@
         ],
         [
             "Census",
-            "MWU 0.3",
+            "MWUFD 0.3",
             42,
             {
                 "0": 0,
@@ -10663,7 +10663,7 @@
         ],
         [
             "Census",
-            "MWU 0.5",
+            "MWUFD 0.5",
             42,
             {
                 "0": 0,
@@ -10700,7 +10700,7 @@
         ],
         [
             "Census",
-            "MWU 0.7",
+            "MWUFD 0.7",
             42,
             {
                 "0": 0,
@@ -10737,7 +10737,7 @@
         ],
         [
             "Census",
-            "MWU 0.1",
+            "MWUFD 0.1",
             42,
             {
                 "0": 0,
@@ -10774,7 +10774,7 @@
         ],
         [
             "Census",
-            "MWU 0.3",
+            "MWUFD 0.3",
             42,
             {
                 "0": -1,
@@ -10811,7 +10811,7 @@
         ],
         [
             "Census",
-            "MWU 0.5",
+            "MWUFD 0.5",
             42,
             {
                 "0": 0,
@@ -10848,7 +10848,7 @@
         ],
         [
             "Census",
-            "MWU 0.7",
+            "MWUFD 0.7",
             42,
             {
                 "0": 0,
@@ -10885,7 +10885,7 @@
         ],
         [
             "Census",
-            "MWU 0.1",
+            "MWUFD 0.1",
             42,
             {
                 "0": 0,
@@ -10922,7 +10922,7 @@
         ],
         [
             "Census",
-            "MWU 0.3",
+            "MWUFD 0.3",
             42,
             {
                 "0": 0,
@@ -10959,7 +10959,7 @@
         ],
         [
             "Census",
-            "MWU 0.5",
+            "MWUFD 0.5",
             42,
             {
                 "0": 0,
@@ -10996,7 +10996,7 @@
         ],
         [
             "Census",
-            "MWU 0.7",
+            "MWUFD 0.7",
             42,
             {
                 "0": 0,
@@ -11033,7 +11033,7 @@
         ],
         [
             "Census",
-            "MWU 0.1",
+            "MWUFD 0.1",
             42,
             {
                 "0": 0,
@@ -11070,7 +11070,7 @@
         ],
         [
             "Census",
-            "MWU 0.3",
+            "MWUFD 0.3",
             42,
             {
                 "0": 0,
@@ -11107,7 +11107,7 @@
         ],
         [
             "Census",
-            "MWU 0.5",
+            "MWUFD 0.5",
             42,
             {
                 "0": 0,
@@ -11144,7 +11144,7 @@
         ],
         [
             "Census",
-            "MWU 0.7",
+            "MWUFD 0.7",
             42,
             {
                 "0": -1,
@@ -11181,7 +11181,7 @@
         ],
         [
             "Census",
-            "MWU 0.1",
+            "MWUFD 0.1",
             42,
             {
                 "0": 0,
@@ -11218,7 +11218,7 @@
         ],
         [
             "Census",
-            "MWU 0.3",
+            "MWUFD 0.3",
             42,
             {
                 "0": 0,
@@ -11255,7 +11255,7 @@
         ],
         [
             "Census",
-            "MWU 0.5",
+            "MWUFD 0.5",
             42,
             {
                 "0": 0,
@@ -11292,7 +11292,7 @@
         ],
         [
             "Census",
-            "MWU 0.7",
+            "MWUFD 0.7",
             42,
             {
                 "0": 0,
@@ -11329,7 +11329,7 @@
         ],
         [
             "Census",
-            "MWU 0.1",
+            "MWUFD 0.1",
             70,
             {
                 "0": 0,
@@ -11366,7 +11366,7 @@
         ],
         [
             "Census",
-            "MWU 0.3",
+            "MWUFD 0.3",
             70,
             {
                 "0": 0,
@@ -11403,7 +11403,7 @@
         ],
         [
             "Census",
-            "MWU 0.5",
+            "MWUFD 0.5",
             70,
             {
                 "0": -1,
@@ -11440,7 +11440,7 @@
         ],
         [
             "Census",
-            "MWU 0.7",
+            "MWUFD 0.7",
             70,
             {
                 "0": 0,
@@ -11477,7 +11477,7 @@
         ],
         [
             "Census",
-            "MWU 0.1",
+            "MWUFD 0.1",
             70,
             {
                 "0": 0,
@@ -11514,7 +11514,7 @@
         ],
         [
             "Census",
-            "MWU 0.3",
+            "MWUFD 0.3",
             70,
             {
                 "0": 0,
@@ -11551,7 +11551,7 @@
         ],
         [
             "Census",
-            "MWU 0.5",
+            "MWUFD 0.5",
             70,
             {
                 "0": 0,
@@ -11588,7 +11588,7 @@
         ],
         [
             "Census",
-            "MWU 0.7",
+            "MWUFD 0.7",
             70,
             {
                 "0": 0,
@@ -11625,7 +11625,7 @@
         ],
         [
             "Census",
-            "MWU 0.1",
+            "MWUFD 0.1",
             70,
             {
                 "0": 0,
@@ -11662,7 +11662,7 @@
         ],
         [
             "Census",
-            "MWU 0.3",
+            "MWUFD 0.3",
             70,
             {
                 "0": 0,
@@ -11699,7 +11699,7 @@
         ],
         [
             "Census",
-            "MWU 0.5",
+            "MWUFD 0.5",
             70,
             {
                 "0": 0,
@@ -11736,7 +11736,7 @@
         ],
         [
             "Census",
-            "MWU 0.7",
+            "MWUFD 0.7",
             70,
             {
                 "0": 0,
@@ -11773,7 +11773,7 @@
         ],
         [
             "Census",
-            "MWU 0.1",
+            "MWUFD 0.1",
             70,
             {
                 "0": 0,
@@ -11810,7 +11810,7 @@
         ],
         [
             "Census",
-            "MWU 0.3",
+            "MWUFD 0.3",
             70,
             {
                 "0": 0,
@@ -11847,7 +11847,7 @@
         ],
         [
             "Census",
-            "MWU 0.5",
+            "MWUFD 0.5",
             70,
             {
                 "0": 0,
@@ -11884,7 +11884,7 @@
         ],
         [
             "Census",
-            "MWU 0.7",
+            "MWUFD 0.7",
             70,
             {
                 "0": 0,
@@ -11921,7 +11921,7 @@
         ],
         [
             "Census",
-            "MWU 0.1",
+            "MWUFD 0.1",
             70,
             {
                 "0": 0,
@@ -11958,7 +11958,7 @@
         ],
         [
             "Census",
-            "MWU 0.3",
+            "MWUFD 0.3",
             70,
             {
                 "0": 0,
@@ -11995,7 +11995,7 @@
         ],
         [
             "Census",
-            "MWU 0.5",
+            "MWUFD 0.5",
             70,
             {
                 "0": -1,
@@ -12032,7 +12032,7 @@
         ],
         [
             "Census",
-            "MWU 0.7",
+            "MWUFD 0.7",
             70,
             {
                 "0": -1,
@@ -12069,7 +12069,7 @@
         ],
         [
             "Census",
-            "MWU 0.1",
+            "MWUFD 0.1",
             84,
             {
                 "0": 0,
@@ -12106,7 +12106,7 @@
         ],
         [
             "Census",
-            "MWU 0.3",
+            "MWUFD 0.3",
             84,
             {
                 "0": 0,
@@ -12143,7 +12143,7 @@
         ],
         [
             "Census",
-            "MWU 0.5",
+            "MWUFD 0.5",
             84,
             {
                 "0": 0,
@@ -12180,7 +12180,7 @@
         ],
         [
             "Census",
-            "MWU 0.7",
+            "MWUFD 0.7",
             84,
             {
                 "0": 0,
@@ -12217,7 +12217,7 @@
         ],
         [
             "Census",
-            "MWU 0.1",
+            "MWUFD 0.1",
             84,
             {
                 "0": 0,
@@ -12254,7 +12254,7 @@
         ],
         [
             "Census",
-            "MWU 0.3",
+            "MWUFD 0.3",
             84,
             {
                 "0": 0,
@@ -12291,7 +12291,7 @@
         ],
         [
             "Census",
-            "MWU 0.5",
+            "MWUFD 0.5",
             84,
             {
                 "0": 0,
@@ -12328,7 +12328,7 @@
         ],
         [
             "Census",
-            "MWU 0.7",
+            "MWUFD 0.7",
             84,
             {
                 "0": 0,
@@ -12365,7 +12365,7 @@
         ],
         [
             "Census",
-            "MWU 0.1",
+            "MWUFD 0.1",
             84,
             {
                 "0": 0,
@@ -12402,7 +12402,7 @@
         ],
         [
             "Census",
-            "MWU 0.3",
+            "MWUFD 0.3",
             84,
             {
                 "0": 0,
@@ -12439,7 +12439,7 @@
         ],
         [
             "Census",
-            "MWU 0.5",
+            "MWUFD 0.5",
             84,
             {
                 "0": 0,
@@ -12476,7 +12476,7 @@
         ],
         [
             "Census",
-            "MWU 0.7",
+            "MWUFD 0.7",
             84,
             {
                 "0": 0,
@@ -12513,7 +12513,7 @@
         ],
         [
             "Census",
-            "MWU 0.1",
+            "MWUFD 0.1",
             84,
             {
                 "0": 0,
@@ -12550,7 +12550,7 @@
         ],
         [
             "Census",
-            "MWU 0.3",
+            "MWUFD 0.3",
             84,
             {
                 "0": 0,
@@ -12587,7 +12587,7 @@
         ],
         [
             "Census",
-            "MWU 0.5",
+            "MWUFD 0.5",
             84,
             {
                 "0": 0,
@@ -12624,7 +12624,7 @@
         ],
         [
             "Census",
-            "MWU 0.7",
+            "MWUFD 0.7",
             84,
             {
                 "0": 0,
@@ -12661,7 +12661,7 @@
         ],
         [
             "Census",
-            "MWU 0.1",
+            "MWUFD 0.1",
             84,
             {
                 "0": -2,
@@ -12698,7 +12698,7 @@
         ],
         [
             "Census",
-            "MWU 0.3",
+            "MWUFD 0.3",
             84,
             {
                 "0": -2,
@@ -12735,7 +12735,7 @@
         ],
         [
             "Census",
-            "MWU 0.5",
+            "MWUFD 0.5",
             84,
             {
                 "0": 0,
@@ -12772,7 +12772,7 @@
         ],
         [
             "Census",
-            "MWU 0.7",
+            "MWUFD 0.7",
             84,
             {
                 "0": 0,
@@ -12809,7 +12809,7 @@
         ],
         [
             "Census",
-            "MWU 0.1",
+            "MWUFD 0.1",
             112,
             {
                 "0": 0,
@@ -12846,7 +12846,7 @@
         ],
         [
             "Census",
-            "MWU 0.3",
+            "MWUFD 0.3",
             112,
             {
                 "0": 0,
@@ -12883,7 +12883,7 @@
         ],
         [
             "Census",
-            "MWU 0.5",
+            "MWUFD 0.5",
             112,
             {
                 "0": 0,
@@ -12920,7 +12920,7 @@
         ],
         [
             "Census",
-            "MWU 0.7",
+            "MWUFD 0.7",
             112,
             {
                 "0": 0,
@@ -12957,7 +12957,7 @@
         ],
         [
             "Census",
-            "MWU 0.1",
+            "MWUFD 0.1",
             112,
             {
                 "0": 0,
@@ -12994,7 +12994,7 @@
         ],
         [
             "Census",
-            "MWU 0.3",
+            "MWUFD 0.3",
             112,
             {
                 "0": 0,
@@ -13031,7 +13031,7 @@
         ],
         [
             "Census",
-            "MWU 0.5",
+            "MWUFD 0.5",
             112,
             {
                 "0": 0,
@@ -13068,7 +13068,7 @@
         ],
         [
             "Census",
-            "MWU 0.7",
+            "MWUFD 0.7",
             112,
             {
                 "0": 0,
@@ -13105,7 +13105,7 @@
         ],
         [
             "Census",
-            "MWU 0.1",
+            "MWUFD 0.1",
             112,
             {
                 "0": -1,
@@ -13142,7 +13142,7 @@
         ],
         [
             "Census",
-            "MWU 0.3",
+            "MWUFD 0.3",
             112,
             {
                 "0": 0,
@@ -13179,7 +13179,7 @@
         ],
         [
             "Census",
-            "MWU 0.5",
+            "MWUFD 0.5",
             112,
             {
                 "0": 0,
@@ -13216,7 +13216,7 @@
         ],
         [
             "Census",
-            "MWU 0.7",
+            "MWUFD 0.7",
             112,
             {
                 "0": 0,
@@ -13253,7 +13253,7 @@
         ],
         [
             "Census",
-            "MWU 0.1",
+            "MWUFD 0.1",
             112,
             {
                 "0": 0,
@@ -13290,7 +13290,7 @@
         ],
         [
             "Census",
-            "MWU 0.3",
+            "MWUFD 0.3",
             112,
             {
                 "0": -2,
@@ -13327,7 +13327,7 @@
         ],
         [
             "Census",
-            "MWU 0.5",
+            "MWUFD 0.5",
             112,
             {
                 "0": -1,
@@ -13364,7 +13364,7 @@
         ],
         [
             "Census",
-            "MWU 0.7",
+            "MWUFD 0.7",
             112,
             {
                 "0": 0,
@@ -13401,7 +13401,7 @@
         ],
         [
             "Census",
-            "MWU 0.1",
+            "MWUFD 0.1",
             112,
             {
                 "0": 0,
@@ -13438,7 +13438,7 @@
         ],
         [
             "Census",
-            "MWU 0.3",
+            "MWUFD 0.3",
             112,
             {
                 "0": 0,
@@ -13475,7 +13475,7 @@
         ],
         [
             "Census",
-            "MWU 0.5",
+            "MWUFD 0.5",
             112,
             {
                 "0": 0,
@@ -13512,7 +13512,7 @@
         ],
         [
             "Census",
-            "MWU 0.7",
+            "MWUFD 0.7",
             112,
             {
                 "0": 0,
