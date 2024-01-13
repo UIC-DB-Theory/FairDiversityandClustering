@@ -49,9 +49,7 @@ def StreamFairDivMax2(features, colors, kis, epsilon, gammahigh, gammalow, norma
     for color in color_number_map:
         kis_list.append(kis[color])
     
-    print(f'[SFDM2-Wrap] Start alg')
     if normalize:
-        print(f'[SFDM2-Wrap] Start alg norm')
         sol, sol_div, stream_time, post_time, total_time = FDMO.StreamFairDivMax2(
                                 X=elements_normalized, 
                                 k=kis_list, 
@@ -62,7 +60,6 @@ def StreamFairDivMax2(features, colors, kis, epsilon, gammahigh, gammalow, norma
                                 dmin=gammalow,
                             )
     else:
-        print(f'[SFDM2-Wrap] Start alg not norm')
         sol, sol_div, stream_time, post_time, total_time = FDMO.StreamFairDivMax2(
                                 X=elements, 
                                 k=kis_list, 
