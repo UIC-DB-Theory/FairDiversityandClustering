@@ -96,7 +96,7 @@ def plot(y_key, x_key, ylogscale = False):
     #     fontsize="20"
     # )
     plt.tight_layout(pad=2.0)
-    plt.savefig(f'{plot_dir}/{y_key}_vs_{x_key}', dpi=300, bbox_inches='tight')
+    plt.savefig(f'{plot_dir}/{y_key}_vs_{x_key}', dpi=100, bbox_inches='tight')
 
 plot( "runtime", "k", ylogscale = True)
 plot( "diversity", "k", ylogscale = False)
@@ -201,7 +201,7 @@ def plot_diversity_time(index, ykey, xkey ,ylogscale = False, xlogscale = False)
     #     fontsize="20"
     # )
     plt.tight_layout(pad=2.0)
-    plt.savefig(f'{plot_dir}/{ykey}_vs_{xkey}_{kval}', dpi=300, bbox_inches='tight')
+    plt.savefig(f'{plot_dir}/{ykey}_vs_{xkey}_{kval}', dpi=100, bbox_inches='tight')
 
 plot_diversity_time(0, "diversity", "runtime", xlogscale = True)
 plot_diversity_time(1, "diversity", "runtime", xlogscale = True)
@@ -352,7 +352,7 @@ def plot_color_results(algorithm):
         #     loc='center left',
         #     bbox_to_anchor=(1, 0.5)
         # )
-        plt.savefig(f'{plot_dir}/{dataset}_{algorithm}.png', dpi=300, bbox_inches='tight')
+        plt.savefig(f'{plot_dir}/{dataset}_{algorithm}.png', dpi=100, bbox_inches='tight')
         plt.close()
 
 def save_color_stats(algorithm):
