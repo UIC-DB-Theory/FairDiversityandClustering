@@ -79,7 +79,7 @@ def calculate_dmin_dmax(points):
     min_distances_per_array = [np.min(distances) for distances in pairwise_distances]
 
     # Step 5: Find the minimum among the minimum pair-wise distances
-    overall_min_distance = np.min(min_distances_per_array)
+    dmin = np.min(min_distances_per_array)
     print('[done calulating dmin]', dmin)
 
     return dmin, dmax
