@@ -173,9 +173,8 @@ for dataset_name in setup["datasets"]:
 
         if dataset_name not in dmin_dmax:
             print('Calculating dataset dmin & dmax for', dataset_name)
-            _, unique_features_indices = np.unique(features, return_index=True, axis=0)
-            ufeatures = features[unique_features_indices]
-            dmin_full, dmax_full = calculate_dmin_dmax(ufeatures)
+            tmp_features = copy.deepcopy(features)
+            dmin_full, dmax_full = calculate_dmin_dmax(tmp_features)
             print('\t\tdmin', dmin_full)
             print('\t\tdmax', dmax_full)
             dmin_dmax[dataset_name] = [dmin_full, dmax_full]

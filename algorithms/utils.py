@@ -55,18 +55,31 @@ def calculate_dmin_dmax(points):
     dmax - l2-norm(largest co-ordinate in each dimension)
 
     '''
-
-    print('[dmin dmax]')
     arr = np.array(points)
+    
     max_values = np.max(arr, axis=0)
-    print(max_values)
     sum_of_squares = np.sum(max_values ** 2)
     dmax = np.sqrt(sum_of_squares)
     print('[done calulating dmax]', dmax)
 
-    sorted_arr = np.sort(arr, axis=0)
-    pairwise_diff = np.diff(sorted_arr, axis=0)
-    dmin = np.min(pairwise_diff, axis=0)
+
+    # Assuming you have a NumPy array 'arr' with shape (n, m)
+    n, m = arr.shape
+
+    # Step 1: Break the array into m arrays of n x 1
+    split_arrays = np.split(arr, m, axis=1)
+
+    # Step 2: For each array, find unique values
+    unique_arrays = [np.unique(sub_arr) for sub_arr in split_arrays]
+
+    # Step 3: Calculate the pair-wise distances for each unique array
+    pairwise_distances = [np.diff(unique_arr, axis=0) for unique_arr in unique_arrays]
+
+    # Step 4: Find the minimum pair-wise distance for each unique array
+    min_distances_per_array = [np.min(distances) for distances in pairwise_distances]
+
+    # Step 5: Find the minimum among the minimum pair-wise distances
+    overall_min_distance = np.min(min_distances_per_array)
     print('[done calulating dmin]', dmin)
 
     return dmin, dmax
