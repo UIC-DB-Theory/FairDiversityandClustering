@@ -168,13 +168,13 @@ def plot_diversity_time(index, ykey, xkey ,ylogscale = False, xlogscale = False)
             x_end, y_end = skyline_points[i + 1]
 
             # Plot a line going right from the first point
-            ax.plot([x_start, x_end], [y_start, y_start], linestyle='dotted', color='blue')
+            ax.plot([x_start, x_end], [y_start, y_start], linestyle='dotted', color='black')
 
             # Plot a dotted line going up along the y-axis 
-            ax.plot([x_end, x_end], [y_start, y_end], linestyle='dotted', color='blue')
+            ax.plot([x_end, x_end], [y_start, y_end], linestyle='dotted', color='black')
         last_point = skyline_points[-1]
         _, x_max = ax.get_xlim()
-        ax.plot([last_point[0], x_max], [last_point[1], last_point[1]], color='blue', linestyle='dotted')
+        ax.plot([last_point[0], x_max], [last_point[1], last_point[1]], color='black', linestyle='dotted')
 
         for point in skyline_points:
             ax.plot(point[0], point[1], marker='o', markersize=15, fillstyle='none', markeredgecolor='black', linestyle='None')
