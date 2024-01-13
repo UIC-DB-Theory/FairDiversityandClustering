@@ -47,21 +47,19 @@ class Stopwatch:
         self.times.append(time.perf_counter())
         return zip(self.names, self._calc_deltas()), self.times[-1] - self.times[0]
 
-def dataset_dmin(points):
-    from scipy.spatial import distance
-    dmin = sys.float_info.max
-    for i in range(len(points)):
-        for j in range(i + 1, len(points)):
-            dmin = min(dmin, distance.euclidean(points[i], points[j]))
-    return dmin
+def dataset_dmin_dmax(points):
+    '''
+    Estimates dmin and dmax for a set of points.
 
-def dataset_dmax(points):
-    from scipy.spatial import distance
-    dmax = sys.float_info.min
-    for i in range(len(points)):
-        for j in range(i + 1, len(points)):
-            dmax = max(dmax, distance.euclidean(points[i], points[j]))
-    return dmax
+    dmin - min(smallest distance in all dimensions)
+    dmax - l2-norm(largest co-ordinate in each dimension)
+
+    '''
+
+    dmin = 0
+    dmax = 0
+
+    return dmin, dmax
 
 
 def compute_diversity(points: npt.NDArray[np.float64]) -> float:

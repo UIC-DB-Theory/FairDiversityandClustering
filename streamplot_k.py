@@ -98,7 +98,7 @@ def plot(y_key, x_key, ylogscale = False):
     plt.tight_layout(pad=2.0)
     plt.savefig(f'{plot_dir}/{y_key}_vs_{x_key}', dpi=300, bbox_inches='tight')
 
-plot( "streamtime", "k", ylogscale = True)
+plot( "streamtime", "k", ylogscale = False)
 plot( "posttime", "k", ylogscale = True)
 plot( "totaltime", "k", ylogscale = True)
 plot( "diversity", "k", ylogscale = False)

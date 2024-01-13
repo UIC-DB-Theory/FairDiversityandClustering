@@ -51,6 +51,11 @@ with open(setup_file_path, 'r') as json_file:
 from algorithms.sfdm2 import StreamFairDivMax2
 from fmmdmwu_stream import fmmdmwu_stream as SMWUFD
 from algorithms.utils import buildKisMap
+from algorithms.utils import dataset_dmin
+from algorithms.utils import dataset_dmax
+
+dataset_dmin_dmax = {}
+
 # Lambdas for running experiments
 algorithms = {
     'SFDM-2' : lambda gen, name, kis, kwargs: StreamFairDivMax2(
@@ -167,6 +172,16 @@ for dataset_name in setup["datasets"]:
         features = dataset['features']
         colors = dataset['colors']
 
+        if dataset_name not in dataset_dmin_dmax:
+            print('Calculating dataset dmin & dmax for', dataset_name)
+            _, unique_features_indices = np.unique(features, return_index=True, axis=0)
+            ufeatures = features[unique_features_indices]
+            dmin_full_dataset = dataset_dmin(ufeatures)
+            dmax_full_dataset = dataset_dmax(ufeatures)
+            print('\t\tdmin', dmin_full_dataset)
+            print('\t\tdmax', dmax_full_dataset)
+            dataset_dmin_dmax[dataset_name] = [dmin_full_dataset, dmax_full_dataset]
+
         # one kis' map to ask for
         kimap = buildKisMap(dataset['colors'], k, setup['parameters']['buildkis_alpha'], equal_k_js=check_flag(setup['parameters'],'buildkis_equal_k_js'))
         adj_k = sum(kimap.values()) # the actual number of points we asked for
@@ -194,8 +209,12 @@ for dataset_name in setup["datasets"]:
                 dimensions, 
                 coreset_size)
             core_features, core_colors = coreset.compute()
-            dmax = coreset.compute_gamma_upper_bound()
-            dmin = coreset.compute_closest_pair()
+            # dmax = coreset.compute_gamma_upper_bound()
+            # dmin = coreset.compute_closest_pair()
+
+            # Use dmin and dmax of full dataset instead
+            dmin = dataset_dmin_dmax[dataset_name][0]
+            dmin = dataset_dmin_dmax[dataset_name][1]
 
             result_per_alg = {}
             for name in setup['algorithms']:
