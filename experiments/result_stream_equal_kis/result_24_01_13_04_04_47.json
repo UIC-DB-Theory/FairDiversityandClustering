@@ -1019,6 +1019,291 @@
                 "South": 12,
                 "West": 12
             }
+        ],
+        [
+            "Yelp_business",
+            "SMWUFD-0.3-15",
+            80,
+            {
+                "Midwest": 3,
+                "Northeast": 1,
+                "Other": -11,
+                "South": 9,
+                "West": -2
+            },
+            {
+                "Midwest": 16,
+                "Northeast": 16,
+                "Other": 16,
+                "South": 16,
+                "West": 16
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2-15",
+            80,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 16,
+                "Northeast": 16,
+                "Other": 16,
+                "South": 16,
+                "West": 16
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2-75",
+            80,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 16,
+                "Northeast": 16,
+                "Other": 16,
+                "South": 16,
+                "West": 16
+            }
+        ],
+        [
+            "Yelp_business",
+            "SMWUFD-0.3-15",
+            80,
+            {
+                "Midwest": -2,
+                "Northeast": 17,
+                "Other": -16,
+                "South": 4,
+                "West": -3
+            },
+            {
+                "Midwest": 16,
+                "Northeast": 16,
+                "Other": 16,
+                "South": 16,
+                "West": 16
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2-15",
+            80,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 16,
+                "Northeast": 16,
+                "Other": 16,
+                "South": 16,
+                "West": 16
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2-75",
+            80,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 16,
+                "Northeast": 16,
+                "Other": 16,
+                "South": 16,
+                "West": 16
+            }
+        ],
+        [
+            "Yelp_business",
+            "SMWUFD-0.3-15",
+            80,
+            {
+                "Midwest": -4,
+                "Northeast": 13,
+                "Other": -12,
+                "South": 7,
+                "West": -4
+            },
+            {
+                "Midwest": 16,
+                "Northeast": 16,
+                "Other": 16,
+                "South": 16,
+                "West": 16
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2-15",
+            80,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 16,
+                "Northeast": 16,
+                "Other": 16,
+                "South": 16,
+                "West": 16
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2-75",
+            80,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 16,
+                "Northeast": 16,
+                "Other": 16,
+                "South": 16,
+                "West": 16
+            }
+        ],
+        [
+            "Yelp_business",
+            "SMWUFD-0.3-15",
+            80,
+            {
+                "Midwest": -4,
+                "Northeast": 10,
+                "Other": -11,
+                "South": 8,
+                "West": -3
+            },
+            {
+                "Midwest": 16,
+                "Northeast": 16,
+                "Other": 16,
+                "South": 16,
+                "West": 16
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2-15",
+            80,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 16,
+                "Northeast": 16,
+                "Other": 16,
+                "South": 16,
+                "West": 16
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2-75",
+            80,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 16,
+                "Northeast": 16,
+                "Other": 16,
+                "South": 16,
+                "West": 16
+            }
+        ],
+        [
+            "Yelp_business",
+            "SMWUFD-0.3-15",
+            80,
+            {
+                "Midwest": -2,
+                "Northeast": 9,
+                "Other": -14,
+                "South": 11,
+                "West": -4
+            },
+            {
+                "Midwest": 16,
+                "Northeast": 16,
+                "Other": 16,
+                "South": 16,
+                "West": 16
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2-15",
+            80,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 16,
+                "Northeast": 16,
+                "Other": 16,
+                "South": 16,
+                "West": 16
+            }
+        ],
+        [
+            "Yelp_business",
+            "SFDM-2-75",
+            80,
+            {
+                "Midwest": 0,
+                "Northeast": 0,
+                "Other": 0,
+                "South": 0,
+                "West": 0
+            },
+            {
+                "Midwest": 16,
+                "Northeast": 16,
+                "Other": 16,
+                "South": 16,
+                "West": 16
+            }
         ]
     ]
 }
