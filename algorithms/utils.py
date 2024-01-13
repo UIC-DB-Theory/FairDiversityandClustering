@@ -47,7 +47,7 @@ class Stopwatch:
         self.times.append(time.perf_counter())
         return zip(self.names, self._calc_deltas()), self.times[-1] - self.times[0]
 
-def calculate_dmin_dmax(points):
+def calculate_dmin_dmax(arr):
     '''
     Estimates dmin and dmax for a set of points.
 
