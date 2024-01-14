@@ -139,6 +139,8 @@ class centerer:
             _, time = timer.stop()
             self.last_finalize_time = time
             return out
+        
+        assert(type(self.centers) is np.ndarray)
 
         # if we saw less than k points, return that many points
         if self.points_seen < self.k:
@@ -154,6 +156,21 @@ class centerer:
             self.last_finalize_time = time
             return self.centers
 
+        # if we have extra points, add the best ones (furthest distance) from all the points in the existing set
+
+        # get the minimum distance to a point in S
+        # cdist returns an array where element i j is distance:
+        #   d(prev_centers[i], centers[j])
+        # so we want to get the minimum along the second axis
+        nearest_dists = np.min(cdist(self.prev_centers, self.centers), axis=1)
+        
+        # get the indices we need to take from prev_centers
+        points_to_take = self.k - len(self.centers)
+        indices = np.argpartition(nearest_dists, points_to_take)
+        additionals = self.prev_centers[indices][:points_to_take]
+        output = np.concatenate([self.centers, additionals])
+
+        """ old approach
         # if not, grab all the points in self.prev_centers not already in self.centers
         # for now, do this the slow way and convert back since these are small
         # TODO? faster?
@@ -161,6 +178,7 @@ class centerer:
         addables = np.array([x for x in self.prev_centers if tuple(x) not in center_set])
         # adds points to the until we have K points
         output = np.concatenate([self.centers, addables])[:self.k]
+        """
 
         # stops the time
         _, time = timer.stop()
