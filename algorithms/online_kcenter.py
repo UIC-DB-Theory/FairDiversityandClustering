@@ -3,7 +3,7 @@ import typing as T
 import numpy.typing as NPT
 import numpy as np
 
-from scipy.spatial.distance import pdist
+from scipy.spatial.distance import pdist, cdist
 from scipy.spatial import KDTree
 
 from collections import defaultdict
@@ -11,24 +11,29 @@ from collections import defaultdict
 from algorithms.utils import Stopwatch
 
 class centerer:
-    def __init__(self, size : int, point_dim : int) -> None:
-        self.centers = np.empty((size, point_dim)) # up to k center points we've selected
+    def __init__(self, size : int) -> None:
+        self.centers = set() # k centers we've collected
+                          # originally this is a dictionary to avoid duplicates
+                          # then a numpy array later on
         self.prev_centers = None # the centers from the previous iteration
         self.k = size
-        self.point_dim = point_dim
         self.R = np.Inf # starts out as far as possible before initialization
+
+        self.point_dim = None
 
         self.points_seen = 0
         self.total_insertion_time = 0
         self.last_finalize_time = 0
 
+        self.in_startup = True
+
     def _calc_initial_R(self):
         """
-        Computes the minium distance between all points in the centers
-
+        Computes the minimum nonzero distance between all points in the centers
         """
+        assert(type(self.centers) is np.ndarray)
         dists = pdist(self.centers)
-        self.R = min(dists)
+        self.R = np.min(dists)
 
     def _to_generator(self, points : NPT.NDArray):
         """
@@ -45,7 +50,10 @@ class centerer:
     def add(self, points : NPT.NDArray):
         # assumes that this is a 2d array of (n points, point dim)
         (_, dims) = points.shape
-        assert(self.point_dim == dims)
+        if self.point_dim == None:
+            self.point_dim = dims
+        else:
+            assert(self.point_dim == dims)
 
         # start timer
         timer = Stopwatch("Compute all points")
@@ -55,15 +63,28 @@ class centerer:
 
         # at this point we do the main algorithm
         try:
-            # if we're yet to see the first k points, just add it
-            while self.points_seen < self.k and pgen:
-                cur_index = self.points_seen
-                self.centers[cur_index] = next(pgen)
+            # startup we find the first k unique points
+            if self.in_startup:
+                assert(type(self.centers) is set)
+                # if we're yet to see the first k points, just add it
+                while len(self.centers) < self.k:
+                    next_point = next(pgen)
+                    tuple_point = tuple(next_point[0])
+                    # if we haven't seen it add it
+                    if tuple_point not in self.centers:
+                        self.centers.add(tuple_point)
 
-            # if we have seen k points, compute the first R radius
-            # and fall through to the rest
-            if self.points_seen == self.k:
+                # we have k points, make the np array (I have no clue why this is a type error)
+                points = [np.reshape(np.asarray(t), (1, -1)) for t in self.centers]
+                self.centers = np.concatenate(points, axis=0)
+                assert(type(self.centers) is np.ndarray)
+
+                # Compute the first R radius and fall through to the rest
                 self._calc_initial_R()
+                self.in_startup = False
+
+            # afterwards, we can do the normal algorithm
+            assert(type(self.centers) is np.ndarray)
 
             while True:
                 # pre-compute a tree of centers
@@ -78,15 +99,22 @@ class centerer:
                         tree = KDTree(self.centers)
 
                 # store this set of centers as the old centers before the next loop
-                self.prev_centers = np.copy(self.centers)
+                # should not need to be a copy as we refer to the old array
+                self.prev_centers = self.centers
 
                 # while there exists z in T such that p(z,T') > 2R
-                # compute the tree and update all at once
-                # tree = KDTree(self.centers) # we re-use the existing KD tree since it is up-to-date
-                too_close_pairs = tree.query_pairs(2.0 * self.R)
-                # remove any point in centers (T) from centers (T)
-                indices_to_delete = [i for (i, _) in too_close_pairs]
-                self.centers = np.delete(self.centers, indices_to_delete, axis=0)
+                new_centers = [np.reshape(self.centers[0], (1, -1))]
+                candidates = self.centers[1:]
+                for point in candidates:
+                    point = np.reshape(point, (1, -1))
+                    # get minimum distance to the new centers
+                    min_dist = np.min(cdist(np.concatenate(new_centers, axis=0), point).ravel())
+                    if min_dist > 2 * self.R:
+                        new_centers.append(point)
+
+                # remake the numpy array (it's faster to add to the list earlier)
+                self.centers = np.concatenate(new_centers, axis=0)
+
                 # update R
                 self.R *= 2
         # we're out of points, so whatever we had is what we had
@@ -94,8 +122,6 @@ class centerer:
             # add the time processing these points to the total time
             _, time = timer.stop()
             self.total_insertion_time += time
-            # don't time this since we time it seperately
-            return self.get_centers()
 
     def get_centers(self):
         """
@@ -105,8 +131,14 @@ class centerer:
             Otherwise, the centers may have fewer points in it,
             as we may be in the portion of the algorithm that is adding new points.
         """
-
         timer = Stopwatch("Finalize centers")
+
+        if type(self.centers) is set:
+            l = [np.reshape(np.asarray(t), (1, -1)) for t in self.centers]
+            out = np.concatenate(l, axis=0)
+            _, time = timer.stop()
+            self.last_finalize_time = time
+            return out
 
         # if we saw less than k points, return that many points
         if self.points_seen < self.k:
@@ -145,11 +177,10 @@ class color_centerer:
     """
         centers points split up by color.
     """
-    def __init__(self, size_per_color, point_dim):
+    def __init__(self, size_per_color):
         self.size_per_color = size_per_color
-        self.point_dim = point_dim
         self.centerers = defaultdict(lambda: 
-                            centerer(self.size_per_color, self.point_dim))
+                            centerer(self.size_per_color))
     
     def add(self, features, colors):
         """
@@ -163,10 +194,6 @@ class color_centerer:
             # The fetures for current color
             color_features = features[inverse == color_index]
             self.centerers[all_colors[color_index]].add(color_features)
-
-        # TODO: this is technically a waste since the previous add call
-        # already computes this for each individually, but this is nicer for now
-        return self.get_centers()
 
     def get_centers(self):
         """
@@ -209,14 +236,14 @@ if __name__ == '__main__':
     return_time = 0
     pointcnts = []
 
-    c = color_centerer(500, 2)
+    c = color_centerer(25)
 
-    num_points_per_round = 10000
+    num_points_per_round = 30000
     num_rounds = 10
 
     for r in range(num_rounds):
         print(f'round: {r}')
-        points = np.random.rand(num_points_per_round, 2)
+        points = np.random.rand(num_points_per_round, 2) * 10
         color_choices = np.array(['Red', 'Blue', 'Green'])
         colors = np.random.choice(color_choices, len(points))
         timer = Stopwatch('Centering')

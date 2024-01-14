@@ -7,7 +7,6 @@ def fmmdmwu_stream(gen, features, colors, kis, gamma_upper, mwu_epsilon, falloff
     # compute final k value
     k = sum(kis.values())
 
-    # get point dimension
     (_, dim) = features.shape
 
     # Stream the data
@@ -36,8 +35,9 @@ def fmmdmwu_stream(gen, features, colors, kis, gamma_upper, mwu_epsilon, falloff
     """
     # make streamed coreset of size k*m
     timer = Stopwatch("Finalize centers")
-    centerer = color_centerer(k, dim)
-    core_features, core_colors = centerer.add(features, colors)
+    centerer = color_centerer(k)
+    centerer.add(features, colors)
+    core_features, core_colors = centerer.get_centers()
     size = len(core_features)
     print(f'\t\tfirst point = {core_features[0]}, {core_colors[0]}')
     print(f'\t\tcoreset size (after stream) = {size}')
