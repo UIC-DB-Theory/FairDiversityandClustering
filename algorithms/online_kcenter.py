@@ -166,8 +166,13 @@ class centerer:
         
         # get the indices we need to take from prev_centers
         points_to_take = self.k - len(self.centers)
-        indices = np.argpartition(nearest_dists, points_to_take)
+
+        # get the points_to_take furthest points
+        # as k - points_to_take === k - (k - len(centers)) === len(centers)
+        indices = np.argpartition(nearest_dists, len(self.centers) - 1)[::-1]
         additionals = self.prev_centers[indices][:points_to_take]
+
+        # adds those in
         output = np.concatenate([self.centers, additionals])
 
         """ old approach
