@@ -169,6 +169,7 @@ class centerer:
 
         # get the points_to_take furthest points
         # as k - points_to_take === k - (k - len(centers)) === len(centers)
+        # so if we reverse the argpartition it'll give us the points_to_take furthest points
         indices = np.argpartition(nearest_dists, len(self.centers) - 1)[::-1]
         additionals = self.prev_centers[indices][:points_to_take]
 
