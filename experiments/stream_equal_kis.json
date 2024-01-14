@@ -8,7 +8,10 @@
 			"feature_fields": [
 				"beer/ABV",
 				"review/appearance",
-				"review/aroma"
+				"review/aroma",
+				"review/palate",
+				"review/taste",
+				"review/overall"
 			],
 			"normalize": true,
 			"filter_unique": false
