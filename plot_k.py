@@ -212,179 +212,95 @@ plt.close()
 ######################################################################################
 
 ######################################################################################
-# Plots of color results
+# Genreate missing points csv
 ######################################################################################
-print('Plotting color ratios...')
+print('Missing points csv')
 plot_dir = result_file_dir + '/' + result_file_name + '/color_results'
 if not os.path.exists(plot_dir):
    os.mkdir(plot_dir)
-use_ratio = False
-use_deltas = False
-color_mappings = {}
-color_mappings2 = {}
-runner_ks = [k for k in range(setup["parameters"]["k"][0] ,setup["parameters"]["k"][1], setup["parameters"]["k"][2])]
-data = {}
+
+
+
+'''
+This keeps track of the avg missing points\
+{
+    'dataset-1': {
+    `               'alg-1' : {
+                                'k': [],
+                                'color1' : [[missing], [required]],
+                                'color2' : [...],
+                                .
+                                .
+                            },
+                    'alg-2' : {
+                                .
+                                .
+                            },
+    
+                },
+    'dataset-2': {
+                    .
+                    .
+                    .
+                },
+    .
+    .
+    .
+
+}
+'''
+avg_color_results = {}
+
+num_runs = setup['parameters']['observations']
 for color_result in color_results:
     dataset = color_result[0]
     algorithm = color_result[1]
-    # if algorithm == 'MWU 0.3':
-    #     print('added mwu')
-    k = color_result[2]
-    kis_delta = color_result[3]
-    kis = color_result[4]
-    kis_returned_ratio = {}
-    kis_ratio = {}
+    k_value = color_result[2]
+    missing_counts = color_result[3]
+    required_counts = color_result[4]
 
-    # Sanity check & color map
-    k_calculated = 0
-    for color, ki in kis.items():
-        k_calculated = k_calculated + int(ki)
-    assert k == k_calculated
-
-    # Calculate kis in ratio
-    k_returned = 0
-    for color, ki in kis.items():
-        if use_ratio:
-            kis_ratio[color] = ki/k
-        elif use_deltas:
-            kis_ratio[color] = ki
-        else:
-            kis_ratio[color] = ki
-        if color in kis_delta:
-            kis_returned_ratio[color] = (ki + kis_delta[color])
-            k_returned += kis_returned_ratio[color]
-            if use_deltas:
-                kis_returned_ratio[color] = -kis_delta[color]
-
-        else:
-            kis_returned_ratio[color] = ki
-            if use_deltas:
-                kis_returned_ratio[color] = -kis_delta[color]
-    if use_ratio:
-        sum1 = 0
-        sum2 = 0
-        for color in kis_returned_ratio:
-            kis_returned_ratio[color] = kis_returned_ratio[color]/k_returned
-            sum1 += kis_returned_ratio[color]
-            sum2 += kis_ratio[color]
     
-    if use_deltas:
-        kis_ratio = kis_returned_ratio
-
-    # Intitalizaton
-    if dataset not in data:
-        data[dataset] = {
-            algorithm : {
-                'ks' : [],
-                'returned_counts' : {c : [] for c in kis},
-                'required_counts' : {c : [] for c in kis}
-            }
-        }
-    if algorithm not in data[dataset]:
-        print('init: ', algorithm)
-        data[dataset][algorithm] = {
-            'ks' : [],
-            'returned_counts' : {c : [] for c in kis},
-            'required_counts' : {c : [] for c in kis}
+    if dataset not in avg_color_results:
+        # Add the counts or new dataset
+        avg_color_results[dataset] = {}
+        avg_color_results[dataset][algorithm] = {}
+        avg_color_results[dataset][algorithm][k_value] = {
+            c : [(-1*missing_counts[c])/num_runs, required_counts[c]] for c in required_counts
         }
     
-    # Add the first observations by appending only when a k is seen for the first time
-    if k not in data[dataset][algorithm]['ks']:
-        data[dataset][algorithm]['ks'].append(k)
-        for color in kis:
-            data[dataset][algorithm]['returned_counts'][color].append(kis_returned_ratio[color])
-            data[dataset][algorithm]['required_counts'][color].append(kis_ratio[color])
+    elif algorithm not in avg_color_results[dataset]:
+        # Add the counts for new algorithm
+        avg_color_results[dataset][algorithm] = {}
+        avg_color_results[dataset][algorithm][k_value] = {
+            c : [(-1*missing_counts[c])/num_runs, required_counts[c]] for c in required_counts
+        }
 
+    elif k_value not in avg_color_results[dataset][algorithm]:
+        # Add the counts for new k value
+        avg_color_results[dataset][algorithm][k_value] = {
+            c : [(-1*missing_counts[c])/num_runs, required_counts[c]] for c in required_counts
+        }
+    
+    else:
+        # Average the counts
+        for c in avg_color_results[dataset][algorithm][k_value]:
+            counts = avg_color_results[dataset][algorithm][k_value][c]
+            counts[0] = counts[0] + (-1*missing_counts[c])/num_runs
 
-
-def plot_color_results(algorithm):
-    plt.clf()
-    width = 0.4
-    only_odds = False
-    for dataset in  data:
-        print(data[dataset].keys())
-        fig, ax = plt.subplots()
-        if algorithm not in data[dataset]:
-            print('not found:', algorithm)
-            return
-        ks = data[dataset][algorithm]['ks']
-        returned_counts = data[dataset][algorithm]['returned_counts']
-        required_counts = data[dataset][algorithm]['required_counts']
-        if only_odds:
-                temp1 = []
-                max_ind= len(ks)
-                for i in range(0, max_ind):
-                    if (i+1)%2 == 0:
-                        temp1.append(ks[i])
-                ks = temp1
-                for color in required_counts:
-                    prev1 = required_counts[color]
-                    prev2 = returned_counts[color]
-                    new1 = []
-                    new2 = []
-                    for i in range(0, max_ind):
-                        if (i+1)%2 == 0:
-                            new1.append(prev1[i])
-                            new2.append(prev2[i])
-                    required_counts[color] = new1
-                    returned_counts[color] = new2
-
-        bottom = np.zeros(len(ks))
-        ind = np.arange(len(ks))
-        for color in required_counts:
-            ax.bar(ind, required_counts[color], width, label=color, bottom=bottom, color = color_mappings[dataset][color], edgecolor='black', linewidth = 2)
-            bottom += required_counts[color]
-        
-        bottom = np.zeros(len(ks))
-        ind = np.arange(len(ks))
-        for color in returned_counts:
-            ax.bar(ind + width + 0.05, returned_counts[color], width, bottom=bottom, color = color_mappings[dataset][color])
-            bottom += returned_counts[color]
-        ax.set_xticks(ind + width/2 + 0.025, ks)
-        ax.set_title(f'{dataset}')
-        ax.set_xlabel('k', fontsize="14")
-        ax.set_ylabel('color ratios', fontsize="14")
-        ax.tick_params(axis='both', which='major', labelsize=18)
-        handles, labels = ax.get_legend_handles_labels()
-        # ax.legend(
-        #     handles[::-1], labels[::-1],
-        #     title = f'Colors in {dataset}',
-        #     loc='center left',
-        #     bbox_to_anchor=(1, 0.5)
-        # )
-        plt.savefig(f'{plot_dir}/{dataset}_{algorithm}.png', dpi=100, bbox_inches='tight')
-        plt.close()
-
-def save_color_stats(algorithm):
-    '''
-    saves csv of format:
-    k,color,required_points,returned points,miss%
-
-    '''
-    for dataset in data:
+for dataset in avg_color_results:
+    for algorithm in avg_color_results[dataset]:
         filepath = f'{plot_dir}/{dataset}_{algorithm}.csv'
         header = ['k']
         csv_rows = []
-        print(data[dataset].keys())
-        if algorithm not in data[dataset]:
-            print('not found:', algorithm)
-            return
-        ks = data[dataset][algorithm]['ks']
-        returned_counts = data[dataset][algorithm]['returned_counts']
-        required_counts = data[dataset][algorithm]['required_counts']
-        for i in range(0, len(ks)):
-            k = ks[i]
-            csv_row = [k]
-            header = ['k']
-            for color in required_counts:
+        for k in avg_color_results[dataset][algorithm]:
+            row = [k]
+            for color in avg_color_results[dataset][algorithm][k]:
                 header.append(color)
-                required_count = required_counts[color][i]
-                returned_count = returned_counts[color][i]
-                delta = required_count - returned_count
-                csv_row.append(f'{delta}/{required_count}')
-            csv_rows.append(csv_row)
-    
-        # clear file first
+                miss = avg_color_results[dataset][algorithm][k][color][0]
+                required = avg_color_results[dataset][algorithm][k][color][1]
+                row.append(f'{miss}/{required}')
+            csv_rows.append(row)
+
         open(filepath, 'w').close()
 
         with open(filepath, 'w+') as csvfile:  
@@ -393,41 +309,6 @@ def save_color_stats(algorithm):
             csvwriter = csv.writer(csvfile)  
 
             csvwriter.writerow(header)  
-                
+
             # writing the fields  
-            csvwriter.writerows(csv_rows)  
-
-
-def generate_colors(n):
-    if n > 14:
-        return []
-    return [
-        '#2f4f4f',
-        '#228b22',
-        '#7f0000',
-        '#4b0082',
-        '#ff8c00',
-        '#ffff00',
-        '#deb887',
-        '#00ff00',
-        '#00bfff',
-        '#0000ff',
-        '#ff00ff',
-        '#dda0dd',
-        '#ff1493',
-        '#7fffd4'
-    ]
-
-
-
-color_mappings = {
-    dataset_name : {
-        color_d : color_m for color_d, color_m in zip(setup['datasets'][dataset_name]['points_per_color'], generate_colors(len(setup['datasets'][dataset_name]['points_per_color'])))
-    } for dataset_name in setup['datasets']
-
-}
-
-for alg in setup['algorithms']:
-    plt.close()
-    # plot_color_results(alg)
-    save_color_stats(alg)
+            csvwriter.writerows(csv_rows)
