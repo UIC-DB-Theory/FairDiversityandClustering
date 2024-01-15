@@ -11,6 +11,7 @@ metadata = {
 
 fields = [
                 "state_category",
+                "rating_category",
                 "x",
                 "y",
                 "z"
@@ -18,17 +19,31 @@ fields = [
 data = []
 
 # ---------------Read original dataset file--------------
-
 northeast_states = ["CT", "DE", "ME", "MD", "MA", "NH", "NJ", "NY", "PA", "RI", "VT"]
 midwest_states = ["IL", "IN", "IA", "KS", "MI", "MN", "MO", "NE", "ND", "OH", "SD", "WI"]
 south_states = ["AL", "AR", "FL", "GA", "KY", "LA", "MS", "NC", "SC", "TN", "VA", "WV"]
 west_states = ["AK", "AZ", "CA", "CO", "HI", "ID", "MT", "NV", "NM", "OR", "UT", "WA", "WY"]
 
+
 with open('yelp_academic_dataset_business.json', 'r') as file:
     lines = file.readlines()
     for i in range(0, len(lines)):
         business = json.loads(lines[i])
+
         state_abbreviation = business['state']
+        rating = float(business['stars'])
+
+        if rating >= 4:
+            rating_category = "[4,5]"
+        elif rating >= 3:
+            rating_category = "[3,4)"
+        elif rating >= 2:
+            rating_category = "[2,3)"
+        else:
+            rating_category = "[0,2)"
+
+        if state_abbreviation == 'AL':
+            print('found alabama')
         if state_abbreviation in northeast_states:
             state_category = "Northeast"
         elif state_abbreviation in midwest_states:
@@ -38,14 +53,14 @@ with open('yelp_academic_dataset_business.json', 'r') as file:
         elif state_abbreviation in west_states:
             state_category = "West"
         else:
-            state_category =  "Other"
+            state_category = 'Other'
         
         lat = business['latitude']
         lon = business['longitude']
         x = 6371*math.cos(lat)*math.cos(lon)
         y = 6371*math.cos(lat)*math.sin(lon)
         z = 6371*math.sin(lat)
-        data.append([state_category, x, y, z])
+        data.append([state_category,rating_category, x, y, z])
         
         
 
