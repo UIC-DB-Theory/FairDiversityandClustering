@@ -1,0 +1,78 @@
+{
+	"datasets": {
+		"Beer_reviews": {
+			"data_dir": "./datasets/beer_reviews",
+			"color_fields": [
+				"beer/category"
+			],
+			"feature_fields": [
+				"beer/ABV",
+				"review/appearance",
+				"review/aroma",
+				"review/palate",
+				"review/taste",
+				"review/overall"
+			],
+			"normalize": true,
+			"filter_unique": false
+		},
+		"Yelp_business": {
+			"data_dir": "./datasets/yelp_business",
+			"color_fields": [
+				"state_category"
+			],
+			"feature_fields": [
+				"x",
+				"y",
+				"z"
+			],
+			"normalize": true,
+			"filter_unique": false
+		}
+	},
+	"algorithms" : {
+		"SMWUFD" : {
+			"alg": "SMWUFD",
+			"color": "#fc0303",
+			"marker": "o",
+			"use_coreset" : false,
+			"use_dmax" : false,
+			"use_dmin" : false,
+			"mwu_epsilon": 0.75,
+			"falloff_epsilon" : 0.15,
+			"sample_percentage" : 0.1,
+			"percent_theoretical_limit": 0.3,
+			"timeout" : 7200
+		},
+		"SFDM-2 (e=.15)" : {
+			"alg" : "SFDM-2",
+			"color": "#4afc03",
+			"marker": "+",
+			"use_coreset" : false,
+			"use_dmax" : true,
+			"use_dmin" : true,
+			"epsilon" : 0.15,
+			"timeout" : 7200
+		},
+		"SFDM-2 (e=.75)" : {
+			"alg" : "SFDM-2",
+			"color": "#1b5902",
+			"marker": "x",
+			"use_coreset" : false,
+			"use_dmax" : true,
+			"use_dmin" : true,
+			"epsilon" : 0.75,
+			"timeout" : 7200
+		}
+	},
+	"parameters": {
+		"k": [
+			20,
+			101,
+			20
+		],
+		"observations": 10,
+		"buildkis_alpha" : 0.1,
+		"buildkis_equal_k_js" : true
+	}
+}
