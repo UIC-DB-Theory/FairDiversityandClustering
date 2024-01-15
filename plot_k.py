@@ -297,7 +297,8 @@ for dataset in avg_color_results:
             required_points_per_color = 0
             temp = []
             for color in avg_color_results[dataset][algorithm][k]:
-                header.append(color)
+                if len(header) != 2 + len(avg_color_results[dataset][algorithm][k]): 
+                    header.append(color)
                 required_points_per_color = avg_color_results[dataset][algorithm][k][color][1]
                 miss = avg_color_results[dataset][algorithm][k][color][0]
                 temp.append(f'{miss}')
