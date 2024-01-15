@@ -1,6 +1,6 @@
-k,Amer-Indian-Eskimo_Female,Amer-Indian-Eskimo_Male,Asian-Pac-Islander_Female,Asian-Pac-Islander_Male,Black_Female,Black_Male,Other_Female,Other_Male,White_Female,White_Male,Amer-Indian-Eskimo_Female,Amer-Indian-Eskimo_Male,Asian-Pac-Islander_Female,Asian-Pac-Islander_Male,Black_Female,Black_Male,Other_Female,Other_Male,White_Female,White_Male,Amer-Indian-Eskimo_Female,Amer-Indian-Eskimo_Male,Asian-Pac-Islander_Female,Asian-Pac-Islander_Male,Black_Female,Black_Male,Other_Female,Other_Male,White_Female,White_Male,Amer-Indian-Eskimo_Female,Amer-Indian-Eskimo_Male,Asian-Pac-Islander_Female,Asian-Pac-Islander_Male,Black_Female,Black_Male,Other_Female,Other_Male,White_Female,White_Male,Amer-Indian-Eskimo_Female,Amer-Indian-Eskimo_Male,Asian-Pac-Islander_Female,Asian-Pac-Islander_Male,Black_Female,Black_Male,Other_Female,Other_Male,White_Female,White_Male
-20,0.0/2,0.0/2,0.0/2,0.0/2,0.0/2,0.0/2,0.0/2,0.0/2,0.0/2,0.0/2
-40,0.0/4,0.0/4,0.0/4,0.0/4,0.0/4,0.0/4,0.0/4,0.2/4,0.0/4,0.0/4
-60,0.0/6,0.0/6,0.0/6,0.0/6,0.0/6,0.0/6,0.0/6,0.0/6,0.0/6,0.0/6
-80,0.0/8,0.0/8,0.0/8,0.0/8,0.0/8,0.0/8,0.0/8,0.0/8,0.0/8,0.0/8
-100,0.0/10,0.0/10,0.0/10,0.0/10,0.0/10,0.0/10,0.0/10,0.0/10,0.0/10,0.0/10
+k,required points per color,Amer-Indian-Eskimo_Female,Amer-Indian-Eskimo_Male,Asian-Pac-Islander_Female,Asian-Pac-Islander_Male,Black_Female,Black_Male,Other_Female,Other_Male,White_Female,White_Male,Amer-Indian-Eskimo_Female,Amer-Indian-Eskimo_Male,Asian-Pac-Islander_Female,Asian-Pac-Islander_Male,Black_Female,Black_Male,Other_Female,Other_Male,White_Female,White_Male,Amer-Indian-Eskimo_Female,Amer-Indian-Eskimo_Male,Asian-Pac-Islander_Female,Asian-Pac-Islander_Male,Black_Female,Black_Male,Other_Female,Other_Male,White_Female,White_Male,Amer-Indian-Eskimo_Female,Amer-Indian-Eskimo_Male,Asian-Pac-Islander_Female,Asian-Pac-Islander_Male,Black_Female,Black_Male,Other_Female,Other_Male,White_Female,White_Male,Amer-Indian-Eskimo_Female,Amer-Indian-Eskimo_Male,Asian-Pac-Islander_Female,Asian-Pac-Islander_Male,Black_Female,Black_Male,Other_Female,Other_Male,White_Female,White_Male
+20,2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+40,4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.2,0.0,0.0
+60,6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+80,8,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+100,10,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0

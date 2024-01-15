@@ -290,15 +290,19 @@ for color_result in color_results:
 for dataset in avg_color_results:
     for algorithm in avg_color_results[dataset]:
         filepath = f'{plot_dir}/{dataset}_{algorithm}.csv'
-        header = ['k']
+        header = ['k', 'required points per color']
         csv_rows = []
         for k in avg_color_results[dataset][algorithm]:
             row = [k]
+            required_points_per_color = 0
+            temp = []
             for color in avg_color_results[dataset][algorithm][k]:
                 header.append(color)
+                required_points_per_color = avg_color_results[dataset][algorithm][k][color][1]
                 miss = avg_color_results[dataset][algorithm][k][color][0]
-                required = avg_color_results[dataset][algorithm][k][color][1]
-                row.append(f'{miss}/{required}')
+                temp.append(f'{miss}')
+            row.append(required_points_per_color)
+            row = row + temp
             csv_rows.append(row)
 
         open(filepath, 'w').close()

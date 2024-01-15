@@ -1,6 +1,6 @@
-k,Female_No,Female_Yes,Male_No,Male_Yes,Female_No,Female_Yes,Male_No,Male_Yes,Female_No,Female_Yes,Male_No,Male_Yes,Female_No,Female_Yes,Male_No,Male_Yes,Female_No,Female_Yes,Male_No,Male_Yes
-20,0.0/5,0.0/5,0.0/5,0.0/5
-40,0.2/10,0.0/10,1.2/10,0.0/10
-60,0.0/15,0.0/15,0.0/15,0.0/15
-80,0.0/20,0.0/20,0.4/20,0.0/20
-100,0.0/25,0.0/25,0.0/25,0.0/25
+k,required points per color,Female_No,Female_Yes,Male_No,Male_Yes,Female_No,Female_Yes,Male_No,Male_Yes,Female_No,Female_Yes,Male_No,Male_Yes,Female_No,Female_Yes,Male_No,Male_Yes,Female_No,Female_Yes,Male_No,Male_Yes
+20,5,0.0,0.0,0.0,0.0
+40,10,0.2,0.0,1.2,0.0
+60,15,0.0,0.0,0.0,0.0
+80,20,0.0,0.0,0.4,0.0
+100,25,0.0,0.0,0.0,0.0
