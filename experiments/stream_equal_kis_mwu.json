@@ -1,5 +1,18 @@
 {
 	"datasets": {
+		"Yelp_business": {
+			"data_dir": "./datasets/yelp_business",
+			"color_fields": [
+				"rating_category"
+			],
+			"feature_fields": [
+				"x",
+				"y",
+				"z"
+			],
+			"normalize": true,
+			"filter_unique": false
+		},
 		"Beer_reviews": {
 			"data_dir": "./datasets/beer_reviews",
 			"color_fields": [
@@ -12,19 +25,6 @@
 				"review/palate",
 				"review/taste",
 				"review/overall"
-			],
-			"normalize": true,
-			"filter_unique": false
-		},
-		"Yelp_business": {
-			"data_dir": "./datasets/yelp_business",
-			"color_fields": [
-				"rating_category"
-			],
-			"feature_fields": [
-				"x",
-				"y",
-				"z"
 			],
 			"normalize": true,
 			"filter_unique": false
