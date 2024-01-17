@@ -15,23 +15,10 @@
 			],
 			"normalize": true,
 			"filter_unique": false
-		},
-		"Yelp_business": {
-			"data_dir": "./datasets/yelp_business",
-			"color_fields": [
-				"rating_category"
-			],
-			"feature_fields": [
-				"x",
-				"y",
-				"z"
-			],
-			"normalize": true,
-			"filter_unique": false
 		}
 	},
 	"algorithms" : {
-		"SMWUFD" : {
+		"StreamMFD (g=.3)" : {
 			"alg": "SMWUFD",
 			"color": "#fc0303",
 			"marker": "o",
