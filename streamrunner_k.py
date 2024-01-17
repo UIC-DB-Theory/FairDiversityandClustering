@@ -206,8 +206,22 @@ for dataset_name in setup["datasets"]:
                 dimensions, 
                 coreset_size)
             core_features, core_colors = coreset.compute()
-            # dmax = coreset.compute_gamma_upper_bound()
-            # dmin = coreset.compute_closest_pair()
+            dmax = coreset.compute_gamma_upper_bound()
+            dmin = coreset.compute_closest_pair()
+
+            print('********Offline Param stats**********')
+            print(f'\t dmin = {dmin}')
+            print(f'\t dmax = {dmax}')
+            core_stats = {}
+            for i in range(0, len(core_features)):
+                if core_colors[i] in core_stats:
+                    core_stats[core_colors[i]] += 1
+                else:
+                    core_stats[core_colors[i]] = 1
+            print(f'\t core stats:')
+            for iter in core_stats:
+                print(f'\t\t {iter} : {core_stats[iter]}')
+             print('********Offline Param stats**********')
 
             # Use dmin and dmax of full dataset instead
             dmin = dmin_dmax[dataset_name][0]

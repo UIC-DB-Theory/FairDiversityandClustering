@@ -9,30 +9,6 @@ def fmmdmwu_stream(gen, features, colors, kis, gamma_upper, mwu_epsilon, falloff
 
     (_, dim) = features.shape
 
-    # Stream the data
-    """
-    for feature, color in zip(features, colors):
-        # TODO: Calculate the coreset for the streaming setting
-        # Notes
-        # Size of the coreset should be k*m, where m is the number of colors
-        # For each color we run the clustering algorithm to get k points
-
-        # Check if the bin has sufficient points
-        if len(color_bins[color]) < k:
-            # If not simply add the new point to the bin
-            color_bins[color].append(feature)
-        else:
-            # TODO: Run k-center on set: color_bins[color] U {new point}
-            pass
-    
-    # Merge the color bins to create the coreset
-    core_features = []
-    core_colors = []
-    for color in color_bins:
-        for feature in color_bins[color]:
-            core_features.append(feature)
-            core_colors.append(color)
-    """
     # make streamed coreset of size k*m
     timer = Stopwatch("Finalize centers")
     centerer = color_centerer(k)
@@ -57,6 +33,20 @@ def fmmdmwu_stream(gen, features, colors, kis, gamma_upper, mwu_epsilon, falloff
     print(f'\t\tdmax(stream) = {dmax}')
     dmax_compute_time = coreset.gamma_upper_bound_compute_time
     
+    print('********StreamMFD Param stats**********')
+    print(f'\t dmax(stream) = {dmax}')
+    core_stats = {}
+    for i in range(0, len(core_features)):
+        if core_colors[i] in core_stats:
+            core_stats[core_colors[i]] += 1
+        else:
+            core_stats[core_colors[i]] = 1
+    print(f'\t core stats:')
+    for iter in core_stats:
+        print(f'\t\t {iter} : {core_stats[iter]}')
+    print('********StreamMFD Param stats**********')
+
+
     # Run MWU on the calculated coreset
     sol, div, t_alg = FMMDMWU(
         gen=gen,
