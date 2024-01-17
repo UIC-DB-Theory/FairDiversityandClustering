@@ -1,0 +1,496 @@
+{
+    "setup": {
+        "datasets": {
+            "Beer_reviews": {
+                "data_dir": "./datasets/beer_reviews",
+                "color_fields": [
+                    "beer/category"
+                ],
+                "feature_fields": [
+                    "beer/ABV",
+                    "review/appearance",
+                    "review/aroma",
+                    "review/palate",
+                    "review/taste",
+                    "review/overall"
+                ],
+                "normalize": true,
+                "filter_unique": false,
+                "points_per_color": {
+                    "Other": 1097316,
+                    "Ale": 372015,
+                    "Lager": 49498
+                },
+                "size": 1518829
+            }
+        },
+        "algorithms": {
+            "MFD (g=.3)": {
+                "alg": "FMMD-MWU",
+                "color": "#fc0303",
+                "marker": "o",
+                "use_coreset": true,
+                "use_dmax": true,
+                "use_dmin": false,
+                "mwu_epsilon": 0.75,
+                "falloff_epsilon": 0.15,
+                "percent_theoretical_limit": 0.3,
+                "timeout": 1800
+            }
+        },
+        "parameters": {
+            "k": [
+                20,
+                101,
+                20
+            ],
+            "observations": 5,
+            "buildkis_alpha": 0.1,
+            "buildkis_equal_k_js": true
+        }
+    },
+    "results": {
+        "Beer_reviews": {
+            "MFD (g=.3)": {
+                "xs": {
+                    "k": [
+                        21,
+                        42,
+                        60,
+                        81,
+                        102
+                    ]
+                },
+                "ys": {
+                    "data_size": [
+                        63.0,
+                        126.0,
+                        180.0,
+                        243.0,
+                        306.0
+                    ],
+                    "dmax": [
+                        11.937690169550262,
+                        9.74584975154941,
+                        8.658043448106962,
+                        7.832151110751319,
+                        7.285988802807336
+                    ],
+                    "dmin": [
+                        0.8676103767985944,
+                        0.6335359046036936,
+                        0.7052320829573245,
+                        0.6412065992463363,
+                        0.2841734470722229
+                    ],
+                    "solution_size": [
+                        21.0,
+                        42.0,
+                        60.0,
+                        81.0,
+                        102.0
+                    ],
+                    "diversity": [
+                        4.4035713165972945,
+                        3.46370535624853,
+                        3.1940358611484596,
+                        2.839685645876611,
+                        2.657544764757197
+                    ],
+                    "runtime": [
+                        4.173119478672743,
+                        8.711789857596159,
+                        19.052678841352463,
+                        18.71490230150521,
+                        25.676178064569832
+                    ],
+                    "div-runtime": [
+                        1.0552229187547362,
+                        0.3975882583104764,
+                        0.16764235033532585,
+                        0.15173392840251268,
+                        0.10350234984638552
+                    ]
+                }
+            }
+        }
+    },
+    "alg_status": [],
+    "color_results": [
+        [
+            "Beer_reviews",
+            "MFD (g=.3)",
+            21,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 7,
+                "Lager": 7,
+                "Other": 7
+            }
+        ],
+        [
+            "Beer_reviews",
+            "MFD (g=.3)",
+            21,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 7,
+                "Lager": 7,
+                "Other": 7
+            }
+        ],
+        [
+            "Beer_reviews",
+            "MFD (g=.3)",
+            21,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 7,
+                "Lager": 7,
+                "Other": 7
+            }
+        ],
+        [
+            "Beer_reviews",
+            "MFD (g=.3)",
+            21,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 7,
+                "Lager": 7,
+                "Other": 7
+            }
+        ],
+        [
+            "Beer_reviews",
+            "MFD (g=.3)",
+            21,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 7,
+                "Lager": 7,
+                "Other": 7
+            }
+        ],
+        [
+            "Beer_reviews",
+            "MFD (g=.3)",
+            42,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 14,
+                "Lager": 14,
+                "Other": 14
+            }
+        ],
+        [
+            "Beer_reviews",
+            "MFD (g=.3)",
+            42,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 14,
+                "Lager": 14,
+                "Other": 14
+            }
+        ],
+        [
+            "Beer_reviews",
+            "MFD (g=.3)",
+            42,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 14,
+                "Lager": 14,
+                "Other": 14
+            }
+        ],
+        [
+            "Beer_reviews",
+            "MFD (g=.3)",
+            42,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 14,
+                "Lager": 14,
+                "Other": 14
+            }
+        ],
+        [
+            "Beer_reviews",
+            "MFD (g=.3)",
+            42,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 14,
+                "Lager": 14,
+                "Other": 14
+            }
+        ],
+        [
+            "Beer_reviews",
+            "MFD (g=.3)",
+            60,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 20,
+                "Lager": 20,
+                "Other": 20
+            }
+        ],
+        [
+            "Beer_reviews",
+            "MFD (g=.3)",
+            60,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 20,
+                "Lager": 20,
+                "Other": 20
+            }
+        ],
+        [
+            "Beer_reviews",
+            "MFD (g=.3)",
+            60,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 20,
+                "Lager": 20,
+                "Other": 20
+            }
+        ],
+        [
+            "Beer_reviews",
+            "MFD (g=.3)",
+            60,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 20,
+                "Lager": 20,
+                "Other": 20
+            }
+        ],
+        [
+            "Beer_reviews",
+            "MFD (g=.3)",
+            60,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 20,
+                "Lager": 20,
+                "Other": 20
+            }
+        ],
+        [
+            "Beer_reviews",
+            "MFD (g=.3)",
+            81,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 27,
+                "Lager": 27,
+                "Other": 27
+            }
+        ],
+        [
+            "Beer_reviews",
+            "MFD (g=.3)",
+            81,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 27,
+                "Lager": 27,
+                "Other": 27
+            }
+        ],
+        [
+            "Beer_reviews",
+            "MFD (g=.3)",
+            81,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 27,
+                "Lager": 27,
+                "Other": 27
+            }
+        ],
+        [
+            "Beer_reviews",
+            "MFD (g=.3)",
+            81,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 27,
+                "Lager": 27,
+                "Other": 27
+            }
+        ],
+        [
+            "Beer_reviews",
+            "MFD (g=.3)",
+            81,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 27,
+                "Lager": 27,
+                "Other": 27
+            }
+        ],
+        [
+            "Beer_reviews",
+            "MFD (g=.3)",
+            102,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 34,
+                "Lager": 34,
+                "Other": 34
+            }
+        ],
+        [
+            "Beer_reviews",
+            "MFD (g=.3)",
+            102,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 34,
+                "Lager": 34,
+                "Other": 34
+            }
+        ],
+        [
+            "Beer_reviews",
+            "MFD (g=.3)",
+            102,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 34,
+                "Lager": 34,
+                "Other": 34
+            }
+        ],
+        [
+            "Beer_reviews",
+            "MFD (g=.3)",
+            102,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 34,
+                "Lager": 34,
+                "Other": 34
+            }
+        ],
+        [
+            "Beer_reviews",
+            "MFD (g=.3)",
+            102,
+            {
+                "Ale": 0,
+                "Lager": 0,
+                "Other": 0
+            },
+            {
+                "Ale": 34,
+                "Lager": 34,
+                "Other": 34
+            }
+        ]
+    ]
+}

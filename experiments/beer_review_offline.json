@@ -1,0 +1,44 @@
+{
+	"datasets": {
+		"Beer_reviews": {
+			"data_dir": "./datasets/beer_reviews",
+			"color_fields": [
+				"beer/category"
+			],
+			"feature_fields": [
+				"beer/ABV",
+				"review/appearance",
+				"review/aroma",
+				"review/palate",
+				"review/taste",
+				"review/overall"
+			],
+			"normalize": true,
+			"filter_unique": false
+		}
+	},
+	"algorithms" : {
+		"MFD (g=.3)": {
+			"alg": "FMMD-MWU",
+			"color": "#fc0303",
+			"marker": "o",
+			"use_coreset": true,
+			"use_dmax": true,
+			"use_dmin": false,
+			"mwu_epsilon": 0.75,
+			"falloff_epsilon": 0.15,
+			"percent_theoretical_limit": 0.3,
+			"timeout": 1800
+		}
+	},
+	"parameters": {
+		"k": [
+			20,
+			101,
+			20
+		],
+		"observations": 5,
+		"buildkis_alpha" : 0.1,
+		"buildkis_equal_k_js" : true
+	}
+}

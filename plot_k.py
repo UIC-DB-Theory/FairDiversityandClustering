@@ -265,20 +265,20 @@ for color_result in color_results:
         avg_color_results[dataset] = {}
         avg_color_results[dataset][algorithm] = {}
         avg_color_results[dataset][algorithm][k_value] = {
-            c : [(-1*missing_counts[c])/num_runs, required_counts[c]] for c in required_counts
+            c : [(missing_counts[c])/num_runs, required_counts[c]] for c in required_counts
         }
     
     elif algorithm not in avg_color_results[dataset]:
         # Add the counts for new algorithm
         avg_color_results[dataset][algorithm] = {}
         avg_color_results[dataset][algorithm][k_value] = {
-            c : [(-1*missing_counts[c])/num_runs, required_counts[c]] for c in required_counts
+            c : [(missing_counts[c])/num_runs, required_counts[c]] for c in required_counts
         }
 
     elif k_value not in avg_color_results[dataset][algorithm]:
-        # Add the counts for new k value
+        # Add the counts for new k valu[e
         avg_color_results[dataset][algorithm][k_value] = {
-            c : [(-1*missing_counts[c])/num_runs, required_counts[c]] for c in required_counts
+            c : [(missing_counts[c])/num_runs, required_counts[c]] for c in required_counts
         }
     
     else:
