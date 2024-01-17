@@ -221,7 +221,7 @@ for dataset_name in setup["datasets"]:
             print(f'\t core stats:')
             for iter in core_stats:
                 print(f'\t\t {iter} : {core_stats[iter]}')
-             print('********Offline Param stats**********')
+            print('********Offline Param stats**********')
 
             # Use dmin and dmax of full dataset instead
             dmin = dmin_dmax[dataset_name][0]
