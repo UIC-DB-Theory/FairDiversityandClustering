@@ -47,8 +47,8 @@
         "algorithms": {
             "SMWUFD 0.1": {
                 "alg": "SMWUFD",
-                "color": "#fc0303",
-                "marker": "o",
+                "color": "#ffc105",
+                "marker": "*",
                 "use_coreset": false,
                 "use_dmax": false,
                 "use_dmin": false,
@@ -73,8 +73,8 @@
             },
             "SMWUFD 0.5": {
                 "alg": "SMWUFD",
-                "color": "#fc0303",
-                "marker": "o",
+                "color": "#05c1ff",
+                "marker": "s",
                 "use_coreset": false,
                 "use_dmax": false,
                 "use_dmin": false,
@@ -86,8 +86,8 @@
             },
             "SMWUFD 0.7": {
                 "alg": "SMWUFD",
-                "color": "#fc0303",
-                "marker": "o",
+                "color": "#050dff",
+                "marker": "x",
                 "use_coreset": false,
                 "use_dmax": false,
                 "use_dmin": false,
