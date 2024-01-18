@@ -1,0 +1,204 @@
+{
+    "setup": {
+        "datasets": {
+            "Beer_reviews": {
+                "data_dir": "./datasets/beer_reviews",
+                "color_fields": [
+                    "beer/category"
+                ],
+                "feature_fields": [
+                    "beer/ABV",
+                    "review/appearance",
+                    "review/aroma",
+                    "review/palate",
+                    "review/taste",
+                    "review/overall"
+                ],
+                "normalize": true,
+                "filter_unique": false,
+                "points_per_color": {
+                    "Other": 1097316,
+                    "Ale": 372015,
+                    "Lager": 49498
+                },
+                "size": 1518829
+            }
+        },
+        "algorithms": {
+            "StreamMFD (g=.3)": {
+                "alg": "SMWUFD",
+                "color": "#fc0303",
+                "marker": "o",
+                "use_coreset": false,
+                "use_dmax": false,
+                "use_dmin": false,
+                "mwu_epsilon": 0.75,
+                "falloff_epsilon": 0.15,
+                "sample_percentage": 0.1,
+                "percent_theoretical_limit": 0.3,
+                "timeout": 7200
+            }
+        },
+        "parameters": {
+            "k": [
+                20,
+                101,
+                20
+            ],
+            "observations": 1,
+            "buildkis_alpha": 0.1,
+            "buildkis_equal_k_js": true
+        }
+    },
+    "results": {
+        "Beer_reviews": {
+            "StreamMFD (g=.3)": {
+                "xs": {
+                    "k": [
+                        21,
+                        42,
+                        60,
+                        81,
+                        102
+                    ]
+                },
+                "ys": {
+                    "data_size": [
+                        1518829.0,
+                        1518829.0,
+                        1518829.0,
+                        1518829.0,
+                        1518829.0
+                    ],
+                    "dmax": [
+                        22.163923014688812,
+                        22.163923014688812,
+                        22.163923014688812,
+                        22.163923014688812,
+                        22.163923014688812
+                    ],
+                    "dmin": [
+                        0.004305658288972891,
+                        0.004305658288972891,
+                        0.004305658288972891,
+                        0.004305658288972891,
+                        0.004305658288972891
+                    ],
+                    "solution_size": [
+                        21.0,
+                        42.0,
+                        60.0,
+                        81.0,
+                        102.0
+                    ],
+                    "diversity": [
+                        3.135569283923277,
+                        2.6113228628643785,
+                        2.260561310159332,
+                        2.2083888949578365,
+                        1.7551062248076903
+                    ],
+                    "streamtime": [
+                        3.6620113078695535e-05,
+                        3.693424859903646e-05,
+                        3.813203033810484e-05,
+                        3.804257995256558e-05,
+                        3.8633731022555356e-05
+                    ],
+                    "posttime": [
+                        0.5628683678805828,
+                        1.7509296759963036,
+                        3.4232553336769342,
+                        5.870850365608931,
+                        51.585851829499006
+                    ],
+                    "totaltime": [
+                        56.721951592713594,
+                        59.20652093924582,
+                        64.33400894887745,
+                        67.87408795394003,
+                        119.79451883211732
+                    ]
+                }
+            }
+        }
+    },
+    "alg_status": [],
+    "color_results": [
+        [
+            "Beer_reviews",
+            "StreamMFD (g=.3)",
+            21,
+            {
+                "Ale": -7,
+                "Lager": -7,
+                "Other": 14
+            },
+            {
+                "Ale": 7,
+                "Lager": 7,
+                "Other": 7
+            }
+        ],
+        [
+            "Beer_reviews",
+            "StreamMFD (g=.3)",
+            42,
+            {
+                "Ale": 9,
+                "Lager": -14,
+                "Other": 5
+            },
+            {
+                "Ale": 14,
+                "Lager": 14,
+                "Other": 14
+            }
+        ],
+        [
+            "Beer_reviews",
+            "StreamMFD (g=.3)",
+            60,
+            {
+                "Ale": 20,
+                "Lager": -20,
+                "Other": 0
+            },
+            {
+                "Ale": 20,
+                "Lager": 20,
+                "Other": 20
+            }
+        ],
+        [
+            "Beer_reviews",
+            "StreamMFD (g=.3)",
+            81,
+            {
+                "Ale": 23,
+                "Lager": -27,
+                "Other": 4
+            },
+            {
+                "Ale": 27,
+                "Lager": 27,
+                "Other": 27
+            }
+        ],
+        [
+            "Beer_reviews",
+            "StreamMFD (g=.3)",
+            102,
+            {
+                "Ale": 29,
+                "Lager": -34,
+                "Other": 5
+            },
+            {
+                "Ale": 34,
+                "Lager": 34,
+                "Other": 34
+            }
+        ]
+    ]
+}

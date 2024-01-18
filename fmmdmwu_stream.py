@@ -64,7 +64,7 @@ def fmmdmwu_stream(gen, features, colors, kis, gamma_upper, mwu_epsilon, falloff
     _, total_time = timer.stop()
 
     from algorithms.utils import check_returned_kis
-    kis_delta = check_returned_kis(core_colors, kimap, sol)
+    kis_delta = check_returned_kis(core_colors, kis, sol)
     print('********StreamMFD KIS DELTA**********')
     for iter in kis_delta:
         print(f'\t\t {iter} : {kis_delta[iter]}')
