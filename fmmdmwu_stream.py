@@ -2,7 +2,7 @@ from algorithms.online_kcenter import color_centerer
 from algorithms.utils import Stopwatch
 from fmmdmwu_nyoom import epsilon_falloff as FMMDMWU
 
-def fmmdmwu_stream(gen, features, colors, kis, gamma_upper, mwu_epsilon, falloff_epsilon, return_unadjusted, percent_theoretical_limit=1.0, streamtimes = False):
+def fmmdmwu_stream(gen, features, colors, kis, gamma_upper, mwu_epsilon, falloff_epsilon, return_unadjusted, percent_theoretical_limit=1.0, streamtimes = False, otherdmax = 0.0, useOtherDmax= False):
     
     # compute final k value
     k = sum(kis.values())
@@ -48,6 +48,8 @@ def fmmdmwu_stream(gen, features, colors, kis, gamma_upper, mwu_epsilon, falloff
 
 
     # Run MWU on the calculated coreset
+    if useOtherDmax:
+        dmax = otherdmax
     sol, div, t_alg = FMMDMWU(
         gen=gen,
         features = core_features, 
@@ -60,6 +62,15 @@ def fmmdmwu_stream(gen, features, colors, kis, gamma_upper, mwu_epsilon, falloff
         return_unadjusted = return_unadjusted
     )
     _, total_time = timer.stop()
+
+    from algorithms.utils import check_returned_kis
+    kis_delta = check_returned_kis(core_colors, kimap, sol)
+    print('********StreamMFD KIS DELTA**********')
+    for iter in kis_delta:
+        print(f'\t\t {iter} : {kis_delta[iter]}')
+    print('********StreamMFD KIS DELTA**********')
+
+
 
     if streamtimes:
         return sol, div, [avg_point_t, t_alg + last_finalize_time + dmax_compute_time, total_time]
