@@ -93,6 +93,14 @@ def plot(y_key, x_key, ylogscale = False):
             # ax.set_title(f'({alp[i]}) {dataset_name}', y = -0.4, fontsize="20")
             ax.set_xticks([20, 40, 60, 80, 100])
             ax.tick_params(axis='both', which='major', labelsize=18)
+
+            if y_key == 'streamtime':
+                from matplotlib.ticker import ScalarFormatter
+                formatter = ScalarFormatter(useMathText=True)
+                formatter.set_scientific(True)
+                formatter.set_powerlimits((-1, 1))  # Adjust power limits as needed
+                plt.gca().yaxis.set_major_formatter(formatter)
+
         i += 1
 
     
