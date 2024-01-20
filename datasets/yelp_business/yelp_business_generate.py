@@ -33,14 +33,12 @@ with open('yelp_academic_dataset_business.json', 'r') as file:
         state_abbreviation = business['state']
         rating = float(business['stars'])
 
-        if rating >= 4:
-            rating_category = "[4,5]"
+        if rating >= 4.5:
+            rating_category = "[4.5,max]"
         elif rating >= 3:
-            rating_category = "[3,4)"
-        elif rating >= 2:
-            rating_category = "[2,3)"
+            rating_category = "[3,4.5)"
         else:
-            rating_category = "[0,2)"
+            rating_category = "[min,3)"
 
         if state_abbreviation == 'AL':
             print('found alabama')
