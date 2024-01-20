@@ -148,3 +148,5 @@ Pipfile.lock
 notes/*
 
 .DS_Store
+
+datasets.zip
