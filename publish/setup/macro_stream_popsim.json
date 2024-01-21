@@ -1,9 +1,9 @@
 {
 	"datasets": {
-		"Yelp_business": {
-			"data_dir": "./datasets/yelp_business",
+		"Popsim": {
+			"data_dir": "./datasets/popsim",
 			"color_fields": [
-				"rating_category"
+				"race"
 			],
 			"feature_fields": [
 				"x",
@@ -46,7 +46,7 @@
 			"use_dmax": true,
 			"use_dmin": true,
 			"epsilon": 0.75,
-			"timeout": 1800
+			"timeout":1800
 		}
 	},
 	"parameters": {
@@ -55,7 +55,7 @@
 			101,
 			20
 		],
-		"observations": 10,
+		"observations": 5,
 		"buildkis_alpha": 0.1,
 		"buildkis_equal_k_js": true
 	}

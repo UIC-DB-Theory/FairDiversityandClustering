@@ -1,10 +1,10 @@
 {
     "setup": {
         "datasets": {
-            "Yelp_business": {
-                "data_dir": "./datasets/yelp_business",
+            "Popsim": {
+                "data_dir": "./datasets/popsim",
                 "color_fields": [
-                    "rating_category"
+                    "race"
                 ],
                 "feature_fields": [
                     "x",
@@ -14,12 +14,13 @@
                 "normalize": true,
                 "filter_unique": false,
                 "points_per_color": {
-                    "[4,5]": 74613,
-                    "[3,4)": 44972,
-                    "[2,3)": 23843,
-                    "[0,2)": 6918
+                    "White": 3070882,
+                    "Black/African American": 705193,
+                    "Asian": 294728,
+                    "Native Hawaiian/Other Pacific Islander": 1725,
+                    "American Indian/Alaska Native": 38080
                 },
-                "size": 150346
+                "size": 4110608
             }
         },
         "algorithms": {
@@ -34,7 +35,7 @@
                 "falloff_epsilon": 0.15,
                 "sample_percentage": 0.1,
                 "percent_theoretical_limit": 0.3,
-                "timeout": 7200
+                "timeout": 1800
             },
             "SFDM-2 (e=.15)": {
                 "alg": "SFDM-2",
@@ -44,7 +45,7 @@
                 "use_dmax": true,
                 "use_dmin": true,
                 "epsilon": 0.15,
-                "timeout": 7200
+                "timeout": 1800
             },
             "SFDM-2 (e=.75)": {
                 "alg": "SFDM-2",
@@ -54,7 +55,7 @@
                 "use_dmax": true,
                 "use_dmin": true,
                 "epsilon": 0.75,
-                "timeout": 7200
+                "timeout": 1800
             }
         },
         "parameters": {
@@ -63,7 +64,7 @@
                 101,
                 20
             ],
-            "observations": 10,
+            "observations": 5,
             "buildkis_alpha": 0.1,
             "buildkis_equal_k_js": true
         }
