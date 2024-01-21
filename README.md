@@ -5,7 +5,7 @@
 There are two ways to get the datasets working:
 ### Google Drive
 
-Download the ziped file at: https://drive.google.com/file/d/1DRjdWPWvGkUfGDajSLywRZzYRqmY-cZ_/view?usp=share_link
+Download the ziped file at: https://drive.google.com/file/d/1XuxgGWcZPNnUhNBBcHbxvYk3YCf_0ooU/view?usp=share_link
 
 Extract and copy its contents into the `./datasets` for all the imports in the code to work.
 
