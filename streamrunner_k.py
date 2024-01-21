@@ -338,10 +338,13 @@ for dataset_name in setup["datasets"]:
                     print(f'\t\ttotal time = {total_time}')
                     result_per_alg[name] = [len(alg_args['features']), dmax, dmin, len(sol), div, stream_time, post_time, total_time]
                 
-                if not timeout_dict[name]:
-                    from algorithms.utils import check_returned_kis
-                    kis_delta = check_returned_kis(alg_args['colors'], kimap, sol)
-                    color_results.append([dataset_name, name, adj_k, kis_delta, kimap])
+                # Streaming setting does not support this as coresets are 
+                # constructed individually by each algorithm, indices are
+                # returned by some are relative to coreset.
+                # if not timeout_dict[name]:
+                #     from algorithms.utils import check_returned_kis
+                #     kis_delta = check_returned_kis(alg_args['colors'], kimap, sol)
+                #     color_results.append([dataset_name, name, adj_k, kis_delta, kimap])
 
                 # End of algorithms loop
 
