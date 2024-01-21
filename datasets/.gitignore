@@ -5,7 +5,6 @@
 /popsim/*
 /popsim_1M/*
 /beer_reviews/*
-/yelp_business/*
 
 # Dont ignore the dataset generation files
 !/diabetes/diabetes_generate.py
@@ -15,4 +14,3 @@
 !/popsim/vis.py
 !/popsim_1M/popsim_generate.py
 !/beer_reviews/beer_reviews_generate.py
-!/yelp_business/yelp_business_generate.py
