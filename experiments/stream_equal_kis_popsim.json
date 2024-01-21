@@ -26,7 +26,7 @@
 			"falloff_epsilon": 0.15,
 			"sample_percentage": 0.1,
 			"percent_theoretical_limit": 0.3,
-			"timeout": 7200
+			"timeout": 1800
 		},
 		"SFDM-2 (e=.15)": {
 			"alg": "SFDM-2",
@@ -36,7 +36,7 @@
 			"use_dmax": true,
 			"use_dmin": true,
 			"epsilon": 0.15,
-			"timeout": 7200
+			"timeout": 1800
 		},
 		"SFDM-2 (e=.75)": {
 			"alg": "SFDM-2",
@@ -46,7 +46,7 @@
 			"use_dmax": true,
 			"use_dmin": true,
 			"epsilon": 0.75,
-			"timeout": 7200
+			"timeout":1800
 		}
 	},
 	"parameters": {
