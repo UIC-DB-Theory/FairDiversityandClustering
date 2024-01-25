@@ -1,0 +1,14 @@
+{
+    "filename": "stocks.data",
+    "url": "https://archive.ics.uci.edu/dataset/296/diabetes+130-us+hospitals+for+years+1999-2008",
+    "fields": [
+        "category",
+        "name",
+        "r7d",
+        "r14d",
+        "r1m",
+        "r3m",
+        "r6m",
+        "r8m"
+    ]
+}
