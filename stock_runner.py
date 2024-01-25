@@ -65,3 +65,15 @@ sol, div, t_alg = FMMDMWU(
 
 print(f'Diversity: {div}')
 print(f'Solution: {sol}')
+
+sol = list(sol)
+all_stocks = []
+import csv
+csv_file_path = './datasets/stocks/stocks.data'
+with open(csv_file_path, 'r') as csv_file:
+    csv_reader = csv.reader(csv_file)
+    for row in csv_reader:
+        all_stocks.append(row[1])
+
+for v in sol:
+    print(all_stocks[v])
