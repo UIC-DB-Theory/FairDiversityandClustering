@@ -72,6 +72,46 @@
 			"epsilon" : 0.15,
 			"timeout" : 7200
 		},
+		"SFDM-2 (e=.3)" : {
+			"alg" : "SFDM-2",
+			"color": "#1b5902",
+			"marker": "x",
+			"use_coreset" : false,
+			"use_dmax" : true,
+			"use_dmin" : true,
+			"epsilon" : 0.3,
+			"timeout" : 7200
+		},
+		"SFDM-2 (e=.4)" : {
+			"alg" : "SFDM-2",
+			"color": "#4afc03",
+			"marker": "+",
+			"use_coreset" : false,
+			"use_dmax" : true,
+			"use_dmin" : true,
+			"epsilon" : 0.4,
+			"timeout" : 7200
+		},
+		"SFDM-2 (e=.5)" : {
+			"alg" : "SFDM-2",
+			"color": "#1b5902",
+			"marker": "x",
+			"use_coreset" : false,
+			"use_dmax" : true,
+			"use_dmin" : true,
+			"epsilon" : 0.5,
+			"timeout" : 7200
+		},
+		"SFDM-2 (e=.6)" : {
+			"alg" : "SFDM-2",
+			"color": "#4afc03",
+			"marker": "+",
+			"use_coreset" : false,
+			"use_dmax" : true,
+			"use_dmin" : true,
+			"epsilon" : 0.6,
+			"timeout" : 7200
+		},
 		"SFDM-2 (e=.75)" : {
 			"alg" : "SFDM-2",
 			"color": "#1b5902",
@@ -89,7 +129,7 @@
 			101,
 			20
 		],
-		"observations": 10,
+		"observations": 3,
 		"buildkis_alpha" : 0.1,
 		"buildkis_equal_k_js" : true
 	}
