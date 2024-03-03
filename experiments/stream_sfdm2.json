@@ -15,50 +15,6 @@
 			],
 			"normalize": true,
 			"filter_unique": false
-		},
-		"Popsim_1M": {
-			"data_dir": "./datasets/popsim_1M",
-			"color_fields": [
-				"race"
-			],
-			"feature_fields": [
-				"x",
-				"y",
-				"z"
-			],
-			"normalize": true,
-			"filter_unique": false
-		},
-		"Diabetes": {
-			"data_dir": "./datasets/diabetes",
-			"color_fields": [
-				"gender",
-				"diabetesMed"
-			],
-			"feature_fields": [
-				"num_procedures",
-				"num_lab_procedures",
-				"number_outpatient",
-				"number_inpatient",
-				"number_diagnoses",
-				"time_in_hospital",
-				"num_medications"
-			],
-			"normalize": true,
-			"filter_unique" : false
-		},
-		"Popsim": {
-			"data_dir": "./datasets/popsim",
-			"color_fields": [
-				"race"
-			],
-			"feature_fields": [
-				"x",
-				"y",
-				"z"
-			],
-			"normalize": true,
-			"filter_unique": false
 		}
 	},
 	"algorithms" : {
