@@ -27,7 +27,7 @@
         "algorithms": {
             "SFDM-2 (e=.15)": {
                 "alg": "SFDM-2",
-                "color": "#4afc03",
+                "color": "#0eff00",
                 "marker": "+",
                 "use_coreset": false,
                 "use_dmax": true,
@@ -37,7 +37,7 @@
             },
             "SFDM-2 (e=.3)": {
                 "alg": "SFDM-2",
-                "color": "#1b5902",
+                "color": "#1fc600",
                 "marker": "x",
                 "use_coreset": false,
                 "use_dmax": true,
@@ -47,7 +47,7 @@
             },
             "SFDM-2 (e=.4)": {
                 "alg": "SFDM-2",
-                "color": "#4afc03",
+                "color": "#089000",
                 "marker": "+",
                 "use_coreset": false,
                 "use_dmax": true,
@@ -57,7 +57,7 @@
             },
             "SFDM-2 (e=.5)": {
                 "alg": "SFDM-2",
-                "color": "#1b5902",
+                "color": "#0a5d00",
                 "marker": "x",
                 "use_coreset": false,
                 "use_dmax": true,
@@ -67,7 +67,7 @@
             },
             "SFDM-2 (e=.6)": {
                 "alg": "SFDM-2",
-                "color": "#4afc03",
+                "color": "#063b00",
                 "marker": "+",
                 "use_coreset": false,
                 "use_dmax": true,
@@ -77,7 +77,7 @@
             },
             "SFDM-2 (e=.75)": {
                 "alg": "SFDM-2",
-                "color": "#1b5902",
+                "color": "#030A00",
                 "marker": "x",
                 "use_coreset": false,
                 "use_dmax": true,
