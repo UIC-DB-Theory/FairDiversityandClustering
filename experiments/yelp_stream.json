@@ -1,9 +1,9 @@
 {
 	"datasets": {
-		"Popsim": {
-			"data_dir": "./datasets/popsim",
+		"Yelp_business": {
+			"data_dir": "./datasets/yelp_business",
 			"color_fields": [
-				"race"
+				"rating_category"
 			],
 			"feature_fields": [
 				"x",
