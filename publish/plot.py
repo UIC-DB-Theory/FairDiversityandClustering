@@ -17,6 +17,7 @@ import matplotlib.lines as mlines
 ######################################################################################
 result_file_path = sys.argv[1]
 legend_margin = float(sys.argv[2])
+set_dpi = int(sys.argv[3])
 result = re.search(r'^(.+)\/([^\/]+)$', result_file_path)
 result_file_dir = result.group(1)
 result_file_name = result.group(2).split('.')[0]
@@ -101,7 +102,7 @@ def plot(y_key, x_key, ylogscale = False):
     #     fontsize="20"
     # )
     plt.tight_layout(pad=2.0)
-    plt.savefig(f'{plot_dir}/{y_key}_vs_{x_key}', dpi=100, bbox_inches='tight')
+    plt.savefig(f'{plot_dir}/{y_key}_vs_{x_key}', dpi=set_dpi, bbox_inches='tight')
 
 plot( "runtime", "k", ylogscale = True)
 plot( "diversity", "k", ylogscale = False)
@@ -212,7 +213,7 @@ def plot_diversity_time(index, ykey, xkey ,ylogscale = False, xlogscale = False)
     #     fontsize="20"
     # )
     plt.tight_layout(pad=2.0)
-    plt.savefig(f'{plot_dir}/{ykey}_vs_{xkey}_{kval}', dpi=100, bbox_inches='tight')
+    plt.savefig(f'{plot_dir}/{ykey}_vs_{xkey}_{kval}', dpi=set_dpi, bbox_inches='tight')
 
 plot_diversity_time(0, "diversity", "runtime", xlogscale = True)
 plot_diversity_time(1, "diversity", "runtime", xlogscale = True)

@@ -16,6 +16,7 @@ import matplotlib.lines as mlines
 # Parse result file path
 ######################################################################################
 result_file_path = sys.argv[1]
+set_dpi = int(sys.argv[2])
 no_legend = False
 only_legend = False
 if len(sys.argv) == 3:
@@ -125,7 +126,7 @@ def plot(y_key, x_key, ylogscale = False):
     #     fontsize="20"
     # )
     plt.tight_layout(pad=2.0)
-    plt.savefig(f'{plot_dir}/{y_key}_vs_{x_key}', dpi=300, bbox_inches='tight')
+    plt.savefig(f'{plot_dir}/{y_key}_vs_{x_key}', dpi=set_dpi, bbox_inches='tight')
 
 plot( "streamtime", "k", ylogscale = False)
 plot( "posttime", "k", ylogscale = True)
