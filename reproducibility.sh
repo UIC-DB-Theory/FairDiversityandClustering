@@ -33,8 +33,8 @@ cp ./publish/setup/result_macro_stream_popsim/*.json ./publish/reproduced_result
 
 # Plot the reproduced results
 python3 ./publish/plot.py ./publish/reproduced_results/macro_exp_equal.json 0.2 300
-python3 ./publishplot.py ./publish/reproduced_results/macro_exp_prop.json 0.2 300
-python3 ./publishplot.py ./publish/reproduced_results/micro_exp_equal.json 1.2 300
-python3 ./publishplot.py ./publish/reproduced_results/micro_exp_prop.json1.2 300S
-python3 ./publishstreamplot.py ./publish/reproduced_results/macro_stream_beer_review.json 300 -nolegend
-python3 ./publishstreamplot.py ./publish/reproduced_results/macro_stream_popsim.json 300 -nolegend
+python3 ./publish/plot.py ./publish/reproduced_results/macro_exp_prop.json 0.2 300
+python3 ./publish/plot.py ./publish/reproduced_results/micro_exp_equal.json 1.2 300
+python3 ./publish/plot.py ./publish/reproduced_results/micro_exp_prop.json1.2 300S
+python3 ./publish/streamplot.py ./publish/reproduced_results/macro_stream_beer_review.json 300 -nolegend
+python3 ./publish/streamplot.py ./publish/reproduced_results/macro_stream_popsim.json 300 -nolegend
