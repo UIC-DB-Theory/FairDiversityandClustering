@@ -5,6 +5,7 @@ Description:
     
     Usage: python3 exp_t_div_vs_k_runner.py /path/to/setup/file.json
 """
+cached_algs = ['SFDM-2 (e=.75)', 'SFDM-2 (e=.15)', 'FairGreedyFlow', 'FairFlow', 'FMMD-S']
 
 import sys
 import re
@@ -250,7 +251,7 @@ for dataset_name in setup["datasets"]:
             result_per_alg = {}
             for name in setup['algorithms']:
 
-                if not name == 'FMMD-MWU' :
+                if name in cached_algs :
                     print(f'\t\t\tSkipping {name} will use cached results...')
                     continue
 
@@ -356,8 +357,7 @@ for dataset_name in setup["datasets"]:
         avgs = {}
         # Average out the observations
         for alg in setup['algorithms']:
-            if not name == 'FMMD-MWU' :
-                print(f'\t\t\tSkipping {name} will use cached results...')
+            if alg in cached_algs :
                 continue
             if timeout_dict[alg]:
                 continue
@@ -410,7 +410,7 @@ for dataset_name in setup["datasets"]:
 
 # Add cached results for non MFD algs
 for alg in setup["algorithms"]:
-    if not alg == "MFD (g=.3)":
+    if alg in cached_algs :
         print('Adding cached results for', alg)
         cached_result_file_path = re.sub(r'setup', 'results', setup_file_path)
         print('Using file', cached_result_file_path)
