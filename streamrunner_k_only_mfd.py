@@ -5,6 +5,7 @@ Description:
     
     Usage: python3 exp_t_div_vs_k_runner.py /path/to/setup/file.json
 """
+# cached_algs = ['SFDM-2 (e=.75)', 'SFDM-2 (e=.15)', 'StreamMFD (g=.3)']
 cached_algs = ['SFDM-2 (e=.75)', 'SFDM-2 (e=.15)']
 
 import sys

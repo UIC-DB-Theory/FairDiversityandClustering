@@ -5,6 +5,7 @@ Description:
     
     Usage: python3 exp_t_div_vs_k_runner.py /path/to/setup/file.json
 """
+# cached_algs = ['SFDM-2 (e=.75)', 'SFDM-2 (e=.15)', 'FairGreedyFlow', 'FairFlow', 'FMMD-S', 'MFD (g=.1)', 'MFD (g=.3)', 'MFD (g=.5)', 'MFD (g=.7)']
 cached_algs = ['SFDM-2 (e=.75)', 'SFDM-2 (e=.15)', 'FairGreedyFlow', 'FairFlow', 'FMMD-S']
 
 import sys
@@ -232,21 +233,21 @@ for dataset_name in setup["datasets"]:
             print(f'\n\nObservation number = {obs + 1}')
 
             # Calculate the coreset, dmax, dmin (same for each alg in each observation)
-            from algorithms.coreset import Coreset_FMM
-            dimensions = len(setup["datasets"][dataset_name]["feature_fields"])
-            num_colors = len(setup["datasets"][dataset_name]['points_per_color'])
-            coreset_size = num_colors * adj_k
-            coreset = Coreset_FMM(
-                gen,
-                features, 
-                colors, 
-                adj_k, 
-                num_colors, 
-                dimensions, 
-                coreset_size)
-            core_features, core_colors = coreset.compute()
-            dmax = coreset.compute_gamma_upper_bound()
-            dmin = coreset.compute_closest_pair()
+            # from algorithms.coreset import Coreset_FMM
+            # dimensions = len(setup["datasets"][dataset_name]["feature_fields"])
+            # num_colors = len(setup["datasets"][dataset_name]['points_per_color'])
+            # coreset_size = num_colors * adj_k
+            # coreset = Coreset_FMM(
+            #     gen,
+            #     features, 
+            #     colors, 
+            #     adj_k, 
+            #     num_colors, 
+            #     dimensions, 
+            #     coreset_size)
+            # core_features, core_colors = coreset.compute()
+            # dmax = coreset.compute_gamma_upper_bound()
+            # dmin = coreset.compute_closest_pair()
 
             result_per_alg = {}
             for name in setup['algorithms']:
