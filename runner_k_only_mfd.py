@@ -198,14 +198,7 @@ for dataset_name in setup["datasets"]:
     # reset the timeout dict for each dataset
     for alg in setup['algorithms']:
         timeout_dict[alg] = False
-
-    results_per_k_per_alg = {}
-    for k in range(setup["parameters"]["k"][0] ,setup["parameters"]["k"][1], setup["parameters"]["k"][2]):
-
-        # each observation in the list would consist of the t & div for each algorithm
-        observations = []
-
-        # Read the dataset everytime -- to prevent overwriting the features and colors
+    
         dataset = read_dataset(
             setup['datasets'][dataset_name]['data_dir'],
             setup['datasets'][dataset_name]['feature_fields'],
@@ -218,6 +211,26 @@ for dataset_name in setup["datasets"]:
         write_results(setup, results, color_results, alg_status)
         features = dataset['features']
         colors = dataset['colors']
+
+    results_per_k_per_alg = {}
+    for k in range(setup["parameters"]["k"][0] ,setup["parameters"]["k"][1], setup["parameters"]["k"][2]):
+
+        # each observation in the list would consist of the t & div for each algorithm
+        observations = []
+
+        # Read the dataset everytime -- to prevent overwriting the features and colors
+        # dataset = read_dataset(
+        #     setup['datasets'][dataset_name]['data_dir'],
+        #     setup['datasets'][dataset_name]['feature_fields'],
+        #     setup['datasets'][dataset_name]['color_fields'],
+        #     normalize=setup["datasets"][dataset_name]['normalize'],
+        #     unique=setup["datasets"][dataset_name]['filter_unique']
+        # )
+        # setup["datasets"][dataset_name]['points_per_color'] = dataset['points_per_color']
+        # setup["datasets"][dataset_name]['size'] = len(dataset['features'])
+        # write_results(setup, results, color_results, alg_status)
+        # features = dataset['features']
+        # colors = dataset['colors']
 
         # one kis' map to ask for
         kimap = buildKisMap(dataset['colors'], k, setup['parameters']['buildkis_alpha'], equal_k_js=check_flag(setup['parameters'],'buildkis_equal_k_js'))
