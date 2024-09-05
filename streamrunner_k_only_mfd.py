@@ -5,8 +5,8 @@ Description:
     
     Usage: python3 exp_t_div_vs_k_runner.py /path/to/setup/file.json
 """
-# cached_algs = ['SFDM-2 (e=.75)', 'SFDM-2 (e=.15)', 'StreamMFD (g=.3)']
-cached_algs = ['SFDM-2 (e=.75)', 'SFDM-2 (e=.15)']
+cached_algs = ['SFDM-2 (e=.75)', 'SFDM-2 (e=.15)', 'StreamMFD (g=.3)']
+# cached_algs = ['SFDM-2 (e=.75)', 'SFDM-2 (e=.15)']
 
 import sys
 import re
@@ -153,18 +153,18 @@ for dataset_name in setup["datasets"]:
     for alg in setup['algorithms']:
         timeout_dict[alg] = False
 
-        dataset = read_dataset(
-            setup['datasets'][dataset_name]['data_dir'],
-            setup['datasets'][dataset_name]['feature_fields'],
-            setup['datasets'][dataset_name]['color_fields'],
-            normalize=setup["datasets"][dataset_name]['normalize'],
-            unique=setup["datasets"][dataset_name]['filter_unique']
-        )
-        setup["datasets"][dataset_name]['points_per_color'] = dataset['points_per_color']
-        setup["datasets"][dataset_name]['size'] = len(dataset['features'])
-        write_results(setup, results, color_results, alg_status)
-        features = dataset['features']
-        colors = dataset['colors']
+    dataset = read_dataset(
+        setup['datasets'][dataset_name]['data_dir'],
+        setup['datasets'][dataset_name]['feature_fields'],
+        setup['datasets'][dataset_name]['color_fields'],
+        normalize=setup["datasets"][dataset_name]['normalize'],
+        unique=setup["datasets"][dataset_name]['filter_unique']
+    )
+    setup["datasets"][dataset_name]['points_per_color'] = dataset['points_per_color']
+    setup["datasets"][dataset_name]['size'] = len(dataset['features'])
+    write_results(setup, results, color_results, alg_status)
+    features = dataset['features']
+    colors = dataset['colors']
 
     results_per_k_per_alg = {}
     for k in range(setup["parameters"]["k"][0] ,setup["parameters"]["k"][1], setup["parameters"]["k"][2]):
@@ -208,35 +208,35 @@ for dataset_name in setup["datasets"]:
             print(f'\n\nObservation number = {obs + 1}')
 
             # Calculate the coreset, dmax, dmin (same for each alg in each observation)
-            from algorithms.coreset import Coreset_FMM
-            dimensions = len(setup["datasets"][dataset_name]["feature_fields"])
-            num_colors = len(setup["datasets"][dataset_name]['points_per_color'])
-            coreset_size = num_colors * adj_k
-            coreset = Coreset_FMM(
-                gen,
-                features, 
-                colors, 
-                adj_k, 
-                num_colors, 
-                dimensions, 
-                coreset_size)
-            core_features, core_colors = coreset.compute()
-            dmax = coreset.compute_gamma_upper_bound()
-            dmin = coreset.compute_closest_pair()
+            # from algorithms.coreset import Coreset_FMM
+            # dimensions = len(setup["datasets"][dataset_name]["feature_fields"])
+            # num_colors = len(setup["datasets"][dataset_name]['points_per_color'])
+            # coreset_size = num_colors * adj_k
+            # coreset = Coreset_FMM(
+            #     gen,
+            #     features, 
+            #     colors, 
+            #     adj_k, 
+            #     num_colors, 
+            #     dimensions, 
+            #     coreset_size)
+            # core_features, core_colors = coreset.compute()
+            # dmax = coreset.compute_gamma_upper_bound()
+            # dmin = coreset.compute_closest_pair()
 
-            print('********Offline Param stats**********')
-            print(f'\t dmin = {dmin}')
-            print(f'\t dmax = {dmax}')
-            core_stats = {}
-            for i in range(0, len(core_features)):
-                if core_colors[i] in core_stats:
-                    core_stats[core_colors[i]] += 1
-                else:
-                    core_stats[core_colors[i]] = 1
-            print(f'\t core stats:')
-            for iter in core_stats:
-                print(f'\t\t {iter} : {core_stats[iter]}')
-            print('********Offline Param stats**********')
+            # print('********Offline Param stats**********')
+            # print(f'\t dmin = {dmin}')
+            # print(f'\t dmax = {dmax}')
+            # core_stats = {}
+            # for i in range(0, len(core_features)):
+            #     if core_colors[i] in core_stats:
+            #         core_stats[core_colors[i]] += 1
+            #     else:
+            #         core_stats[core_colors[i]] = 1
+            # print(f'\t core stats:')
+            # for iter in core_stats:
+            #     print(f'\t\t {iter} : {core_stats[iter]}')
+            # print('********Offline Param stats**********')
 
             # Use dmin and dmax of full dataset instead
             dmin = dmin_dmax[dataset_name][0]
@@ -438,7 +438,8 @@ for alg in setup["algorithms"]:
         with open(cached_result_file_path, 'r') as json_file:
             cached_result = json.load(json_file)
         for dataset in results:
-            results[dataset][alg] = cached_result['results'][dataset][alg]
+            if alg in cached_result['results'][dataset]:
+                results[dataset][alg] = cached_result['results'][dataset][alg]
 
 # End of dataset loop
 write_results(setup, results, color_results, alg_status)

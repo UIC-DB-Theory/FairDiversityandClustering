@@ -19,10 +19,11 @@ result_file_path = sys.argv[1]
 set_dpi = int(sys.argv[2])
 no_legend = False
 only_legend = False
-if len(sys.argv) == 3:
-    if sys.argv[2] == '-nolegend':
+print(sys.argv)
+if len(sys.argv) == 4:
+    if sys.argv[3] == '-nolegend':
         no_legend = True
-    elif sys.argv[2] == '-onlylegend':
+    elif sys.argv[3] == '-onlylegend':
         only_legend = True
 
 result = re.search(r'^(.+)\/([^\/]+)$', result_file_path)
@@ -109,6 +110,7 @@ def plot(y_key, x_key, ylogscale = False):
     ax_legend.set_ylabel(set_y_label, fontsize="16")
 
     if not no_legend:
+        print('Yes legend')
         ax_legend.legend(
             handles=legend_handles[:len(setup["algorithms"])],
             ncol=len(setup["algorithms"]),

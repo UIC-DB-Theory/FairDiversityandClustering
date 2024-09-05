@@ -52,69 +52,69 @@ cp ./publish/setup/result_macro_exp_prop/*.json ./publish/reproduced_results/mac
 cp ./publish/setup/result_macro_stream_beer_review/*.json ./publish/reproduced_results/macro_stream_beer_review.json
 
 # Plot the reproduced results
-python3 ./publish/plot.py ./publish/reproduced_results/micro_exp_equal.json 1.2 300
-python3 ./publish/plot.py ./publish/reproduced_results/macro_exp_equal.json 0.2 300
-python3 ./publish/plot.py ./publish/reproduced_results/macro_exp_prop.json 0.2 300
-python3 ./publish/streamplot.py ./publish/reproduced_results/macro_stream_beer_review.json 300 -nolegend
+python3 publish/plot.py ./publish/reproduced_results/micro_exp_equal.json 1.2 300
+python3 publish/plot.py ./publish/reproduced_results/macro_exp_equal.json 0.2 300
+python3 publish/plot.py ./publish/reproduced_results/macro_exp_prop.json 0.2 300
+python3 publish/streamplot.py ./publish/reproduced_results/macro_stream_beer_review.json 300 -nolegend
 
 # send the entire result folder back to the main machine
-cp -r ./publish/ /opt/IO/publish/
+# cp -r publish/ /opt/IO/publish/
 
 
-rm -r -f ./publish/plots/micro_bench/equal/
-mkdir ./publish/plots/micro_bench/equal/
+rm -r -f publish/plots/micro_bench/equal/
+mkdir -p publish/plots/micro_bench/equal/
 # After running this script the figures are related to the paper as follows:
 # Fig 3 
 #   Original:
 #        publish/results/micro_exp_equal/diversity_vs_k.png
 #   Reproduced
 #       publish/reproduced_results/micro_exp_equal/diversity_vs_k.png
-cp ./publish/reproduced_results/micro_exp_equal/diversity_vs_k.png ./publish/plots/micro_bench/equal/
+cp publish/reproduced_results/micro_exp_equal/diversity_vs_k.png publish/plots/micro_bench/equal/
 
 # Fig 4
 #   Original:
 #       publish/results/micro_exp_equal/runtime_vs_k.png
 #   Reproduced
 #       publish/reproduced_results/micro_exp_equal/runtime_vs_k.png
-cp ./publish/results/micro_exp_equal/runtime_vs_k.png ./publish/plots/micro_bench/equal/
+cp publish/results/micro_exp_equal/runtime_vs_k.png publish/plots/micro_bench/equal/
 
 
-rm -r -f ./publish/plots/macro_bench/equal/
-mkdir ./publish/plots/macro_bench/equal/
+rm -r -f publish/plots/macro_bench/equal/
+mkdir -p publish/plots/macro_bench/equal/
 # Fig 5
 #   Original:
 #       publish/results/macro_exp_equal/diversity_vs_k.png
 #   Reproduced
 #       publish/reproduced_results/macro_exp_equal/diversity_vs_k.png
-cp ./publish/reproduced_results/macro_exp_equal/diversity_vs_k.png ./publish/plots/macro_bench/equal/
+cp publish/reproduced_results/macro_exp_equal/diversity_vs_k.png publish/plots/macro_bench/equal/
 
 # Fig 6
 #   Original:
 #       publish/results/macro_exp_equal/runtime_vs_k.png
 #   Reproduced
 #       publish/reproduced_results/macro_exp_equal/runtime_vs_k.png  
-cp ./publish/reproduced_results/macro_exp_equal/runtime_vs_k.png  ./publish/plots/macro_bench/equal/
+cp publish/reproduced_results/macro_exp_equal/runtime_vs_k.png  publish/plots/macro_bench/equal/
 
 
-rm -r -f ./publish/plots/macro_bench/proportional/
-mkdir ./publish/plots/macro_bench/proportional/
+rm -r -f publish/plots/macro_bench/proportional/
+mkdir -p publish/plots/macro_bench/proportional/
 # Fig 7
 #   Original:
 #       publish/results/macro_exp_prop/diversity_vs_k.png
 #   Reproduced
 #       publish/reproduced_results/macro_exp_prop/diversity_vs_k.png
-cp ./publish/reproduced_results/macro_exp_prop/diversity_vs_k.png ./publish/plots/macro_bench/proportional/
+cp publish/reproduced_results/macro_exp_prop/diversity_vs_k.png publish/plots/macro_bench/proportional/
 
 # Fig 8
 #   Original:
 #       publish/results/macro_exp_prop/runtime_vs_k.png
 #   Reproduced
 #       publish/reproduced_results/macro_exp_prop/runtime_vs_k.png
-cp ./publish/reproduced_results/macro_exp_prop/runtime_vs_k.png ./publish/plots/macro_bench/proportional/
+cp publish/reproduced_results/macro_exp_prop/runtime_vs_k.png publish/plots/macro_bench/proportional/
 
 
-rm -r -f ./publish/plots/skyline
-mkdir ./publish/plots/skyline
+rm -r -f publish/plots/skyline
+mkdir -p publish/plots/skyline
 # Fig 9
 #   Original:
 #       publish/results/macro_exp_equal/diversity_vs_runtime_100.png
@@ -122,8 +122,8 @@ mkdir ./publish/plots/skyline
 #       publish/reproduced_results/macro_exp_equal/diversity_vs_runtime_100.png
 cp publish/reproduced_results/macro_exp_equal/diversity_vs_runtime_100.png ./publish/plots/skyline
 
-rm -r -f ./publish/plots/stream_beer
-mkdir ./publish/plots/stream_beer
+rm -r -f publish/plots/stream_beer
+mkdir -p publish/plots/stream_beer
 # Fig 10
 #   Original:
 #       publish/results/macro_stream_beer_review/legend.png
@@ -135,14 +135,17 @@ mkdir ./publish/plots/stream_beer
 #       publish/reproduced_results/macro_stream_beer_review/streamtime_vs_k.png
 #       publish/reproduced_results/macro_stream_beer_review/posttime_vs_k.png
 #       publish/reproduced_results/macro_stream_beer_review/diversity_vs_k.png
-cp ./publish/results/macro_stream_beer_review/legend.png ./publish/plots/stream_beer
-cp ./publish/reproduced_results/macro_stream_beer_review/streamtime_vs_k.png ./publish/plots/stream_beer
-cp ./publish/reproduced_results/macro_stream_beer_review/posttime_vs_k.png ./publish/plots/stream_beer
-cp ./publish/reproduced_results/macro_stream_beer_review/diversity_vs_k.png ./publish/plots/stream_beer
+cp publish/results/macro_stream_beer_review/legend.png publish/plots/stream_beer
+cp publish/reproduced_results/macro_stream_beer_review/streamtime_vs_k.png publish/plots/stream_beer
+cp publish/reproduced_results/macro_stream_beer_review/posttime_vs_k.png publish/plots/stream_beer
+cp publish/reproduced_results/macro_stream_beer_review/diversity_vs_k.png publish/plots/stream_beer
 
 # copy the plots to the paper
-cp ./publish/plots /opt/paper
+# cp -r publish/plots /opt/paper
+
+# rm -r /opt/paper
+
 
 # build the paper
-cd /opt/paper && ./tectonic main.tex && cp main.pdf /opt/IO/paper.pdf
+# cd /opt/paper && ./tectonic main.tex && cp main.pdf /opt/IO/paper.pdf
 
