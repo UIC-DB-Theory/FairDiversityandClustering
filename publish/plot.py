@@ -131,8 +131,8 @@ def plot_diversity_time(index, ykey, xkey ,ylogscale = False, xlogscale = False)
 
     alp = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
     alp_i = 0
-    
-    for gs, dataset_name in zip(grid_specs, results):
+    dataset_names = ['Adult', 'Diabetes', 'Census', 'Popsim', 'Popsim_1M']
+    for gs, dataset_name in zip(grid_specs, dataset_names):
         points = [] 
         ax = plt.subplot(gs)
         for alg,result in results[dataset_name].items():
