@@ -4,9 +4,6 @@
 
 files = [
     'macro_exp_equal.json',
-    'macro_exp_prop.json',
-    'macro_stream_beer_review.json',
-    'macro_stream_popsim.json',
 ]
 
 total_runtime = 0
@@ -23,14 +20,14 @@ for file in files:
             for alg in results[dataset]:
                 if 'FMMD-S' in alg:
                     continue
-                # if 'FairFlow' in alg:
-                #     continue
-                # if 'FairGreedyFlow' in alg:
-                #     continue
+                if 'FairFlow' in alg:
+                    continue
+                if 'FairGreedyFlow' in alg:
+                    continue
                 if 'SFDM-2 (e=.15)' in alg:
                     continue
-                # if 'SFDM-2 (e=.75)' in alg:
-                #     continue
+                if 'SFDM-2 (e=.75)' in alg:
+                    continue
                 print("\t", alg)
                 if "runtime" in results[dataset][alg]["ys"]:
                     runtime = sum(results[dataset][alg]["ys"]["runtime"])
