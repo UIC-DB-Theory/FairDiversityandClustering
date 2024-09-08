@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 # Data for the figures from the paper are generated using the following
 # Fig 3, Fig 4   python3 runner_k_no_gurobi.py ./publish/setup/micro_exp_equal.json
 # Fig 5, Fig 6, Fig 9   python3 runner_k_no_gurobi.py ./publish/setup/macro_exp_equal.json
@@ -9,7 +11,7 @@
 # Remove any previous runs
 rm -r -f ./publish/setup/result_*
 
-if [[ "$*" == *"bash"* ]]
+if [[ "$*" == *"--bash"* ]]
 then
 	bash
 	exit 0
@@ -19,12 +21,12 @@ if [[ "$*" == *"--no-gurobi"* ]]; then
     python3 runner_k_no_gurobi.py ./publish/setup/macro_exp_equal.json
     python3 runner_k_no_gurobi.py ./publish/setup/macro_exp_prop.json
     python3 streamrunner_k.py ./publish/setup/macro_stream_beer_review.json
-elif [[ "$*" == *"--only-mfd-rest-cached"* ]]; then
+elif [[ "$*" == *"--only-mfd"* ]]; then
     python3 runner_k_only_mfd.py ./publish/setup/micro_exp_equal.json
     python3 runner_k_only_mfd.py ./publish/setup/macro_exp_equal.json
     python3 runner_k_only_mfd.py ./publish/setup/macro_exp_prop.json
     python3 streamrunner_k_only_mfd.py ./publish/setup/macro_stream_beer_review.json
-else
+elif [[ "$*" == *"--all"* ]]; then
 	# make sure we have an environment file (and hopefully a license file)
 	if ! [ -f /opt/IO/env ]
 	then
@@ -39,6 +41,38 @@ else
     python3 runner_k.py ./publish/setup/macro_exp_equal.json
     python3 runner_k.py ./publish/setup/macro_exp_prop.json
     python3 streamrunner_k.py ./publish/setup/macro_stream_beer_review.json
+else
+	echo ""
+	echo "Usage: docker run -v ./IO:/opt/IO milesshamo/fdc [ --all | --no-gurobi | --only-mfd | --bash ]"
+	echo ""
+	echo "    This docker container runs experiments for the paper:"
+	echo "      Faster Algorithms for Fair Max-Min Diversification in R^𝑑"
+	echo "    published in SIGMO 2024."
+	echo ""
+	echo "    The container expects an IO directory in your working directory, which will"
+	echo "    be used to pass in any required files and will have the paper and output plots"
+	echo "    after execution.  Please note that if you re-run this with the same mount, any"
+	echo "    prior outputs will be overwritten."
+	echo ""
+	echo "    Running all the experiments takes around 48 hours and requires a license"
+	echo "    to the gurobi linear program solver (https://www.gurobi.com/)."
+	echo "    As such, we provide three options to both shorten the running time and"
+	echo "    remove the license requirements at the cost of using some cached results."
+	echo ""
+	echo "    --all runs all experiments and requires a license to gurobi.  This is"
+	echo "          the longest setting and requires a gurobi license and environemnt"
+	echo "          file at IO/env.  Running this without an environemnt file will copy an"
+	echo "          example environment file into the IO directory at IO/example_env."
+	echo ""
+	echo "    --no-gurobi runs all experiments that don't require a license file."
+	echo "                This has a shorter run-time, but is still longer than a day"
+	echo ""
+	echo "    --only-mfd only re-runs our algorithm and uses cached results for all others."
+	echo "               This runs significantly faster, at around eight hours."
+	echo ""
+	echo "    --bash opens a bash shell in the container to allow for troubleshooting"
+	echo "           and analysis."
+	exit 0
 fi
 
 # Create reproduced results directory
@@ -56,10 +90,6 @@ python3 publish/plot.py ./publish/reproduced_results/micro_exp_equal.json 1.2 30
 python3 publish/plot.py ./publish/reproduced_results/macro_exp_equal.json 0.2 300
 python3 publish/plot.py ./publish/reproduced_results/macro_exp_prop.json 0.2 300
 python3 publish/streamplot.py ./publish/reproduced_results/macro_stream_beer_review.json 300 -nolegend
-
-# send the entire result folder back to the main machine
-# cp -r publish/ /opt/IO/publish/
-
 
 rm -r -f publish/plots/micro_bench/equal/
 mkdir -p publish/plots/micro_bench/equal/
@@ -112,7 +142,6 @@ cp publish/reproduced_results/macro_exp_prop/diversity_vs_k.png publish/plots/ma
 #       publish/reproduced_results/macro_exp_prop/runtime_vs_k.png
 cp publish/reproduced_results/macro_exp_prop/runtime_vs_k.png publish/plots/macro_bench/proportional/
 
-
 rm -r -f publish/plots/skyline
 mkdir -p publish/plots/skyline
 # Fig 9
@@ -140,12 +169,25 @@ cp publish/reproduced_results/macro_stream_beer_review/streamtime_vs_k.png publi
 cp publish/reproduced_results/macro_stream_beer_review/posttime_vs_k.png publish/plots/stream_beer
 cp publish/reproduced_results/macro_stream_beer_review/diversity_vs_k.png publish/plots/stream_beer
 
+# this one needs to be combined into one graphic
+# do it in a subshell se we can do it with relative paths
+( 
+	set -e
+	cd publish/plots/stream_beer
+	convert +append streamtime_vs_k.png posttime_vs_k.png diversity_vs_k.png all_plots.png
+	convert -append legend.png all_plots.png StreamPic.png
+)
+
+# remove old plots
+rm -r /opt/paper/plots
+
 # copy the plots to the paper
-# cp -r publish/plots /opt/paper
+cp -r publish/plots /opt/paper/plots
 
-# rm -r /opt/paper
-
+# send the entire result folder back to the main machine
+rm -rf /opt/IO/publish/
+mkdir /opt/IO/publish/
+cp -r publish/{plots,reproduced_results,results} /opt/IO/publish/
 
 # build the paper
-# cd /opt/paper && ./tectonic main.tex && cp main.pdf /opt/IO/paper.pdf
-
+cd /opt/paper && ./tectonic main.tex && cp main.pdf /opt/IO/paper.pdf
